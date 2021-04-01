@@ -28,6 +28,8 @@ class RegisterController extends Controller
 
     public $dni_front;
 
+    public $dni_atras;
+
     use RegistersUsers;
 
     /**
@@ -59,15 +61,15 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'dni' => ['required', 'integer', 'min:8'],
             'celular' => ['required', 'integer', 'min:9'],
             'domicilio' => ['required', 'string', 'max:255'],
             'nacionalidad' => ['required', 'string', 'max:255'],
             'ocupacion' => ['required', 'string', 'max:255'],
             'politico'=> ['required'],
-            //'cargo' => ['required', 'string', 'max:255'],
-            //'empresa' => ['required', 'string', 'max:255'],
+            'dni' => ['required', 'integer', 'min:8'],
+            'archivo_dni_front' => ['required'],
+            'archivo_dni_atras' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'terminos' => ['accepted']
         ]);
@@ -84,6 +86,7 @@ class RegisterController extends Controller
     {
 
 
+
         if(request()->hasfile('archivo_dni_front')){
             $file=request()->file('archivo_dni_front');
             $destinationPath= 'images/dni/';
@@ -91,14 +94,21 @@ class RegisterController extends Controller
             $uploadSuccess= request()->file('archivo_dni_front')->move($destinationPath,$filename);
             $this->dni_front = $destinationPath . $filename;
         }
+
+        if(request()->hasfile('archivo_dni_atras')){
+            $file=request()->file('archivo_dni_atras');
+            $destinationPath= 'images/dni/';
+            $filename= time() . '-' . $file->getClientOriginalName();
+            $uploadSuccess= request()->file('archivo_dni_atras')->move($destinationPath,$filename);
+            $this->dni_atras = $destinationPath . $filename;
+        }
+        
         
 
         $politico = $data['politico'] === 'si' ? "1" : "0";
         $user = User::create([
             'name' => $data['name'],
             'apellidos' => $data['apellidos'],
-            'email' => $data['email'],
-            'dni' => $data['dni'],
             'celular' => $data['celular'],
             'domicilio' => $data['domicilio'],
             'nacionalidad' => $data['nacionalidad'],
@@ -106,21 +116,25 @@ class RegisterController extends Controller
             'politico' => $politico,
             'cargo' => $data['cargo'],
             'empresa' => $data['empresa'],
+            'dni' => $data['dni'],
+            'archivo_dni_front' => $this->dni_front,
+            'archivo_dni_atras' => $this->dni_atras,
+            'email' => $data['email'],
             'tipo_id' => "2",
             'status_bancario' => "0",
-            'archivo_dni_front' => $this->dni_front,
-            'archivo_dni_atras' => " ",
             'password' => Hash::make($data['password']),
+            
         ]);
 
         return $user;
         
     
     }
-
+ 
     protected function redirectTo()
     {
             return '/email/verify';
        
     }
+    
 }
