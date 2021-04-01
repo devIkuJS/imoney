@@ -31,7 +31,7 @@
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card">
-                <div class="card-header">{{ __('EMPRESA alex') }}</div>
+                <div class="card-header">{{ __('EMPRESA alex2') }}</div>
 
                 <div class="card-body">
                     <div id="stepper1" class="bs-stepper linear">
