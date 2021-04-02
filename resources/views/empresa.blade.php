@@ -2,6 +2,10 @@
     .bs-stepper .step-trigger,
     .bs-stepper-label {
         display: block !important;
+        font-size:12px;
+    }
+    .active .bs-stepper-circle {
+    background-color: #0274be !important;
     }
 
     .custom-file-label::after {
@@ -10,6 +14,7 @@
 
     .custom-file {
         overflow: hidden;
+        box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
     }
 
     .custom-file-input {
@@ -22,6 +27,38 @@
         font-weight: bold;
         font-size: 14px;
     }
+    .form-control{
+        border-radius: 8px !important;
+        box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
+        
+    }
+    .col-form-label{
+        color:gray ;
+        font-family: Helvetica, sans-serif;
+        font-weight: bold;
+    }
+    .btn-primary1{
+        background-color: #C0BEBF !important;
+        color:white  !important;
+        font-weight:bold !important;
+        font-family: Helvetica, sans-serif;
+        box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
+    }
+    .btn-primary{
+        font-weight: bold !important;
+        font-family: Helvetica, sans-serif;
+        box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
+        background:#0274be !important;
+    }
+    .form-check-label2{
+        color: black !important; 
+        font-weight: bold !important;   
+    }
+    .link-password {
+    font-family: Helvetica, sans-serif;
+    color: black;
+    font-weight: bold !important;
+    }
 </style>
 @extends('layouts.app')
 
@@ -31,7 +68,7 @@
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card">
-                <div class="card-header">{{ __('EMPRESA alex2') }}</div>
+                <div class="card-header"><img src={{asset('imagenes/mesa.png')}} alt="Fjords" style="width:5%" class="img-fluid"> {{ __('EMPRESA') }}</div>
 
                 <div class="card-body">
                     <div id="stepper1" class="bs-stepper linear">
@@ -121,7 +158,7 @@
 
                                     <div class="form-group row">
                                         <label for="grupo"
-                                            class="col-md-4 col-form-label text-md-right">{{ __('Ud. pertenece a un grupo económico?') }}</label>
+                                            class="col-md-4 col-form-label text-md-right">{{ __('¿Ud. pertenece a un grupo económico?') }}</label>
 
                                         <div class="col-md-6">
                                             <div class="form-check form-check-inline mt-3">
@@ -357,7 +394,7 @@
 
                                         <div class="form-group row">
                                             <label for="politico_repre_legal"
-                                                class="col-md-4 col-form-label text-md-right">{{ __('Es Ud. una persona politicamente expuesta?') }}</label>
+                                                class="col-md-4 col-form-label text-md-right">{{ __('¿Es Ud. una persona politicamente expuesta?') }}</label>
 
                                             <div class="col-md-6 text-left">
                                                 <div class="form-check form-check-inline mt-3">
@@ -406,7 +443,7 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <a class="btn btn-primary" onclick="stepper1.previous()">Anterior</a>
+                                        <a class="btn btn-primary1" onclick="stepper1.previous()">Anterior</a>
                                         <a class="btn btn-primary" onclick="stepper1.next()">Siguiente</a>
                                     </div>
 
@@ -520,7 +557,7 @@
 
                                         <div class="form-group row">
                                             <label for="politico_per_operaciones"
-                                                class="col-md-4 col-form-label text-md-right">{{ __('Es Ud. una persona politicamente expuesta?') }}</label>
+                                                class="col-md-4 col-form-label text-md-right">{{ __('¿Es Ud. una persona politicamente expuesta?') }}</label>
 
                                             <div class="col-md-6 text-left">
                                                 <div class="form-check form-check-inline mt-3">
@@ -607,7 +644,7 @@
 
                                             </div>
                                             <div class="text-center">
-                                                <a class="btn btn-primary" onclick="stepper1.previous()">Anterior</a>
+                                                <a class="btn btn-primary1" onclick="stepper1.previous()">Anterior</a>
                                                 <a class="btn btn-primary" onclick="stepper1.next()">Siguiente</a>
                                             </div>
                                         </div>
@@ -689,9 +726,9 @@
                                                             <div class="form-check">
                                                                 <input type="checkbox" name="terminos" class="form-check-input"
                                                                     id="accept">
-                                                                <label class="form-check-label" for="accept">Registrándote, aceptas
-                                                                    <a href="#" target="_blank">Términos y Condiciones</a> / <a
-                                                                        href="#" target="_blank">Políticas de privacidad y uso de
+                                                                <label class="form-check-label2" for="accept">Registrándote, aceptas.
+                                                                    <a href="#" target="_blank" class="text-dark link-password">Términos y Condiciones</a>. <a
+                                                                        href="#" target="_blank" class="text-dark link-password">Políticas de privacidad y uso de
                                                                         Datos</a>.</label>
                                                             </div>
                                                             @if ($errors->has('terminos'))
@@ -702,7 +739,7 @@
                                                 </div>
 
                                                 <div class="text-center">
-                                                    <a class="btn btn-primary" onclick="stepper1.previous()">Anterior</a>
+                                                    <a class="btn btn-primary1" onclick="stepper1.previous()">Anterior</a>
                                                     <button type="submit" class="btn btn-primary">Registrar</button>
                                                 </div>
                                             </div>

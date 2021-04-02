@@ -6,6 +6,25 @@
         font-weight: bold;
         font-size: 14px;
     }
+    .form-control{
+        border-radius: 8px !important;
+        box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
+        
+    }
+    .col-form-label{
+        color:gray ;
+        font-family: Helvetica, sans-serif;
+        font-weight: bold;
+    }
+    .btn-primary{
+        font-weight: bold !important;
+        font-family: Helvetica, sans-serif;
+        box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
+        background:#0274be !important;
+    }
+    .btn-link{
+        color:#0274be !important;
+    }
 </style>
 @extends('layouts.app')
 
@@ -15,7 +34,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('BIENVENIDO | Iniciar sesiòn') }}</div>
+                <div class="card-header"><img src={{asset('imagenes/logo_alex.png')}} alt="Fjords" style="width:6%" class="img-fluid"> {{ __('BIENVENIDO | Iniciar sesiòn') }}</div>
 
                 <div class="card-body pb-0">
                     <form method="POST" action="{{ route('login') }}">
@@ -84,7 +103,7 @@
                             <div class="col-md-8 offset-md-4 pl-0">
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Olvidaste tu contraseña?') }}
+                                        {{ __('¿Olvidaste tu contraseña?') }}
                                     </a>
                                 @endif
                             </div>
@@ -92,7 +111,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-8 offset-md-4 pl-0">
-                                <label style="padding-left: 0.8rem !important;">No tiene una cuenta? Crea una<a class="btn btn-link pl-1 pt-1" href="{{ route('tipoRegistro') }}">
+                                <label style="padding-left: 0.8rem !important;">¿No tiene una cuenta? Crea una<a class="btn btn-link pl-1 pt-1" href="{{ route('tipoRegistro') }}">
                                     {{ __('aqui') }}
                                 </a></label>    
                             </div>
