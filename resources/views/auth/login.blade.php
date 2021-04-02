@@ -23,7 +23,7 @@
         background:#0274be !important;
     }
     .btn-link{
-        color:#0274be !important;
+        color:#0274be ;
     }
 </style>
 @extends('layouts.app')

@@ -59,7 +59,7 @@
     .link-password {
     font-family: Helvetica, sans-serif;
     color: black;
-    font-weight: bold !important;
+    font-weight: bold ;
     }
     
         

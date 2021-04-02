@@ -11,7 +11,7 @@
         color:#0274be !important;
         font-family: Helvetica, sans-serif;
         font-weight: bold;
-        margin-top:10px;
+        margin-top:10px !important;
     }
     
 </style>
