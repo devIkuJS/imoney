@@ -3,7 +3,14 @@
     .bs-stepper-label {
         display: block !important;
         font-size:12px;
+        
     }
+    .bs-stepper-label{
+        white-space: pre-wrap !important;
+        margin: 0px !important;
+
+    }
+    
     .active .bs-stepper-circle {
     background-color: #0274be !important;
     }
@@ -59,6 +66,14 @@
     color: black;
     font-weight: bold;
     }
+
+    @media (max-width: 600px) {
+    .bs-stepper .step-trigger {
+    padding: 0px !important;
+    }
+}
+
+    
 </style>
 @extends('layouts.app')
 
@@ -66,7 +81,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header"><img src={{asset('imagenes/mesa.png')}} alt="Fjords" style="width:5%" class="img-fluid"> {{ __('EMPRESA') }}</div>
 
@@ -93,7 +108,7 @@
                                 <button type="button" class="step-trigger" role="tab" id="stepper1trigger3"
                                     aria-controls="test-l-3" aria-selected="false" disabled="disabled">
                                     <span class="bs-stepper-circle">3</span>
-                                    <span class="bs-stepper-label">Datos del Responsable de Operaciones</span>
+                                    <span class="bs-stepper-label">Datos Responsable Operaciones</span>
                                 </button>
                             </div>
                             <div class="bs-stepper-line"></div>
@@ -101,7 +116,7 @@
                                 <button type="button" class="step-trigger" role="tab" id="stepper1trigger4"
                                     aria-controls="test-l-4" aria-selected="false" disabled="disabled">
                                     <span class="bs-stepper-circle">4</span>
-                                    <span class="bs-stepper-label">Adjuntar Documentos</span>
+                                    <span class="bs-stepper-label">Adjuntar Documentos de Empresa</span>
                                 </button>
                             </div>
                         </div>

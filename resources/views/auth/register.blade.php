@@ -4,6 +4,11 @@
         display: block !important;   
         font-size:12px;
     }
+    .bs-stepper-label{
+        white-space: pre-wrap !important;
+        margin: 0px !important;
+
+    }
     .active .bs-stepper-circle {
     background-color: #0274be !important;
     }
@@ -168,7 +173,7 @@
 
                                         <div class="form-group row">
                                             <label for="domicilio"
-                                                class="col-md-4 col-form-label text-md-right">{{ __('domicilio') }}</label>
+                                                class="col-md-4 col-form-label text-md-right">{{ __('Domicilio') }}</label>
 
                                             <div class="col-md-6">
                                                 <input id="domicilio" type="text"
