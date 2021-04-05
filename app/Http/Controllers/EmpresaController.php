@@ -6,17 +6,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 use App\Models\Empresa;
 use App\Models\User;
 use App\Models\RepresentanteLegal;
 use App\Models\PersonaOperaciones;
+
+use Illuminate\Auth\Events\Registered;
+
 
 
 class EmpresaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest');
+       $this->middleware('guest');
     }
 
     public function index()
@@ -201,27 +205,26 @@ class EmpresaController extends Controller
         $newPersonaOperaciones->empresa_id = $newEmpresa->id;
         $newPersonaOperaciones->save();
         
-        //return redirect()->back();
 
-        if($newUserOperaciones->tipo_id === "4"){
-            return redirect('/email/verify');
 
-        }
+        //return Redirect::to('/email/verify');
+
+        $newUserOperaciones->sendEmailVerificationNotification();
+
+       /* return Route::get('/email/verify', function () {
+            return view('auth.verify');
+          })->middleware('auth')->name('verification.notice');
+          */
+
+         // event(new Registered($newUserOperaciones));
+
+
+          return redirect()->intended('/email/verify');
+          
+
+    
+
         
-
-        /*$credentials = $request->only('correo_per_operaciones', );
-
-        dd($credentials);
-
-        if (Auth::attempt($credentials)) {
-            // Authentication passed...
-            return redirect()->intended('/email/verify');
-        }
-        */
-
-
-        
-       
         
         }
     

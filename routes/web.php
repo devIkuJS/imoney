@@ -20,14 +20,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/', function () {
   return view('auth.login');
 });
+
 Route::get('/tipoRegistro', [App\Http\Controllers\TipoRegistroController::class, 'index'])->name('tipoRegistro');
 
 //user
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
 Route::post('/user/create', [App\Http\Controllers\UserController::class, 'create'])->name('user.create');
-
-//empresa
-Route::get('/registerEmpresa', [App\Http\Controllers\RegisterEmpresaController::class, 'index'])->name('registerEmpresa');
 
 
 //Empresa
