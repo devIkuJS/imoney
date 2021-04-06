@@ -26,7 +26,7 @@ class EmailEmpresaController extends Controller
     
 
     public function index() {        
-      return view('empresa-verify');
+      return view('email-verify');
     }
     
 }

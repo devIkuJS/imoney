@@ -27,7 +27,9 @@ class UserSeeder extends Seeder
             'ocupacion' => 'Administrador',
             'politico' => '0',
             'password' => Hash::make('iMoney5$'),
-            'tipo_id' => '1'
+            'tipo_id' => '1',
+            'is_verified' => '1',
+
             ]);
     }
 }

@@ -11,6 +11,7 @@ class MailController extends Controller
     public static function sendSignupEmail($name, $email, $verification_code){
         $data = [
             'name' => $name,
+            'email' => $email,
             'verification_code' => $verification_code
         ];
         Mail::to($email)->send(new SignupEmail($data));

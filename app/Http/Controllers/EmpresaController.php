@@ -172,6 +172,7 @@ class EmpresaController extends Controller
         $newUserRepresentante->save();
         $newRepresentante->user_id = $newUserRepresentante->id;
         $newRepresentante->empresa_id = $newEmpresa->id;
+    
         $newRepresentante->save();
         
 
@@ -200,29 +201,29 @@ class EmpresaController extends Controller
         $newUserOperaciones->tipo_id = "4";
         $newUserOperaciones->status_bancario = "0";
         $newUserOperaciones->archivo_dni_atras = "";
+        $newUserOperaciones->verification_code = sha1(time());
         $newUserOperaciones->save();
         $newPersonaOperaciones->user_id = $newUserOperaciones->id;
         $newPersonaOperaciones->empresa_id = $newEmpresa->id;
         $newPersonaOperaciones->save();
         
 
+        MailController::sendSignupEmail($newUserOperaciones->name, $newUserOperaciones->email, $newUserOperaciones->verification_code);
+        return redirect('/email-verify');
 
-        //return Redirect::to('/email/verify');
 
-        //$newUserOperaciones->sendEmailVerificationNotification(); //
-        MailController::sendSignupEmail($newUserOperaciones->name, $newUserOperaciones->email,$newUserOperaciones->verification_code);  
-        return redirect('/empresa-verify');
+        }
 
-       /* return Route::get('/email/verify', function () {
-            return view('auth.verify');
-          })->middleware('auth')->name('verification.notice');
-          */
-
-         // event(new Registered($newUserOperaciones));
-
-      
-               
-        
+        public function verifyUser(Request $request){
+            $verification_code = \Illuminate\Support\Facades\Request::get('code');
+            $user = User::where(['verification_code' => $verification_code])->first();
+            if($user != null){
+                $user->is_verified = 1;
+                $user->save();
+              return redirect()->route('login')->with(session()->flash('alert-success', 'Tu cuenta ha sido verificada. Por favor inicia sesion!'));
+            }
+    
+            return redirect()->route('login')->with(session()->flash('alert-danger', 'Codigo de verificacion invalido'));
         }
     
 }

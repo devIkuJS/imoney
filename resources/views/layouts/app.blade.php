@@ -23,7 +23,7 @@
 </head>
 <body>
 <div id="app">
-    @if (Auth::check() &&  Auth::user()->email_verified_at)
+    @if (Auth::check())
 
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
