@@ -12,3 +12,4 @@ class TipoRegistroController extends Controller
         return view('tipoRegistro');
       }
 }
+

@@ -14,7 +14,7 @@ use App\Models\PersonaOperaciones;
 
 use Illuminate\Auth\Events\Registered;
 
-
+use App\Http\Controllers\MailController;
 
 class EmpresaController extends Controller
 {
@@ -209,7 +209,9 @@ class EmpresaController extends Controller
 
         //return Redirect::to('/email/verify');
 
-        $newUserOperaciones->sendEmailVerificationNotification();
+        //$newUserOperaciones->sendEmailVerificationNotification(); //
+        MailController::sendSignupEmail($newUserOperaciones->name, $newUserOperaciones->email,$newUserOperaciones->verification_code);  
+        return redirect('/empresa-verify');
 
        /* return Route::get('/email/verify', function () {
             return view('auth.verify');
@@ -218,13 +220,8 @@ class EmpresaController extends Controller
 
          // event(new Registered($newUserOperaciones));
 
-
-          return redirect()->intended('/email/verify');
-          
-
-    
-
-        
+      
+               
         
         }
     

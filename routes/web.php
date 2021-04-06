@@ -16,6 +16,8 @@ use App\Http\Controllers\UserController;
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/empresa-verify', [App\Http\Controllers\EmailEmpresaController::class, 'index'])->name('tipoRegistro');
+
 //rutas publicas
 Route::get('/', function () {
   return view('auth.login');
@@ -28,13 +30,13 @@ Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name
 Route::post('/user/create', [App\Http\Controllers\UserController::class, 'create'])->name('user.create');
 
 
-//Empresa
+//Empresa 
 Route::get('/empresa', [App\Http\Controllers\EmpresaController::class, 'index'])->name('empresa');
 Route::post('/empresa/create', [App\Http\Controllers\EmpresaController::class, 'create'])->name('empresa.create');
 
 //inversionista
 Route::get('/inversionista', [App\Http\Controllers\InversionistaController::class, 'index'])->name('inversionista');
-Route::post('/empresa/create', [App\Http\Controllers\EmpresaController::class, 'create'])->name('empresa.create');
+
 //Admin
 Route::get('/admin/empresas', [App\Http\Controllers\Admin\EmpresaController::class, 'index'])->name('admin.empresas');
 Route::get('/admin/usuarios', [App\Http\Controllers\Admin\UsuarioController::class, 'index'])->name('admin.usuarios');

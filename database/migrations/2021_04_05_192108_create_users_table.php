@@ -32,7 +32,8 @@ class CreateUsersTable extends Migration
             $table->string('status_bancario')->nullable();
             $table->string('archivo_dni_front')->nullable();
             $table->string('archivo_dni_atras')->nullable();
-            $table->rememberToken();
+            $table->string('verification_code')->nullable();
+            $table->integer('is_verified')->default(0);
             $table->timestamps();
         });
     }
