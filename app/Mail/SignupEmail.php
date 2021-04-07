@@ -30,7 +30,7 @@ class SignupEmail extends Mailable
     {
 
        // dd($this->email_data);
-        return $this->from('john@example.com', 'Biofeedback')->subject("Confirmacion de correo electronico")->view('content-mail-empresa', ['email_data' => $this->email_data]);
+        return $this->from('inversiones@imoney.pe', 'Imoney')->subject("Confirmacion de correo electronico")->view('content-mail-empresa', ['email_data' => $this->email_data]);
 
     }
 }

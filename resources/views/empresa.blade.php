@@ -173,7 +173,7 @@
 
                                     <div class="form-group row">
                                         <label for="grupo"
-                                            class="col-md-4 col-form-label text-md-right">{{ __('¿Ud. pertenece a un grupo económico?') }}</label>
+                                            class="col-md-4 col-form-label text-md-right">{{ __('¿Pertenece a un grupo económico?') }}</label>
 
                                         <div class="col-md-6">
                                             <div class="form-check form-check-inline mt-3">
