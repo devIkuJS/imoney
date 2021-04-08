@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Inversionista;
+use App\Models\CambioTipo;
 
-class InversionistaController extends Controller
+class CambioTipoController extends Controller
 {
     public function __construct()
     {
@@ -15,8 +15,8 @@ class InversionistaController extends Controller
 
     public function index()
     {
-        $inversionista = Inversionista::all();
-        return view('inversionista');
+        $cambioTipo = CambioTipo::all();
+        return view('cambioTipo');
         
     }
 }

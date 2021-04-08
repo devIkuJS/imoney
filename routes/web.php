@@ -31,13 +31,32 @@ Route::get('/tipoRegistro', [App\Http\Controllers\TipoRegistroController::class,
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
 Route::post('/user/create', [App\Http\Controllers\UserController::class, 'create'])->name('user.create');
 
+//TipodeCambio
+Route::get('/tipoCambio', [App\Http\Controllers\TipoCambioController::class, 'index'])->name('tipoCambio');
 
 //Empresa 
 Route::get('/empresa', [App\Http\Controllers\EmpresaController::class, 'index'])->name('empresa');
 Route::post('/empresa/create', [App\Http\Controllers\EmpresaController::class, 'create'])->name('empresa.create');
 
-//inversionista
+//inversionista - GUTI
 Route::get('/inversionista', [App\Http\Controllers\InversionistaController::class, 'index'])->name('inversionista');
+
+//CuentaBancaria - GUTI
+Route::get('/cuentaBancaria', [App\Http\Controllers\CuentaBancariaController::class, 'index'])->name('cuentaBancaria');
+
+//EstadoCuenta - GUTI
+Route::get('/estadoCuenta', [App\Http\Controllers\EstadoCuentaController::class, 'index'])->name('estadoCuenta');
+
+//Financiamiento - GUTI
+Route::get('/financiamiento', [App\Http\Controllers\FinanciamientoController::class, 'index'])->name('financiamiento');
+
+//MisDatos - GUTI
+Route::get('/misDatos', [App\Http\Controllers\MisDatosController::class, 'index'])->name('misDatos');
+
+//CambioTipo - GUTI
+Route::get('/cambioTipo', [App\Http\Controllers\CambioTipoController::class, 'index'])->name('cambioTipo');
+
+
 
 //Admin
 Route::get('/admin/empresas', [App\Http\Controllers\Admin\EmpresaController::class, 'index'])->name('admin.empresas');
