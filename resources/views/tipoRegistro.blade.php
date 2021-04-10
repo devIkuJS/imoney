@@ -13,6 +13,16 @@
         font-weight: bold;
         margin-top:10px !important;
     }
+    .img-fluid{
+        
+    }
+
+    .img-fluid:hover{
+        opacity: 0.5;
+        transform: scale(1.25);
+        transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    }
+    
     
 </style>
 @extends('layouts.app')
@@ -23,7 +33,7 @@
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card">
-                <div class="card-header"><img src={{asset('imagenes/logo_alex.png')}} alt="Fjords" style="width:10%" class="img-fluid"> {{ __('SELECCIONA TU PERFIL') }}</div>
+                <div class="card-header"><img src={{asset('imagenes/logo_alex.png')}} alt="Fjords" style="width:10%" class="img-fluid2"> {{ __('SELECCIONA TU PERFIL') }}</div>
 
                 <div class="card-body mx-auto">
                     <div class="text-center mb-5 mt-2">
