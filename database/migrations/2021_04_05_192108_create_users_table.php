@@ -29,7 +29,6 @@ class CreateUsersTable extends Migration
             $table->string('empresa')->nullable();
             $table->string('password')->nullable();
             $table->foreignId('tipo_id')->constrained('roles');
-            $table->string('status_bancario')->nullable();
             $table->string('archivo_dni_front')->nullable();
             $table->string('archivo_dni_atras')->nullable();
             $table->string('verification_code')->nullable();

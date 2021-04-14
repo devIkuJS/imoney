@@ -128,7 +128,6 @@ class RegisterController extends Controller
         $user->dni = $request->dni;
         $user->email = $request->email;
         $user->tipo_id = "2";
-        $user->status_bancario = "0";
         $user->password = Hash::make($request->password);
         $user->verification_code = sha1(time());
         $user->save();

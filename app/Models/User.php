@@ -29,7 +29,6 @@ class User extends Authenticatable
         'cargo',
         'empresa',
         'password',
-        'status_bancario',
         'tipo_id',
         'archivo_dni_front',
         'archivo_dni_atras',

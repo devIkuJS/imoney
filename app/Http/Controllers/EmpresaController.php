@@ -199,7 +199,6 @@ class EmpresaController extends Controller
         $newUserOperaciones->empresa = $request->empresa_per_operaciones;
         $newUserOperaciones->password = Hash::make($request->password);
         $newUserOperaciones->tipo_id = "4";
-        $newUserOperaciones->status_bancario = "0";
         $newUserOperaciones->archivo_dni_atras = "";
         $newUserOperaciones->verification_code = sha1(time());
         $newUserOperaciones->save();

@@ -1,99 +1,110 @@
-
-<style>
-   
-    .card-deck-wrapper2{
-        margin-top:35px;
-    }
-    
-    .card-title{
-        text-align:center;
-        color: #0274be;
-        font-family: Helvetica, sans-serif;
-        font-weight: bold; 
-        
-    }
-    .card{
-        box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-        transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
-    }
-    .card:hover{
-        transform: scale(1.05);
-        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-    }
-    
-</style>
-
 @extends('layouts.app')
 
 @section('content')
-<div class="container py-4">
-    <div class="row ">
-            <div class="card-deck-wrapper">
-                <div class="card-deck">
-                    <div class="card p-2">
-                        <div class="text-center">
-                            <a class="card-block stretched-link text-decoration-none" href="{{URL::to('inversionista/')}}">
-                            <img class="card-img-top" src={{asset('imagenes/inversionista.png')}} alt="Card image" style="width:50%">
-                                <h4 class="card-title">INVERSIONISTAS</h4> 
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="card p-2">
-                        <div class="text-center">
-                            <a class="card-block stretched-link text-decoration-none" href="{{URL::to('financiamiento/')}}">
-                            <img class="card-img-top" src={{asset('imagenes/financiamiento.jpg')}} alt="Card image" style="width:50%">
-                                <h4 class="card-title">FINANCIAMIENTO</h4>                        
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="card p-2">
-                        <div class="text-center">
-                            <a class="card-block stretched-link text-decoration-none" href="{{URL::to('cambioTipo/')}}">
-                            <img class="card-img-top" src={{asset('imagenes/tipo-de-cambio.jpg')}} alt="Card image" style="width:50%">
-                                <h4 class="card-title">TIPO DE CAMBIO</h4>                            
-                            </a>
-                        </div>
-                    </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="text-center">
+                <p>Vas a cambiar de <strong id="text-changeA"></strong> a <strong id="text-changeB"></strong></p>
+                <span class="pr-2">Compra: 3.62</span>
+                <span>Venta: 3.656</span>
+            </div>
+            <div class="form-group d-flex mt-3">
+                <div class="col-sm-6 text-center">
+                    <img src={{asset('icon-calculator/peru.png')}} id="icon-changeA">
+                </div>
+                <div class="col-sm-6 text-center">
+                    <img src={{asset('icon-calculator/usa.png')}} id="icon-changeB">
                 </div>
             </div>
-    </div> 
-    
-    <div class="row">
-            <div class="card-deck-wrapper2">
-                <div class="card-deck">
-                    <div class="card p-2">
-                        <div class="text-center">
-                            <a class="card-block stretched-link text-decoration-none" href="{{URL::to('misDatos/')}}">
-                            <img class="card-img-top" src={{asset('imagenes/mis_datos.png')}} alt="Card image" style="width:50%">
-                                <h4 class="card-title">Mis Datos</h4>
-                            
-                            </a>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card p-2">
-                        <div class="text-center">
-                            <a class="card-block stretched-link text-decoration-none" href="{{URL::to('cuentaBancaria/')}}">
-                            <img class="card-img-top" src={{asset('imagenes/cuenta_bancaria.jpg')}} alt="Card image" style="width:50%">
-                                <h4 class="card-title">Cuentas Bancarias</h4>
-                                
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="card p-2">
-                        <div class="text-center">
-                            <a class="card-block stretched-link text-decoration-none" href="{{URL::to('estadoCuenta/')}}">
-                            <img class="card-img-top" src={{asset('imagenes/estado_cuenta.jpg')}} alt="Card image" style="width:50%">
-                                <h4 class="card-title">Estado de Cuenta</h4>  
-                            </a>
-                        </div>
-                    </div>
+            <div class="form-group d-flex">
+                <div class="col-sm-5">
+                    <label for="amount-one">Envias</label>
+                    <input type="text" class="form-control" id="amount-one" onkeypress="return isNumber(event);" >
+                </div>
+                <div class="col-sm-2">
+                    <button class="mt-4" id="swap" value="1">Cambiar</button>
+                </div>
+                <div class="col-sm-5">
+                    <label for="amount-two">Recibes</label>
+                    <input type="text" class="form-control" id="amount-two" onkeypress="return isNumber(event);">
                 </div>
             </div>
-    </div>    
+        </div>
+    </div>
 </div>
 @endsection
+
+@section('custom-script')
+<script type="text/javascript">
+const amountEl_one = document.getElementById('amount-one');
+const amountEl_two = document.getElementById('amount-two');
+document.getElementById('text-changeA').innerHTML  = "Soles";
+document.getElementById('text-changeB').innerHTML  = "Dolares";
+let button_change = document.getElementById('swap');
+// donde changeCambio= 1 es Soles a Dólares y changeCambio = 2 es Dólares a Soles
+
+let tipoCambio = 3.656;
+let tipoCambio_Venta = 3.656;
+let tipoCambio_Compra = 3.62;
+
+//validate only numbers
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+
+
+
+function calculateMontoAtoMontoB() {
+
+    button_change.value == 2 ? 
+    amountEl_two.value = (amountEl_one.value*tipoCambio).toFixed(2) : 
+    amountEl_two.value = (amountEl_one.value/tipoCambio).toFixed(2);
+
+}
+
+amountEl_one.addEventListener('input', calculateMontoAtoMontoB);
+
+function calculateMontoBtoMontoA() {
+
+    button_change.value == 1 ? 
+    amountEl_one.value = (amountEl_two.value*tipoCambio).toFixed(2) : 
+    amountEl_one.value = (amountEl_two.value/tipoCambio).toFixed(2);
+
+}
+
+amountEl_two.addEventListener('input', calculateMontoBtoMontoA);
+
+
+swap.addEventListener('click', ()=> {
+
+    if (button_change.value == 1) {
+      document.getElementById('text-changeA').innerHTML  = "Dolares";
+      document.getElementById('text-changeB').innerHTML  = "Soles";
+      document.getElementById("icon-changeA").src="icon-calculator/usa.png";
+      document.getElementById("icon-changeB").src="icon-calculator/peru.png";
+      tipoCambio = tipoCambio_Compra;
+      button_change.value = 2;
+      amountEl_two.value = (amountEl_one.value*tipoCambio).toFixed(2);
+    } else {
+      document.getElementById('text-changeA').innerHTML  = "Soles";
+      document.getElementById('text-changeB').innerHTML  = "Dolares";
+      document.getElementById("icon-changeA").src="icon-calculator/peru.png";
+      document.getElementById("icon-changeB").src="icon-calculator/usa.png";
+      tipoCambio = tipoCambio_Venta;
+      button_change.value = 1;
+      amountEl_two.value = (amountEl_one.value/tipoCambio).toFixed(2);
+    }
+  
+})
+
+
+
+</script>
+
+@stop
