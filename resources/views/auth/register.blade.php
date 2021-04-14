@@ -79,8 +79,7 @@
     color: black;
     font-weight: bold ;
     }
-    
-        
+         
 </style>
 @extends('layouts.app')
 

@@ -19,8 +19,8 @@
     .form-control{
         border-radius: 8px !important;
         box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
-        
     }
+
     .col-form-label{
         color:gray ;
         font-family: Helvetica, sans-serif;
@@ -35,6 +35,7 @@
     .btn-link{
         color:#0274be ;
     }
+    
 </style>
 @extends('layouts.app')
 

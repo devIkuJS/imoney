@@ -360,8 +360,7 @@ h2{
         }
         .btn-primary table td:hover {
           background-color: #34495e !important; 
-        }
-        
+        }  
       }
 
     </style>

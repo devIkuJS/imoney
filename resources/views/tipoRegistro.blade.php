@@ -27,8 +27,7 @@
         font-weight: bold;
         margin-top:10px !important;
     }
-    
-    
+       
 </style>
 @extends('layouts.app')
 

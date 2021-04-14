@@ -82,8 +82,7 @@
     padding: 0px !important;
     }
 }
-
-    
+ 
 </style>
 @extends('layouts.app')
 
