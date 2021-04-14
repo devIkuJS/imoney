@@ -1,4 +1,9 @@
 <style>
+
+.container{
+        margin-top: -11px !important;
+       
+    }
     .bs-stepper .step-trigger,
     .bs-stepper-label {
         display: block !important;   
@@ -9,8 +14,11 @@
         margin: 0px !important;
 
     }
+    .bs-stepper-header{
+        margin-bottom:20px;
+    }
     .active .bs-stepper-circle {
-    background-color: #0274be !important;
+        background-color: #0274be !important;
     }
 
     .custom-file-label::after {
@@ -31,13 +39,18 @@
         color: white;
         font-family: Helvetica, sans-serif;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 17px;
+    }
+
+    .img-fluid{
+        
+        margin-right:10px;
     }
     .form-control{
         border-radius: 8px !important;
-        box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
-        
+        box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);  
     }
+
     .col-form-label{
         color:gray ;
         font-family: Helvetica, sans-serif;
@@ -77,7 +90,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><img src={{asset('imagenes/persona100.png')}} alt="Fjords" style="width:5%" class="img-fluid">  {{ __('PERSONA NATURAL') }}</div>
+                <div class="card-header"><img src={{asset('imagenes/persona100.png')}} alt="Fjords" style="width:7%" class="img-fluid">  {{ __('PERSONA NATURAL') }}</div>
 
                 <div class="card-body">
 

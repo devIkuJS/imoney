@@ -10,6 +10,10 @@
         margin: 0px !important;
 
     }
+
+    .bs-stepper-header{
+        margin-bottom:20px;
+    }
     
     .active .bs-stepper-circle {
     background-color: #0274be !important;
@@ -32,7 +36,13 @@
         color:white;
         font-family: Helvetica, sans-serif;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 17px;
+    }
+    .img-fluid{
+        
+        margin-top: 0px;
+        margin-left:0px;
+        margin-right:10px;
     }
     .form-control{
         border-radius: 8px !important;
