@@ -1,17 +1,11 @@
 <style>
 
-p{
-    font-size:21px;
-    color: #0274be !important;
-    font-weight: bold;
-	text-align:center;
-}
 
 h2{
     font-size:21px;
     color: #0274be !important;
     font-weight: bold;
-	text-align:center;
+	text-align:center !important;
 }
 
 </style>
@@ -38,7 +32,8 @@ h2{
 
       body {
         background-color: #f6f6f6;
-        font-family: sans-serif;
+        font-family: Helvetica, sans-serif;
+        font-weight:bold !important;
         -webkit-font-smoothing: antialiased;
         font-size: 14px;
         line-height: 1.4;
@@ -125,22 +120,41 @@ h2{
       /* -------------------------------------
           TYPOGRAPHY
       ------------------------------------- */
-      h1,
-      h2,
-      h3,
-      h4 {
-        color: #000000;
+      
+      h2 {
+        color: #01498a;
         font-family: Helvetica, sans-serif;
         font-weight: 400;
+        font-weight: bold;
         line-height: 1.4;
         margin: 0;
         margin-bottom: 30px; 
+      }
+      h3 {
+        color: #0274be;
+        font-family: Helvetica, sans-serif;
+        font-weight: 400;
+        font-weight: bold;
+        line-height: 1.4;
+        margin: 0;
+        margin-bottom: 30px; 
+      }
+      h4 {
+        color: #7f7f7f;
+        font-family: Helvetica, sans-serif;
+        font-weight: 400;
+        font-weight: bold;
+        line-height: 1.4;
+        margin: 0;
+        margin-bottom: 30px;
+        margin-top: 30px;
       }
 
       h1 {
         font-size: 35px;
         font-weight: 300;
         text-align: center;
+        color: #0274be;
         text-transform: capitalize; 
       }
 
@@ -158,6 +172,7 @@ h2{
         ol li {
           list-style-position: inside;
           margin-left: 5px; 
+          color: #0274be;
       }
 
       a {
@@ -345,8 +360,7 @@ h2{
         }
         .btn-primary table td:hover {
           background-color: #34495e !important; 
-        }
-        
+        }  
       }
 
     </style>
@@ -364,14 +378,14 @@ h2{
 
               <!-- START MAIN CONTENT AREA -->
               <tr>
-                <td class="wrapper">
+                <td class="wrapper" align="center">
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                      <td>
-					  <img src={{asset('imagenes/logo50.jpg')}} alt="Fjords" style="width:10%,text-align:center;" class="img-fluid">
+                      <td align="center">
+					  <img src={{asset('imagenes/logo-mail-4.png')}} alt="Fjords" style="width:10%,text-align:center;" class="img-fluid-alex">
                         
 						<h2>¡Gracias por registrarte!</h2>
-                        <p>Por favor confirma tu email para finalizar tu registro.</p>
+                        <h3>Por favor confirma tu email para finalizar tu registro.</h3>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -387,7 +401,7 @@ h2{
                             </tr>
                           </tbody>
                         </table>
-                        <p>Registrándote aceptas nuestros Términos y Condiciones. Política de Privacidad y Uso de datos</p>
+                        <h4>Registrándote aceptas nuestros Términos y Condiciones. Política de Privacidad y Uso de datos</h4>
                     
                       </td>
                     </tr>
