@@ -56,7 +56,8 @@ Route::get('/misDatos', [App\Http\Controllers\MisDatosController::class, 'index'
 //CambioTipo - GUTI
 Route::get('/cambioTipo', [App\Http\Controllers\CambioTipoController::class, 'index'])->name('cambioTipo');
 
-
+//Operaciones
+Route::get('/operacion', [App\Http\Controllers\OperacionController::class, 'index'])->name('operacion');
 
 //Admin
 Route::get('/admin/empresas', [App\Http\Controllers\Admin\EmpresaController::class, 'index'])->name('admin.empresas');

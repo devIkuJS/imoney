@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\TipoCambio;
+use App\Models\Operacion;
 
-class TipoCambioController extends Controller
+class OperacionController extends Controller
 {
     public function __construct()
     {
@@ -14,8 +14,7 @@ class TipoCambioController extends Controller
     }
     
     public function index() { 
-        $tipoCambio = TipoCambio::all();       
-        return view('tipoCambio');
+        $operacion = Operacion::all();       
+        return view('operacion');
       }
-
 }
