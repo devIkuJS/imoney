@@ -19,4 +19,18 @@ class CuentaBancariaController extends Controller
         return view('cuentaBancaria');
         
     }
+    public function create(Request $request)
+    {
+        $newCuentaBancaria = new CuentaBancaria();
+
+        $newCuentaBancaria->user_id = Auth::id();
+    	$newCuentaBancaria->banco_id = $request->bancos;
+        $newCuentaBancaria->tipo_cuenta_id = $request->tipo_cuentas;
+        $newCuentaBancaria->cuenta_soles = $request->cuenta_soles;
+        $newCuentaBancaria->cuenta_dolares = $request->cuenta_dolares;
+       
+    	$newCuentaBancaria->save();
+
+    	return redirect()->back();
+    }
 }

@@ -148,7 +148,8 @@
                 <div class="card-header">{{ __('Tu cambio para hoy es') }}</div>
 
                 <div class="card-body pb-0">
-                    <form method="POST" action="{{ route('login') }}">
+                    
+                    <form method="POST" action="{{ route('operacion.create') }}">
                         @csrf
                     <div class="card">
                         <div class="card-body">
@@ -178,15 +179,12 @@
                                         <h4>¿DESDE QUÉ BANCO ENVÍAS TU DINERO?</h4>
                                         <p class="selecciona-Banco">Selecciona el banco de donde transferirás el dinero para tu cambio.</p>
                                             
-													<select class="form-control" name="banco">
-														<option value="">Seleccionar</option>
-														<option value="">BCP</option>
-														<option value="">BBVA</option>
-														<option value="">SCOTIABANK</option>
-														<option value="">Banco Pichincha</option>
-														<option value="">Banco Interbank</option>
-														<option value="">Banco de la Nación</option>
-													</select>
+                                        <select class="form-control" id="bancos" name="bancos">
+                                            <option value="">Seleccione el banco</option>
+                                            @foreach ($bancos as $banco)
+                                            <option value="{{$banco->id}}">{{$banco->name}}</option>
+                                            @endforeach
+                                        </select>
                                             
                                             <div class="form-check">
                                                     <input type="checkbox" name="declaro" class="form-check-input" id="accept" >
@@ -208,25 +206,7 @@
                                                 <button type="button" class="btn btn-primary3" data-toggle="modal" data-target="#exampleModal"><i class="far fa-address-card"></i>&nbsp;SELECCIONAR CUENTA
                                                 </button>
                                         </a>
-                                            <!-- Modal -->
-                                            <div class="modal fade2" id="exampleModal2" tabindex="-1" role="dialog2" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-                                                <div class="modal-dialog2" role="document2">
-                                                    <div class="modal-content2">
-                                                    <div class="modal-header2">
-                                                        <h5 class="modal-title2" id="exampleModalLabel2">AGREGAR NUEVA CUENTA2222</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true2">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body2">
-                                                        ...
-                                                    </div>
-                                                    <div class="modal-footer2">
-                                                        <button type="button" class="btn btn-primary">Agregar</button>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                                </div>
+                                        
                                         
                                             <a id="agregar-cuenta" class="dis-itmcent text-selectCount color-btnsky">
                                                 <button type="button" class="btn btn-primary4" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus-circle"></i>&nbsp;AGREGAR NUEVA CUENTA
@@ -243,10 +223,34 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        
-                                                    </div>
+                                                        <div class="form-group">
+                                                        <form action="{{ route('cuentaBancaria.create') }}" method="post" >
+                                                        @csrf
+                                                            <select class="form-control" name="cuenta_bancarias">
+                                                                <option value="">Seleccionar</option>
+                                                                <option value="">BCP</option>
+                                                                <option value="">BBVA</option>
+                                                                <option value="">SCOTIABANK</option>
+                                                                <option value="">Banco Pichincha</option>
+                                                                <option value="">Banco Interbank</option>
+                                                                <option value="">Banco de la Nación</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                        <label for="validationCustomUsername">Número de Cuenta</label>
+                                                            <div class="col-md-10">
+                                                                <input id="numero_cuenta" type="text"
+                                                                    class="form-control @error('numero_cuenta') is-invalid @enderror"
+                                                                    name="numero_cuenta" value="{{ old('numero_cuenta') }}" required
+                                                                    autocomplete="numero_cuenta" autofocus>
+
+                                                                @if ($errors->has('numero_cuenta'))
+                                                                <span class="text-danger">{{ $errors->first('numero_cuenta') }}</span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-primary10">Agregar</button>
+                                                        <button type="submit" class="btn btn-primary10">Agregar</button>
                                                     </div>
                                                     </div>
                                                 </div>

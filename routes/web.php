@@ -43,6 +43,7 @@ Route::get('/inversionista', [App\Http\Controllers\InversionistaController::clas
 
 //CuentaBancaria - GUTI
 Route::get('/cuentaBancaria', [App\Http\Controllers\CuentaBancariaController::class, 'index'])->name('cuentaBancaria');
+Route::post('/cuentaBancaria/create', [App\Http\Controllers\CuentaBancariaController::class, 'create'])->name('cuentaBancaria.create');
 
 //EstadoCuenta - GUTI
 Route::get('/estadoCuenta', [App\Http\Controllers\EstadoCuentaController::class, 'index'])->name('estadoCuenta');
@@ -58,6 +59,8 @@ Route::get('/cambioTipo', [App\Http\Controllers\CambioTipoController::class, 'in
 
 //Operaciones
 Route::get('/operacion', [App\Http\Controllers\OperacionController::class, 'index'])->name('operacion');
+Route::post('/operacion/create', [App\Http\Controllers\CuentaBancariaController::class, 'create'])->name('operacion.create');
+
 
 //Admin
 Route::get('/admin/empresas', [App\Http\Controllers\Admin\EmpresaController::class, 'index'])->name('admin.empresas');
