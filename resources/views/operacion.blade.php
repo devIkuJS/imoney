@@ -218,7 +218,6 @@
 
                             </div>
                         </div>
-
                         <div class="text-center">
                             <a class="btn btn-primary1" href="{{ route('tipoCambio') }}">Regresar</a>
                             <button class="btn btn-primary" id="procesar-operacion">Procesar</button>

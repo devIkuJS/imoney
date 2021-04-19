@@ -40,7 +40,6 @@
                 <ul class="navbar-nav mr-auto">
 
                 </ul>
-
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
@@ -82,7 +81,10 @@
 
      @endif
     
-    <main class="py-4">
+    <main class="py-4" style="background: linear-gradient(141deg, rgba(1,237,251,1) 0%, rgba(38,88,203,1) 82%, rgba(50,51,193,1) 100%)no-repeat center center fixed;background-size:100%;
+   height: auto;
+   position: absolute;
+   width: 100%;">
         @yield('content')
     </main>
 </div>
