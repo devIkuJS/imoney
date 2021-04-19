@@ -178,13 +178,7 @@
                                     <div class="col">
                                         <h4>¿DESDE QUÉ BANCO ENVÍAS TU DINERO?</h4>
                                         <p class="selecciona-Banco">Selecciona el banco de donde transferirás el dinero para tu cambio.</p>
-                                            
-                                        <select class="form-control" id="bancos" name="bancos">
-                                            <option value="">Seleccione el banco</option>
-                                            @foreach ($bancos as $banco)
-                                            <option value="{{$banco->id}}">{{$banco->name}}</option>
-                                            @endforeach
-                                        </select>
+                                                                               
                                             
                                             <div class="form-check">
                                                     <input type="checkbox" name="declaro" class="form-check-input" id="accept" >
