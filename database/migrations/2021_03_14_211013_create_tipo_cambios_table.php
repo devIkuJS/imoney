@@ -15,8 +15,8 @@ class CreateTipoCambiosTable extends Migration
     {
         Schema::create('tipo_cambios', function (Blueprint $table) {
             $table->id();
-            $table->decimal('compra', $precision = 8, $scale = 2);
-            $table->decimal('venta', $precision = 8, $scale = 2);
+            $table->decimal('compra', $precision = 8, $scale = 3);
+            $table->decimal('venta', $precision = 8, $scale = 3);
             $table->char('estado', 1);
             $table->timestamps();
         });

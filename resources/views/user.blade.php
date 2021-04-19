@@ -32,7 +32,7 @@
                 <div class="card-deck">
                     <div class="card p-2">
                         <div class="text-center">
-                            <a class="card-block stretched-link text-decoration-none" href="{{ route('inversionista') }}">
+                            <a class="card-block stretched-link text-decoration-none" href="{{ route('tipoCambio') }}">
                             <img class="card-img-top" src={{asset('imagenes/inversionista.png')}} alt="Card image" style="width:50%">
                                 <h4 class="card-title">Tipo de Cambio</h4> 
                             </a>
@@ -50,7 +50,7 @@
 
                     <div class="card p-2">
                         <div class="text-center">
-                            <a class="card-block stretched-link text-decoration-none" href="{{ route('tipoCambio') }}">
+                            <a class="card-block stretched-link text-decoration-none" href="{{ route('inversionista') }}">
                             <img class="card-img-top" src={{asset('imagenes/tipo-de-cambio.jpg')}} alt="Card image" style="width:50%">
                                 <h4 class="card-title">Inversionistas</h4>                            
                             </a>

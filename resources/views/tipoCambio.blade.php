@@ -1,28 +1,30 @@
 <style>
-
-    .btn-primary{
+    .btn-primary {
         font-family: Helvetica, sans-serif !important;
         background: #0274be !important;
         border-radius: 50px !important;
         font-weight: bold !important;
-        margin-top:50px;
+        margin-top: 50px;
         letter-spacing: 1.26px;
         font-size: 14px;
         width: 211px;
     }
-    .form-control{
+
+    .form-control {
         border-radius: 8px !important;
         box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
-        margin-top:20px;
+        margin-top: 20px;
     }
-   
-    .img-Peru{
-        margin-right:40px !important;
+
+    .img-Peru {
+        margin-right: 40px !important;
     }
-    .img-EEUU{
-        margin-left:40px !important;
+
+    .img-EEUU {
+        margin-left: 40px !important;
     }
-    p{
+
+    p {
         font-size: 27px !important;
         font-weight: 600;
         color: #2375f0;
@@ -30,15 +32,17 @@
         text-transform: uppercase;
         margin-top: 60px !important;
     }
-    label{
+
+    label {
         color: #2375f0;
         font-weight: bold;
         font-size: 18px;
         margin-bottom: 10px;
         font-family: Helvetica, sans-serif !important;
     }
-    span{
-        font-size:17px;
+
+    span {
+        font-size: 17px;
     }
 </style>
 
@@ -51,8 +55,9 @@
         <div class="col-md-5">
             <div class="text-center">
                 <p>Vas a cambiar de <strong id="text-changeA"></strong> a <strong id="text-changeB"></strong></p>
-                <span class="pr-2">Compra: 3.62</span>
-                <span>Venta: 3.656</span>
+                <span class="pr-2">Compra: <strong id="t-compra"></strong></span>
+                <span>Venta: <strong id="t-venta"></strong></span>
+                <strong></strong>
             </div>
             <div class="form-group d-flex mt-3">
                 <div class="col-sm-6 text-center">
@@ -65,8 +70,8 @@
             <div class="form-group d-flex">
                 <div class="col-sm-5">
                     <div class="text-center">
-                        <label for="amount-one"  class="tacharDescuentoVenta" style="opacity:0.5;">Envias</label>
-                        <input type="text" class="form-control" id="amount-one" onkeypress="return isNumber(event);" >
+                        <label for="amount-one" class="tacharDescuentoVenta">Envias</label>
+                        <input type="text" class="form-control" id="amount-one" onkeypress="return isNumber(event);">
                     </div>
                 </div>
                 <div class="col-sm-2">
@@ -81,7 +86,7 @@
             </div>
             <div class="form-group">
                 <div class="text-center">
-                <a href="{{ route('operacion') }}" class="btn btn-primary" role="button" id="cambiarAhora">{{ __('CAMBIAR AHORA') }}</a>           
+                    <button class="btn btn-primary" type="button" id="cambiarAhora">Cambiar Ahora</button>
                 </div>
             </div>
         </div>
@@ -91,16 +96,21 @@
 
 @section('custom-script')
 <script type="text/javascript">
+    const dataEncode = {!! json_encode($tipoCambio, JSON_HEX_TAG) !!};
+let tipoCambio = dataEncode[0].venta;
+let tipoCambio_Venta = dataEncode[0].venta;
+let tipoCambio_Compra = dataEncode[0].compra;
+
 const amountEl_one = document.getElementById('amount-one');
 const amountEl_two = document.getElementById('amount-two');
 document.getElementById('text-changeA').innerHTML  = "Soles";
 document.getElementById('text-changeB').innerHTML  = "Dolares";
+document.getElementById('t-compra').innerHTML  = tipoCambio_Compra;
+document.getElementById('t-venta').innerHTML  = tipoCambio_Venta;
 let button_change = document.getElementById('swap');
+const button_save = document.getElementById('cambiarAhora');
 // donde changeCambio= 1 es Soles a Dólares y changeCambio = 2 es Dólares a Soles
 
-let tipoCambio = 3.656;
-let tipoCambio_Venta = 3.656;
-let tipoCambio_Compra = 3.62;
 
 //validate only numbers
 function isNumber(evt) {
@@ -111,8 +121,6 @@ function isNumber(evt) {
     }
     return true;
 }
-
-
 
 function calculateMontoAtoMontoB() {
 
@@ -157,6 +165,36 @@ swap.addEventListener('click', ()=> {
   
 })
 
+button_save.addEventListener('click', ()=>{
+
+    if(amountEl_one.value == "" || amountEl_one.value == 0){
+
+        alert("Por favor, ingrese una cantidad valida")
+
+    }else{
+        $.ajax({
+            type: "POST",
+            url: "{{ route('tipoCambio.getTipoCambio')}}",
+            data: { 
+            tipoCambio: tipoCambio ,
+            descripcionMontoA: document.getElementById('text-changeA').innerHTML,
+            descripcionMontoB: document.getElementById('text-changeB').innerHTML,
+            montoA: amountEl_one.value,
+            montoB: amountEl_two.value,
+            _token:"{{ csrf_token() }}",
+            },
+            success: function (data) {
+            window.location.href = "operacion";
+
+            },
+            error: function (data, textStatus, errorThrown) {
+                console.log(data);
+
+            },
+        });
+
+      } 
+});
 
 
 </script>

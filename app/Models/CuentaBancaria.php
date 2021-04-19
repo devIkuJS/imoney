@@ -17,7 +17,8 @@ class CuentaBancaria extends Model
         return $this->belongsTo('App\Models\Banco');
     }
 
-    public function tipo_cuenta(){
+    /*public function tipo_cuenta(){
         return $this->belongsTo('App\Models\TipoCuenta');
     }
+    */
 }

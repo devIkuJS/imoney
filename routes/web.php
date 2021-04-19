@@ -33,6 +33,7 @@ Route::post('/user/create', [App\Http\Controllers\UserController::class, 'create
 
 //TipodeCambio
 Route::get('/tipoCambio', [App\Http\Controllers\TipoCambioController::class, 'index'])->name('tipoCambio');
+Route::post('/tipoCambio/getTipoCambio', [App\Http\Controllers\TipoCambioController::class, 'getTipoCambio'])->name('tipoCambio.getTipoCambio');
 
 //Empresa 
 Route::get('/empresa', [App\Http\Controllers\EmpresaController::class, 'index'])->name('empresa');
@@ -59,7 +60,11 @@ Route::get('/cambioTipo', [App\Http\Controllers\CambioTipoController::class, 'in
 
 //Operaciones
 Route::get('/operacion', [App\Http\Controllers\OperacionController::class, 'index'])->name('operacion');
-Route::post('/operacion/create', [App\Http\Controllers\CuentaBancariaController::class, 'create'])->name('operacion.create');
+Route::post('/operacion/createCuentaBancaria', [App\Http\Controllers\OperacionController::class, 'createCuentaBancaria'])->name('operacion.createCuentaBancaria');
+Route::post('/operacion/createOperacion', [App\Http\Controllers\OperacionController::class, 'createOperacion'])->name('operacion.createOperacion');
+Route::get('/operacion/{cuentaId}/getCuentaBancariaSelected', [App\Http\Controllers\OperacionController::class, 'getCuentaBancariaSelected'])->name('operacion.getCuentaBancariaSelected');
+
+
 
 
 //Admin

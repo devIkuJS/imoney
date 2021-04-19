@@ -17,9 +17,8 @@ class CreateCuentaBancariasTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('banco_id')->constrained('bancos');
-            $table->foreignId('tipo_cuenta_id')->constrained('tipo_cuentas');
-            $table->string('cuenta_soles', 100);
-            $table->string('cuenta_dolares', 100);
+            $table->foreignId('tipo_cuenta', 1)->constrained('tipo_cuentas');
+            $table->string('numero_cuenta', 100);
             $table->timestamps();
         });
     }
