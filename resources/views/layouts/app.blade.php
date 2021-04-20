@@ -20,75 +20,67 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/imoney.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/navbar-fixed-left.min.css') }}" rel="stylesheet">
+    
 </head>
-<body>
+<body class="background-imoney">
 <div id="app">
     @if (Auth::check())
-
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand">
-                
-                <img src={{asset('imagenes/logo10.jpg')}} width="250" height="52" class="d-inline-block align-top" alt="logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-
-                </ul>
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
-                    @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @endif
-                        
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
-                    @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-white fixed-top">
+        <a class="navbar-brand"><img src={{asset('imagenes_sidebar/logo.png')}} width="100" ></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src={{asset('imagenes_sidebar/soporte.png')}} width="15" class="mb-1 mr-2">Soporte</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item">Action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item">Separated link</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold">¿Necesitas ayuda?</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"><img src={{asset('imagenes_sidebar/celular.png')}} width="15" class="mb-1 mr-2">(01) 748-2710</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://api.whatsapp.com/send?phone=+51982273702&text=Quiero%20mas%20informacion" target="_blank"><img src={{asset('imagenes_sidebar/WSP.png')}} width="20" class="mb-1 mr-2"> 982273702</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold">Horario de atencion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Lunes a Viernes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">9:00 am a 17:00 pm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"><img src={{asset('imagenes_sidebar/cerrar-sesion.png')}} width="20" class="mb-1 mr-2">Cerrar Sesión</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
         </div>
     </nav>
 
      @endif
-    
-    <main class="py-4" style="background: linear-gradient(141deg, rgba(1,237,251,1) 0%, rgba(38,88,203,1) 82%, rgba(50,51,193,1) 100%)no-repeat center center fixed;background-size:100%;
-   height: auto;
-   position: absolute;
-   width: 100%;">
-        @yield('content')
+     @yield('content')
+ <!--   <main class="py-4">
+        
     </main>
+-->
 </div>
-
+<script src="{{ asset('js/navbar-fixed-left.js') }}" defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 @yield('custom-script')
