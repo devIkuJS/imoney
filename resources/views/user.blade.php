@@ -77,7 +77,7 @@
             <div class="col-12">
                 <div class="card-deck">
                     <div class="card background-card">
-                        <a href="{{ route('tipoCambio') }}"><img src={{asset('imagenes/MIS_DATOS.png')}}
+                        <a href="{{ route('misDatos') }}"><img src={{asset('imagenes/MIS_DATOS.png')}}
                                 class="card-img-top" alt="Imagen Tipo de cambio"></a>
                         <div class="card-body">
                             <h4 class="card-title text-center">Mis datos</h4>
