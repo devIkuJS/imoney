@@ -27,7 +27,7 @@
 <body class="background-imoney">
 <div id="app">
     @if (Auth::check())
-    <nav class="navbar navbar-expand-md navbar-dark bg-white fixed-top">
+    <nav class="navbar navbar-expand-md navbar-dark bg-white fixed-left">
         <a class="navbar-brand"><img src={{asset('imagenes_sidebar/logo50.jpg')}} width="200" ></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
                 aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,7 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown" style="margin-top:25px;">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:17px;"><img src={{asset('imagenes_sidebar/soporte.png')}} width="15" class="mb-1 mr-2">Soporte</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:18px;"><img src={{asset('imagenes_sidebar/soporte.png')}} width="15" class="mb-1 mr-2">Soporte</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item">Action</a>
                         <div class="dropdown-divider"></div>
@@ -54,7 +54,7 @@
                     <a class="nav-link" href="https://api.whatsapp.com/send?phone=+51982273702&text=Quiero%20mas%20informacion" target="_blank" style="font-size:17px;"><img src={{asset('imagenes_sidebar/LOGO_WSP.png')}} width="20" class="mb-1 mr-2"> 982273702</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold h5">Horario de atención</a>
+                    <a class="nav-link font-weight-bold" style="font-size:18px;">Horario de atención</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="font-size:17px;"><img src={{asset('imagenes_sidebar/horario.png')}} width="20" class="mb-1 mr-2">Lunes a Viernes</a>
@@ -63,7 +63,7 @@
                     <a class="nav-link" style="font-size:17px;">9:00 am a 17:00 pm</a>
                 </li>
                 <li class="nav-item" style="margin-top:30px;">
-                    <a class="nav-link font-weight-bold h4" href="{{ route('logout') }}" onclick="event.preventDefault();
+                    <a class="nav-link font-weight-bold" style="font-size:18px;" href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();"><img src={{asset('imagenes_sidebar/cerrar-sesion.png')}} width="20" class="mb-1 mr-2">Cerrar Sesión</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
@@ -80,7 +80,6 @@
     </main>
 -->
 </div>
-<script src="{{ asset('js/navbar-fixed-left.js') }}" defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 @yield('custom-script')
