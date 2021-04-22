@@ -147,12 +147,12 @@
                             <div class="col-6">
                                 <input type="text" id="amount-one" class="form-control input-calculator"
                                     onkeypress="return isNumber(event);" />
-                                <label class="form-control-label" for="envias">Envías</label>
+                                <label class="form-control-label font-weight-bold" for="envias">Envías</label>
                             </div>
 
                             <div class="col-6">
                                 <div class="d-flex justify-content-center align-items-center border-content-change">
-                                    <strong class="text-left text-white h4 text-change mr-4" id="text-changeA"></strong>
+                                    <strong class="text-left text-white h4 text-change mr-4 font-weight-bold" id="text-changeA"></strong>
                                     <img src={{asset('icon-calculator/bandera_peru.png')}} width="40" id="icon-changeA">
                                 </div>
                             </div>
@@ -163,11 +163,11 @@
                             <div class="col-6">
                                 <input type="text" id="amount-two" class="form-control input-calculator"
                                     onkeypress="return isNumber(event);" />
-                                <label class="form-control-label" for="recibes">Recibes</label>
+                                <label class="form-control-label font-weight-bold" for="recibes">Recibes</label>
                             </div>
                             <div class="col-6">
                                 <div class="d-flex justify-content-center align-items-center border-content-change">
-                                    <strong class="text-left text-white h4 text-change mr-4"
+                                    <strong class="text-left text-white h4 text-change mr-4 font-weight-bold"
                                         id="text-changeB">Soles</strong>
 
                                     <img src={{asset('icon-calculator/bandera_usa.png')}} width="40" id="icon-changeB">
