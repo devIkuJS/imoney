@@ -59,6 +59,9 @@
        /* color:#2375f0; */
        font-family: Helvetica, sans-serif !important;
     }
+    h3{
+        color:#2375F0;
+    }
 
          
 </style>
@@ -176,6 +179,11 @@
                                                         @if ($errors->has('celular'))
                                                         <span class="text-danger">{{ $errors->first('celular') }}</span>
                                                         @endif
+                                                        <!--<a id="btnModalActualizarCelular"><img src={{asset('imagenes/edit-perfil.png')}} class="card-img-top"
+                                                           alt="Imagen Financiamiento"></a> -->
+                                                            <button type="button" class="btn btn-warning btn-sm btn-xs" data-toggle="modal" data-target="#exampleModalCenter">
+                                                            <i class="fas fa-edit"></i>
+                                                            </button>
                                                 </div>
                                             </div>
 
@@ -273,7 +281,7 @@
                                                     
                                                     <!-- Button trigger modal -->
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" 
-                                                            data-target="#exampleModal">
+                                                            data-target="#modal-cambiar-contrasena">
                                                             <i class="fa fa-key"></i>&nbsp;Cambiar Contraseña
                                                     </button>
                                                 </div>
@@ -288,13 +296,42 @@
     
 </main>
 
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 <!-- Modal Cambiar Contraseña -->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-cambiar-contrasena" tabindex="-1" role="dialog" aria-labelledby="modal-cambiar-contrasena" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title " id="exampleModalLabel">Cambiar Contraseña</h5>
+        <h3 class="modal-title" id="modal-cambiar-contrasena">CAMBIAR CONTRASEÑA</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
