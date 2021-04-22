@@ -1,18 +1,4 @@
 <style>
-    .icon-change {
-        position: absolute;
-        top: 24.5%;
-        transform: translateY(-50%);
-        left: 0;
-        right: 0;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        pointer-events: none;
-        z-index: 20;
-    }
-
     .form-group {
         position: relative;
         min-height: 3.5em;

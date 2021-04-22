@@ -64,6 +64,9 @@ Route::post('/operacion/createCuentaBancaria', [App\Http\Controllers\OperacionCo
 Route::post('/operacion/createOperacion', [App\Http\Controllers\OperacionController::class, 'createOperacion'])->name('operacion.createOperacion');
 Route::get('/operacion/{cuentaId}/getCuentaBancariaSelected', [App\Http\Controllers\OperacionController::class, 'getCuentaBancariaSelected'])->name('operacion.getCuentaBancariaSelected');
 
+//transaccion
+Route::get('/transaccion/{nroTransaccion}', [App\Http\Controllers\TransaccionController::class, 'index'])->name('transaccion');
+
 
 
 
