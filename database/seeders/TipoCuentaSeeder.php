@@ -17,11 +17,11 @@ class TipoCuentaSeeder extends Seeder
     {
         //Crearemos un Administrador.
         $tipo_cuenta=TipoCuenta::create([
-            'name' => 'Ahorros'
+            'name' => 'Soles'
         ]);
 
         $tipo_cuenta=TipoCuenta::create([
-            'name' => 'Creditos'
+            'name' => 'Dolares'
         ]);
 
                     

@@ -28,11 +28,9 @@ class UserController extends Controller
     {
         $bancos = Banco::all();
         $tipo_cuenta = TipoCuenta::all();
-        $status_bancario = Auth::user()->status_bancario;
         return view('user' , [
             'bancos' => $bancos,
             'tipo_cuentas' => $tipo_cuenta,
-            'status_bancario' => $status_bancario,
         ]);
     }
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class tipoRegistroController extends Controller
+class TipoRegistroController extends Controller
 {
     //
 
@@ -12,3 +12,4 @@ class tipoRegistroController extends Controller
         return view('tipoRegistro');
       }
 }
+

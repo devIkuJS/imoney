@@ -3,7 +3,18 @@
     .bs-stepper-label {
         display: block !important;
         font-size:12px;
+        
     }
+    .bs-stepper-label{
+        white-space: pre-wrap !important;
+        margin: 0px !important;
+
+    }
+
+    .bs-stepper-header{
+        margin-bottom:20px;
+    }
+    
     .active .bs-stepper-circle {
     background-color: #0274be !important;
     }
@@ -25,7 +36,13 @@
         color:white;
         font-family: Helvetica, sans-serif;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 17px;
+    }
+    .img-fluid{
+        
+        margin-top: 0px;
+        margin-left:0px;
+        margin-right:10px;
     }
     .form-control{
         border-radius: 8px !important;
@@ -59,6 +76,13 @@
     color: black;
     font-weight: bold;
     }
+
+    @media (max-width: 600px) {
+    .bs-stepper .step-trigger {
+    padding: 0px !important;
+    }
+}
+ 
 </style>
 @extends('layouts.app')
 
@@ -66,7 +90,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header"><img src={{asset('imagenes/mesa.png')}} alt="Fjords" style="width:5%" class="img-fluid"> {{ __('EMPRESA') }}</div>
 
@@ -93,7 +117,7 @@
                                 <button type="button" class="step-trigger" role="tab" id="stepper1trigger3"
                                     aria-controls="test-l-3" aria-selected="false" disabled="disabled">
                                     <span class="bs-stepper-circle">3</span>
-                                    <span class="bs-stepper-label">Datos del Responsable de Operaciones</span>
+                                    <span class="bs-stepper-label">Datos Responsable Operaciones</span>
                                 </button>
                             </div>
                             <div class="bs-stepper-line"></div>
@@ -101,7 +125,7 @@
                                 <button type="button" class="step-trigger" role="tab" id="stepper1trigger4"
                                     aria-controls="test-l-4" aria-selected="false" disabled="disabled">
                                     <span class="bs-stepper-circle">4</span>
-                                    <span class="bs-stepper-label">Adjuntar Documentos</span>
+                                    <span class="bs-stepper-label">Adjuntar Documentos de Empresa</span>
                                 </button>
                             </div>
                         </div>
@@ -158,7 +182,7 @@
 
                                     <div class="form-group row">
                                         <label for="grupo"
-                                            class="col-md-4 col-form-label text-md-right">{{ __('¿Ud. pertenece a un grupo económico?') }}</label>
+                                            class="col-md-4 col-form-label text-md-right">{{ __('¿Pertenece a un grupo económico?') }}</label>
 
                                         <div class="col-md-6">
                                             <div class="form-check form-check-inline mt-3">

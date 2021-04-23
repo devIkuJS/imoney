@@ -1,11 +1,25 @@
 <style>
+
+.container{
+        margin-top: -11px !important;
+       
+    }
     .bs-stepper .step-trigger,
     .bs-stepper-label {
-        display: block !important;   
-        font-size:12px;
+        display: block !important;
+        font-size: 12px;
+    }
+
+    .bs-stepper-label {
+        white-space: pre-wrap !important;
+        margin: 0px !important;
+
+    }
+    .bs-stepper-header{
+        margin-bottom:20px;
     }
     .active .bs-stepper-circle {
-    background-color: #0274be !important;
+        background-color: #0274be !important;
     }
 
     .custom-file-label::after {
@@ -26,43 +40,51 @@
         color: white;
         font-family: Helvetica, sans-serif;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 17px;
     }
-    .form-control{
-        border-radius: 8px !important;
-        box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
+
+    .img-fluid{
         
+        margin-right:10px;
     }
+
+    .form-control {
+        border-radius: 8px !important;
+        box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);  
+    }
+
     .col-form-label{
         color:gray ;
         font-family: Helvetica, sans-serif;
         font-weight: bold;
     }
-   
-    .btn-primary1{
+
+    .btn-primary1 {
         background-color: #C0BEBF !important;
-        color:white  !important;
-        font-weight:bold !important;
-        font-family: Helvetica, sans-serif;
-        box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
-    }
-    .btn-primary{
+        color: white !important;
         font-weight: bold !important;
         font-family: Helvetica, sans-serif;
         box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
-        background:#0274be !important;
     }
-    .form-check-label2{
-        color: black !important; 
-        font-weight: bold !important;   
+
+    .btn-primary {
+        font-weight: bold !important;
+        font-family: Helvetica, sans-serif;
+        box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
+        background: #0274be !important;
     }
+
+    .form-check-label2 {
+        color: black !important;
+        font-weight: bold !important;
+    }
+
     .link-password {
-    font-family: Helvetica, sans-serif;
-    color: black;
-    font-weight: bold ;
+        font-family: Helvetica, sans-serif;
+        color: black;
+        font-weight: bold;
     }
-    
-        
+         
 </style>
 @extends('layouts.app')
 
@@ -72,7 +94,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><img src={{asset('imagenes/persona100.png')}} alt="Fjords" style="width:5%" class="img-fluid">  {{ __('PERSONA NATURAL') }}</div>
+                <div class="card-header"><img src={{asset('imagenes/persona100.png')}} alt="Fjords" style="width:7%" class="img-fluid">  {{ __('PERSONA NATURAL') }}</div>
 
                 <div class="card-body">
 
@@ -122,11 +144,9 @@
                                                     class="form-control @error('name') is-invalid @enderror" name="name"
                                                     value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                                                @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
+                                                @if ($errors->has('name'))
+                                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                                                @endif
                                             </div>
                                         </div>
 
@@ -140,11 +160,9 @@
                                                     name="apellidos" value="{{ old('apellidos') }}" required
                                                     autocomplete="apellidos" autofocus>
 
-                                                @error('apellidos')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
+                                                @if ($errors->has('apellidos'))
+                                                <span class="text-danger">{{ $errors->first('apellidos') }}</span>
+                                                @endif
                                             </div>
                                         </div>
 
@@ -158,17 +176,15 @@
                                                     name="celular" value="{{ old('celular') }}" required
                                                     autocomplete="celular" autofocus>
 
-                                                @error('celular')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
+                                                @if ($errors->has('celular'))
+                                                <span class="text-danger">{{ $errors->first('celular') }}</span>
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="domicilio"
-                                                class="col-md-4 col-form-label text-md-right">{{ __('domicilio') }}</label>
+                                                class="col-md-4 col-form-label text-md-right">{{ __('Domicilio') }}</label>
 
                                             <div class="col-md-6">
                                                 <input id="domicilio" type="text"
@@ -176,11 +192,9 @@
                                                     name="domicilio" value="{{ old('domicilio') }}" required
                                                     autocomplete="domicilio" autofocus>
 
-                                                @error('domicilio')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
+                                                @if ($errors->has('domicilio'))
+                                                <span class="text-danger">{{ $errors->first('domicilio') }}</span>
+                                                @endif
                                             </div>
                                         </div>
 
@@ -194,11 +208,9 @@
                                                     name="nacionalidad" value="{{ old('nacionalidad') }}" required
                                                     autocomplete="nacionalidad" autofocus>
 
-                                                @error('nacionalidad')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
+                                                @if ($errors->has('nacionalidad'))
+                                                <span class="text-danger">{{ $errors->first('nacionalidad') }}</span>
+                                                @endif
                                             </div>
                                         </div>
 
@@ -212,11 +224,9 @@
                                                     name="ocupacion" value="{{ old('ocupacion') }}" required
                                                     autocomplete="ocupacion" autofocus>
 
-                                                @error('ocupacion')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
+                                                @if ($errors->has('ocupacion'))
+                                                <span class="text-danger">{{ $errors->first('ocupacion') }}</span>
+                                                @endif
                                             </div>
                                         </div>
 
@@ -233,11 +243,10 @@
                                                     <input class="form-check-input" type="radio" name="politico" id="no"
                                                         value="no" onclick="showPoliticoContainer();">
                                                 </div>
-                                                @error('politico')
-                                                <span class="invalid-feedback d-block" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
+                                                @if ($errors->has('politico'))
+                                                <span
+                                                    class="text-danger d-block">{{ $errors->first('politico') }}</span>
+                                                @endif
                                             </div>
                                         </div>
 
@@ -253,11 +262,6 @@
                                                         name="cargo" value="{{ old('cargo') }}" autocomplete="cargo"
                                                         autofocus>
 
-                                                    @error('cargo')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                    @enderror
                                                 </div>
                                             </div>
 
@@ -271,11 +275,7 @@
                                                         name="empresa" value="{{ old('empresa') }}"
                                                         autocomplete="empresa" autofocus>
 
-                                                    @error('empresa')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                    @enderror
+
                                                 </div>
                                             </div>
                                         </div>
@@ -298,11 +298,9 @@
                                                         class="form-control @error('dni') is-invalid @enderror"
                                                         name="dni" value="{{ old('dni') }}" required autocomplete="dni"
                                                         autofocus>
-                                                    @error('dni')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                    @enderror
+                                                    @if ($errors->has('dni'))
+                                                    <span class="text-danger">{{ $errors->first('dni') }}</span>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -321,11 +319,10 @@
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    @error('archivo_dni_front')
-                                                    <span class="invalid-feedback d-block" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                    @enderror
+                                                    @if ($errors->has('archivo_dni_front'))
+                                                    <span
+                                                        class="text-danger d-block">{{ $errors->first('archivo_dni_front') }}</span>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -344,11 +341,10 @@
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    @error('archivo_dni_atras')
-                                                    <span class="invalid-feedback d-block" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                    @enderror
+                                                    @if ($errors->has('archivo_dni_atras'))
+                                                    <span
+                                                        class="text-danger d-block">{{ $errors->first('archivo_dni_atras') }}</span>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -375,11 +371,9 @@
                                                     name="email" value="{{ old('email') }}" required
                                                     autocomplete="email">
 
-                                                @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
+                                                @if ($errors->has('email'))
+                                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                                                @endif
                                             </div>
                                         </div>
 
@@ -392,11 +386,9 @@
                                                     class="form-control @error('password') is-invalid @enderror"
                                                     name="password" autocomplete="new-password">
 
-                                                @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
+                                                @if ($errors->has('password'))
+                                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                                                @endif
                                             </div>
 
                                         </div>
@@ -416,17 +408,20 @@
                                                 <div class="form-check">
                                                     <input type="checkbox" name="terminos" class="form-check-input"
                                                         id="accept">
-                                                    <label class="form-check-label2" for="accept">Registrándote, aceptas.
-                                                        <a href="#" target="_blank" class="text-dark link-password">Términos y Condiciones</a>. <a
-                                                            href="#" target="_blank" class="text-dark link-password">Políticas de privacidad y uso de
+                                                    <label class="form-check-label2" for="accept">Registrándote,
+                                                        aceptas.
+                                                        <a href="#" target="_blank"
+                                                            class="text-dark link-password">Términos y Condiciones</a>.
+                                                        <a href="#" target="_blank"
+                                                            class="text-dark link-password">Políticas de privacidad y
+                                                            uso de
                                                             Datos</a>.</label>
                                                 </div>
 
-                                                @error('terminos')
-                                                <span class="invalid-feedback d-block" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
+                                                @if ($errors->has('terminos'))
+                                                <span
+                                                    class="text-danger d-block">{{ $errors->first('terminos') }}</span>
+                                                @endif
 
                                             </div>
                                         </div>
@@ -441,8 +436,8 @@
                                                 </button>
                                             </div>
                                         </div>
+                                    </div>
                             </div>
-                        </div>
 
                     </form>
                 </div>
@@ -482,5 +477,4 @@ document.querySelector('.dni-atras').addEventListener('change',function(e){
 })
  
     </script>
-
-    @stop
+@stop

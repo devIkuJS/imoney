@@ -1,4 +1,8 @@
 <style>
+
+    .container{
+        margin-top: 55px !important;
+    }
     .card-header{
         background:#0274be !important;
         color:white;
@@ -6,11 +10,17 @@
         font-weight: bold;
         font-size: 14px;
     }
+    .img-fluid{
+        margin:5px;
+        margin-top: 0px;
+        margin-left:-10px;
+        margin-right:10px;
+    }
     .form-control{
         border-radius: 8px !important;
         box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
-        
     }
+
     .col-form-label{
         color:gray ;
         font-family: Helvetica, sans-serif;
@@ -25,6 +35,7 @@
     .btn-link{
         color:#0274be ;
     }
+    
 </style>
 @extends('layouts.app')
 
@@ -32,9 +43,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
-                <div class="card-header"><img src={{asset('imagenes/logo_alex.png')}} alt="Fjords" style="width:6%" class="img-fluid"> {{ __('BIENVENIDO | Iniciar sesiòn') }}</div>
+                <div class="card-header"><img src={{asset('imagenes/logo_alex.png')}} alt="Fjords" style="width:7%" class="img-fluid">{{ __('BIENVENIDO | Iniciar sesión') }}</div>
 
                 <div class="card-body pb-0">
                     <form method="POST" action="{{ route('login') }}">

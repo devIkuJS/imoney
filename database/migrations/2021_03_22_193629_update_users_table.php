@@ -18,10 +18,6 @@ class UpdateUsersTable extends Migration
         if (!Type::hasType('char')) {
             Type::addType('char', StringType::class);
             }
-            
-        Schema::table('users', function (Blueprint $table) {
-            $table->char('status_bancario', 1)->change();
-        });
     }
 
     /**

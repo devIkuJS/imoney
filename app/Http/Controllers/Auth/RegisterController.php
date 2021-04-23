@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Mail\UserMail;
 
+use App\Http\Controllers\MailController;
+
 
 class RegisterController extends Controller
 {
@@ -25,10 +27,6 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
-    public $dni_front;
-
-    public $dni_atras;
 
     use RegistersUsers;
 
@@ -56,24 +54,6 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'apellidos' => ['required', 'string', 'max:255'],
-            'celular' => ['required', 'integer', 'min:9'],
-            'domicilio' => ['required', 'string', 'max:255'],
-            'nacionalidad' => ['required', 'string', 'max:255'],
-            'ocupacion' => ['required', 'string', 'max:255'],
-            'politico'=> ['required'],
-            'dni' => ['required', 'integer', 'min:8'],
-            'archivo_dni_front' => ['required'],
-            'archivo_dni_atras' => ['required'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'terminos' => ['accepted']
-        ]);
-    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -82,59 +62,82 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
 
-    protected function create(array $data)
+    public function register(Request $request)
     {
+        $user = new User();
 
-
-
-        if(request()->hasfile('archivo_dni_front')){
-            $file=request()->file('archivo_dni_front');
-            $destinationPath= 'images/dni/';
-            $filename= time() . '-' . $file->getClientOriginalName();
-            $uploadSuccess= request()->file('archivo_dni_front')->move($destinationPath,$filename);
-            $this->dni_front = $destinationPath . $filename;
-        }
-
-        if(request()->hasfile('archivo_dni_atras')){
-            $file=request()->file('archivo_dni_atras');
-            $destinationPath= 'images/dni/';
-            $filename= time() . '-' . $file->getClientOriginalName();
-            $uploadSuccess= request()->file('archivo_dni_atras')->move($destinationPath,$filename);
-            $this->dni_atras = $destinationPath . $filename;
-        }
-        
-        
-
-        $politico = $data['politico'] === 'si' ? "1" : "0";
-        $user = User::create([
-            'name' => $data['name'],
-            'apellidos' => $data['apellidos'],
-            'celular' => $data['celular'],
-            'domicilio' => $data['domicilio'],
-            'nacionalidad' => $data['nacionalidad'],
-            'ocupacion' => $data['ocupacion'],
-            'politico' => $politico,
-            'cargo' => $data['cargo'],
-            'empresa' => $data['empresa'],
-            'dni' => $data['dni'],
-            'archivo_dni_front' => $this->dni_front,
-            'archivo_dni_atras' => $this->dni_atras,
-            'email' => $data['email'],
-            'tipo_id' => "2",
-            'status_bancario' => "0",
-            'password' => Hash::make($data['password']),
-            
+        $this->validate($request, [
+            'name' => 'required',
+            'apellidos' => 'required',
+            'celular' => 'required|min:9',
+            'domicilio' => 'required',
+            'nacionalidad' => 'required',
+            'ocupacion' => 'required',
+            'politico' => 'required',
+            'dni' => 'required|min:8',
+            'archivo_dni_front' => 'required',
+            'archivo_dni_atras' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'required|min:8|confirmed',
+            'terminos' => 'accepted',
+        ],
+        [
+            'name.required' => 'Ingrese nombres',
+            'apellidos.required' => 'Ingrese apellidos',
+            'celular.required' => 'Ingrese celular',
+            'domicilio.required' => 'Ingrese su domicilio',
+            'nacionalidad.required' => 'Ingrese su nacionalidad',
+            'ocupacion.required' => 'Ingrese su ocupacion',
+            'politico.required' => 'Seleccione si es politico',
+            'dni.required' => 'Ingrese su dni',
+            'archivo_dni_front.required' => 'Seleccione DNI Anverso',
+            'archivo_dni_atras.required' => 'Seleccione DNI Reverso',
+            'email.required' => 'El email es invalido',
+            'password.required' => 'Ingrese una contraseña valida',
+            'terminos.required' => 'Seleccione terminos y condiciones',
         ]);
 
-        return $user;
-        
-    
+        if($request->hasfile('archivo_dni_front')){
+            $file=$request->file('archivo_dni_front');
+            $destinationPath= 'images/dni/';
+            $filename= time() . '-' . $file->getClientOriginalName();
+            $uploadSuccess= $request->file('archivo_dni_front')->move($destinationPath,$filename);
+            $user->archivo_dni_front = $destinationPath . $filename;
+        }
+
+        if($request->hasfile('archivo_dni_atras')){
+            $file=$request->file('archivo_dni_atras');
+            $destinationPath= 'images/dni/';
+            $filename= time() . '-' . $file->getClientOriginalName();
+            $uploadSuccess= $request->file('archivo_dni_atras')->move($destinationPath,$filename);
+            $user->archivo_dni_atras = $destinationPath . $filename;
+        }
+
+
+        $politico = $request['politico'] === 'si' ? "1" : "0";
+
+        $user->name = $request->name;
+        $user->apellidos = $request->apellidos;
+        $user->celular = $request->celular;
+        $user->domicilio = $request->domicilio;
+        $user->nacionalidad = $request->nacionalidad;
+        $user->ocupacion = $request->ocupacion;
+        $user->politico = $politico;
+        $user->cargo = $request->cargo;
+        $user->empresa = $request->empresa;
+        $user->dni = $request->dni;
+        $user->email = $request->email;
+        $user->tipo_id = "2";
+        $user->password = Hash::make($request->password);
+        $user->verification_code = sha1(time());
+        $user->save();
+
+        if($user != null){
+            MailController::sendSignupEmail($user->name, $user->email, $user->verification_code);
+            return redirect('/email-verify');
+        }
+
     }
- 
-    protected function redirectTo()
-    {
-            return '/email/verify';
-       
-    }
+
     
 }
