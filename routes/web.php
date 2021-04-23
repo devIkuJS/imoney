@@ -56,6 +56,7 @@ Route::get('/financiamiento', [App\Http\Controllers\FinanciamientoController::cl
 Route::get('/misDatos', [App\Http\Controllers\MisDatosController::class, 'index'])->name('misDatos');
 Route::post('/misDatos/{usuarioId}/actualizar', [App\Http\Controllers\MisDatosController::class, 'actualizar'])->name('misDatos.actualizar');
 
+
 //CambioTipo - GUTI
 Route::get('/cambioTipo', [App\Http\Controllers\CambioTipoController::class, 'index'])->name('cambioTipo');
 
@@ -65,7 +66,9 @@ Route::post('/operacion/createCuentaBancaria', [App\Http\Controllers\OperacionCo
 Route::post('/operacion/createOperacion', [App\Http\Controllers\OperacionController::class, 'createOperacion'])->name('operacion.createOperacion');
 Route::get('/operacion/{cuentaId}/getCuentaBancariaSelected', [App\Http\Controllers\OperacionController::class, 'getCuentaBancariaSelected'])->name('operacion.getCuentaBancariaSelected');
 
-
+//Cambiar Contraseña
+Route::get('change-password', 'CambiarContraseñaController@index');
+Route::post('change-password', 'CambiarContraseñaController@store')->name('change.password');
 
 
 //Admin

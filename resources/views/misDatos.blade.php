@@ -137,6 +137,24 @@
                                                
 
                                                 <div class="col-md-6">
+                                                    <label for="email"
+                                                        class="col-form-label">{{ __('CORREO') }}</label>
+
+                                                    <input id="email" type="email"
+                                                        class="form-control @error('email') is-invalid @enderror"
+                                                        name="email" value="{{$user->email}}" required
+                                                        autocomplete="email" autofocus disabled>
+
+                                                    @if ($errors->has('email'))
+                                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            
+
+                                            <div class="form-group row">
+
+                                            <div class="col-md-3">
                                                     <label for="domicilio"
                                                         class="col-form-label">{{ __('DOMICILIO') }}</label>
 
@@ -149,41 +167,33 @@
                                                     <span class="text-danger">{{ $errors->first('domicilio') }}</span>
                                                     @endif
                                                 </div>
-                                            </div>
-                                            
 
-                                            <div class="form-group row">
-                                                <div class="col-md-6">
-                                                    <label for="email"
-                                                        class="col-form-label">{{ __('CORREO') }}</label>
-
-                                                    <input id="email" type="email"
-                                                        class="form-control @error('email') is-invalid @enderror"
-                                                        name="email" value="{{$user->email}}" required
-                                                        autocomplete="email">
-
-                                                    @if ($errors->has('email'))
-                                                    <span class="text-danger">{{ $errors->first('email') }}</span>
-                                                    @endif
+                                                <div class="col-md-3">
+                                                    <button type="button" class="btn btn-light btn-sm btn-xs" 
+                                                            data-toggle="modal" data-target="#modal-actualizar-domicilio-{{$user->id}}">
+                                                                <i class="fas fa-edit"></i></button>        
                                                 </div>
                                         
-                                                <div class="col-md-6">
+                                                <div class="col-md-3">
                                                     <label for="celular"
                                                         class="col-form-label">{{ __('CELULAR') }}</label>
 
                                                         <input id="celular" type="text"
                                                             class="form-control @error('celular') is-invalid @enderror"
                                                             name="celular" value="{{$user->celular}}" required
-                                                            autocomplete="celular" autofocus>
+                                                            autocomplete="celular" autofocus disabled>
 
                                                         @if ($errors->has('celular'))
                                                         <span class="text-danger">{{ $errors->first('celular') }}</span>
                                                         @endif
                                                         <!--<a id="btnModalActualizarCelular"><img src={{asset('imagenes/edit-perfil.png')}} class="card-img-top"
                                                            alt="Imagen Financiamiento"></a> -->
-                                                            <button type="button" class="btn btn-warning btn-sm btn-xs" data-toggle="modal" data-target="#exampleModalCenter">
-                                                            <i class="fas fa-edit"></i>
-                                                            </button>
+                                                            
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <button type="button" class="btn btn-light btn-sm btn-xs" 
+                                                            data-toggle="modal" data-target="#modal-actualizar-celular-{{$user->id}}">
+                                                                <i class="fas fa-edit"></i></button>        
                                                 </div>
                                             </div>
 
@@ -265,27 +275,13 @@
                                                         </div>
                                                     </div> -->
                                                     <div class="col-md-6">
-                                                        <button type="submit" class="btn btn-primary px-4 float-right">
-                                                            {{ __('Guardar') }}
-                                                        </button>
-                                                    </div>
-                                            </div>
-
-                                            <!--<div class="text-center">
-                                                <button type="submit" class="btn btn-primary px-4 float-right">
-                                                        {{ __('Guardar') }}
-                                                </button>
-                                            </div> -->
-                                            <div class="form-group row">
-                                                <div class="col-md-6">
-                                                    
-                                                    <!-- Button trigger modal -->
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" 
+                                                        <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-primary px-4 float-right" data-toggle="modal" 
                                                             data-target="#modal-cambiar-contrasena">
                                                             <i class="fa fa-key"></i>&nbsp;Cambiar Contraseña
                                                     </button>
-                                                </div>
-                                            </div>
+                                                    </div>
+                                            </div>                    
                             </form>
                         </div>               
                     </div>    
@@ -297,36 +293,72 @@
 </main>
 
 
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Modal actualizar domicilio -->
+<div class="modal fade" id="modal-actualizar-domicilio-{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">ACTUALIZAR DOMICILIO</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+      <form method="POST" action="{{ route ('misDatos.actualizar', $user->id) }}" >
+            @csrf
+            <div class="form-group row">
+                <label for="domicilio"
+                      class="col-md-4 col-form-label text-md-right">Domiclio</label>
+                        <div class="col-md-6">
+                                <input id="domicilio" type="text"
+                                    class="form-control" name="domicilio">                                  
+                        </div>
+            </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">GUARDAR</button>
       </div>
     </div>
   </div>
 </div>
+<!-- Modal actualizar domicilio -->
 
 
-
-
+<!-- Modal actualizar celular -->
+<div class="modal fade" id="modal-actualizar-celular-{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">ACTUALIZAR CELULAR</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="POST" action="{{ route ('misDatos.actualizar', $user->id) }}" >
+            @csrf
+            <div class="form-group row">
+                <label for="celular"
+                      class="col-md-4 col-form-label text-md-right">Celular</label>
+                        <div class="col-md-6">
+                                <input id="celular" type="text"
+                                    class="form-control" name="celular">
+                                    
+                        </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">GUARDAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal actualizar celular -->
 
 
 <!-- Modal Cambiar Contraseña -->
-
 <div class="modal fade" id="modal-cambiar-contrasena" tabindex="-1" role="dialog" aria-labelledby="modal-cambiar-contrasena" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -337,49 +369,41 @@
         </button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="{{ route('misDatos') }}">
+        <form method="POST" action="{{ route('misDatos.actualizar', $user->id) }}">
             @csrf
             <div class="form-group row">
                     <label for="password"
                            class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
                     <div class="col-md-6">
-                        <input id="password" type="password"
+                        <input id="old_password" type="password"
                                class="form-control @error('password') is-invalid @enderror"
-                               name="password" autocomplete="new-password">
-
-                                @if ($errors->has('password'))
-                                <span class="text-danger">{{ $errors->first('password') }}</span>
-                                @endif
+                               name="old_password" autocomplete="password" >                     
                     </div>
             </div>
             <div class="form-group row">
                     <label for="NuevoPassword"
                            class="col-md-4 col-form-label text-md-right">{{ __('Nueva Contraseña') }}</label>
                     <div class="col-md-6">
-                        <input id="NuevoPassword" type="password"
+                        <input id="password" type="password"
                                class="form-control @error('NuevoPassword') is-invalid @enderror"
-                               name="NuevoPassword" autocomplete="new-NuevoPassword">
+                               name="password" autocomplete="password">
 
-                                @if ($errors->has('NuevoPassword'))
-                                <span class="text-danger">{{ $errors->first('NuevoPassword') }}</span>
-                                @endif
                     </div>
             </div>
-
 
             <div class="form-group row">
                     <label for="password-confirm"
                            class="col-md-4 col-form-label text-md-right">{{ __('Confirmar contraseña') }}</label>
 
                     <div class="col-md-6">
-                         <input id="password-confirm" type="password" class="form-control"
-                                name="password_confirmation" autocomplete="new-password">
+                         <input id="password-confirm" type="password" 
+                                class="form-control" name="password_confirmation">                             
                     </div>
              </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="cambiar-contrasena">RESTABLECER</button>
+        <button type="submit" class="btn btn-primary" id="cambiar-contrasena">RESTABLECER</button>
       </div>
     </div>
   </div>
@@ -401,6 +425,29 @@ function showPoliticoContainer() {
 
 }
 
- 
+$('#formmass').on('submit', function(e) {
+  // evito que propague el submit
+  e.preventDefault();
+  
+  // agrego la data del form a formData
+  var formData = new FormData(this);
+  formData.append('_token', $('input[name=_token]').val());
+
+  $.ajax({
+      type:'POST',
+      url: '../update/' + id,
+      data:formData,
+      cache:false,
+      contentType: false,
+      processData: false,
+      success:function(data){
+          toastr.error('Validation true!', 'se pudo Añadir los datos<br>', {timeOut: 5000});
+      },
+      error: function(jqXHR, text, error){
+          toastr.error('Validation error!', 'No se pudo Añadir los datos<br>' + error, {timeOut: 5000});
+      }
+  });
+});
+
     </script>
 @stop

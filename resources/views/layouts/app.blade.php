@@ -36,7 +36,7 @@
     
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav">
-                <li class="nav-item dropdown" style="margin-top:25px;">
+                <li class="nav-item dropdown" style="margin-top:17px;">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:17px;"><img src={{asset('imagenes_sidebar/soporte.png')}} width="15" class="mb-1 mr-2">Soporte</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item">Action</a>
