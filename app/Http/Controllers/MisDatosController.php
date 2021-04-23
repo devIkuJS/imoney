@@ -22,7 +22,6 @@ class MisDatosController extends Controller
         return view('misDatos'); */
         
         $user = User::find(Auth::user()->id); 
-       /* $user = Auth::user(); */
         
         return view('misDatos',['user'=>$user]);
         
@@ -31,13 +30,14 @@ class MisDatosController extends Controller
     public function actualizar(Request $request, $usuarioId)
     {
     	$user = User::find($usuarioId);
-        $user->correo = $request->correo;
-        $user->celular = $request->celular;
-    	$user->nuevoPassword = $request->nuevoPassword;
-    	$user->save();
-
+        /*$user->domicilio = $request->domicilio;*/ 
+        $user->celular = $request->filled('celular') ? $request->celular : $user->celular; 
+        $user->domicilio = $request->filled('domicilio') ? $request->domicilio : $user->domicilio;
+      
+    	$user->save();   
     	return redirect()->back();
     	//dd($request->all());
         return view('misDatos.actualizar',['user'=>$user]);
     }
+    
 }

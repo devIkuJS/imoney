@@ -56,6 +56,7 @@ Route::get('/financiamiento', [App\Http\Controllers\FinanciamientoController::cl
 Route::get('/misDatos', [App\Http\Controllers\MisDatosController::class, 'index'])->name('misDatos');
 Route::post('/misDatos/{usuarioId}/actualizar', [App\Http\Controllers\MisDatosController::class, 'actualizar'])->name('misDatos.actualizar');
 
+
 //CambioTipo - GUTI
 Route::get('/cambioTipo', [App\Http\Controllers\CambioTipoController::class, 'index'])->name('cambioTipo');
 

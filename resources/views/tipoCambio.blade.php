@@ -23,7 +23,7 @@
     .input-calculator {
         padding-top: 2.5rem !important;
         padding-bottom: 1rem !important;
-        font-size: 1rem !important;
+        font-size: 1.1rem !important;
         font-weight: bold !important;
     }
     
@@ -31,8 +31,8 @@
 
         border: 1.5px solid #fff;
         border-radius: 0.25rem;
-        padding-top: 19.4px;
-        padding-bottom: 19.4px;
+        padding-top: 23px;
+        padding-bottom: 23px;
 
     }
 

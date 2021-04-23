@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <p class="font-weight-bold h5">Tienes un promedio de 20 minutos para realizar la transferencia sin
+                    <p class="font-weight-bold h5">Tienes un promedio de 25 minutos para realizar la transferencia sin
                         perder el tipo de cambio</p>
                     <p class="font-weight-bold h5 text-white">Hora de inicio: {{ date('H:i:s', strtotime($transaccion->created_at)) }}</p>
                     <p class="font-weight-bold h5 text-white">Hora de fin: {{ date('H:i:s', strtotime($transaccion->created_at)+1500) }}</p>
