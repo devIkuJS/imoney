@@ -196,7 +196,7 @@
                                     puede
                                     ser propia o de terceros.</p>
 
-                                   
+
 
                                 <a id="seleccionar-cuenta" class="dis-itmcent text-selectCount color-btnsky">
                                     <button type="button" class="btn btn-primary3" data-toggle="modal"
@@ -249,7 +249,8 @@
                                 id="radio_{{$cbancaria->id }}" value="{{$cbancaria->id }}">
                             <h5 class="card-title">Banco: {{$cbancaria->banco}}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Numero de Cuenta: {{$cbancaria->numero_cuenta}}
-                            </h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Tipo de Cuenta: {{$cbancaria->tipo_cuenta}}
+                                </h6>
                         </div>
                     </div>
                     @endforeach
@@ -292,6 +293,15 @@
                             <label for="numero_cuenta">Numero de cuenta</label>
                             <input type="text" class="form-control" id="numero_cuenta" name="numero_cuenta">
                         </div>
+                        <div class="form-group">
+                            <select class="form-control" id="categoria_cuenta" name="categoria_cuenta">
+                                <option value="">Seleccione el tipo de cuenta</option>
+                                @foreach ($categoria_cuenta as $cat)
+                                <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
 
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary10" id="agregar-tipo-cuenta">Agregar</button>
@@ -307,20 +317,20 @@
 
     @section('custom-script')
     <script type="text/javascript">
-     $('#seleccionar-tipo-cuenta').click(function() {
+        $('#seleccionar-tipo-cuenta').click(function() {
     var value = $('input[name=cbancaria_selected]:checked').val();
 
     $.ajax({
     type: 'GET',
     url: `operacion/${value}/getCuentaBancariaSelected`,
     success: function (data) {
-        console.log(data);
         $("#cuenta-selected").html(
             '<h4>Cuenta Seleccionada</h4>'+
             '<div class="card">'+
             '<div class="card-body">'+
                 '<h5 class="card-title">Banco: '+data[0].banco+'</h5>'+
                 '<h6 class="card-subtitle mb-2 text-muted">Numero de Cuenta: '+data[0].numero_cuenta+'</h6>'+
+                '<h6 class="card-subtitle mb-2 text-muted">Tipo de cuenta: '+data[0].tipo_cuenta+'</h6>'+
                 '</div>'+
          '</div>');
 
@@ -341,18 +351,17 @@
         type: "POST",
         url: "{{ route('operacion.createOperacion')}}",
         data: { 
-        bancos: tipoCambio ,
-        descripcionMontoA: document.getElementById('text-changeA').innerHTML,
-        montoA: document.getElementById('text-changeA').innerHTML,
-        descripcionMontoB: document.getElementById('text-changeA').innerHTML,
-        montoB: document.getElementById('text-changeA').innerHTML,
-        cuenta_destino: "",
-        tipo_cuenta: "",
+        bancos: $('#bancos').val(),
+        descripcionMontoA: '{{$dataTipoCambio["descripcionMontoA"]}}',
+        montoA: '{{$dataTipoCambio["montoA"]}}',
+        descripcionMontoB: '{{$dataTipoCambio["descripcionMontoB"]}}',
+        montoB: '{{$dataTipoCambio["montoB"]}}',
+        cuenta_destino: $('input[name=cbancaria_selected]:checked').val(),
+        tipo_cuenta: '{{$dataTipoCambio["descripcionMontoB"]}}',
         _token:"{{ csrf_token() }}",
         },
         success: function (data) {
-       // window.location.href = "operacion";
-       console.log(data);
+        window.location.href = `transaccion/${data}`;
 
         },
         error: function (data, textStatus, errorThrown) {

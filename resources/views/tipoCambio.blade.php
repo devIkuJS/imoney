@@ -1,18 +1,4 @@
 <style>
-    .icon-change {
-        position: absolute;
-        top: 24.5%;
-        transform: translateY(-50%);
-        left: 0;
-        right: 0;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        pointer-events: none;
-        z-index: 20;
-    }
-
     .form-group {
         position: relative;
         min-height: 3.5em;
@@ -37,7 +23,7 @@
     .input-calculator {
         padding-top: 2.5rem !important;
         padding-bottom: 1rem !important;
-        font-size: 1rem !important;
+        font-size: 1.1rem !important;
         font-weight: bold !important;
     }
     
@@ -45,8 +31,8 @@
 
         border: 1.5px solid #fff;
         border-radius: 0.25rem;
-        padding-top: 19.4px;
-        padding-bottom: 19.4px;
+        padding-top: 23px;
+        padding-bottom: 23px;
 
     }
 

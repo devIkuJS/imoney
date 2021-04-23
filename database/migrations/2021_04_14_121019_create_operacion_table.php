@@ -15,6 +15,7 @@ class CreateOperacionTable extends Migration
     {
         Schema::create('operacion', function (Blueprint $table) {
             $table->id();
+            $table->string('nro_orden', 80);
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('banco_origen_id')->constrained('bancos');
             $table->string('descripcionMontoA', 30);

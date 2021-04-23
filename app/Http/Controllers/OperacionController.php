@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Operacion;
 use App\Models\Banco;
 use App\Models\CuentaBancaria;
+use App\Models\CategoriaCuenta;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
@@ -21,13 +22,16 @@ class OperacionController extends Controller
 
         $bancos = Banco::all();
 
+        $categoria_cuenta = CategoriaCuenta::all();
+
         $dataTipoCambio = json_decode(Session::get('dataTipoCambio'), true);
 
         $tipo_cuenta = $dataTipoCambio["descripcionMontoB"] === 'Soles' ? "1" : "2";
 
         $lista_cuenta_bancaria = DB::table('cuenta_bancarias')
             ->join('bancos', 'cuenta_bancarias.banco_id', '=', 'bancos.id')
-            ->select('cuenta_bancarias.*', 'bancos.name AS banco')
+            ->join('categoria_cuenta', 'cuenta_bancarias.categoria_cuenta_id', '=', 'categoria_cuenta.id')
+            ->select('cuenta_bancarias.*', 'bancos.name AS banco', 'categoria_cuenta.name AS tipo_cuenta')
             ->where('cuenta_bancarias.tipo_cuenta', $tipo_cuenta)
             ->where('cuenta_bancarias.user_id', Auth::id())
             ->get();
@@ -37,6 +41,7 @@ class OperacionController extends Controller
             'bancos' => $bancos,
             'dataTipoCambio' => $dataTipoCambio,
             'lista_cuenta_bancaria' => $lista_cuenta_bancaria,
+            'categoria_cuenta' => $categoria_cuenta,
 
         ]); 
       }
@@ -61,6 +66,7 @@ class OperacionController extends Controller
     	$newCuentaBancaria->banco_id = $request->cuenta_bancaria_user;
         $newCuentaBancaria->tipo_cuenta = $tipo_cuenta;
         $newCuentaBancaria->numero_cuenta = $request->numero_cuenta;
+        $newCuentaBancaria->categoria_cuenta_id = $request->categoria_cuenta;
         $newCuentaBancaria->save();
         return redirect()->back();
         
@@ -73,7 +79,8 @@ class OperacionController extends Controller
       public function getCuentaBancariaSelected(Request $request, $cuentaId){
         $cuentaSelected = DB::table('cuenta_bancarias')
             ->join('bancos', 'cuenta_bancarias.banco_id', '=', 'bancos.id')
-            ->select('cuenta_bancarias.id', 'bancos.name AS banco', 'cuenta_bancarias.numero_cuenta')
+            ->join('categoria_cuenta', 'cuenta_bancarias.categoria_cuenta_id', '=', 'categoria_cuenta.id')
+            ->select('cuenta_bancarias.id', 'bancos.name AS banco', 'cuenta_bancarias.numero_cuenta', 'categoria_cuenta.name AS tipo_cuenta')
             ->where('cuenta_bancarias.id', $cuentaId)
             ->where('cuenta_bancarias.user_id', Auth::id())
             ->get();
@@ -84,6 +91,7 @@ class OperacionController extends Controller
 
       public function createOperacion (Request $request)
       {
+          /*
         $this->validate($request, [
             'banco_envio' => 'required',
             'banco_destino' => 'required',
@@ -94,22 +102,35 @@ class OperacionController extends Controller
             'banco_destino.required' => 'Seleccione la cuenta de destino',
             'terminos.required' => 'Seleccione terminos y condiciones',
         ]);
-        
+        */
 
-        $todo = new Operacion();
+        $newOperacion = new Operacion();
         $tipo_cuenta = $request->tipo_cuenta === 'Soles' ? "1" : "2";
         $newOperacion->user_id = Auth::id();
-        $newOperacion->banco_id = $request->bancos;
+        $newOperacion->nro_orden = $this->generateRandomString();
+        $newOperacion->banco_origen_id = $request->bancos;
         $newOperacion->descripcionMontoA = $request->descripcionMontoA;
         $newOperacion->montoA = $request->montoA;
         $newOperacion->descripcionMontoB = $request->descripcionMontoB;
         $newOperacion->montoB = $request->montoB;
-        $newOperacion->cuenta_id = $request->cuenta_destino;
+        $newOperacion->banco_destino_id = $request->cuenta_destino;
         $newOperacion->tipo_cuenta = $tipo_cuenta;
+        $newOperacion->estado = "0";
         $newOperacion->save();
-        return response(json_encode($newOperacion),200)->header('Content-type','application/json');;
+        return response(json_encode($newOperacion->nro_orden),200)->header('Content-type','application/json');;
           
       } 
+
+
+      function generateRandomString($length = 6) {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXY123456789Z';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 
       
 }
