@@ -34,8 +34,7 @@ class MisDatosController extends Controller
         $user->celular = $request->filled('celular') ? $request->celular : $user->celular; 
         $user->domicilio = $request->filled('domicilio') ? $request->domicilio : $user->domicilio;
       
-    	$user->save();
-        
+    	$user->save();   
     	return redirect()->back();
     	//dd($request->all());
         return view('misDatos.actualizar',['user'=>$user]);
