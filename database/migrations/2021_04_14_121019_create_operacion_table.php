@@ -24,7 +24,7 @@ class CreateOperacionTable extends Migration
             $table->decimal('montoB', $precision = 8, $scale = 2);
             $table->foreignId('banco_destino_id')->constrained('cuenta_bancarias');
             $table->char('tipo_cuenta', 1);
-            $table->char('estado', 1);
+            $table->foreignId('estado_id', 1)->constrained('estado_operacion');
             $table->timestamps();
         });
     }

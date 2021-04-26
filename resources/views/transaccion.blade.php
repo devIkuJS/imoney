@@ -6,6 +6,10 @@
         font-weight: bold !important;
         padding: 10px 20px !important;
     }
+
+    #showMe {
+        display: none;
+    }
 </style>
 
 
@@ -37,12 +41,14 @@
                 <div class="mt-3">
                     <p class="font-weight-bold h5">Tienes un promedio de 25 minutos para realizar la transferencia sin
                         perder el tipo de cambio</p>
-                    <p class="font-weight-bold h5 text-white">Hora de inicio: {{ date('H:i:s', strtotime($transaccion->created_at)) }}</p>
-                    <p class="font-weight-bold h5 text-white">Hora de fin: {{ date('H:i:s', strtotime($transaccion->created_at)+1500) }}</p>
+                    <p class="font-weight-bold h5 text-white">Hora de inicio:
+                        {{ date('H:i:s', strtotime($transaccion->created_at)) }}</p>
+                    <p class="font-weight-bold h5 text-white">Hora de fin:
+                        {{ date('H:i:s', strtotime($transaccion->created_at)+1500) }}</p>
                 </div>
                 <div class="text-center mt-4">
                     <button class="btn btn-primary btn-cambiar-ahora" type="button" data-toggle="modal"
-                    data-target="#modal-declarar-transferencia">Declarar
+                        data-target="#modal-declarar-transferencia">Declarar
                         transferencia hecha</button>
                 </div>
 
@@ -51,39 +57,65 @@
     </div>
     </div>
 </main>
-<div class="modal fade" id="modal-declarar-transferencia" tabindex="-1" role="dialog" aria-labelledby="modal-declarar-transferencia"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modal-declarar-transferencia">Elige como declarar tu transferencia
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+<div class="modal fade" id="modal-declarar-transferencia" tabindex="-1" role="dialog"
+    aria-labelledby="modal-declarar-transferencia" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-declarar-transferencia">Elige como declarar tu transferencia
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('transaccion.enviarOperacion') }}" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group">
-                        <select class="form-control" id="select-reporte" name="select-reporte">
+                        <select class="form-control" id="select_reporte" name="select_reporte">
                             <option value="">Seleccione el modo de reporte de su transaccion</option>
                             <option value="1">Por Nro Operacion</option>
                             <option value="2">Adjuntar voucher</option>
                         </select>
                     </div>
-                    
-                    
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" id="seleccionar-tipo-cuenta">Enviar</button>
-                    </div>
+                    <input type="hidden" name="transaccion_id" value="{{$transaccion->id}}" />
 
-                </div>
+                    <div id="showMe"></div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('custom-script')
 <script type="text/javascript">
+    var elem = document.getElementById("select_reporte");
+elem.onchange = function(){
+    var hiddenDiv = document.getElementById("showMe");
+
+    if(this.value == ""){
+        hiddenDiv.style.display = "none";
+    }else if(this.value == "1"){
+        hiddenDiv.style.display = "block";
+        $('#showMe').html('<div class="form-group">'+
+                        '<label for="nro_operacion">Nro Operacion</label>'+
+                        '<input type="text" class="form-control" name="nro_operacion" id="nro_operacion" >'+
+                    '</div>')
+    }else if(this.value == "2"){
+        hiddenDiv.style.display = "block";
+        $('#showMe').html('<div class="form-group">'+
+                        '<label for="voucher">Adjuntar Voucher</label>'+
+                        '<input type="file" class="form-control-file" name="voucher" id="voucher" accept="image/jpeg,image/png,application/pdf,image/x-eps">'+
+                    '</div>');
+
+    }
+};
+
 </script>
 
 @stop

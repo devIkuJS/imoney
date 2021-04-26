@@ -70,6 +70,7 @@ Route::get('/operacion/{cuentaId}/getCuentaBancariaSelected', [App\Http\Controll
 
 //transaccion
 Route::get('/transaccion/{nroTransaccion}', [App\Http\Controllers\TransaccionController::class, 'index'])->name('transaccion');
+Route::post('/transaccion/enviarOperacion', [App\Http\Controllers\TransaccionController::class, 'enviarOperacion'])->name('transaccion.enviarOperacion');
 
 
 
@@ -85,6 +86,9 @@ Route::get('/admin/tipocambio', [App\Http\Controllers\Admin\TipoCambioController
 Route::post('/admin/tipocambio/registro', [App\Http\Controllers\Admin\TipoCambioController::class, 'registro'])->name('admin.tipocambio.registro');
 Route::post('/admin/tipocambio/{tipocambioId}/actualizar', [App\Http\Controllers\Admin\TipoCambioController::class, 'actualizar'])->name('admin.tipocambio.actualizar');
 Route::delete('/admin/tipocambio/{tipocambioId}/eliminar', [App\Http\Controllers\Admin\TipoCambioController::class, 'eliminar'])->name('admin.tipocambio.eliminar');
+
+Route::get('/admin/operaciones', [App\Http\Controllers\Admin\OperacionController::class, 'index'])->name('admin.operaciones');
+Route::post('/admin/operaciones/{operacionId}/actualizar', [App\Http\Controllers\Admin\OperacionController::class, 'actualizar'])->name('admin.operaciones.actualizar');
 
 Auth::routes(['verify' => true]);
 
