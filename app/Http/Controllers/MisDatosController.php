@@ -33,7 +33,7 @@ class MisDatosController extends Controller
         /*$user->domicilio = $request->domicilio;*/ 
         $user->celular = $request->filled('celular') ? $request->celular : $user->celular; 
         $user->domicilio = $request->filled('domicilio') ? $request->domicilio : $user->domicilio;
-      
+        
     	$user->save();   
     	return redirect()->back();
     	//dd($request->all());

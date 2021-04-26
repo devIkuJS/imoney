@@ -182,7 +182,7 @@
                                     <input type="checkbox" name="declaro" class="form-check-input" id="accept">
 
                                     <label class="form-check-label2" for="accept">Declaro que transfireré los fondos
-                                        a Imoney desde una cuenta bancaria de pruebaAlex
+                                        a Imoney Perú S.A.C. desde una cuenta bancaria de <span> {{Auth::user()->name}}</span>
                                         de la cual soy titular o con autorización del representante legal.</label>
 
                                 </div>

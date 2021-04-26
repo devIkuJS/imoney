@@ -54,7 +54,7 @@
                     </div>
                     <div class="card background-card">
                         <a href="{{ route('inversionista') }}">
-                            <img src={{asset('imagenes/INVERSIONISTA.png')}} class="card-img-top"
+                            <img src={{asset('imagenes/INVERSIONISTA2.png')}} class="card-img-top"
                                 alt="Imagen Inversionista"></a>
                         <div class="card-body">
                             <h4 class="card-title text-center">Inversión</h4>
@@ -78,15 +78,15 @@
                 <div class="card-deck">
                     <div class="card background-card">
                         <a href="{{ route('misDatos') }}"><img src={{asset('imagenes/MIS_DATOS.png')}}
-                                class="card-img-top" alt="Imagen Tipo de cambio"></a>
+                                class="card-img-top" alt="Imagen Mis datos"></a>
                         <div class="card-body">
                             <h4 class="card-title text-center">Mis datos</h4>
                         </div>
                     </div>
                     <div class="card background-card">
-                        <a href="{{ route('inversionista') }}">
+                        <a href="{{ route('cuentaBancaria') }}">
                             <img src={{asset('imagenes/CUENTAS_BANCARIAS2.png')}} class="card-img-top"
-                                alt="Imagen Inversionista"></a>
+                                alt="Imagen cuentas"></a>
                         <div class="card-body">
                             <h4 class="card-title text-center">Cuentas bancarias</h4>
                         </div>
@@ -94,7 +94,7 @@
                     <div class="card background-card">
                         <a href="{{ route('financiamiento') }}">
                             <img src={{asset('imagenes/ESTADOS_CUENTA.png')}} class="card-img-top"
-                                alt="Imagen Financiamiento">
+                                alt="Imagen Estados">
                         </a>
                         <div class="card-body">
                             <h4 class="card-title text-center">Estado de cuenta</h4>
