@@ -84,7 +84,6 @@
 
 @section('custom-script')
 <script type="text/javascript">
-
 </script>
 
 @stop

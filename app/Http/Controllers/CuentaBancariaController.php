@@ -10,16 +10,18 @@ class CuentaBancariaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
     public function index()
     {
         $cuentaBancaria = CuentaBancaria::all();
-        return view('cuentaBancaria');
+        /*return view('cuentaBancaria'); */
+
+        return view('cuentaBancaria' , ['cuentaBancaria' => $cuentaBancaria]);
         
     }
-    public function create(Request $request)
+    public function registro(Request $request)
     {
         $newCuentaBancaria = new CuentaBancaria();
 
