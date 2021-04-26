@@ -116,7 +116,6 @@ elem.onchange = function(){
     }
 };
 
-
 </script>
 
 @stop
