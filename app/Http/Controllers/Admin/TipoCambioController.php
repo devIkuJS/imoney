@@ -30,7 +30,6 @@ class TipoCambioController extends Controller
     	$newTipoCambio->save();
 
     	return redirect()->back();
-    	//dd($request->all());
     }
 
     public function actualizar(Request $request, $tipocambioId)
@@ -41,7 +40,6 @@ class TipoCambioController extends Controller
     	$tipocambio->save();
 
     	return redirect()->back();
-    	//dd($request->all());
     }
 
 }

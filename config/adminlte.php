@@ -250,6 +250,11 @@ return [
             'url'  => '/admin/empresas',
             'icon' => 'fas fa-fw fas fa-building',
         ],
+        [
+            'text' => 'Operaciones',
+            'url'  => '/admin/operaciones',
+            'icon' => 'fas fa-fw fas fa-funnel-dollar',
+        ],
     ],
 
     /*

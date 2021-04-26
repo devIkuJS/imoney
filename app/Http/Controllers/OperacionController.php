@@ -115,7 +115,7 @@ class OperacionController extends Controller
         $newOperacion->montoB = $request->montoB;
         $newOperacion->banco_destino_id = $request->cuenta_destino;
         $newOperacion->tipo_cuenta = $tipo_cuenta;
-        $newOperacion->estado = "0";
+        $newOperacion->estado_id = "1";
         $newOperacion->save();
         return response(json_encode($newOperacion->nro_orden),200)->header('Content-type','application/json');;
           
