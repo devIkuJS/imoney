@@ -17,9 +17,8 @@ use App\Http\Controllers\UserController;
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/email-verify', [App\Http\Controllers\EmailEmpresaController::class, 'index'])->name('email-verify');
-
 Route::get('/empresa/verifyUser', [App\Http\Controllers\EmpresaController::class, 'verifyUser'])->name('empresa.verifyUser');
-
+Route::get('/email-transaccion', [App\Http\Controllers\EmailTransaccionController::class, 'index'])->name('email-transaccion');
 //rutas publicas
 Route::get('/', function () {
   return view('auth.login');
