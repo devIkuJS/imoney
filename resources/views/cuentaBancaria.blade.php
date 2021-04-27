@@ -86,8 +86,7 @@
                         @foreach ($lista_cuentas as $lista_cuenta)
                         <tr>
 
-                            <td>{{ $lista_cuenta->id }}</td>
-                            
+                            <td>{{ $lista_cuenta->id }}</td> 
                             <td>{{ $lista_cuenta->banco }}</td>
                             
                             <td>{{ $lista_cuenta->tipo_cuenta }}</td>
