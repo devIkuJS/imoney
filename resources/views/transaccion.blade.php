@@ -5,10 +5,17 @@
         font-size: 1.2rem !important;
         font-weight: bold !important;
         padding: 10px 20px !important;
+        border: transparent !important;
     }
 
     #showMe {
         display: none;
+    }
+
+    .div-border{
+        border:2px solid #fff;
+        border-radius:10px;
+
     }
 </style>
 
@@ -19,40 +26,104 @@
 <main>
     <div class="container pt-5">
 
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <h4>Transfiere desde tu banco</h4>
+        <div class="row">
+
+            <div class="col-md-12 text-center">
+                <h3 class="text-white font-weight-bold"><img src={{asset('imagenes/icon-transfiere.png')}} width="30" height="30" class="mr-3">Transfiere desde tu banco</h3>
+            </div>
+            <div class="col-md-10 mx-auto">
+
+                <div class="row mt-4 text-center py-2 div-border col-md-5 mx-auto">
+                    <div class="col-12">
+                        <h4 class="font-weight-bold text-white">Nro Orden</h4>
+                        <h5 class="font-weight-bold text-white">{{$transaccion->nro_orden}}</h5>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title text-center font-weight-bold">Nro Orden: {{$transaccion->nro_orden}}</h5>
-                        <p class="card-text">Ahora transfiere <strong>{{$transaccion->montoA}}
-                                {{$transaccion->descripcionMontoA}}</strong> desde tu <strong>banca por internet
-                                ({{$transaccion->banco}})</strong> a la cuenta indicada a continuacion:</p>
-                        <p class="card-text"><strong>Nùmero de cuenta:</strong> 1946452215201</p>
-                        <p class="card-text"><strong>Banco:</strong> BCP</p>
-                        <p class="card-text"><strong>Titular de la cuenta:</strong> iMoney</p>
-                        <p class="card-text"><strong>Tipo de cuenta:</strong> Corriente</p>
-                        <p class="card-text"><strong>Moneda:</strong> Soles</p>
-                        <p class="card-text"><strong>RUC:</strong> 20602075665</p>
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <p class="font-weight-bold h5">Tienes un promedio de 25 minutos para realizar la transferencia sin
-                        perder el tipo de cambio</p>
-                    <p class="font-weight-bold h5 text-white">Hora de inicio:
-                        {{ date('H:i:s', strtotime($transaccion->created_at)) }}</p>
-                    <p class="font-weight-bold h5 text-white">Hora de fin:
-                        {{ date('H:i:s', strtotime($transaccion->created_at)+1500) }}</p>
-                </div>
-                <div class="text-center mt-4">
-                    <button class="btn btn-primary btn-cambiar-ahora" type="button" data-toggle="modal"
-                        data-target="#modal-declarar-transferencia">Declarar
-                        transferencia hecha</button>
                 </div>
 
+                <div class="col-md-12">
+
+                    
+                    <p class="text-center mt-3 font-weight-bold h5 text-white">Ahora transfiere <strong class="text-dark">{{$transaccion->montoA}}
+                        {{$transaccion->descripcionMontoA}}</strong> desde tu <strong class="text-dark">banca por internet
+                        ({{$transaccion->banco}})</strong> a cualquiera de las cuentas indicada a continuacion:</p>
+
+                        <div class="text-center mt-4">
+                            <strong class="font-weight-bold text-white h5 mr-4">Razon social: iMoney Perú SAC</strong>
+                            <strong class="font-weight-bold text-white h5 mr-4">RUC: 20602075665</strong>
+                            <strong class="font-weight-bold text-white h5 mr-4">Moneda: Soles</strong>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-4 col-12">
+                               <div class="card font-weight-bold text-center py-2">
+                                  BCP
+                               </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                  <div class="card font-weight-bold text-center py-2">
+                                     <strong>Cuenta Corriente: 193-2543783-0-76</strong> 
+                                  </div>
+                               </div>
+                               <div class="col-md-4 col-12">
+                                  <div class="card font-weight-bold text-center py-2">
+                                     CCI: 00219300254378307610
+                                  </div>
+                               </div>
+                           </div>
+
+                           <div class="row mt-4">
+                            <div class="col-md-4 col-12">
+                               <div class="card font-weight-bold text-center py-2">
+                                Interbank
+                               </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                  <div class="card font-weight-bold text-center py-2">
+                                    Cuenta Corriente: 200-3001857191
+                                  </div>
+                               </div>
+                               <div class="col-md-4 col-12">
+                                  <div class="card font-weight-bold text-center py-2">
+                                    CCI: 00320000300185719136
+                                  </div>
+                               </div>
+                           </div>
+
+                           <div class="row mt-4">
+                            <div class="col-md-4 col-12">
+                               <div class="card font-weight-bold text-center py-2">
+                                Pichincha
+                               </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                  <div class="card font-weight-bold text-center py-2">
+                                    Cuenta Corriente: 1202094503
+                                  </div>
+                               </div>
+                               <div class="col-md-4 col-12">
+                                  <div class="card font-weight-bold text-center py-2">
+                                    CCI: 035-058001202094503-71
+                                  </div>
+                               </div>
+                           </div>
+
+                        <p class="text-center mt-4 font-weight-bold h5">Tienes un promedio de 25 minutos para realizar la transferencia sin
+                            perder el tipo de cambio</p>
+
+                            <p class="font-weight-bold h5 text-white text-center">Hora de inicio:
+                                {{ date('H:i:s', strtotime($transaccion->created_at)) }}</p>
+                            <p class="font-weight-bold h5 text-white text-center">Hora de fin:
+                                {{ date('H:i:s', strtotime($transaccion->created_at)+1500) }}</p>
+
+                                <div class="text-center my-4">
+                                    <button class="btn btn-primary btn-cambiar-ahora" type="button" data-toggle="modal"
+                                        data-target="#modal-declarar-transferencia">Adjunta tu transferencia</button>
+                                </div>
+
+                        
+                </div>
             </div>
+
         </div>
     </div>
     </div>
