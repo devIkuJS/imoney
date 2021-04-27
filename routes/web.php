@@ -44,6 +44,8 @@ Route::get('/inversionista', [App\Http\Controllers\InversionistaController::clas
 
 //CuentaBancaria - GUTI
 Route::get('/cuentaBancaria', [App\Http\Controllers\CuentaBancariaController::class, 'index'])->name('cuentaBancaria');
+//Route::get('/cuentasBancarias', [App\Http\Controllers\CuentaBancariaController::class, 'index'])->name('cuentasBancarias');
+
 Route::post('/cuentaBancaria/registro', [App\Http\Controllers\CuentaBancariaController::class, 'registro'])->name('cuentaBancaria.registro');
 Route::post('/cuentaBancaria/{usuarioId}/actualizar', [App\Http\Controllers\CuentaBancariaController::class, 'actualizar'])->name('cuentaBancaria.actualizar');
 Route::delete('/cuentaBancaria/{usuarioId}/eliminar', [App\Http\Controllers\CuentaBancariaController::class, 'eliminar'])->name('cuentaBancaria.eliminar');
