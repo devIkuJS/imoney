@@ -19,7 +19,10 @@ class TransaccionController extends Controller
 
         $transaccion = DB::table('operacion')
             ->join('bancos', 'operacion.banco_origen_id', '=', 'bancos.id')
-            ->select('operacion.*', 'bancos.name AS banco')
+            ->select('operacion.*', 'bancos.name AS banco' , DB::raw("(SELECT `bancos`.`name`
+            FROM `cuenta_bancarias`
+            inner join `bancos` on `cuenta_bancarias`.`banco_id` = `bancos`.`id`
+            where `cuenta_bancarias`.`id` = `operacion`.`banco_destino_id`) AS `banco_destino`")  )
             ->where('operacion.nro_orden', $nroTransaccion)
             ->where('operacion.user_id', Auth::id())
             ->get();
@@ -33,6 +36,8 @@ class TransaccionController extends Controller
     public function enviarOperacion(Request $request){
 
 
+        $transaccion = json_decode($request->transaccion);
+
         $newOperacion = new StatusOperacion(); 
 
         if($request->hasfile('voucher')){
@@ -43,16 +48,21 @@ class TransaccionController extends Controller
             $newOperacion->voucher_operacion=$destinationPath . $filename;
         }
         
-        $newOperacion->operacion_id = $request->transaccion_id;
+        $newOperacion->operacion_id = $transaccion->id;
         $newOperacion->nro_operacion = $request->nro_operacion;
 
-        DB::table('operacion')->where('id', $request->transaccion_id)->update(array(
+        DB::table('operacion')->where('id', $transaccion->id)->update(array(
             'estado_id'=>2,
             'updated_at'=> now()
         ));
+
         $newOperacion->save();
 
-        return redirect()->back();
+        MailController::enviarOperacion(Auth::user()->name, Auth::user()->email , $transaccion->nro_orden, $transaccion->montoA, $transaccion->descripcionMontoA,  $transaccion->montoB, $transaccion->descripcionMontoB, $transaccion->banco , $transaccion->banco_destino);
+
+        return redirect()->route('email-transaccion-verify', $transaccion->nro_orden);
+
+        
 
     }
 }

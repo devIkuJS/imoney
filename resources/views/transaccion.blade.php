@@ -149,7 +149,7 @@
                             <option value="2">Adjuntar voucher</option>
                         </select>
                     </div>
-                    <input type="hidden" name="transaccion_id" value="{{$transaccion->id}}" />
+                    <input type="hidden" name="transaccion" value="{{json_encode($transaccion,true)}}" />
 
                     <div id="showMe"></div>
 
