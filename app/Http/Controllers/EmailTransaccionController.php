@@ -25,8 +25,11 @@ class EmailTransaccionController extends Controller
 
     
 
-    public function index() {        
-      return view('email-transaccion');
+    public function index($nroTransaccion) {    
+
+      return view('email-transaccion-verify' , [
+        'nroTransaccion' => $nroTransaccion,
+      ]);
     }
     
 }

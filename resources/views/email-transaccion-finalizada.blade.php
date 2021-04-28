@@ -423,9 +423,9 @@
                       <img src={{asset('imagenes/logo-mail-4.png')}} alt="Fjords" style="width:10%,text-align:center;"
                         class="img-fluid-alex">
 
-                      <h2>Transacción informada</h2>
+                      <h2>Transacción realizada</h2>
                       <h3 style="color:black !important;">Tu número de orden es: {{$email_data['nro_orden']}} </h3>
-                      <h4>Hemos recibido el número de operación de su transacción</h4>
+                      <h4>Hemos depositado {{$email_data['montoB']}} {{$email_data['descripcionMontoB']}} en su cuenta {{$email_data['descripcionMontoB']}} indicada de la entidad bancaria {{$email_data['banco_destino']}} </h4>
                       <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                         <tbody>
                           <tr>
@@ -435,8 +435,8 @@
                                 <tbody>
                                   <tr>
                                     <th>Cambio</th>
-                                    <th>Envìas</th>
-                                    <th>Recibiràs</th>
+                                    <th>Monto que envío</th>
+                                    <th>Monto depositado</th>
                                   </tr>
                                   <tr>
                                     <td>De {{$email_data['descripcionMontoA']}} a {{$email_data['descripcionMontoB']}}</td>
@@ -449,10 +449,7 @@
                           </tr>
                         </tbody>
                       </table>
-                      <p>Datos Enviados</p>
-                      <p style="font-weight:bold;">{{$email_data['montoA']}} {{$email_data['descripcionMontoA']}} de la entidad bancaria {{$email_data['banco_origen']}}</p>
-                      <p>En breves minutos se abonará tu cambio a la siguiente cuenta y se te enviará un correo con la confirmación del depositó realizado:</p>
-                       <p style="font-weight:bold;">{{$email_data['montoB']}} {{$email_data['descripcionMontoB']}} en su cuenta {{$email_data['descripcionMontoB']}} indicada de la entidad bancaria {{$email_data['banco_destino']}}</p>
+                      <p style="font-weight:bold;">Muchas gracias por operar con iMoney SAC , pronto tendremos mas novedades para ti</p>
                        
                        <small style="font-size: 12px;color:gray;">Si tuviese alguna consulta, duda sobre su transaccion por favor comunicarse a nuestro <a  href="https://api.whatsapp.com/send?phone=+51982273702&text=Tengo%20una%20consulta"
                         target="_blank">whastapp en linea</a></small>

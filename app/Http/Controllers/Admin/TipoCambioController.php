@@ -37,6 +37,7 @@ class TipoCambioController extends Controller
     	$tipocambio = TipoCambio::find($tipocambioId);
     	$tipocambio->compra = $request->compra;
         $tipocambio->venta = $request->venta;
+        $tipocambio->updated_at = now();
     	$tipocambio->save();
 
     	return redirect()->back();
