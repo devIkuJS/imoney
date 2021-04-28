@@ -44,7 +44,7 @@
                                 <td>{{ $operacion->nombre_usuario }} {{ $operacion->apellido_usuario }}</td>
                                 <td>{{ $operacion->banco_origen }}</td>
                                 <td>{{ $operacion->montoA }} {{ $operacion->descripcionMontoA }}</td>
-                                <td>{{ $operacion->numero_cuenta}}</td>
+                                <td>{{ $operacion->banco_destino}} {{ $operacion->numero_cuenta}} {{ $operacion->tipo_cuenta}}</td>
                                 <td>{{ $operacion->montoB }} {{ $operacion->descripcionMontoB }}</td>
                                 <td>{{ $operacion->estado }}</td>
                                 <td>{{ date('d-m-Y H:i:s', strtotime($operacion->created_at)) }}</td>

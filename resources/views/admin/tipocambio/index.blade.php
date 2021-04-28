@@ -25,6 +25,7 @@
                             <th>ID</th>
                             <th>Compra</th>
                             <th>Venta</th>
+                            <th>Fecha actualizacion</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -34,6 +35,7 @@
                             <td>{{ $tcambio->id }}</td>
                             <td>{{ $tcambio->compra }}</td>
                             <td>{{ $tcambio->venta }}</td>
+                            <td>{{ date('d-m-Y H:i:s', strtotime($tcambio->updated_at)) }}</td>
                             <td>
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-update-tipocambio-{{$tcambio->id}}">Actualizar</button>
                             </td>
@@ -48,6 +50,7 @@
                             <th>ID</th>
                             <th>Compra</th>
                             <th>Venta</th>
+                            <th>Fecha actualizacion</th>
                             <th>Acciones</th>
                         </tr>
                     </tfoot>

@@ -15,11 +15,13 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+//email-verify
 Route::get('/email-verify', [App\Http\Controllers\EmailEmpresaController::class, 'index'])->name('email-verify');
-
 Route::get('/empresa/verifyUser', [App\Http\Controllers\EmpresaController::class, 'verifyUser'])->name('empresa.verifyUser');
-
+//transaccion-verify
+Route::get('/email-transaccion-verify/{nroTransaccion}', [App\Http\Controllers\EmailTransaccionController::class, 'index'])->name('email-transaccion-verify');
+Route::get('/email-transaccion', [App\Http\Controllers\EmailTransaccionController::class, 'index'])->name('email-transaccion');
+Route::get('/email-transaccion-finalizada', [App\Http\Controllers\EmailTransaccionController::class, 'index'])->name('email-transaccion-finalizada');
 //rutas publicas
 Route::get('/', function () {
   return view('auth.login');
@@ -44,6 +46,8 @@ Route::get('/inversionista', [App\Http\Controllers\InversionistaController::clas
 
 //CuentaBancaria - GUTI
 Route::get('/cuentaBancaria', [App\Http\Controllers\CuentaBancariaController::class, 'index'])->name('cuentaBancaria');
+//Route::get('/cuentasBancarias', [App\Http\Controllers\CuentaBancariaController::class, 'index'])->name('cuentasBancarias');
+
 Route::post('/cuentaBancaria/registro', [App\Http\Controllers\CuentaBancariaController::class, 'registro'])->name('cuentaBancaria.registro');
 Route::post('/cuentaBancaria/{usuarioId}/actualizar', [App\Http\Controllers\CuentaBancariaController::class, 'actualizar'])->name('cuentaBancaria.actualizar');
 Route::delete('/cuentaBancaria/{usuarioId}/eliminar', [App\Http\Controllers\CuentaBancariaController::class, 'eliminar'])->name('cuentaBancaria.eliminar');
