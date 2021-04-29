@@ -284,7 +284,6 @@
     .mb0 {
       margin-bottom: 0;
     }
-
     .preheader {
       color: transparent;
       display: none;
