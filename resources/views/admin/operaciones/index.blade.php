@@ -19,7 +19,7 @@
                 <!-- card-header -->
                 <div class="card-body">
                     <table id="operaciones" class="table table-bordered table-striped" style="width:100%">
-                        <thead>
+                        <thead class="bg-primary text-white">
                             <tr>
                                 <th>ID</th>
                                 <th>Nro Orden</th>

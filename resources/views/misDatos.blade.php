@@ -427,9 +427,12 @@ function showPoliticoContainer() {
 
     function mostrarId(){
         if(document.getElementById('si').checked===1){
-            
+            return("Este usuario  es politico");
         }else{
-            else document.getElementById('no').checked===0; 
+            document.getElementById('no').checked===0){
+                return("Este usuario no es politico");
+            }
+
         }
     }
     </script>

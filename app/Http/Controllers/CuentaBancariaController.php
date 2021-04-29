@@ -21,15 +21,18 @@ class CuentaBancariaController extends Controller
 
     public function index()
     {   
+
         $lista_cuentas = DB::table('cuenta_bancarias')
             
             ->join('bancos', 'cuenta_bancarias.banco_id', '=', 'bancos.id')
             ->join('categoria_cuenta', 'cuenta_bancarias.categoria_cuenta_id', '=', 'categoria_cuenta.id')
             ->select('cuenta_bancarias.id', 'bancos.name AS banco', 'cuenta_bancarias.numero_cuenta', 'categoria_cuenta.name AS tipo_cuenta')
             ->where('cuenta_bancarias.user_id', Auth::id())
+            
             ->get();
 
     	return view('cuentaBancaria' , ['lista_cuentas' => $lista_cuentas]);
+        
     }
     public function registro(Request $request)
     {

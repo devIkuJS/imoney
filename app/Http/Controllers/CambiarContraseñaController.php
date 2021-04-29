@@ -16,7 +16,9 @@ class CambiarContraseñaController extends Controller
 
     public function index()
     {
-        return view('changePassword');
+        $user = User::find(Auth::user()->id); 
+        
+        return view('changePassword',['user'=>$user]);
     } 
    
     /**
