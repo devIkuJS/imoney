@@ -424,6 +424,7 @@
                         class="img-fluid-alex">
 
                       <h2>Transacción informada</h2>
+                      <h3 style="color:black !important;">Hola {{ Auth::user()->name }} {{ Auth::user()->apellidos }}</h3>
                       <h3 style="color:black !important;">Tu número de orden es: {{$email_data['nro_orden']}} </h3>
                       <h4>Hemos recibido el número de operación de su transacción</h4>
                       <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
