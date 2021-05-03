@@ -8,7 +8,7 @@
     .bs-stepper-label{
         white-space: pre-wrap !important;
         margin: 0px !important;
-
+        color: black !important;
     }
 
     .bs-stepper-header{
@@ -16,7 +16,7 @@
     }
     
     .active .bs-stepper-circle {
-    background-color: #0274be !important;
+    background-color: black !important;
     }
 
     .custom-file-label::after {
@@ -50,7 +50,7 @@
         
     }
     .col-form-label{
-        color:gray ;
+        color:white ;
         font-family: Helvetica, sans-serif;
         font-weight: bold;
     }
@@ -65,8 +65,12 @@
         font-weight: bold !important;
         font-family: Helvetica, sans-serif;
         box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
-        background:#0274be !important;
+        background:black !important;
     }
+    .form-check-label{
+        color: white !important;
+    }
+    
     .form-check-label2{
         color: black !important; 
         font-weight: bold !important;   
@@ -91,8 +95,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <div class="card">
-                <div class="card-header"><img src={{asset('imagenes/mesa.png')}} alt="Fjords" style="width:5%" class="img-fluid"> {{ __('EMPRESA') }}</div>
+            <div class="card" style="background: transparent !important;border-style: none;">
+                <div class="card-header" style="background: transparent !important;border-style: none;"><img src={{asset('imagenes/mesa.png')}} alt="Fjords" style="width:5%" class="img-fluid"> {{ __('EMPRESA') }}</div>
 
                 <div class="card-body">
                     <div id="stepper1" class="bs-stepper linear">

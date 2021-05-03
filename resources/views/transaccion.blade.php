@@ -115,7 +115,7 @@
                         </div>
                     </div>
 
-                    <div class="row mt-4">
+                    <!--<div class="row mt-4">
                         <div class="col-md-4 col-12">
                             <div class="card font-weight-bold text-center py-2">
                                 Scotiabank
@@ -131,7 +131,7 @@
                                 CCI: 00924300000622653179
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
                     @else
 
@@ -189,7 +189,7 @@
                         </div>
                     </div>
 
-                    <div class="row mt-4">
+                    <!--<div class="row mt-4">
                         <div class="col-md-4 col-12">
                             <div class="card font-weight-bold text-center py-2">
                                 Scotiabank
@@ -205,7 +205,7 @@
                                 CCI: 00924300000489226475
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
                     @endif
 
