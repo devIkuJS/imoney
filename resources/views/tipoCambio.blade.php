@@ -13,7 +13,6 @@
 
     label.form-control-label {
         position: absolute;
-        /*font-size: 1.1em; */
         font-size: 1.4em;
         top: 0;
         left: 5px;
@@ -76,6 +75,14 @@
         left: 0;
         right: 0;
         margin: auto;
+    }
+
+    .text-error {
+        color: #8f0000;
+    }
+
+    .text-warning {
+        color: #d8ee0a;
     }
 
     @media (max-width: 575.98px) {
@@ -164,7 +171,9 @@
                     </div>
                 </div>
 
-                <div class="text-center mt-5">
+                <div id="tcambio-message" class="text-center mt-4 h5"></div>
+
+                <div class="text-center mt-4">
                     <button class="btn btn-primary btn-cambiar-ahora" type="button" id="cambiarAhora">Confirmar
                         Operación</button>
                 </div>
@@ -189,8 +198,7 @@
 
 @section('custom-script')
 <script type="text/javascript">
-    const dataEncode = {!! json_encode($tipoCambio, JSON_HEX_TAG) !!};
-    console.log(dataEncode);
+const dataEncode = {!! json_encode($tipoCambio, JSON_HEX_TAG) !!};
 let tipoCambio = dataEncode[0].venta;
 let tipoCambio_Venta = dataEncode[0].venta;
 let tipoCambio_Compra = dataEncode[0].compra;
@@ -205,12 +213,12 @@ const button_save = document.getElementById('cambiarAhora');
 // donde changeCambio= 1 es Soles a Dólares y changeCambio = 2 es Dólares a Soles
 //validate only numbers
 function isNumber(evt) {
-    evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
-    }
-    return true;
+          if (charCode != 46 && charCode > 31 
+            && (charCode < 48 || charCode > 57))
+             return false;
+
+          return true;
 }
 function calculateMontoAtoMontoB() {
     button_change.value == 2 ? 
@@ -245,8 +253,10 @@ swap.addEventListener('click', ()=> {
   
 })
 button_save.addEventListener('click', ()=>{
-    if(amountEl_one.value == "" || amountEl_one.value == 0){
-        alert("Por favor, ingrese una cantidad valida")
+    if(amountEl_one.value == "" ){
+       $("#tcambio-message").html('<strong class="text-error">Por favor ingrese una cantidad válida</strong>')
+    }else if(amountEl_one.value < 150){
+        $("#tcambio-message").html('<strong class="text-warning">El monto minimo a operar es 150 soles o su equivalente en doláres</strong>')
     }else{
         $.ajax({
             type: "POST",

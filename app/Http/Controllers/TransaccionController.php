@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Validator,Redirect,Response,File;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 use App\Models\StatusOperacion;
 
 class TransaccionController extends Controller
@@ -60,7 +61,7 @@ class TransaccionController extends Controller
 
         MailController::enviarOperacion(Auth::user()->name, Auth::user()->email , $transaccion->nro_orden, $transaccion->montoA, $transaccion->descripcionMontoA,  $transaccion->montoB, $transaccion->descripcionMontoB, $transaccion->banco , $transaccion->banco_destino);
 
-        return redirect()->route('email-transaccion-verify', $transaccion->nro_orden);
+       return response(json_encode($transaccion->nro_orden),200)->header('Content-type','application/json');
 
         
 

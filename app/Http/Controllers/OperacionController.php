@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Operacion;
 use App\Models\Banco;
 use App\Models\CuentaBancaria;
@@ -48,18 +49,19 @@ class OperacionController extends Controller
 
       public function createCuentaBancaria(Request $request){
 
-        $newCuentaBancaria = new CuentaBancaria();
-        /*$this->validate($request, [
-            'banco_envio' => 'required',
-            'banco_destino' => 'required',
-            'terminos' => 'accepted',
+        $this->validate($request, [
+            'cuenta_bancaria_user' => 'required',
+            'numero_cuenta' => 'required|min:5|unique:cuenta_bancarias,numero_cuenta',
+            'categoria_cuenta' => 'required',
         ],
         [
-            'banco_envio.required' => 'Seleccione el banco donde envias tu dinero',
-            'banco_destino.required' => 'Seleccione la cuenta de destino',
-            'terminos.required' => 'Seleccione terminos y condiciones',
+            'cuenta_bancaria_user.required' => 'Seleccione el banco de su cuenta bancaria',
+            'numero_cuenta.required' => 'El numero de cuenta bancaria es inválido',
+            'categoria_cuenta.required' => 'Seleccione el tipo de su cuenta corriente (Ahorros o Corriente)',
+            'numero_cuenta.unique' => 'La cuenta ingresada ya esta registrada en el sistema',
         ]);
-        */
+
+       $newCuentaBancaria = new CuentaBancaria();
         
         $tipo_cuenta = $request->tipo_cuenta === 'Soles' ? "1" : "2";
         $newCuentaBancaria->user_id = Auth::id();
@@ -68,9 +70,9 @@ class OperacionController extends Controller
         $newCuentaBancaria->numero_cuenta = $request->numero_cuenta;
         $newCuentaBancaria->categoria_cuenta_id = $request->categoria_cuenta;
         $newCuentaBancaria->save();
-        return redirect()->back();
         
-        //dd($newCuentaBancaria);
+        return response(json_encode($newCuentaBancaria),200)->header('Content-type','application/json');;
+
         
           
       } 
@@ -91,19 +93,8 @@ class OperacionController extends Controller
 
       public function createOperacion (Request $request)
       {
-          /*
-        $this->validate($request, [
-            'banco_envio' => 'required',
-            'banco_destino' => 'required',
-            'terminos' => 'accepted',
-        ],
-        [
-            'banco_envio.required' => 'Seleccione el banco donde envias tu dinero',
-            'banco_destino.required' => 'Seleccione la cuenta de destino',
-            'terminos.required' => 'Seleccione terminos y condiciones',
-        ]);
-        */
 
+        
         $newOperacion = new Operacion();
         $tipo_cuenta = $request->tipo_cuenta === 'Soles' ? "1" : "2";
         $newOperacion->user_id = Auth::id();
@@ -117,7 +108,7 @@ class OperacionController extends Controller
         $newOperacion->tipo_cuenta = $tipo_cuenta;
         $newOperacion->estado_id = "1";
         $newOperacion->save();
-        return response(json_encode($newOperacion->nro_orden),200)->header('Content-type','application/json');;
+        return response(json_encode($newOperacion->nro_orden),200)->header('Content-type','application/json');
           
       } 
 
