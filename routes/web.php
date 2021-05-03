@@ -19,7 +19,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/email-verify', [App\Http\Controllers\EmailEmpresaController::class, 'index'])->name('email-verify');
 Route::get('/empresa/verifyUser', [App\Http\Controllers\EmpresaController::class, 'verifyUser'])->name('empresa.verifyUser');
 //transaccion-verify
-Route::get('/email-transaccion-verify/{nroTransaccion}', [App\Http\Controllers\EmailTransaccionController::class, 'index'])->name('email-transaccion-verify');
+Route::get('/transaccion/email-transaccion-verify/{nroTransaccion}', [App\Http\Controllers\EmailTransaccionController::class, 'index'])->name('email-transaccion-verify');
 Route::get('/email-transaccion', [App\Http\Controllers\EmailTransaccionController::class, 'index'])->name('email-transaccion');
 Route::get('/email-transaccion-finalizada', [App\Http\Controllers\EmailTransaccionController::class, 'index'])->name('email-transaccion-finalizada');
 //rutas publicas

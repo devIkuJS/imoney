@@ -17,6 +17,9 @@
         border-radius: 10px;
 
     }
+    .text-error {
+        color: #8f0000;
+    }
 </style>
 
 
@@ -242,8 +245,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('transaccion.enviarOperacion') }}" enctype="multipart/form-data">
-                    @csrf
+                <form enctype="multipart/form-data" id="send-transaccion" action="javascript:void(0)">
                     <div class="form-group">
                         <select class="form-control" id="select_reporte" name="select_reporte">
                             <option value="">Seleccione el modo de reporte de su transaccion</option>
@@ -251,14 +253,19 @@
                             <option value="2">Adjuntar voucher</option>
                         </select>
                     </div>
-                    <input type="hidden" name="transaccion" value="{{json_encode($transaccion,true)}}" />
+                    <input type="hidden" name="transaccion" id="transaccion" value="{{json_encode($transaccion,true)}}" />
 
                     <div id="showMe"></div>
 
+                    <div id="reporte-message" class="text-center"></div>
+
+                    <div id="callback-message"></div>
+
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button  class="btn btn-primary" type="submit" id="btn-transferencia">Enviar</button>
                     </div>
                 </form>
+                    
             </div>
         </div>
     </div>
@@ -288,6 +295,88 @@ elem.onchange = function(){
 
     }
 };
+
+
+
+$('#send-transaccion').submit(function(e) {
+    e.preventDefault();
+
+    var formData = new FormData(this);
+
+    
+if($('#select_reporte').val() === "" ){
+
+$('#reporte-message').html('<strong class="text-error">Por favor seleccione el modo de reporte de su transaccion</strong>');
+
+}else{
+
+    if($('#select_reporte').val() === "1"){
+
+        if($('#nro_operacion').val().length === 0){
+                $('#reporte-message').html('<strong class="text-error">Ingrese por favor el numero de operacion de su transferencia</strong>');
+        }else{
+            
+            $('#callback-message').html('<div class="alert alert-info" role="alert">Efectuando operacion..</div>');
+            $("#btn-transferencia").attr("disabled", true);
+
+            $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type:'POST',
+            url: "{{ route('transaccion.enviarOperacion')}}",
+            data: formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success: (data) => {
+                $('#callback-message').fadeIn(1000);
+                $("#btn-transferencia").attr("disabled", false);
+                window.location.href = `email-transaccion-verify/${data}`;
+            },
+            error: function(err){
+            console.log(err);
+            }
+            });
+        }
+
+    }else if($('#select_reporte').val() === "2"){
+
+        if($("#voucher")[0].files.length === 0){
+                $('#reporte-message').html('<strong class="text-error">Adjunte el voucher de su transferencia</strong>');
+        }else{
+            $('#callback-message').html('<div class="alert alert-info" role="alert">Efectuando operacion..</div>');
+            $("#btn-transferencia").attr("disabled", true);
+
+            $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type:'POST',
+            url: "{{ route('transaccion.enviarOperacion')}}",
+            data: formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success: (data) => {
+                $('#callback-message').fadeIn(1000);
+                $("#btn-transferencia").attr("disabled", false);
+                window.location.href = `email-transaccion-verify/${data}`;
+            },
+            error: function(err){
+            console.log(err);
+            }
+            });
+        }
+
+    
+    }
+
+
+
+
+}
+
+
+
+});
+
 
 </script>
 

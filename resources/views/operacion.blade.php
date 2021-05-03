@@ -1,6 +1,4 @@
 <style>
-  
-
     .btn-regresar {
         background-color: #C0BEBF !important;
         font-weight: bold !important;
@@ -20,81 +18,86 @@
         border-color: transparent !important;
     }
 
-    .div-border{
-        border:2px solid #fff;
-        border-radius:10px;
+    .div-border {
+        border: 2px solid #fff;
+        border-radius: 10px;
 
     }
 
-    .content-label{
-     width: 100%;
+    .content-label {
+        width: 100%;
     }
 
     .card-input-element+.card {
-    color: var(--primary);
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border: 2px solid transparent;
-    border-radius: 4px;
+        color: var(--primary);
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border: 2px solid transparent;
+        border-radius: 4px;
     }
 
     .card-input-element+.card:hover {
-    cursor: pointer;
+        cursor: pointer;
     }
 
     .card-input-element:checked+.card {
-    border: 2px solid var(--primary);
-    -webkit-transition: border .3s;
-    -o-transition: border .3s;
-    transition: border .3s;
+        border: 2px solid var(--primary);
+        -webkit-transition: border .3s;
+        -o-transition: border .3s;
+        transition: border .3s;
     }
 
     .card-input-element:checked+.card::after {
-    content: '\f058';
-    color: #AFB8EA;
-    font-family: 'Font Awesome 5 Free';
-    font-size: 24px;
-    -webkit-animation-name: fadeInCheckbox;
-    animation-name: fadeInCheckbox;
-    -webkit-animation-duration: .5s;
-    animation-duration: .5s;
-    -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        content: '\f058';
+        color: #AFB8EA;
+        font-family: 'Font Awesome 5 Free';
+        font-size: 24px;
+        -webkit-animation-name: fadeInCheckbox;
+        animation-name: fadeInCheckbox;
+        -webkit-animation-duration: .5s;
+        animation-duration: .5s;
+        -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .text-error {
+        color: #8f0000;
     }
 
     @-webkit-keyframes fadeInCheckbox {
-    from {
-        opacity: 0;
-        -webkit-transform: rotateZ(-20deg);
-    }
-    to {
-        opacity: 1;
-        -webkit-transform: rotateZ(0deg);
-    }
+        from {
+            opacity: 0;
+            -webkit-transform: rotateZ(-20deg);
+        }
+
+        to {
+            opacity: 1;
+            -webkit-transform: rotateZ(0deg);
+        }
     }
 
     @keyframes fadeInCheckbox {
-    from {
-        opacity: 0;
-        transform: rotateZ(-20deg);
-    }
-    to {
-        opacity: 1;
-        transform: rotateZ(0deg);
-    }
+        from {
+            opacity: 0;
+            transform: rotateZ(-20deg);
+        }
+
+        to {
+            opacity: 1;
+            transform: rotateZ(0deg);
+        }
     }
 
-    
 
-    @media (max-width: 575.98px) { 
 
-        .space-div{
-            margin-top:2rem;
+    @media (max-width: 575.98px) {
+
+        .space-div {
+            margin-top: 2rem;
         }
 
 
     }
-
 </style>
 
 
@@ -144,14 +147,19 @@
                                 <option value="{{$banco->id}}">{{$banco->name}}</option>
                                 @endforeach
                             </select>
+
+                            <div id="err-banco-envio"></div>
                         </div>
                         <div class="form-check mt-3">
-                            <input type="checkbox" name="declaro" class="form-check-input" id="accept" style="margin-top: 13px;width:18px;height:18px;margin-left: -1.7rem !important;">
+                            <input type="checkbox" name="declaro" class="form-check-input" id="accept"
+                                style="margin-top: 13px;width:18px;height:18px;margin-left: -1.7rem !important;">
 
                             <label class="form-check-label text-white font-weight-bold" for="accept">Declaro que
                                 transfireré los fondos
                                 a Imoney Perú S.A.C. desde una cuenta bancaria de <span> {{Auth::user()->name}} {{ Auth::user()->apellidos }}</span>
                                 de la cual soy titular o con autorización del representante legal.</label>
+
+                            <div id="err-acepto"></div>
 
                         </div>
                     </div>
@@ -161,18 +169,18 @@
                         <p class="text-center">Selecciona la cuenta en donde deseas recibir tu cambio</p>
                         <div class="text-center">
                             <button type="button" class="btn btn-dark mr-2" data-toggle="modal"
-                                data-target="#modal-listar-cuenta"><i
-                                    class="far fa-address-card pr-2"></i>Seleccionar cuenta
+                                data-target="#modal-listar-cuenta"><i class="far fa-address-card pr-2"></i>Seleccionar
+                                cuenta
                             </button>
 
                             <button type="button" class="btn btn-dark ml-2" data-toggle="modal"
-                                data-target="#modal-agregar-cuenta"><i
-                                    class="fa fa-plus-circle pr-2"></i>Agregar cuenta
+                                data-target="#modal-agregar-cuenta"><i class="fa fa-plus-circle pr-2"></i>Agregar cuenta
                             </button>
                         </div>
+                        <div id="err-cbancaria-selected" class="text-center mt-3"></div>
                         <div id="cuenta-selected" class="text-center col-md-6 mt-3 mx-auto"></div>
                     </div>
-                    
+
                 </div>
 
             </div>
@@ -188,54 +196,56 @@
 
 <!-- Modal Listar Cuenta -->
 <div class="modal fade" id="modal-listar-cuenta" tabindex="-1" role="dialog" aria-labelledby="modal-listar-cuenta"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="modal-listar-cuenta">Lista de cuentas en
-                {{ $dataTipoCambio["descripcionMontoB"] }}
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            @foreach ($lista_cuenta_bancaria as $cbancaria)
-            <label class="content-label">
-                <input type="radio" name="cbancaria_selected" class="card-input-element d-none" id="radio_{{$cbancaria->id }}" value="{{$cbancaria->id }}">
-                <div class="card card-body bg-light">
-                    <h5 class="card-title">Banco: {{$cbancaria->banco}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Numero de Cuenta: {{$cbancaria->numero_cuenta}}
-                    <h6 class="card-subtitle mb-2 text-muted">Tipo de Cuenta: {{$cbancaria->tipo_cuenta}}</h6>
-                </div>
-                </label>
-            @endforeach
-            <div class="modal-footer">
-                <button class="btn btn-primary" id="seleccionar-tipo-cuenta">Seleccionar</button>
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-listar-cuenta">Lista de cuentas en
+                    {{ $dataTipoCambio["descripcionMontoB"] }}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <div class="modal-body">
+                <p class="text-center font-weight-bold" style="color:#2a3253;font-size: 17px;">Esta lista muestra tus cuentas bancarias en moneda {{ $dataTipoCambio["descripcionMontoB"] }}</p>
+                @foreach ($lista_cuenta_bancaria as $cbancaria)
+                <label class="content-label">
+                    <input type="radio" name="cbancaria_selected" class="card-input-element d-none"
+                        id="radio_{{$cbancaria->id }}" value="{{$cbancaria->id }}">
+                    <div class="card card-body bg-light">
+                        <h5 class="card-title">Banco: {{$cbancaria->banco}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Numero de Cuenta: {{$cbancaria->numero_cuenta}}
+                            <h6 class="card-subtitle mb-2 text-muted">Tipo de Cuenta: {{$cbancaria->tipo_cuenta}}</h6>
+                    </div>
+                </label>
+                @endforeach
+                <div id="err-modal-select-cuenta" class="text-center"></div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="seleccionar-tipo-cuenta">Seleccionar</button>
+                </div>
 
+            </div>
         </div>
     </div>
-</div>
 </div>
 <!-- Modal Listar Cuenta -->
 
 <!-- Modal Agregar Cuenta -->
 <div class="modal fade" id="modal-agregar-cuenta" tabindex="-1" role="dialog" aria-labelledby="modal-agregar-cuenta"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="modal-agregar-cuenta">Agregar nueva cuenta en
-                {{ $dataTipoCambio["descripcionMontoB"] }}
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form method="POST" action="{{ route('operacion.createCuentaBancaria') }}">
-                @csrf
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-agregar-cuenta">Agregar nueva cuenta en
+                    {{ $dataTipoCambio["descripcionMontoB"] }}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <p class="text-center font-weight-bold mt-3" style="color:#2a3253;font-size: 17px;">Ingresa tu cuenta bancaria en moneda {{ $dataTipoCambio["descripcionMontoB"] }}</p>
+            <div class="modal-body">
                 <input type="hidden" name="tipo_cuenta" value="{{ $dataTipoCambio["descripcionMontoB"] }}" />
                 <div class="form-group">
                     <select class="form-control" id="cuenta_bancaria_user" name="cuenta_bancaria_user">
@@ -257,15 +267,13 @@ aria-hidden="true">
                         @endforeach
                     </select>
                 </div>
-
-
+                <div id="success-message"></div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="agregar-tipo-cuenta">Agregar</button>
+                    <button class="btn btn-primary" id="agregar-tipo-cuenta">Agregar</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
 </div>
 <!-- Modal Agregar Cuenta -->
 
@@ -273,10 +281,56 @@ aria-hidden="true">
 
 @section('custom-script')
 <script type="text/javascript">
-    $('#seleccionar-tipo-cuenta').click(function() {
-var value = $('input[name=cbancaria_selected]:checked').val();
+    $('#agregar-tipo-cuenta').click(function() {
 
-$.ajax({
+ $.ajax({
+ type: "POST",
+ url: "{{ route('operacion.createCuentaBancaria')}}",
+ data: { 
+ cuenta_bancaria_user: $('#cuenta_bancaria_user').val(),
+ numero_cuenta: $('#numero_cuenta').val(),
+ categoria_cuenta: $('#categoria_cuenta').val(),
+ _token:"{{ csrf_token() }}",
+ },
+ success: function (data) {
+  $("#agregar-tipo-cuenta").attr("disabled", true);
+  $('#success-message').html('<div class="alert alert-success text-center">Cuenta Bancaria registrada , por favor seleccione su cuenta para seguir con la operación</div>');
+
+  setTimeout(() => {
+
+    $("#modal-agregar-cuenta").modal('hide');
+     window.location.reload();
+
+  },  3000);
+
+
+ },
+ error: function (err) {
+    if (err.status == 422) {
+            $.each(err.responseJSON.errors, function (i, error) {
+                var el = $(document).find('[name="'+i+'"]');
+                el.after($('<strong  class="text-error">'+error[0]+'</strong>'));
+            });
+        }
+
+ },
+ });
+
+
+
+});
+
+
+
+$('#seleccionar-tipo-cuenta').click(function() {
+
+    var value = $('input[name=cbancaria_selected]:checked').val();
+
+if(value === undefined){
+    $('#err-modal-select-cuenta').html('<strong class="text-error">Por favor seleccione la cuenta donde desea recibir su dinero</strong>');
+}else{
+
+    $.ajax({
 type: 'GET',
 url: `operacion/${value}/getCuentaBancariaSelected`,
 success: function (data) {
@@ -296,12 +350,28 @@ error: function() {
 }
 });
 
+}
+
+
+
+
 });
 
 
 $('#procesar-operacion').click(function() {
 
-$.ajax({
+   if($('#bancos').val() === "" ){
+      $('#err-banco-envio').html('<strong class="text-error">Por favor selecciona el banco de donde nos envias tu dinero</strong>');
+
+    }else if(!$('#accept').is(":checked")){
+        $('#err-acepto').html('<strong class="text-error">Por favor acepta la declaración de transferencia</strong>');
+    
+    }else if($('input[name=cbancaria_selected]:checked').val() === undefined){
+        $('#err-cbancaria-selected').html('<strong class="text-error">Por favor seleccione la cuenta donde desea recibir su dinero</strong>');
+
+    }else{
+
+    $.ajax({
     type: "POST",
     url: "{{ route('operacion.createOperacion')}}",
     data: { 
@@ -318,11 +388,14 @@ $.ajax({
     window.location.href = `transaccion/${data}`;
 
     },
-    error: function (data, textStatus, errorThrown) {
-        console.log(data);
+    error: function (err) {
+        console.log(err);
 
     },
-});
+    });
+
+    }
+
 
 });
 
