@@ -58,12 +58,13 @@
 
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
+    <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">-->
 @endsection
 
 @section('content')
 <main>
+
     <div class="container-fluid">           
         <div class="row">        
             <div class="col-md-12 mx-auto">
@@ -76,7 +77,7 @@
                         <tr>
                         
                             <th>ID</th>
-                            <th>Usuario</th>
+                            <!--<th>Usuario</th>-->
                             <th>Banco</th>
                             <th>Tipo de Cuenta</th>
                             <th>Categoria de Cuenta</th>
@@ -89,12 +90,9 @@
                         <tr>
 
                             <td>{{ $lista_cuenta->id }}</td> 
-                            
                             <td>{{ $lista_cuenta->banco }}</td>
-                      
-                            <td>{{ $lista_cuenta->tipo_cuenta }}</td>
-                           
-                            
+                            <td>{{ $lista_cuenta->tipo }}</td>
+                            <td>{{ $lista_cuenta->categoria }}</td>
                             <td>{{ $lista_cuenta->numero_cuenta }}</td>       
                             <td>
           
@@ -130,11 +128,11 @@
 
 
     @section('js')
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.5.1.js"></script>-->
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.bootstrap4.min.js"></script>
+    <!--<script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.bootstrap4.min.js"></script>-->
 
     <script>
       $(document).ready(function() {

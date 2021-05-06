@@ -65,14 +65,17 @@
     .button-change {
         background-size: 100%;
         background-repeat: no-repeat;
-        width: 55px;
-        height: 55px;
+        width: 80px;
+        /*width: 55px;*/
+        height: 60px;
+        /*width: 55px;*/
         border: none;
         outline: none;
         z-index: 20;
         position: absolute;
         top: 20%;
-        left: 0;
+        /*left: 0;*/
+        left:20px;
         right: 0;
         margin: auto;
     }
@@ -122,7 +125,7 @@
         <div class="row">
 
             <div class="col-md-12 text-center">
-                <h3 class="text-white font-weight-bold">Tipo de cambio de dólar</h3>
+                <h3 class="text-white font-weight-bold">Tipo de cambio Dolár/Sol (USDPEN)</h3>
             </div>
             <div class="col-md-6 mx-auto">
                 <div class="text-center">
