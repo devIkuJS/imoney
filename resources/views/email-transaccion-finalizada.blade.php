@@ -448,7 +448,7 @@
                           </tr>
                         </tbody>
                       </table>
-                      <p style="font-weight:bold;">Muchas gracias por operar con iMoney Perú SAC , pronto tendremos mas novedades para ti</p>
+                      <p style="font-weight:bold;">Muchas gracias por operar con iMoney Perú SAC RUC:20602075665, Teléfono: 01-7482710, Celular: 982 273 702, pronto tendremos mas novedades para ti.</p>
                        
                        <small style="font-size: 12px;color:gray;">Si tuviese alguna consulta, duda sobre su transaccion por favor comunicarse a nuestro <a  href="https://api.whatsapp.com/send?phone=+51982273702&text=Tengo%20una%20consulta"
                         target="_blank">whastapp en linea</a></small>

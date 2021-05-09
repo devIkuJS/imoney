@@ -65,14 +65,17 @@
     .button-change {
         background-size: 100%;
         background-repeat: no-repeat;
-        width: 55px;
-        height: 55px;
+        width: 80px;
+        /*width: 55px;*/
+        height: 60px;
+        /*width: 55px;*/
         border: none;
         outline: none;
         z-index: 20;
         position: absolute;
         top: 20%;
-        left: 0;
+        /*left: 0;*/
+        left:20px;
         right: 0;
         margin: auto;
     }
@@ -122,7 +125,7 @@
         <div class="row">
 
             <div class="col-md-12 text-center">
-                <h3 class="text-white font-weight-bold">Tipo de cambio de dolár</h3>
+                <h3 class="text-white font-weight-bold">Tipo de cambio Dolár/Sol (USDPEN)</h3>
             </div>
             <div class="col-md-6 mx-auto">
                 <div class="text-center">
@@ -253,10 +256,15 @@ swap.addEventListener('click', ()=> {
   
 })
 button_save.addEventListener('click', ()=>{
+    console.log(document.getElementById('text-changeA').innerHTML);
+    console.log(amountEl_one.value);
+
     if(amountEl_one.value == "" ){
        $("#tcambio-message").html('<strong class="text-error">Por favor ingrese una cantidad válida</strong>')
-    }else if(amountEl_one.value < 150){
-        $("#tcambio-message").html('<strong class="text-warning">El monto minimo a operar es 150 soles o su equivalente en doláres</strong>')
+    }else if(document.getElementById('text-changeA').innerHTML === 'Soles' && amountEl_one.value < 350 ){
+        $("#tcambio-message").html('<strong class="text-warning">El monto minimo a operar es 350 soles.</strong>')
+    }else if(document.getElementById('text-changeA').innerHTML === 'Dolares' && amountEl_one.value < 100 ){
+        $("#tcambio-message").html('<strong class="text-warning">El monto minimo a operar es 100 doláres.</strong>')
     }else{
         $.ajax({
             type: "POST",
@@ -278,6 +286,7 @@ button_save.addEventListener('click', ()=>{
         });
       } 
 });
+
 </script>
 
 @stop

@@ -28,7 +28,16 @@
         box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
     }
 
-    */
+   /* @media (max-width: 991.98px) {
+        .card-title{
+            font-size:12.5px;
+        }*/
+    }
+   /* @media (max-width: 1199.98px) {
+        .card-title{
+            font-size:12.5px;
+        }
+    }*/
 </style>
 
 @extends('layouts.app')
@@ -92,7 +101,7 @@
                         </div>
                     </div>
                     <div class="card background-card">
-                        <a href="{{ route('financiamiento') }}">
+                        <a href="{{ route('estadoCuenta') }}">
                             <img src={{asset('imagenes/ESTADOS_CUENTA.png')}} class="card-img-top"
                                 alt="Imagen Estados">
                         </a>
@@ -103,7 +112,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </main>
 

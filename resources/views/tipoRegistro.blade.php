@@ -22,10 +22,16 @@
         transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
     }
     .font-weight-bold{
-        color:#0274be !important;
+        color:white !important;
         font-family: Helvetica, sans-serif;
         font-weight: bold;
         margin-top:10px !important;
+    }
+    
+    @media (max-width: 575.98px) {
+        .text-center {
+            font-size:17px;
+        }
     }
        
 </style>
@@ -36,21 +42,22 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-header"><img src={{asset('imagenes/logo_alex.png')}} alt="Fjords" style="width:10%" class="img-fluid2"> {{ __('SELECCIONA TU PERFIL') }}</div>
+            
+            <div class="card" style="background: transparent !important;border-style: none;">
+                <div class="card-header" style="background: transparent !important;border-style: none;"><!--<img src={{asset('imagenes/logo_alex.png')}} alt="Fjords" style="width:10%" class="img-fluid2">--> <h5 class="text-center font-weight-bold">{{ __('SELECCIONA TU PERFIL') }}</h5></div>
 
                 <div class="card-body mx-auto">
                     <div class="text-center mb-5 mt-2">
                         <a class="icon-block" href="{{ route('register') }}">
-                            <img src={{asset('imagenes/persona100.png')}} alt="Fjords" style="width:80%" class="img-fluid">
+                            <img src={{asset('imagenes/persona100.png')}} alt="Fjords" style="width:30%" class="img-fluid">
                         </a>
-                        <p class="font-weight-bold">Persona Natural</p>
+                        <p class="font-weight-bold text-white">Persona Natural</p>
                     </div>
                     <div class="text-center">
                         <a class="icon-block" href="{{ route('empresa') }}">
-                            <img src={{asset('imagenes/empresa300.png')}} alt="Fjords" style="width:80%" class="img-fluid">
+                            <img src={{asset('imagenes/empresa_original.png')}} alt="Fjords" style="width:30%" class="img-fluid">
                         </a>
-                        <p class="font-weight-bold">Empresa</p>
+                        <p class="font-weight-bold text-white">Empresa</p>
                     </div>
                     
                     
