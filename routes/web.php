@@ -44,13 +44,11 @@ Route::post('/empresa/create', [App\Http\Controllers\EmpresaController::class, '
 //inversionista - GUTI
 Route::get('/inversionista', [App\Http\Controllers\InversionistaController::class, 'index'])->name('inversionista');
 
-//CuentaBancaria - GUTI
+//CuentaBancaria - cliente
 Route::get('/cuentaBancaria', [App\Http\Controllers\CuentaBancariaController::class, 'index'])->name('cuentaBancaria');
-//Route::get('/cuentasBancarias', [App\Http\Controllers\CuentaBancariaController::class, 'index'])->name('cuentasBancarias');
-
 Route::post('/cuentaBancaria/registro', [App\Http\Controllers\CuentaBancariaController::class, 'registro'])->name('cuentaBancaria.registro');
-Route::post('/cuentaBancaria/{usuarioId}/actualizar', [App\Http\Controllers\CuentaBancariaController::class, 'actualizar'])->name('cuentaBancaria.actualizar');
-Route::delete('/cuentaBancaria/{usuarioId}/eliminar', [App\Http\Controllers\CuentaBancariaController::class, 'eliminar'])->name('cuentaBancaria.eliminar');
+Route::post('/cuentaBancaria/{cuentaBancariaId}/actualizar', [App\Http\Controllers\CuentaBancariaController::class, 'actualizar'])->name('cuentaBancaria.actualizar');
+Route::delete('/cuentaBancaria/{cuentaBancariaId}/eliminar', [App\Http\Controllers\CuentaBancariaController::class, 'eliminar'])->name('cuentaBancaria.eliminar');
 
 //EstadoCuenta - GUTI
 Route::get('/estadoCuenta', [App\Http\Controllers\EstadoCuentaController::class, 'index'])->name('estadoCuenta');

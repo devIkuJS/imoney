@@ -4,7 +4,7 @@
         margin-top: 55px !important;
     }
     .card-header{
-        background:#0274be !important;
+        /*background:#0274be !important;*/
         color:white;
         font-family: Helvetica, sans-serif;
         font-weight: bold;
@@ -22,7 +22,7 @@
     }
 
     .col-form-label{
-        color:gray ;
+        color:white ;
         font-family: Helvetica, sans-serif;
         font-weight: bold;
     }
@@ -30,23 +30,31 @@
         font-weight: bold !important;
         font-family: Helvetica, sans-serif;
         box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
-        background:#0274be !important;
+        background:black!important;
+
     }
+
     .btn-link{
-        color:#0274be ;
+        color:white !important ;
     }
-    
+    .btn-link-aqui{
+        color:white !important ;
+    }
+    .una-cuenta{
+        color:black !important ;
+    }
+   
 </style>
 @extends('layouts.app')
-
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header"><img src={{asset('imagenes/logo_alex.png')}} alt="Fjords" style="width:7%" class="img-fluid">{{ __('BIENVENIDO | Iniciar sesión') }}</div>
-
+        <div class="col-md-8">
+            <div class="card" style="background: transparent !important;border-style: none;">
+                <div class="card-header" style="background: transparent !important;border-style: none;">
+                    
+                    <img src={{asset('imagenes/logo_alex.png')}} alt="Fjords" style="width:9%;margin-right:7px !important;" class="img-fluid"><label class="col-form-label-iniciar h4 font-weight-bold" style="margin-left:20px;">{{ __('INICIAR SESIÓN') }}</label></div>
                 <div class="card-body pb-0">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -64,6 +72,7 @@
                                 @enderror
                             </div>
                         </div>
+                        
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
@@ -84,7 +93,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
+                                    <label class="form-check-label text-white" for="remember">
                                         {{ __('Recordarme') }}
                                     </label>
                                 </div>
@@ -96,7 +105,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="showpassword" id="showpassword" {{ old('showpassword') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="showpassword">
+                                    <label class="form-check-label text-white" for="showpassword">
                                         {{ __('Mostrar contraseña') }}
                                     </label>
                                 </div>
@@ -122,8 +131,8 @@
 
                         <div class="form-group row">
                             <div class="col-md-8 offset-md-4 pl-0">
-                                <label style="padding-left: 0.8rem !important;">¿No tiene una cuenta? Crea una<a class="btn btn-link pl-1 pt-1" href="{{ route('tipoRegistro') }}">
-                                    {{ __('aqui') }}
+                                <label class="una-cuenta" style="padding-left: 0.8rem !important;">¿No tiene una cuenta? <a class="btn btn-link-aqui pl-1 pt-1" href="{{ route('tipoRegistro') }}">
+                                    {{ __('Crea una aqui') }}
                                 </a></label>    
                             </div>
                         </div>
@@ -135,4 +144,6 @@
         </div>
     </div>
 </div>
+
+
 @endsection

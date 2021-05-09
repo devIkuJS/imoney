@@ -156,7 +156,7 @@
 
                             <label class="form-check-label text-white font-weight-bold" for="accept">Declaro que
                                 transfireré los fondos
-                                a Imoney Perú S.A.C. desde una cuenta bancaria de <span> {{Auth::user()->name}}</span>
+                                a Imoney Perú S.A.C. desde una cuenta bancaria de <span> {{Auth::user()->name}} {{ Auth::user()->apellidos }}</span>
                                 de la cual soy titular o con autorización del representante legal.</label>
 
                             <div id="err-acepto"></div>

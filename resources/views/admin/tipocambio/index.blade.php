@@ -20,7 +20,7 @@
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="tcambio" class="table table-bordered table-striped">
-                    <thead>
+                    <thead class="bg-primary text-white">
                         <tr>
                             <th>ID</th>
                             <th>Compra</th>

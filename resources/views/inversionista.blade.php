@@ -1,102 +1,68 @@
+<style>
+    .container{
+        margin-top: 55px !important;
+        
+    }
+    
+    .card-header{
+        background:#0274be !important;
+        color:white !important;
+        font-family: Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+    .img-fluid2{
+        margin: 10px;
+        margin-top: 0px;
+        margin-left:-10px;
+        margin-right:10px;
+    }
+    .img-fluid:hover{
+        opacity: 0.5;
+        transform: scale(1.25);
+        transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    }
+    .font-weight-bold{
+        color:#0274be !important;
+        font-family: Helvetica, sans-serif;
+        font-weight: bold;
+        margin-top:10px !important;
+    }
+       
+</style>
 @extends('layouts.app')
 
+
 @section('content')
+<div class="container pt-5">
+    <!--<div class="row justify-content-center">-->
+    
+        <div class="col-md-12">
+            <div class="row seven-cols">
+            <div class="card" >
+                <div class="card-header" ><!--<img src={{asset('imagenes/logo_alex.png')}} alt="Fjords" style="width:10%" class="img-fluid2">--> <h4 class="text-center text-bold">{{ __('SELECCIONA TU PERFIL') }}</h4></div>
 
-<style type="text/css">
-			.row { 
-                margin: 10px 0; 
-                }
-			.row div[class*='col'] { 
-                padding: 5px; 
-                text-align: center; 
-                border: none;
-                }
-               .card-header{
-                text-align: left;  
-               } 
-		</style>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-9">
-            <div class="card">           
-                <div class="card-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="thumbnail">
-                                    <a href="{{URL::to('inversionista/')}}">
-                                    <img src={{asset('imagenes/inversionista.png')}} alt="Fjords" style="width:80%">
-                                        <div class="caption">
-                                            <p>INVERSIONISTAS</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            
-                        <div class="col-md-4">
-                            <div class="thumbnail">
-                                <a href="{{URL::to('financiamiento/')}}">
-                                    <img src={{asset('imagenes/financiamiento.jpg')}} alt="Fjords" style="width:80%">
-                                    <div class="caption">
-                                        <p>FINANCIAMIENTO</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="thumbnail">
-                                <a href="{{URL::to('cambioTipo/')}}">
-                                    <img src={{asset('imagenes/tipo-de-cambio.jpg')}} alt="Fjords" style="width:80%">
-                                    <div class="caption">
-                                        <p>TIPO DE CAMBIO</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                <div class="card-body mx-auto">
+                    <div class="text-center mb-5 mt-2">
+                        <a class="icon-block" href="{{ route('register') }}">
+                            <img src={{asset('imagenes/persona100.png')}} alt="Fjords" style="width:80%;" class="img-fluid">
+                        </a>
+                        <p class="font-weight-bold text-white">Persona Natural</p>
                     </div>
-                </div>       
-
-
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="thumbnail">
-                                    <a href="{{URL::to('misDatos/')}}">
-                                        <img src={{asset('imagenes/mis_datos.png')}} alt="Fjords" style="width:80%">
-                                        <div class="caption">
-                                            <p>Mis datos</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="thumbnail">
-                                    <a href="{{URL::to('cuentaBancaria/')}}">
-                                        <img src={{asset('imagenes/cuenta_bancaria.jpg')}} alt="Fjords" style="width:80%">
-                                        <div class="caption">
-                                            <p>Cuentas Bancarias</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="thumbnail">
-                                    <a href="{{URL::to('estadoCuenta/')}}">
-                                        <img src={{asset('imagenes/estado_cuenta.jpg')}} alt="Fjords" style="width:80%">
-                                        <div class="caption">
-                                            <p>Estado de Cuenta</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>       
-                                                                                     
-                        
-                  
+                    <div class="text-center">
+                        <a class="icon-block" href="{{ route('empresa') }}">
+                            <img src={{asset('imagenes/empresa300.png')}} alt="Fjords" style="width:80%;" class="img-fluid">
+                        </a>
+                        <p class="font-weight-bold text-white">Empresa</p>
+                    </div>
+                    
+                    
                 </div>
             </div>
         </div>
-    </div>
+    <!--</div>-->
 </div>
+
+
 @endsection
