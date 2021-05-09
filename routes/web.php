@@ -76,7 +76,6 @@ Route::post('/transaccion/enviarOperacion', [App\Http\Controllers\TransaccionCon
 
 
 
-
 //Admin
 Route::get('/admin/empresas', [App\Http\Controllers\Admin\EmpresaController::class, 'index'])->name('admin.empresas');
 Route::get('/admin/usuarios', [App\Http\Controllers\Admin\UsuarioController::class, 'index'])->name('admin.usuarios');
