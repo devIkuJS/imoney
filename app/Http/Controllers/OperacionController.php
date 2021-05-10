@@ -35,6 +35,7 @@ class OperacionController extends Controller
             ->select('cuenta_bancarias.*', 'bancos.name AS banco', 'categoria_cuenta.name AS tipo_cuenta')
             ->where('cuenta_bancarias.tipo_cuenta', $tipo_cuenta)
             ->where('cuenta_bancarias.user_id', Auth::id())
+            ->where('cuenta_bancarias.estado', 1)
             ->get();
 
             
@@ -69,6 +70,7 @@ class OperacionController extends Controller
         $newCuentaBancaria->tipo_cuenta = $tipo_cuenta;
         $newCuentaBancaria->numero_cuenta = $request->numero_cuenta;
         $newCuentaBancaria->categoria_cuenta_id = $request->categoria_cuenta;
+        $newCuentaBancaria->estado = 1;
         $newCuentaBancaria->save();
         
         return response(json_encode($newCuentaBancaria),200)->header('Content-type','application/json');;
@@ -85,6 +87,7 @@ class OperacionController extends Controller
             ->select('cuenta_bancarias.id', 'bancos.name AS banco', 'cuenta_bancarias.numero_cuenta', 'categoria_cuenta.name AS tipo_cuenta')
             ->where('cuenta_bancarias.id', $cuentaId)
             ->where('cuenta_bancarias.user_id', Auth::id())
+            ->where('cuenta_bancarias.estado', 1)
             ->get();
     	return response(json_encode($cuentaSelected),200)->header('Content-type','application/json');
       }
