@@ -21,12 +21,6 @@ class CuentaBancariaController extends Controller
         $this->middleware('auth');
     }
 
-    /*public function show($id)
-    {
-        $cuentaBancaria=CuentaBancaria::find($id);
-        return view('cuentaBancaria.show',compact('cuentaBancaria'));
-    }*/
-
     public function index()
     {   
         $bancos = Banco::all();
@@ -37,10 +31,8 @@ class CuentaBancariaController extends Controller
             ->join('bancos', 'cuenta_bancarias.banco_id', '=', 'bancos.id')
             ->join('tipo_cuentas', 'cuenta_bancarias.tipo_cuenta', '=', 'tipo_cuentas.id')
             ->join('categoria_cuenta', 'cuenta_bancarias.categoria_cuenta_id', '=', 'categoria_cuenta.id')
-            /*->select('users.name AS user')*/
-            ->select('cuenta_bancarias.id','bancos.name AS banco', 'tipo_cuentas.name AS tipo','categoria_cuenta.name AS categoria','cuenta_bancarias.numero_cuenta')
+            ->select('cuenta_bancarias.id','bancos.name AS banco', 'tipo_cuentas.name AS tipo','categoria_cuenta.name AS categoria','cuenta_bancarias.numero_cuenta', 'cuenta_bancarias.estado')
             ->where('cuenta_bancarias.user_id', Auth::id())
-            
             ->get();
 
     	return view('cuentaBancaria' , ['lista_cuentas' => $lista_cuentas,'bancos' => $bancos,'categoria_cuenta' => $categoria_cuenta,'tipo_cuenta' => $tipo_cuenta]);
@@ -59,38 +51,18 @@ class CuentaBancariaController extends Controller
             'numero_cuenta.unique' => 'La cuenta ingresada ya esta registrada en el sistema',
         ]);
         $newCuentaBancaria = new CuentaBancaria();
-        //dd($request->tipo_cuenta);
-        //$tipo_cuenta = $request->tipo_cuenta === 'Soles' ? "1" : "2";
         $newCuentaBancaria->user_id = Auth::id();
     	$newCuentaBancaria->banco_id = $request->cuenta_bancaria_user;
         $newCuentaBancaria->tipo_cuenta = $request->tipo_cuenta;
         $newCuentaBancaria->numero_cuenta = $request->numero_cuenta;
         $newCuentaBancaria->categoria_cuenta_id = $request->categoria_cuenta;
-        //dd($newCuentaBancaria);
+        $newCuentaBancaria->estado = 1;
         $newCuentaBancaria->save();
         
         return redirect()->back();
        
     
     }
-    /*public function getCuentaBancariaSelected(){
-        $cuentaBancaria = cuentaBancaria::select(['id','usuario','banco','Tipo de cuenta','Categoria de cuenta','Número de cuenta']);
- 
-        return Datatables::of($cuentaBancaria)
- 
-            ->make(true);
-    }*/
-
-    public function getCuentaBancariaSelected(Request $request,$cuentaId,$userId){
-        $cuentaSelected = DB::table('cuenta_bancarias')
-            ->join('bancos', 'cuenta_bancarias.banco_id', '=', 'bancos.id')
-            ->join('categoria_cuenta', 'cuenta_bancarias.categoria_cuenta_id', '=', 'categoria_cuenta.id')
-            ->select('cuenta_bancarias.id', 'bancos.name AS banco', 'cuenta_bancarias.numero_cuenta', 'categoria_cuenta.name AS tipo_cuenta')
-            ->where('cuenta_bancarias.id', $cuentaId)
-            ->where('cuenta_bancarias.user_id', Auth::id())
-            ->get();
-    	return response(json_encode($cuentaSelected),200)->header('Content-type','application/json');
-      }
 
       public function actualizar(Request $request, $cuentaBancariaId)
       {
@@ -99,13 +71,12 @@ class CuentaBancariaController extends Controller
           $cuentaBancaria->save();
   
           return redirect()->back();
-          //dd($request->all());
       }
 
-      public function eliminar(Request $request, $cuentaBancariaId){
-        $cuentaBancaria=CuentaBancaria::find($cuentaBancariaId);
-        $cuentaBancaria->numero_cuenta = $request->numero_cuenta;
-        $cuentaBancaria->delete();
+      public function cambiarEstado(Request $request, $cuentaBancariaId){
+        $cuentaBancaria = CuentaBancaria::find($cuentaBancariaId);
+          $cuentaBancaria->estado = 0;
+          $cuentaBancaria->save();
 
         return redirect()->back();
       }
