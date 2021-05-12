@@ -14,6 +14,9 @@
         font-family: Helvetica, sans-serif;
         box-shadow: 0px 2px 4px rgb(0 0 0 / 40%);
     }
+    .btn-primary1{
+        background-color: #C0BEBF !important;
+    }
    /* div.container { max-width: 1200px } */
 </style>
 @extends('layouts.app')
@@ -85,6 +88,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="text-center col-md-12 mt-4">
+                            <a class="btn btn-primary1 btn-regresar mr-3 font-weight-bold text-white" href="{{ route('user') }}">Atrás</a>
+                        </div>
                     </div>
                     <!-- /.card-body -->
                 </div>

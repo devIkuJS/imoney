@@ -41,8 +41,11 @@ Route::post('/tipoCambio/getTipoCambio', [App\Http\Controllers\TipoCambioControl
 Route::get('/empresa', [App\Http\Controllers\EmpresaController::class, 'index'])->name('empresa');
 Route::post('/empresa/create', [App\Http\Controllers\EmpresaController::class, 'create'])->name('empresa.create');
 
-//inversionista - GUTI
+//Inversionista - cliente
 Route::get('/inversionista', [App\Http\Controllers\InversionistaController::class, 'index'])->name('inversionista');
+Route::get('/inversionistaCaracteristica', [App\Http\Controllers\InversionistaCaracteristicaController::class, 'index'])->name('inversionistaCaracteristica');
+Route::get('/inversionistaOperacion', [App\Http\Controllers\InversionistaOperacionController::class, 'index'])->name('inversionistaOperacion');
+Route::get('/inversionistaTransaccion', [App\Http\Controllers\InversionistaTransaccionController::class, 'index'])->name('inversionistaTransaccion');
 
 //CuentaBancaria - cliente
 Route::get('/cuentaBancaria', [App\Http\Controllers\CuentaBancariaController::class, 'index'])->name('cuentaBancaria');

@@ -34,6 +34,8 @@
                             <th>Cargo</th>
                             <th>Empresa</th>
                             <th>Tipo de Usuario</th>
+                            <th>DNI Adelante</th>
+                            <th>DNI Atras</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -53,6 +55,8 @@
                             <td>{{ $usuario->cargo }}</td>
                             <td>{{ $usuario->empresa }}</td>
                             <td>{{ $usuario->rol }}</td>
+                            <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-ver-dni-adelante-{{$usuario->id}}">Ver DNI</button></td>
+                             <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-ver-dni-atras-{{$usuario->id}}">Ver DNI</button></td>
                             <td>
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-update-usuario-{{$usuario->id}}">Editar</button>
                                 <form action="{{ route ('admin.usuarios.eliminar', $usuario->id) }}" class="d-inline" method="post">
@@ -66,6 +70,12 @@
                         <!-- modal update -->
                         @include('admin.usuarios.modal-update-usuario')
                         <!-- /.modal update-->
+                        <!-- modal ver dni adelante -->
+                        @include('admin.usuarios.modal-ver-dni-adelante')
+                        <!-- /.modal ver dni adelante-->
+                        <!-- modal ver dni atras -->
+                        @include('admin.usuarios.modal-ver-dni-atras')
+                        <!-- /.modal ver dni atras-->
                         @endforeach
                     </tbody>
                     <tfoot>
@@ -79,9 +89,12 @@
                             <th>Domicilio</th>
                             <th>Nacionalidad</th>
                             <th>Ocupacion</th>
-                            <th>Posicion Politica?</th>
+                            <th>Pos. Politica?</th>
                             <th>Cargo</th>
                             <th>Empresa</th>
+                            <th>Tipo de Usuario</th>
+                            <th>DNI Adelante</th>
+                            <th>DNI Atras</th>
                             <th>Acciones</th>
                         </tr>
                     </tfoot>
