@@ -11,7 +11,7 @@
                     <div class="modal-body">
                    
                 <div class="form-group">
-                    <label for="nombre">Número de Cuenta</label>
+                    <label for="nombre">N&uacutemero de Cuenta</label>
                     <input type="text" name="numero_cuenta" class="form-control" id="numero_cuenta" value="{{$cuentaBancaria->numero_cuenta}}">
                 </div>
                 
