@@ -7,7 +7,7 @@ use App\Rules\MatchOldPassword ;
 use Illuminate\Support\Facades\Hash ;
 use App\User ;
 
-class CambiarContraseñaController extends Controller
+class CambiarContrasenaController extends Controller
 {
     public function __construct()
     {

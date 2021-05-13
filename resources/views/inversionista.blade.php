@@ -1,68 +1,199 @@
 <style>
-    .container{
-        margin-top: 55px !important;
-        
-    }
-    
-    .card-header{
-        background:#0274be !important;
-        color:white !important;
-        font-family: Helvetica, sans-serif;
-        font-weight: bold;
-        font-size: 15px;
+    .btn-cambiar-ahora {
+        background: black !important;
+        border-radius: 3rem !important;
+        font-size: 1.2rem !important;
+        font-weight: bold !important;
+        padding: 10px 20px !important;
+        border: transparent !important;
     }
 
-    .img-fluid2{
-        margin: 10px;
-        margin-top: 0px;
-        margin-left:-10px;
-        margin-right:10px;
+    .div-border {
+        border: 2px solid #fff;
+        border-radius: 10px;
+
     }
-    .img-fluid:hover{
-        opacity: 0.5;
-        transform: scale(1.25);
-        transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+   
+    /* Activado */
+    .custom-control-input:checked~.custom-control-label::before{
+        border-color: black !important;
+        background-color: black !important;
+    
     }
-    .font-weight-bold{
-        color:#0274be !important;
-        font-family: Helvetica, sans-serif;
-        font-weight: bold;
-        margin-top:10px !important;
+    /* Desactivado*/
+    .custom-control-label:before{
+        border-color:green !important;
+        background-color:green !important;
     }
-       
+
+    @media (max-width: 575.98px) {
+        h4 {
+            font-size:15px !important;
+        }
+        div.card{
+            width: 4rem !important;
+        }
+        h5{
+            font-size:14px !important;  
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        h4{
+            font-size:15px !important; 
+        }
+    }
+
+    @media (max-width: 991.98px) {
+        h4{
+            font-size:17px !important; 
+        }
+    }
+
+    @media (max-width: 1199.98px) {
+        h4{
+            font-size:17px !important; 
+        }
+    }
+
+   
 </style>
+
+
 @extends('layouts.app')
 
-
 @section('content')
-<div class="container pt-5">
-    <!--<div class="row justify-content-center">-->
-    
-        <div class="col-md-12">
-            <div class="row seven-cols">
-            <div class="card" >
-                <div class="card-header" ><!--<img src={{asset('imagenes/logo_alex.png')}} alt="Fjords" style="width:10%" class="img-fluid2">--> <h4 class="text-center text-bold">{{ __('SELECCIONA TU PERFIL') }}</h4></div>
+<main>
+    <div class="container pt-5">
 
-                <div class="card-body mx-auto">
-                    <div class="text-center mb-5 mt-2">
-                        <a class="icon-block" href="{{ route('register') }}">
-                            <img src={{asset('imagenes/persona100.png')}} alt="Fjords" style="width:80%;" class="img-fluid">
-                        </a>
-                        <p class="font-weight-bold text-white">Persona Natural</p>
+        <div class="row">
+
+            <div class="col-md-12 text-center">
+                <span class="font-weight-bold h2">Hola, </span><span
+                    class="font-weight-bold h2">{{ Auth::user()->name }}</span>
+                    <span class="font-weight-bold text-black h2">este es tu saldo disponible:</span>        
+            </div>
+            <div class="col-md-12 mx-auto">
+                    <div class="row">
+                        <div class="col-6 text-right">
+                            <h4 class="font-weight-bold">PEN 0.00</h4> 
+                        </div>
+                        <div class="col-6 text-left">
+                            <h4 class="font-weight-bold">USD 0.00</h4>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <a class="icon-block" href="{{ route('empresa') }}">
-                            <img src={{asset('imagenes/empresa300.png')}} alt="Fjords" style="width:80%;" class="img-fluid">
-                        </a>
-                        <p class="font-weight-bold text-white">Empresa</p>
+            <div>
+
+                <div class="col-md-12">
+                    <div class="row mt-5">
+                            <div class="col-6 text-left">
+                                <h4 class="text-white font-weight-bold">Oportunidades de Inversión</h4>
+                            </div>
+                            <div class="col-6">
+                            <div class="d-flex float-right">
+                                <span class="mr-2 font-weight-bold text-white">PEN</span>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                    <label class="custom-control-label text-white font-weight-bold" for="customSwitch1">USD</label>
+                                    
+                                </div>   
+                            </div>
+                             </div>  
                     </div>
-                    
-                    
+
+                    <div class="row mt-5">
+                            <div class="col-6 text-left">
+                                <h4 class="text-white font-weight-bold">Empresa pagadora</h4>
+                            </div>
+                            <div class="col-6 text-right">
+                                <h4 class="text-white font-weight-bold">Bertonati Technologies S.A.</h4>
+                            </div>
+                    </div>
+
+                    <div class="row mt-5">
+                            <div class="col-6 text-left">
+                                <h5 class="text-white font-weight-bold">Monto disponible</h5>
+                                <h5 class="text-white font-weight-bold">106,721.92</h5>
+                            </div>
+                            <div class="col-6 text-right">
+                                <h5 class="text-white font-weight-bold">Monto total</h5>
+                                <h5 class="text-white font-weight-bold">144,432.00</h5>
+                            </div>
+                    </div>
+
+                    <div class="row text-center">
+                            <div class="col-12">
+                                <div class="progress">
+                                    <div id="inversionista" class="progress-bar bg-dark" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">10%</div>
+                                </div>
+                            </div>
+                    </div>
+
+                    <!--<div class="row">
+                            <div class="col-6">
+                                <div class="d-flex justify-content-center align-items-center border-content-change">
+                                    <label class="form-control-label font-weight-bold" for="envias">106,721.92</label>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="d-flex justify-content-center align-items-center border-content-change">
+                                    <label class="form-control-label font-weight-bold" for="envias">144,432.00</label>
+                                </div>
+                            </div>
+                    </div>-->
+       
+
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <h5 class="text-white text-left font-weight-bold">Tasa anualizada</h5>
+                            <div class="card font-weight-bold py-2 w-50 text-center float-left">13.63%</div>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="text-white text-right font-weight-bold ">Plazo</h5>
+                            <div class="card font-weight-bold py-2 w-50 text-center float-right">113 días</div>
+                        </div> 
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="text-center mt-4">
+                            <button class="btn btn-primary btn-cambiar-ahora" type="button" id="cambiarAhora" onclick="move()">Confirmar Inversión
+                            </button>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
-        </div>
-    <!--</div>-->
-</div>
 
+        </div>
+    </div>
+    </div>
+</main>
 
 @endsection
+
+@section('custom-script')
+<script>
+    var i = 0;
+function move() {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("inversionista");
+    var width = 10;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+        elem.innerHTML = width  + "%";
+      }
+    }
+  }
+}
+</script>
+@stop()
+
