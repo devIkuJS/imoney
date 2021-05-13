@@ -19,7 +19,7 @@
                 </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="tcambio" class="table table-bordered table-striped">
+                <table id="tabla-cambio" class="table table-bordered table-striped">
                     <thead class="bg-primary text-white">
                         <tr>
                             <th>ID</th>
@@ -70,10 +70,10 @@
 <script>
 
 $(document).ready(function() {
-    $('#tcambio').DataTable( {
-        "order": [[ 3, "desc" ]]
-    } );
+    $('#tabla-cambio').dataTable()
 } );
+
+
 
 // 24 hour clock  
 setInterval(function() {
@@ -95,5 +95,49 @@ $("#clock").html(currentTimeString);
 
 }, 200);
 
+
+
+
+$('#click-tcambio').click(function() {
+
+var id = $('#tcambio').val()
+
+$.ajax({
+type: "POST",
+url:`/admin/tipocambio/${id}/actualizar`,
+async: true,
+cache: false,
+data: { 
+compra: $('#compra').val(),
+venta: $('#venta').val(),
+_token:"{{ csrf_token() }}",
+},
+success: function (data) {
+$("#click-tcambio").attr("disabled", true);
+$('#success-message').html('<div class="alert alert-success text-center">Tipo de cambio actualizado</div>');
+ setTimeout(() => {
+
+$("#modal-update-tipocambio").modal('hide');
+window.location.reload();
+
+},  3000);
+
+
+},
+error: function (err) {
+   console.log(err);
+
+},
+});
+
+
+
+});
+
+
+
 </script>
 @stop
+
+
+

@@ -35,7 +35,8 @@ Route::post('/user/create', [App\Http\Controllers\UserController::class, 'create
 
 //TipodeCambio
 Route::get('/tipoCambio', [App\Http\Controllers\TipoCambioController::class, 'index'])->name('tipoCambio');
-Route::post('/tipoCambio/getTipoCambio', [App\Http\Controllers\TipoCambioController::class, 'getTipoCambio'])->name('tipoCambio.getTipoCambio');
+Route::get('/tipoCambio/getTipoCambioTimeReal', [App\Http\Controllers\TipoCambioController::class, 'getTipoCambioTimeReal'])->name('tipoCambio.getTipoCambioTimeReal');
+Route::post('/tipoCambio/sendTipoCambio', [App\Http\Controllers\TipoCambioController::class, 'sendTipoCambio'])->name('tipoCambio.sendTipoCambio');
 
 //Empresa 
 Route::get('/empresa', [App\Http\Controllers\EmpresaController::class, 'index'])->name('empresa');
