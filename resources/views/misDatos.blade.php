@@ -33,8 +33,7 @@
         opacity:0,2:
     }*/
     input{
-        background:#FAFAFA !important;
-       
+        background:#FAFAFA !important;   
     } 
 
    
@@ -141,8 +140,7 @@
                                                             <span class="text-danger">{{ $errors->first('dni') }}</span>
                                                             @endif                                            
                                                 </div>
-                                            
-                                               
+                                        
 
                                                 <div class="col-md-6">
                                                     <label for="email"
@@ -159,7 +157,6 @@
                                                 </div>
                                             </div>
                                             
-
                                             <div class="form-group row">
 
                                                 <div class="col-md-6">
@@ -238,7 +235,6 @@
                                                 </div>
                                             </div>
 
-
                                             <div class="form-group row">
                                                 <div class="col-md-6">
                                                     <label for="politico"
@@ -286,6 +282,9 @@
                                                             data-target="#modal-cambiar-contrasena">
                                                             <!--<i class="fa fa-key"></i>&nbsp;-->Cambiar Contraseña
                                                     </button>
+                                                    </div>
+                                                    <div class="text-center col-md-12 mt-4">
+                                                        <a class="btn btn-primary1 btn-regresar mr-3 font-weight-bold text-white" href="{{ route('user') }}">Atrás</a>
                                                     </div>
                                             </div>                    
                             </form>
@@ -371,7 +370,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="{{ route('misDatos.actualizar', $user->id) }}">
+        <form method="POST" action="{{ route('misDatos.cambiarContrasena', $user->id) }}">
             @csrf
             <div class="form-group row">
                     <label for="password"
@@ -398,7 +397,7 @@
                            class="col-md-4 col-form-label text-md-right" style="color:#22abf1;">{{ __('Confirmar contraseña') }}</label>
 
                     <div class="col-md-6">
-                         <input id="password-confirm" type="password" 
+                         <input id="password_confirmation" type="password" 
                                 class="form-control" name="password_confirmation" style="background:white !important;">                             
                     </div>
              </div>
@@ -425,7 +424,7 @@ function showPoliticoContainer() {
     else document.getElementById('politico-container').style.display = 'none';
 }
 
-    function mostrarId(){
+    /*function mostrarId(){
         if(document.getElementById('si').checked===1){
             return("Este usuario  es politico");
         }else{
@@ -434,7 +433,7 @@ function showPoliticoContainer() {
             }
 
         }
-    }
+    }*/
     </script>
 
     

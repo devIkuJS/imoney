@@ -41,14 +41,17 @@ Route::post('/tipoCambio/getTipoCambio', [App\Http\Controllers\TipoCambioControl
 Route::get('/empresa', [App\Http\Controllers\EmpresaController::class, 'index'])->name('empresa');
 Route::post('/empresa/create', [App\Http\Controllers\EmpresaController::class, 'create'])->name('empresa.create');
 
-//inversionista - GUTI
+//Inversionista - cliente
 Route::get('/inversionista', [App\Http\Controllers\InversionistaController::class, 'index'])->name('inversionista');
+Route::get('/inversionistaCaracteristica', [App\Http\Controllers\InversionistaCaracteristicaController::class, 'index'])->name('inversionistaCaracteristica');
+Route::get('/inversionistaOperacion', [App\Http\Controllers\InversionistaOperacionController::class, 'index'])->name('inversionistaOperacion');
+Route::get('/inversionistaTransaccion', [App\Http\Controllers\InversionistaTransaccionController::class, 'index'])->name('inversionistaTransaccion');
 
 //CuentaBancaria - cliente
 Route::get('/cuentaBancaria', [App\Http\Controllers\CuentaBancariaController::class, 'index'])->name('cuentaBancaria');
 Route::post('/cuentaBancaria/registro', [App\Http\Controllers\CuentaBancariaController::class, 'registro'])->name('cuentaBancaria.registro');
 Route::post('/cuentaBancaria/{cuentaBancariaId}/actualizar', [App\Http\Controllers\CuentaBancariaController::class, 'actualizar'])->name('cuentaBancaria.actualizar');
-Route::delete('/cuentaBancaria/{cuentaBancariaId}/eliminar', [App\Http\Controllers\CuentaBancariaController::class, 'eliminar'])->name('cuentaBancaria.eliminar');
+Route::post('/cuentaBancaria/{cuentaBancariaId}/cambiarEstado', [App\Http\Controllers\CuentaBancariaController::class, 'cambiarEstado'])->name('cuentaBancaria.cambiarEstado');
 
 //EstadoCuenta - GUTI
 Route::get('/estadoCuenta', [App\Http\Controllers\EstadoCuentaController::class, 'index'])->name('estadoCuenta');
@@ -59,7 +62,7 @@ Route::get('/financiamiento', [App\Http\Controllers\FinanciamientoController::cl
 //MisDatos - GUTI
 Route::get('/misDatos', [App\Http\Controllers\MisDatosController::class, 'index'])->name('misDatos');
 Route::post('/misDatos/{usuarioId}/actualizar', [App\Http\Controllers\MisDatosController::class, 'actualizar'])->name('misDatos.actualizar');
-
+Route::post('/misDatos/{usuarioId}/cambiarContrasena', [App\Http\Controllers\MisDatosController::class, 'cambiarContrasena'])->name('misDatos.cambiarContrasena');
 
 //CambioTipo - GUTI
 Route::get('/cambioTipo', [App\Http\Controllers\CambioTipoController::class, 'index'])->name('cambioTipo');
@@ -73,7 +76,6 @@ Route::get('/operacion/{cuentaId}/getCuentaBancariaSelected', [App\Http\Controll
 //transaccion
 Route::get('/transaccion/{nroTransaccion}', [App\Http\Controllers\TransaccionController::class, 'index'])->name('transaccion');
 Route::post('/transaccion/enviarOperacion', [App\Http\Controllers\TransaccionController::class, 'enviarOperacion'])->name('transaccion.enviarOperacion');
-
 
 
 
@@ -91,6 +93,7 @@ Route::delete('/admin/tipocambio/{tipocambioId}/eliminar', [App\Http\Controllers
 
 Route::get('/admin/operaciones', [App\Http\Controllers\Admin\OperacionController::class, 'index'])->name('admin.operaciones');
 Route::post('/admin/operaciones/{operacionId}/actualizar', [App\Http\Controllers\Admin\OperacionController::class, 'actualizar'])->name('admin.operaciones.actualizar');
+
 
 Auth::routes(['verify' => true]);
 
