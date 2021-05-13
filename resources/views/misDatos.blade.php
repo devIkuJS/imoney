@@ -370,7 +370,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="{{ route('misDatos.actualizar', $user->id) }}">
+        <form method="POST" action="{{ route('misDatos.cambiarContrasena', $user->id) }}">
             @csrf
             <div class="form-group row">
                     <label for="password"
@@ -397,7 +397,7 @@
                            class="col-md-4 col-form-label text-md-right" style="color:#22abf1;">{{ __('Confirmar contraseña') }}</label>
 
                     <div class="col-md-6">
-                         <input id="password-confirm" type="password" 
+                         <input id="password_confirmation" type="password" 
                                 class="form-control" name="password_confirmation" style="background:white !important;">                             
                     </div>
              </div>

@@ -62,7 +62,7 @@ Route::get('/financiamiento', [App\Http\Controllers\FinanciamientoController::cl
 //MisDatos - GUTI
 Route::get('/misDatos', [App\Http\Controllers\MisDatosController::class, 'index'])->name('misDatos');
 Route::post('/misDatos/{usuarioId}/actualizar', [App\Http\Controllers\MisDatosController::class, 'actualizar'])->name('misDatos.actualizar');
-
+Route::post('/misDatos/{usuarioId}/cambiarContrasena', [App\Http\Controllers\MisDatosController::class, 'cambiarContrasena'])->name('misDatos.cambiarContrasena');
 
 //CambioTipo - GUTI
 Route::get('/cambioTipo', [App\Http\Controllers\CambioTipoController::class, 'index'])->name('cambioTipo');
@@ -93,6 +93,7 @@ Route::delete('/admin/tipocambio/{tipocambioId}/eliminar', [App\Http\Controllers
 
 Route::get('/admin/operaciones', [App\Http\Controllers\Admin\OperacionController::class, 'index'])->name('admin.operaciones');
 Route::post('/admin/operaciones/{operacionId}/actualizar', [App\Http\Controllers\Admin\OperacionController::class, 'actualizar'])->name('admin.operaciones.actualizar');
+
 
 Auth::routes(['verify' => true]);
 
