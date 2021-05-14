@@ -73,7 +73,7 @@ class OperacionController extends Controller
         $newCuentaBancaria->estado = 1;
         $newCuentaBancaria->save();
         
-        return response(json_encode($newCuentaBancaria),200)->header('Content-type','application/json');;
+        return response(json_encode($newCuentaBancaria),200)->header('Content-type','application/json');
 
         
           

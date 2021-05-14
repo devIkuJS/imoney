@@ -40,7 +40,9 @@ class TipoCambioController extends Controller
         $tipocambio->updated_at = now();
     	$tipocambio->save();
 
-    	return redirect()->back();
+        return response(json_encode($tipocambio),200)->header('Content-type','application/json');
+
+    	//return redirect()->back();
     }
 
 }

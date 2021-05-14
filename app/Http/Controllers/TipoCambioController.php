@@ -17,13 +17,24 @@ class TipoCambioController extends Controller
     }
     
     public function index() {  
-        $tipoCambio = DB::table('tipo_cambios')
-            ->select('compra', 'venta')
+
+      $tipoCambio = DB::table('tipo_cambios')
+            ->select('compra', 'venta' , 'updated_at')
             ->get();
-       return view('tipoCambio')->with('tipoCambio',$tipoCambio);
+
+      return view('tipoCambio')->with('tipoCambio', $tipoCambio);
     }
 
-    public function getTipoCambio (Request $request)
+    public function getTipoCambioTimeReal(){
+
+      $tipoCambio = DB::table('tipo_cambios')
+            ->select('compra', 'venta' , 'updated_at')
+            ->get();
+            return response(json_encode($tipoCambio),200)->header('Content-type','application/json');
+
+    }
+
+    public function sendTipoCambio (Request $request)
       {
         $data = $request->all();
 
