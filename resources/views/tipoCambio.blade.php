@@ -177,6 +177,8 @@
 
                 <div id="tcambio-message" class="text-center mt-4 h5"></div>
 
+                <div id="msj-cambio" class="text-center"></div>
+
                 <div class="text-center mt-4">
                     <button class="btn btn-primary btn-cambiar-ahora" type="button" id="cambiarAhora">Confirmar
                         Operación</button>
@@ -192,11 +194,6 @@
                         para transferir el monto deseado. Solo aceptamos transferencias y CCI de tus cuentas de banco.
                     </p>
                     <p class="font-weight-bold">No aceptamos depósitos de efectivo en ventanilla.</p>
-
-                    <p class="font-weight-bold">No aceptamos depósitos de efectivo en ventanilla.</p>
-
-                    <input type="hidden" id="compra" />
-
                 </div>
             </div>
         </div>
@@ -208,42 +205,50 @@
 @section('custom-script')
 <script type="text/javascript">
 
-function showDataTimeReal(){
+var jsonGlobal = @json($tipoCambio);
 
-    $.ajax({
+var tCambioCompra = jsonGlobal[0].compra;
+var tCambioVenta = jsonGlobal[0].venta;
+
+
+sendData();
+
+setInterval( function(){
+
+$.ajax({
 type: 'GET',
 cache: false,
 async:false,
 url: "{{ route('tipoCambio.getTipoCambioTimeReal')}}",
 success: function(data) {
 
-sendData(data);
+tCambioCompra = data[0].compra;
+tCambioVenta = data[0].venta;
 
+if((jsonGlobal[0].compra != tCambioCompra) || (jsonGlobal[0].venta != tCambioVenta) ){
+    $("#msj-cambio").html('<strong class="text-warning">El tipo de cambio ha sido actualizado</strong>')
+   
+   setTimeout(function(){
+    window.location.reload();
+}, 2000);
+    
+}
 
+sendData();
 
 }
 });
 
-}
+},8000)
+
+
+function sendData(){
 
 
 
-setInterval( function(){
-
-showDataTimeReal();
-
-},1000)
-
-const button_save = document.getElementById('cambiarAhora');
-let button_change = document.getElementById('swap');
-
-function sendData(data){
-
-    console.log(data[0]);
-
-let tipoCambio = data[0].venta;
-let tipoCambio_Venta = data[0].venta;
-let tipoCambio_Compra = data[0].compra;
+let tipoCambio = tCambioVenta;
+let tipoCambio_Venta = tCambioVenta;
+let tipoCambio_Compra = tCambioCompra;
 const amountEl_one = document.getElementById('amount-one');
 const amountEl_two = document.getElementById('amount-two');
 document.getElementById('text-changeA').innerHTML  = "Soles";
@@ -251,15 +256,16 @@ document.getElementById('text-changeB').innerHTML  = "Dolares";
 document.getElementById('t-compra').innerHTML  = tipoCambio_Compra;
 document.getElementById('t-venta').innerHTML  = tipoCambio_Venta;
 
-
-
+let button_change = document.getElementById('swap');
+const button_save = document.getElementById('cambiarAhora');
+// donde changeCambio= 1 es Soles a Dólares y changeCambio = 2 es Dólares a Soles
+//validate only numbers
 
 function calculateMontoAtoMontoB() {
     button_change.value == 2 ? 
     amountEl_two.value = (amountEl_one.value*tipoCambio).toFixed(2) : 
     amountEl_two.value = (amountEl_one.value/tipoCambio).toFixed(2);
 }
-
 amountEl_one.addEventListener('input', calculateMontoAtoMontoB);
 function calculateMontoBtoMontoA() {
     button_change.value == 1 ? 
@@ -273,7 +279,7 @@ swap.addEventListener('click', ()=> {
       document.getElementById('text-changeB').innerHTML  = "Soles";
       document.getElementById("icon-changeA").src="icon-calculator/bandera_usa.png";
       document.getElementById("icon-changeB").src="icon-calculator/bandera_peru.png";
-     // tipoCambio = tipoCambio_Compra;
+      tipoCambio = tipoCambio_Compra;
       button_change.value = 2;
       amountEl_two.value = (amountEl_one.value*tipoCambio).toFixed(2);
     } else {
@@ -281,14 +287,12 @@ swap.addEventListener('click', ()=> {
       document.getElementById('text-changeB').innerHTML  = "Dolares";
       document.getElementById("icon-changeA").src="icon-calculator/bandera_peru.png";
       document.getElementById("icon-changeB").src="icon-calculator/bandera_usa.png";
-      //tipoCambio = tipoCambio_Venta;
+      tipoCambio = tipoCambio_Venta;
       button_change.value = 1;
       amountEl_two.value = (amountEl_one.value/tipoCambio).toFixed(2);
     }
   
 })
-
-
 button_save.addEventListener('click', ()=>{
     console.log(document.getElementById('text-changeA').innerHTML);
     console.log(amountEl_one.value);
@@ -321,25 +325,9 @@ button_save.addEventListener('click', ()=>{
       } 
 });
 
-
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// donde changeCambio= 1 es Soles a Dólares y changeCambio = 2 es Dólares a Soles
-//validate only numbers
 function isNumber(evt) {
     var charCode = (evt.which) ? evt.which : evt.keyCode;
           if (charCode != 46 && charCode > 31 
@@ -348,7 +336,6 @@ function isNumber(evt) {
 
           return true;
 }
-
 
 
 </script>

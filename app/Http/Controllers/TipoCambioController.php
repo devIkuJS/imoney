@@ -18,7 +18,11 @@ class TipoCambioController extends Controller
     
     public function index() {  
 
-      return view('tipoCambio');
+      $tipoCambio = DB::table('tipo_cambios')
+            ->select('compra', 'venta' , 'updated_at')
+            ->get();
+
+      return view('tipoCambio')->with('tipoCambio', $tipoCambio);
     }
 
     public function getTipoCambioTimeReal(){
