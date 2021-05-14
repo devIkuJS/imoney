@@ -24,8 +24,15 @@
         outline: 0 !important;
         /*color: #fff !important;*/
         border-bottom: 3px solid white !important;
+        font-size:24px !important;
     }
-
+    input:focus, input.form-control:focus {
+        outline:none !important;
+        outline-width: 0 !important;
+        box-shadow: none;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+    }
     #amount-monto {  
         color:white;
     }
