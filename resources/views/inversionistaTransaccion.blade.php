@@ -40,7 +40,7 @@
                 <div class="row mt-4 text-center py-2 div-border col-md-5 mx-auto">
                     <div class="col-12">
                         <h4 class="font-weight-bold text-white">Nro Orden</h4>
-                        <h5 class="font-weight-bold text-white"></h5>
+                        <h5 class="font-weight-bold text-white">    </h5>
                     </div>
                 </div>
 
@@ -238,4 +238,113 @@
     </div>
 </div>
 @endsection
+
+@section('custom-script')
+<script type="text/javascript">
+    var elem = document.getElementById("select_reporte");
+elem.onchange = function(){
+    var hiddenDiv = document.getElementById("showMe");
+
+    if(this.value == ""){
+        hiddenDiv.style.display = "none";
+    }else if(this.value == "1"){
+        hiddenDiv.style.display = "block";
+        $('#showMe').html('<div class="form-group">'+
+                        '<label for="nro_operacion">Nro Operacion</label>'+
+                        '<input type="text" class="form-control" name="nro_operacion" id="nro_operacion" >'+
+                    '</div>')
+    }else if(this.value == "2"){
+        hiddenDiv.style.display = "block";
+        $('#showMe').html('<div class="form-group">'+
+                        '<label for="voucher">Adjuntar Voucher</label>'+
+                        '<input type="file" class="form-control-file" name="voucher" id="voucher" accept="image/jpeg,image/png,application/pdf,image/x-eps">'+
+                    '</div>');
+
+    }
+};
+
+
+
+$('#send-transaccion').submit(function(e) {
+    e.preventDefault();
+
+    var formData = new FormData(this);
+
+    
+if($('#select_reporte').val() === "" ){
+
+$('#reporte-message').html('<strong class="text-error">Por favor seleccione el modo de reporte de su transaccion</strong>');
+
+}else{
+
+    if($('#select_reporte').val() === "1"){
+
+        if($('#nro_operacion').val().length === 0){
+                $('#reporte-message').html('<strong class="text-error">Ingrese por favor el numero de operacion de su transferencia</strong>');
+        }else{
+            
+            $('#callback-message').html('<div class="alert alert-info" role="alert">Efectuando operacion..</div>');
+            $("#btn-transferencia").attr("disabled", true);
+
+            $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type:'POST',
+            url: "{{ route('inversionistaTransaccion.enviarOperacion')}}",
+            data: formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success: (data) => {
+                $('#callback-message').fadeIn(1000);
+                $("#btn-transferencia").attr("disabled", false);
+                window.location.href = `email-inversionista-transaccion-verify/${data}`;
+            },
+            error: function(err){
+            console.log(err);
+            }
+            });
+        }
+
+    }else if($('#select_reporte').val() === "2"){
+
+        if($("#voucher")[0].files.length === 0){
+                $('#reporte-message').html('<strong class="text-error">Adjunte el voucher de su transferencia</strong>');
+        }else{
+            $('#callback-message').html('<div class="alert alert-info" role="alert">Efectuando operacion..</div>');
+            $("#btn-transferencia").attr("disabled", true);
+
+            $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type:'POST',
+            url: "{{ route('inversionistaTransaccion.enviarOperacion')}}",
+            data: formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success: (data) => {
+                $('#callback-message').fadeIn(1000);
+                $("#btn-transferencia").attr("disabled", false);
+                window.location.href = `email-inversionista-transaccion-verify/${data}`;
+            },
+            error: function(err){
+            console.log(err);
+            }
+            });
+        }
+
+    
+    }
+
+
+
+
+}
+
+
+
+});
+
+
+</script>
+@stop
 
