@@ -255,6 +255,11 @@ return [
             'url'  => '/admin/operaciones',
             'icon' => 'fas fa-fw fas fa-funnel-dollar',
         ],
+        [
+            'text' => 'Cuentas Bancarias',
+            'url'  => '/admin/cuentabancaria',
+            'icon' => 'fas fa-fw fas fa-money-bill',
+        ],
     ],
 
     /*

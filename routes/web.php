@@ -103,6 +103,7 @@ Route::delete('/admin/tipocambio/{tipocambioId}/eliminar', [App\Http\Controllers
 Route::get('/admin/operaciones', [App\Http\Controllers\Admin\OperacionController::class, 'index'])->name('admin.operaciones');
 Route::post('/admin/operaciones/{operacionId}/actualizar', [App\Http\Controllers\Admin\OperacionController::class, 'actualizar'])->name('admin.operaciones.actualizar');
 
+Route::get('/admin/cuentabancaria', [App\Http\Controllers\Admin\CuentaBancariaController::class, 'index'])->name('admin.cuentabancaria');
 
 Auth::routes(['verify' => true]);
 
