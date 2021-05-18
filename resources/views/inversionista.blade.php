@@ -104,9 +104,13 @@
                     <div class="row mt-5">
                             <div class="col-6 text-left">
                                 <h4 class="text-white font-weight-bold">Empresa pagadora</h4>
+                                <img src={{asset('imagenes_empresa/imoney.jpg')}} width="120"
+                        height="70" class="mr-3">
                             </div>
                             <div class="col-6 text-right">
                                 <h4 class="text-white font-weight-bold">Bertonati Technologies S.A.</h4>
+                                <img src={{asset('imagenes_empresa/rojo.jpg')}} width="120"
+                        height="70" class="">
                             </div>
                     </div>
 

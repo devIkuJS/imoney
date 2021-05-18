@@ -108,7 +108,7 @@
         <div class="row">
 
             <div class="col-md-12 text-center">
-                <h3 class="text-white font-weight-bold">Confirmacion de Inversión FX -
+                <h3 class="text-white font-weight-bold">Confirmacion de Inversión
                     {{ date('d-m-Y', strtotime(now())) }}</h3>
             </div>
             <div class="col-md-6 mx-auto">
@@ -117,8 +117,8 @@
 
                     <div class="row mt-4 text-center py-4 div-border">
                         <div class="col-12">
-                            <h4 class="font-weight-bold text-white">Envias</h4>
-                            <h5 class="font-weight-bold text-white"></h5>
+                            <h4 class="font-weight-bold text-white">Envias: 1000 dólares</h4>
+                            <h5 class="font-weight-bold text-white">                    </h5>
                         </div>
                         <!--<div class="col-4">
                             <h4 class="font-weight-bold text-white">Recibes</h4>

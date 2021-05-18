@@ -109,13 +109,13 @@
             <div class="col-md-12 mx-auto">
                     <div class="row mt-4">
                         <div class="col-6">
-                                <h5 class="text-white text-left font-weight-bold">Tasa</h5>
+                                <h5 class="text-white text-left font-weight-bold">Tasa anualizada</h5>
                                 <div class="card font-weight-bold py-2 w-50 text-center float-left">13.63%</div>
                         </div>
                         <div class="col-6">
                                 <h5 class="text-white text-right font-weight-bold">Fecha proyectada de cobro</h5>
                                 <!--<div class="card font-weight-bold py-2 w-50 text-center float-right">19/08/2021</div>-->
-                                <div class="card font-weight-bold py-2 w-50 text-center float-right">19 de Agosto del 2021</div>
+                                <div class="card font-weight-bold py-2 w-50 text-center float-right">{{ date('d-m-Y', strtotime(now())) }}</div>
                         </div> 
                     </div>
 
@@ -139,7 +139,7 @@
                     <div class="row mt-4">
                             <div class="col-12 text-left">
                                 <h4 class="text-white font-weight-bold ">Quiero Invertir</h4>
-                                <input type="text" id="amount-monto" placeholder="Monto" class="form-control input-monto font-weight-bold"
+                                <input type="text" id="amount-monto" placeholder="Monto" maxlength="4" class="form-control input-monto font-weight-bold"
                                     onkeypress="return isNumber(event);"/>
                                     <h5 class="text-black text-center font-weight-bold">(cuentas con USD 0.00 disponibles)</h5>
                             </div>  
