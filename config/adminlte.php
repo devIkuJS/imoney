@@ -260,6 +260,11 @@ return [
             'url'  => '/admin/cuentabancaria',
             'icon' => 'fas fa-fw fas fa-money-bill',
         ],
+		[
+            'text' => 'Inversiones',
+            'url'  => '/admin/inversiones',
+            'icon' => 'fas fa-fw fas fa-address-card',
+        ],
     ],
 
     /*

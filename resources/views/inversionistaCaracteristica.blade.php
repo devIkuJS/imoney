@@ -91,6 +91,11 @@
             width:10rem !important;
         }
     }
+    .custom-file-label::after {
+        content: "Subir el Teaser Informativo PDF" !important;
+        background: red !important;
+        color: white !important;
+    }
    
 </style>
 
@@ -114,8 +119,17 @@
                         </div>
                         <div class="col-6">
                                 <h5 class="text-white text-right font-weight-bold">Fecha proyectada de cobro</h5>
-                                <!--<div class="card font-weight-bold py-2 w-50 text-center float-right">19/08/2021</div>-->
                                 <div class="card font-weight-bold py-2 w-50 text-center float-right">{{ date('d-m-Y', strtotime(now())) }}</div>
+                                <!--<button type="button" class="btn btn-danger float-right"><i class="far fa-file-pdf"></i>&nbsp;Subir el Teaser Informativo</button>-->
+                                <div class="input-group">
+                                                                <div class="custom-file">
+                                                                    <input type="file" class="ruc-file-input" name="ruc_doc" id="ruc-id"
+                                                                        aria-describedby="ruc-id"
+                                                                        accept="image/jpeg,image/png,application/pdf,image/x-eps">
+                                                                    <label class="custom-file-label" for="ruc-id">
+                                                                        </label>
+                                                                </div>
+                                                            </div>
                         </div> 
                     </div>
 

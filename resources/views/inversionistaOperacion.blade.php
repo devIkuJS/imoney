@@ -182,7 +182,7 @@
             </div>
 
             <div class="text-center col-md-12 mt-4">
-                <a class="btn btn-primary btn-regresar mr-3" href="{{ route('inversionistaCaracteristica') }}">Atrás</a>
+                <a class="btn btn-primary btn-regresar mr-3" href="{{ route('inversionista') }}">Atrás</a>
                 <button class="btn btn-primary btn-procesar ml-3" id="procesar-operacion">Procesar</button>
             </div>
         </div>
@@ -257,11 +257,11 @@
                 </div>
                 <div class="form-group">
                 <select class="form-control" id="categoria_cuenta" name="categoria_cuenta">
-                        <option value="">Seleccione el tipo de cuenta</option>
+                    <option value="">Seleccione el tipo de cuenta</option>
                         @foreach ($categoria_cuenta as $cat)
-                        <option value="{{$cat->id}}">{{$cat->name}}</option>
+                    <option value="{{$cat->id}}">{{$cat->name}}</option>
                         @endforeach
-                    </select>
+                </select>
 
 
 

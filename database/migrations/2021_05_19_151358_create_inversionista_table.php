@@ -15,6 +15,9 @@ class CreateInversionistaTable extends Migration
     {
         Schema::create('inversionista', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->string('informe');
+            $table->string('logo');
             $table->timestamps();
         });
     }
