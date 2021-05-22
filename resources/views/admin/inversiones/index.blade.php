@@ -2,7 +2,6 @@
     .custom-file-label::after {
         content: "Adjuntar" !important;
     }
-    
 </style>
 @extends('adminlte::page')
 
@@ -31,69 +30,74 @@
 
                 <div class="mt-3">
                     <button type="button" class="btn btn-primary ml-2" data-toggle="modal"
-                            data-target="#modal-crear-cuenta"><i class="fa fa-plus-circle pr-2"></i>Crear nueva empresa inversionista
+                        data-target="#modal-crear-cuenta"><i class="fa fa-plus-circle pr-2"></i>Crear nueva empresa
+                        inversionista
                     </button>
                 </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <table id="empresa_inversiones" class="table table-bordered table-striped" style="width:100%">
-                    <thead class="bg-primary text-white">
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Informe</th>
-                            <th>Logo</th>
-                            <th>Monto Disponible</th>
-                            <th>Fecha Esperada</th>
-                            <th>Moneda Inversion</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($inversiones as $inversion)
-                        <tr>
-                            <td>{{ $inversion->id }}</td>
-                            <td>{{ $inversion->nombre }}</td>
-                            <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-ver-informe-{{$inversion->id}}">Ver INFORME</button></td>
-                            <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-ver-logo-{{$inversion->id}}">Ver LOGO</button></td>
-                            <td>{{ $inversion->monto_disponible }}</td>
-                            <td>{{ $inversion->fechaEsperada }}</td>
-                            <td>{{ $inversion->moneda_inversion}}</td>
-                            <td>
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-update-inversion-{{$inversion->id}}">Editar</button>
-                                <form action="{{ route ('admin.inversiones.eliminar', $inversion->id) }}" class="d-inline" method="post">
-                                    {{ csrf_field() }}
-                                    @method('DELETE')
-                                    <button class="btn btn-danger">Eliminar</button>    
-                                </form>
-                            </td>
-                        </tr>
-                        <!-- modal update -->
-                        @include('admin.inversiones.modal-update-inversiones')
-                        <!-- /.modal update-->
-                        <!-- modal ver informe -->
-                        @include('admin.inversiones.modal-ver-informe')
-                        <!-- /.modal ver informe-->
-                        <!-- modal ver logo -->
-                        @include('admin.inversiones.modal-ver-logo')
-                        <!-- /.modal ver logo-->
-                        @endforeach
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Informe</th>
-                            <th>Logo</th>
-                            <th>Monto Disponible</th>
-                            <th>Fecha Esperada</th>
-                            <th>Moneda Inversion</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-            <!-- /.card-body -->
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="empresa_inversiones" class="table table-bordered table-striped" style="width:100%">
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Informe</th>
+                                <th>Logo</th>
+                                <th>Monto Disponible</th>
+                                <th>Fecha Esperada</th>
+                                <th>Moneda Inversion</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($inversiones as $inversion)
+                            <tr>
+                                <td>{{ $inversion->id }}</td>
+                                <td>{{ $inversion->nombre }}</td>
+                                <td><button type="button" class="btn btn-link" data-toggle="modal"
+                                        data-target="#modal-ver-informe-{{$inversion->id}}">Ver informe</button></td>
+                                <td><button type="button" class="btn btn-link" data-toggle="modal"
+                                        data-target="#modal-ver-logo-{{$inversion->id}}">Ver logo</button></td>
+                                <td>{{ $inversion->monto_disponible }}</td>
+                                <td>{{ date('d-m-Y', strtotime($inversion->fecha_esperada )) }}</td>
+                                <td>{{ $inversion->moneda_inversion === '1' ? 'Soles' : 'Dolares'  }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                                        data-target="#modal-update-inversion-{{$inversion->id}}">Editar</button>
+                                    <form action="{{ route ('admin.inversiones.eliminar', $inversion->id) }}"
+                                        class="d-inline" method="post">
+                                        {{ csrf_field() }}
+                                        @method('DELETE')
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <!-- modal update -->
+                            @include('admin.inversiones.modal-update-inversiones')
+                            <!-- /.modal update-->
+                            <!-- modal ver informe -->
+                            @include('admin.inversiones.modal-ver-informe')
+                            <!-- /.modal ver informe-->
+                            <!-- modal ver logo -->
+                            @include('admin.inversiones.modal-ver-logo')
+                            <!-- /.modal ver logo-->
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Informe</th>
+                                <th>Logo</th>
+                                <th>Monto Disponible</th>
+                                <th>Fecha Esperada</th>
+                                <th>Moneda Inversion</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
             </div>
             <!-- /.card -->
         </div>
@@ -119,101 +123,56 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="nombre">Empresa</label>
-                        <input type="text" class="form-control"  name="nombre">
+                        <input type="text" class="form-control" name="nombre">
                     </div>
-                    
-                    <div class="form-group">
-                        <div class="form-group row">
-                            <label for="ficha_ruc_emp" class="col-md-4 col-form-label text-md-left">Informe</label>
-                            <div class="col-md-12">
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="ruc-file-input" name="ruc_doc" id="ruc-id"
-                                                aria-describedby="ruc-id"
-                                                accept="image/jpeg,image/png,application/pdf,image/x-eps">
-                                        <label class="custom-file-label" for="ruc-id">
-                                        </label>
-                                    </div>
-                                </div>
-                                    @if ($errors->has('ruc_doc'))
-                                        <span class="text-danger">{{ $errors->first('ruc_doc') }}</span>
-                                    @endif
-                            </div>
+
+                        <div class="form-group">
+                            <label for="informe">Informe</label>
+                            <input type="file" class="form-control-file" name="informe_doc" accept="application/pdf">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-group row">
-                            <label for="logo" class="col-md-4 col-form-label text-md-left">logo</label>
-                            <div class="col-md-12">
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="logo-file-input" name="logo" id="logo"
-                                            aria-describedby="logo"
-                                            accept="image/jpeg,image/png,application/pdf,image/x-eps">
-                                        <label class="custom-file-label" for="logo"></label>
-                                    </div>
-                                </div>
-                                    @if ($errors->has('logo'))
-                                        <span class="text-danger">{{ $errors->first('logo') }}</span>
-                                    @endif
-                            </div>
+
+                        <div class="form-group">
+                            <label for="logo">Logo</label>
+                            <input type="file" class="form-control-file" name="logo"
+                                accept="image/jpeg,image/png,image/x-eps">
                         </div>
-                    </div>
+
                     <div class="form-group">
                         <label for="monto_disponible">Monto Disponible</label>
-                        <input type="text" class="form-control" name="monto_disponible" name="monto_disponible"/>
+                        <input type="text" class="form-control" name="monto_disponible" name="monto_disponible" />
                     </div>
                     <div class="form-group">
                         <div class="form-group row">
-                            <label for="fecha_esperada" class="col-md-4 col-form-label text-md-left">Fecha Esperada</label>
+                            <label for="fecha_esperada" class="col-md-4 col-form-label text-md-left">Fecha
+                                Esperada</label>
                             <div class="col-md-12">
-                                <input class="form-control" type="date" value="" id="fecha_esperada">
+                                <input class="form-control" type="date" name="fecha_esperada" id="fecha_esperada">
                             </div>
                         </div>
                     </div>
-            
+
                     <div class="form-group">
                         <select class="form-control" id="moneda_inversion" name="moneda_inversion">
                             <option value="">Moneda Inversion</option>
-                                @foreach ($moneda_inversion as $cat)
+                            @foreach ($moneda_inversion as $cat)
                             <option value="{{$cat->id}}">{{$cat->name}}</option>
-                                @endforeach
+                            @endforeach
                         </select>
                     </div>
                 </div>
-                    <div id="success-message"></div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" id="crear-tipo-cuenta">Agregar</button>
-                    </div>
+                <div id="success-message"></div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="crear-tipo-cuenta">Agregar</button>
                 </div>
+            </form>
         </div>
     </div>
 </div>
 <!-- Modal Agregar empresa inversionista -->
 @stop
 
-@section('custom-script')
+@section('js')
 <script type="text/javascript">
-
-/*document.querySelector('.informe-file-input').addEventListener('change',function(e){ 
-  var fileName = document.getElementById("informe-id").files[0].name;
-  var nextSibling = e.target.nextElementSibling
-  nextSibling.innerText = fileName
-})*/
-
-document.querySelector('.logo-file-input').addEventListener('change',function(e){ 
-  var fileName = document.getElementById("logo").files[0].name;
-  var nextSibling = e.target.nextElementSibling
-  nextSibling.innerText = fileName
-})
-
-document.querySelector('.ruc-file-input').addEventListener('change',function(e){ 
-  var fileName = document.getElementById("ruc-id").files[0].name;
-  var nextSibling = e.target.nextElementSibling
-  nextSibling.innerText = fileName
-})
-
-
 $(document).ready(function() {
     $('#empresa_inversiones').DataTable({
         dom: 'Bfrtip',
@@ -234,7 +193,7 @@ $(document).ready(function() {
                 }
         }
     } );
-} );
+});
 </script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>

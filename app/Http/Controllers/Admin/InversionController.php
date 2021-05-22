@@ -28,6 +28,14 @@ class InversionController extends Controller
     public function registro(Request $request){
         $newInversion = new EmpresaInversiones();
 
+         if($request->hasfile('informe_doc')){
+            $file=$request->file('informe_doc');
+            $destinationPath= 'images/informe/';
+            $filename= time() . '-' . $file->getClientOriginalName();
+            $uploadSuccess= $request->file('informe_doc')->move($destinationPath,$filename);
+            $newInversion->informe=$destinationPath . $filename;
+        }
+
         if($request->hasfile('logo')){
             $file=$request->file('logo');
             $destinationPath= 'images/inversiones_logo/';
@@ -35,27 +43,12 @@ class InversionController extends Controller
             $uploadSuccess= $request->file('logo')->move($destinationPath,$filename);
             $newInversion->logo=$destinationPath . $filename;
         }
-        /*if($request->hasfile('informe_doc')){
-            $file=$request->file('informe_doc');
-            $destinationPath= 'images/informe/';
-            $filename= time() . '-' . $file->getClientOriginalName();
-            $uploadSuccess= $request->file('informe_doc')->move($destinationPath,$filename);
-            $newInversion->informe=$destinationPath . $filename;
-        }*/
-        if($request->hasfile('ruc_doc')){
-            $file=$request->file('ruc_doc');
-            $destinationPath= 'images/informe/';
-            $filename= time() . '-' . $file->getClientOriginalName();
-            $uploadSuccess= $request->file('ruc_doc')->move($destinationPath,$filename);
-            $newInversion->informe=$destinationPath . $filename;
-        }
-        
+       
         $newInversion->nombre = $request->nombre;
         $newInversion->monto_disponible = $request->monto_disponible;
         $newInversion->fecha_esperada = $request->fecha_esperada;
         $newInversion->moneda_inversion = $request->moneda_inversion;
         $newInversion->save();
-        //dd($request->logo);
         return redirect()->back();
     }
 
