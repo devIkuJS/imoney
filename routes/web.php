@@ -44,6 +44,7 @@ Route::post('/empresa/create', [App\Http\Controllers\EmpresaController::class, '
 
 //Inversionista - cliente
 Route::get('/inversionista', [App\Http\Controllers\InversionistaController::class, 'index'])->name('inversionista');
+Route::get('/inversionista/download', [App\Http\Controllers\InversionistaController::class, 'download'])->name('inversionista.download');
 Route::get('/inversionistaCaracteristica', [App\Http\Controllers\InversionistaCaracteristicaController::class, 'index'])->name('inversionistaCaracteristica');
 
 //Inversionista - operacion - cliente 
@@ -99,6 +100,12 @@ Route::get('/admin/tipocambio', [App\Http\Controllers\Admin\TipoCambioController
 Route::post('/admin/tipocambio/registro', [App\Http\Controllers\Admin\TipoCambioController::class, 'registro'])->name('admin.tipocambio.registro');
 Route::post('/admin/tipocambio/{tipocambioId}/actualizar', [App\Http\Controllers\Admin\TipoCambioController::class, 'actualizar'])->name('admin.tipocambio.actualizar');
 Route::delete('/admin/tipocambio/{tipocambioId}/eliminar', [App\Http\Controllers\Admin\TipoCambioController::class, 'eliminar'])->name('admin.tipocambio.eliminar');
+
+Route::get('/admin/inversiones', [App\Http\Controllers\Admin\InversionController::class, 'index'])->name('admin.inversiones');
+Route::post('/admin/inversiones/registro', [App\Http\Controllers\Admin\InversionController::class, 'registro'])->name('admin.inversiones.registro');
+Route::post('/admin/inversiones/{inversionesId}/actualizar', [App\Http\Controllers\Admin\InversionController::class, 'actualizar'])->name('admin.inversiones.actualizar');
+Route::delete('/admin/inversiones/{inversionesId}/eliminar', [App\Http\Controllers\Admin\InversionController::class, 'eliminar'])->name('admin.inversiones.eliminar');
+
 
 Route::get('/admin/operaciones', [App\Http\Controllers\Admin\OperacionController::class, 'index'])->name('admin.operaciones');
 Route::post('/admin/operaciones/{operacionId}/actualizar', [App\Http\Controllers\Admin\OperacionController::class, 'actualizar'])->name('admin.operaciones.actualizar');
