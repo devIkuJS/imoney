@@ -108,7 +108,7 @@
         <div class="row">
 
             <div class="col-md-12 text-center">
-                <h3 class="text-white font-weight-bold">Confirmacion de Inversión FX -
+                <h3 class="text-white font-weight-bold">Confirmacion de Inversión
                     {{ date('d-m-Y', strtotime(now())) }}</h3>
             </div>
             <div class="col-md-6 mx-auto">
@@ -117,8 +117,8 @@
 
                     <div class="row mt-4 text-center py-4 div-border">
                         <div class="col-12">
-                            <h4 class="font-weight-bold text-white">Envias</h4>
-                            <h5 class="font-weight-bold text-white"></h5>
+                            <h4 class="font-weight-bold text-white">Envias: 1000 dólares</h4>
+                            <h5 class="font-weight-bold text-white">                    </h5>
                         </div>
                         <!--<div class="col-4">
                             <h4 class="font-weight-bold text-white">Recibes</h4>
@@ -182,7 +182,7 @@
             </div>
 
             <div class="text-center col-md-12 mt-4">
-                <a class="btn btn-primary btn-regresar mr-3" href="{{ route('inversionistaCaracteristica') }}">Atrás</a>
+                <a class="btn btn-primary btn-regresar mr-3" href="{{ route('inversionista') }}">Atrás</a>
                 <button class="btn btn-primary btn-procesar ml-3" id="procesar-operacion">Procesar</button>
             </div>
         </div>
@@ -257,11 +257,11 @@
                 </div>
                 <div class="form-group">
                 <select class="form-control" id="categoria_cuenta" name="categoria_cuenta">
-                        <option value="">Seleccione el tipo de cuenta</option>
+                    <option value="">Seleccione el tipo de cuenta</option>
                         @foreach ($categoria_cuenta as $cat)
-                        <option value="{{$cat->id}}">{{$cat->name}}</option>
+                    <option value="{{$cat->id}}">{{$cat->name}}</option>
                         @endforeach
-                    </select>
+                </select>
 
 
 
