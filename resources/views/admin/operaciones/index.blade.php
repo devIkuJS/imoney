@@ -28,6 +28,8 @@
                         <thead class="bg-primary text-white">
                             <tr>
                                 <th>ID</th>
+                                <th>compra</th>
+                                <th>venta</th>
                                 <th>Nro Orden</th>
                                 <th>Usuario</th>
                                 <th>Banco de Origen</th>
@@ -46,6 +48,8 @@
                             @foreach ($operaciones as $operacion)
                             <tr>
                                 <td>{{ $operacion->id }}</td>
+                                <td>{{ $operacion->compra}}</td>
+                                <td>{{ $operacion->venta}}</td>
                                 <td>{{ $operacion->nro_orden }}</td>
                                 <td>{{ $operacion->nombre_usuario }} {{ $operacion->apellido_usuario }}</td>
                                 <td>{{ $operacion->banco_origen }}</td>
@@ -79,6 +83,8 @@
                         <tfoot>
                             <tr>
                                 <th>ID</th>
+                                <th>compra</th>
+                                <th>venta</th>
                                 <th>Nro Orden</th>
                                 <th>Usuario</th>
                                 <th>Banco de Origen</th>
