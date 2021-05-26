@@ -153,6 +153,7 @@
                         <button class="btn btn-primary" id="crear-tipo-cuenta">Agregar</button>
                     </div>
                 </div>
+            </form>
         </div>
     </div>
 </div>

@@ -28,14 +28,13 @@
                         <thead class="bg-primary text-white">
                             <tr>
                                 <th>ID</th>
-                                <th>compra</th>
-                                <th>venta</th>
                                 <th>Nro Orden</th>
                                 <th>Usuario</th>
                                 <th>Banco de Origen</th>
                                 <th>Monto Enviado</th>
                                 <th>Banco de destino</th>
                                 <th>Monto a Recibir</th>
+                                <th>Tipo de cambio</th>
                                 <th>Estado de transaccion</th>
                                 <th>Fecha de transaccion</th>
                                 <th>Fecha de Actualiz. de transaccion</th>
@@ -48,14 +47,13 @@
                             @foreach ($operaciones as $operacion)
                             <tr>
                                 <td>{{ $operacion->id }}</td>
-                                <td>{{ $operacion->compra}}</td>
-                                <td>{{ $operacion->venta}}</td>
                                 <td>{{ $operacion->nro_orden }}</td>
                                 <td>{{ $operacion->nombre_usuario }} {{ $operacion->apellido_usuario }}</td>
                                 <td>{{ $operacion->banco_origen }}</td>
                                 <td>{{ $operacion->montoA }} {{ $operacion->descripcionMontoA }}</td>
                                 <td>{{ $operacion->banco_destino}} {{ $operacion->numero_cuenta}} {{ $operacion->tipo_cuenta}}</td>
                                 <td>{{ $operacion->montoB }} {{ $operacion->descripcionMontoB }}</td>
+                                <td>{{ $operacion->tipo_cambio }}</td>
                                 <td>{{ $operacion->estado }}</td>
                                 <td>{{ date('d-m-Y H:i:s', strtotime($operacion->created_at)) }}</td>
                                 <td>{{ date('d-m-Y H:i:s', strtotime($operacion->updated_at)) }}</td>
@@ -83,14 +81,13 @@
                         <tfoot>
                             <tr>
                                 <th>ID</th>
-                                <th>compra</th>
-                                <th>venta</th>
                                 <th>Nro Orden</th>
                                 <th>Usuario</th>
                                 <th>Banco de Origen</th>
                                 <th>Monto Enviado</th>
                                 <th>Banco de destino</th>
                                 <th>Monto a Recibir</th>
+                                <th>Tipo de cambio</th>
                                 <th>Estado de operacion</th>
                                 <th>Fecha de operacion</th>
                                 <th>Fecha de Actualizacion de Operacion</th>
@@ -131,7 +128,7 @@
               "paginate": {
               "next": "Siguiente",
               "previous": "Anterior"
-                }
+            }
         }
     });
 
