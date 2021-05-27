@@ -16,29 +16,28 @@ class InversionistaTransaccionController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
-    {
-        $inversionistaTransaccion = Inversionista::all();
-        return view('inversionistaTransaccion');
-        
-    }
-    /*public function index(Request $request, $nroTransaccion) {  
 
-        $transaccion = DB::table('operacion')
-            ->join('bancos', 'operacion.banco_origen_id', '=', 'bancos.id')
-            ->select('operacion.*', 'bancos.name AS banco' , DB::raw("(SELECT `bancos`.`name`
+    public function index(Request $request, $nroTransaccion) {  
+
+        $transaccion = DB::table('inversion_operacion')
+            ->join('bancos', 'inversion_operacion.banco_origen_id', '=', 'bancos.id')
+            ->join('tipo_cuentas', 'inversion_operacion.moneda_id', '=', 'tipo_cuentas.id')
+            ->select('inversion_operacion.*', 'bancos.name AS banco' , 'tipo_cuentas.name as moneda', DB::raw("(SELECT `bancos`.`name`
             FROM `cuenta_bancarias`
             inner join `bancos` on `cuenta_bancarias`.`banco_id` = `bancos`.`id`
-            where `cuenta_bancarias`.`id` = `operacion`.`banco_destino_id`) AS `banco_destino`")  )
-            ->where('operacion.nro_orden', $nroTransaccion)
-            ->where('operacion.user_id', Auth::id())
+            where `cuenta_bancarias`.`id` = `inversion_operacion`.`banco_destino_id`) AS `banco_destino`")  )
+            ->where('inversion_operacion.nro_orden', $nroTransaccion)
+            ->where('inversion_operacion.user_id', Auth::id())
             ->get();
 
-        return view('transaccion' , [
+           // dd($transaccion);
+
+        return view('inversionistaTransaccion' , [
             'transaccion' => $transaccion[0],
 
         ]);
-    }*/
+        
+    }
 
     public function enviarOperacion(Request $request){
 

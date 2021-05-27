@@ -85,8 +85,9 @@
 
 
     .form-control {
-        background-color: transparent !important;
+        /*  background-color: transparent !important;
         border: none !important
+        */
     }
 
     .input-monto {
@@ -182,14 +183,15 @@
                             <div class="row mt-5">
                                 <div class="col-6 text-left">
                                     <h4 class="text-white font-weight-bold">Empresa pagadora</h4>
-                                    <img src={{asset('imagenes_empresa/imoney.jpg')}} width="120" height="70" class="mr-3">
+                                    <img src={{asset('imagenes_empresa/imoney.jpg')}} width="120" height="70"
+                                        class="mr-3">
                                 </div>
                                 <div class="col-6 text-right">
                                     <h4 class="text-white font-weight-bold">{{ $empresa->nombre }}</h4>
-                                    <img src={{asset($empresa->logo)}} width="120" height="70" >
+                                    <img src={{asset($empresa->logo)}} width="120" height="70">
                                 </div>
                             </div>
-    
+
                             <div class="row mt-5">
                                 <div class="col-6 text-left">
                                     <h5 class="text-white font-weight-bold">Monto disponible</h5>
@@ -197,20 +199,20 @@
                                 </div>
                                 <div class="col-6 text-right">
                                     <h5 class="text-white font-weight-bold">Monto total</h5>
-                                    <h5 class="text-white font-weight-bold">144,432.00</h5>
+                                    <h5 class="text-white font-weight-bold">{{ $empresa->monto_total }}</h5>
                                 </div>
                             </div>
-    
+
                             <div class="row text-center">
                                 <div class="col-12">
                                     <div class="progress">
                                         <div id="inversionista" class="progress-bar bg-dark" role="progressbar"
-                                            style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">10%
+                                            style="width: 30%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="row mt-4">
                                 <div class="col-3">
                                     <h5 class="text-white text-left font-weight-bold">Tasa anualizada</h5>
@@ -218,15 +220,114 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-center mt-4 ">
-                                        <button class="btn btn-primary btn-cambiar-ahora">Invertir</button>
+
+                                        <button type="button" class="btn btn-primary btn-cambiar-ahora"
+                                            data-toggle="modal" data-target="#modal-ver-detalle-{{$empresa->id}}">Ver
+                                            detalle</button>
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <h5 class="text-white text-right font-weight-bold ">Plazo</h5>
-                                    <div class="card font-weight-bold py-2 w-50 text-center float-right">{{ $empresa->fecha_esperada }} días</div> 
+                                    <div class="card font-weight-bold py-2 w-50 text-center float-right">
+                                        {{ $empresa->cantidad_dias }} días</div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Modal Ver detalle -->
+                        <div class="modal fade" id="modal-ver-detalle-{{$empresa->id}}" tabindex="-1" role="dialog"
+                            aria-labelledby="modal-ver-detalle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title font-weight-bold" id="modal-crear-cuenta">Característica
+                                            de la Inversión - Deuda
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="{{ route ('inversionista.gestion') }}" method="post">
+                                        {{ csrf_field() }}
+                                        <div class="modal-body">
+                                            <div class="row mt-4">
+                                                <div class="col-6">
+                                                    <h5 class="font-weight-bold">Fecha proyectada de cobro</h5>
+                                                    <div class="card font-weight-bold py-2 w-50 text-center float-left">
+                                                        {{ date('d-m-Y', strtotime($empresa->fecha_esperada )) }}</div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <h5 class="text-right font-weight-bold">Teaser informativo</h5>
+                                                    <a href="{{asset($empresa->informe)}}" target="_blank"><button
+                                                            type="button" class="btn btn-danger float-right"><i
+                                                                class="far fa-file-pdf pr-2"></i>Ver PDF</button></a>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-6">
+                                                    <h5 class="font-weight-bold">Tasa mensual</h5>
+                                                    <div class="card font-weight-bold py-2 w-50 text-center float-left">
+                                                        8 %</div>
+                                                </div>
+                                                <!--  <div class="col-6">
+                                            <h5 class="text-right font-weight-bold">Nº factura</h5>
+                                            <div class="card font-weight-bold py-2 w-50 text-center float-right">F0001-00000076
+                                            </div>
+                                        </div>
+                                            -->
+                                            </div>
+
+                                            <div class="row mt-5">
+                                                <div class="col-md-12 mt-4 text-left">
+                                                    <span class="font-weight-bold h3">Operación de Factoring</span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row mt-4">
+                                                <div class="col-12 text-left">
+                                                    <h4 class="font-weight-bold ">Quiero Invertir</h4>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Ingrese monto a invertir" name="monto_cambio"
+                                                        onkeypress="return isNumber(event);" />
+
+                                                    <input type="hidden" name="inversion_id" value="{{$empresa->id}}" />
+                                                    <!-- <h5 class="text-black text-center font-weight-bold">(cuentas con USD 0.00 disponibles)
+                                            </h5> -->
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4">
+                                                <div class="col-6">
+                                                    <h5 class="font-weight-bold text-left">Monto disponible de la
+                                                        factura</h5>
+                                                    <h5 class="font-weight-bold text-left">
+                                                        {{ $empresa->monto_disponible }}</h5>
+                                                </div>
+                                                <div class="col-6">
+                                                    <h5 class="font-weight-bold text-right">Retorno esperado</h5>
+                                                    <h5 class="font-weight-bold text-right"></h5>
+                                                    <div
+                                                        class="card font-weight-bold py-2 w-50 text-center float-right">
+                                                        {{ $empresa->cantidad_dias }} dias</div>
+                                                    <!--<input type="text" class="col-form-label text-right rounded-pill float-right" placeholder="113 dias" disabled></input>-->
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4">
+                                                <div class="text-center mt-4">
+                                                    <button class="btn btn-primary btn-cambiar-ahora"
+                                                        type="submit">Invertir
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal Ver detalle -->
                         @endforeach
                     </div>
                 </div>
@@ -235,11 +336,14 @@
     </div>
 </main>
 
+
+
+
 @endsection
 
 @section('custom-script')
 <script>
-    var i = 0;
+    /*  var i = 0;
 function move() {
   if (i == 0) {
     i = 1;
@@ -258,6 +362,11 @@ function move() {
     }
   }
 }
+*/
+
+
+
+
 function isNumber(evt) {
     var charCode = (evt.which) ? evt.which : evt.keyCode;
           if (charCode != 46 && charCode > 31 
@@ -266,4 +375,4 @@ function isNumber(evt) {
           return true;
 }
 </script>
-@stop()
+@stop
