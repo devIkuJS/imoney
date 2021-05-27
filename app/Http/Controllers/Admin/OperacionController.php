@@ -19,10 +19,6 @@ class OperacionController extends Controller
 
     public function index(Request $request)
     {   
-      $tipocambio = TipoCambio::all();
-      $tipoCambio = DB::table('tipo_cambios')
-            ->select('compra', 'venta')
-            ->get();
     $estado_transaccion = DB::table('estado_operacion')
                           ->where('id', '>=', 3)
                           ->get();          

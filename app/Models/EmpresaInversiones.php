@@ -14,6 +14,10 @@ class EmpresaInversiones extends Model
 
     protected $fillable = [
         'nombre',
-        'informe'
+        'informe',
+        'logo',
+        'monto_disponible',
+        'fecha_esperada',
+        'moneda_inversion'
     ];
 }
