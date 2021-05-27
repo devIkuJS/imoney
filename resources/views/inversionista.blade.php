@@ -147,23 +147,24 @@
             <div class="col-md-12 text-center">
                 <span class="font-weight-bold h2">Hola, </span><span
                     class="font-weight-bold h2">{{ Auth::user()->name }}</span>
-                <span class="font-weight-bold text-black h2">este es tu saldo disponible:</span>
+                    <span class="font-weight-bold text-black h2"> te presentamos nuestras oportunidades de inversión</span>
+                    <!--<span class="font-weight-bold text-black h2">este es tu saldo disponible:</span> -->         
             </div>
-            <div class="col-md-12 mx-auto">
-                <div class="row">
-                    <div class="col-6 text-right">
-                        <h4 class="font-weight-bold">PEN 0.00</h4>
+            <!--<div class="col-md-12 mx-auto">
+                    <div class="row">
+                        <div class="col-6 text-right">
+                            <h4 class="font-weight-bold">PEN 0.00</h4> 
+                        </div>
+                        <div class="col-6 text-left">
+                            <h4 class="font-weight-bold">USD 0.00</h4>
+                        </div>
                     </div>
-                    <div class="col-6 text-left">
-                        <h4 class="font-weight-bold">USD 0.00</h4>
-                    </div>
-                </div>
-                <div>
+            <div>-->
 
                     <div class="col-md-12 mx-auto mb-5">
                         <div class="row mt-5">
                             <div class="col-6 text-left">
-                                <h4 class="text-white font-weight-bold">Oportunidades de Inversión</h4>
+                                <!--<h4 class="text-white font-weight-bold">Oportunidades de Inversión</h4>-->
                             </div>
                             <div class="col-6">
                                 <div class="d-flex float-right">
@@ -206,8 +207,7 @@
                                 <div class="col-12">
                                     <div class="progress">
                                         <div id="inversionista" class="progress-bar bg-dark" role="progressbar"
-                                            style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-                                            10%
+                                            style="width: 30%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
                                         </div>
                                     </div>
                                 </div>
