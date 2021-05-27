@@ -40,7 +40,7 @@
                 <div class="row mt-4 text-center py-2 div-border col-md-5 mx-auto">
                     <div class="col-12">
                         <h4 class="font-weight-bold text-white">Nro Orden</h4>
-                        <h5 class="font-weight-bold text-white">    </h5>
+                        <h5 class="font-weight-bold text-white">{{$transaccion->nro_orden}}</h5>
                     </div>
                 </div>
 
@@ -48,18 +48,18 @@
 
 
                     <p class="text-center mt-3 font-weight-bold h5 text-white">Ahora transfiere <strong
-                            class="text-dark">
+                            class="text-dark">{{$transaccion->monto_inversion}} {{$transaccion->moneda}}
                                     </strong> desde tu <strong class="text-dark">banca por
-                            internet
+                            internet ({{$transaccion->banco}})
                                 </strong> a cualquiera de las cuentas indicada a continuacion:</p>
 
                     <div class="text-center mt-4">
                         <strong class="font-weight-bold text-white h5 mr-4">Razon social: iMoney Perú SAC</strong>
                         <strong class="font-weight-bold text-white h5 mr-4">RUC: 20602075665</strong>
-                        <strong class="font-weight-bold text-white h5 mr-4">Moneda: </strong>
+                        <strong class="font-weight-bold text-white h5 mr-4">Moneda: {{$transaccion->moneda}} </strong>
                     </div>
 
-                    
+                    @if($transaccion->moneda_id === '1')
 
                     <div class="row mt-4">
                         <div class="col-md-4 col-12">
@@ -115,9 +115,25 @@
                         </div>
                     </div>
 
-                    
+                    <!--<div class="row mt-4">
+                        <div class="col-md-4 col-12">
+                            <div class="card font-weight-bold text-center py-2">
+                                Scotiabank
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="card font-weight-bold text-center py-2">
+                                Cuenta Corriente: 0006226531
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="card font-weight-bold text-center py-2">
+                                CCI: 00924300000622653179
+                            </div>
+                        </div>
+                    </div>-->
 
-                    
+                    @else
 
                     <div class="row mt-4">
                         <div class="col-md-4 col-12">
@@ -173,20 +189,34 @@
                         </div>
                     </div>
 
-            
+                    <!--<div class="row mt-4">
+                        <div class="col-md-4 col-12">
+                            <div class="card font-weight-bold text-center py-2">
+                                Scotiabank
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="card font-weight-bold text-center py-2">
+                                Cuenta Corriente: 0004892264
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="card font-weight-bold text-center py-2">
+                                CCI: 00924300000489226475
+                            </div>
+                        </div>
+                    </div>-->
 
-                 
-
-                    
+                    @endif
 
                     <p class="text-center mt-4 font-weight-bold h5">Tienes un promedio de 60 minutos para realizar la
                         transferencia sin
                         perder la oportunidad de inversión.</p>
 
-                    <p class="font-weight-bold h5 text-white text-center">Hora de inicio:
-                        </p>
-                    <p class="font-weight-bold h5 text-white text-center">Hora de fin:
-                        </p>
+                        <p class="font-weight-bold h5 text-white text-center">Hora de inicio:
+                            {{ date('H:i:s', strtotime($transaccion->created_at)) }}</p>
+                        <p class="font-weight-bold h5 text-white text-center">Hora de fin:
+                            {{ date('H:i:s', strtotime($transaccion->created_at)+3600) }}</p>
 
                     <div class="text-center my-4">
                         <button class="btn btn-primary btn-cambiar-ahora" type="button" data-toggle="modal"

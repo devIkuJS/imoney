@@ -44,14 +44,13 @@ Route::post('/empresa/create', [App\Http\Controllers\EmpresaController::class, '
 
 //Inversionista - cliente
 Route::get('/inversionista', [App\Http\Controllers\InversionistaController::class, 'index'])->name('inversionista');
-Route::get('/inversionista/download', [App\Http\Controllers\InversionistaController::class, 'download'])->name('inversionista.download');
-Route::get('/inversionistaCaracteristica', [App\Http\Controllers\InversionistaCaracteristicaController::class, 'index'])->name('inversionistaCaracteristica');
+Route::post('/inversionista/gestion', [App\Http\Controllers\InversionistaController::class, 'gestion'])->name('inversionista.gestion');
 
 //Inversionista - operacion - cliente 
 Route::get('/inversionistaOperacion', [App\Http\Controllers\InversionistaOperacionController::class, 'index'])->name('inversionistaOperacion');
 Route::post('/inversionistaOperacion/createCuentaBancaria', [App\Http\Controllers\InversionistaOperacionController::class, 'createCuentaBancaria'])->name('inversionistaOperacion.createCuentaBancaria');
-Route::post('/inversionistaOperacion/createOperacion', [App\Http\Controllers\InversionistaOperacionController::class, 'createOperacion'])->name('inversionistaOperacion.createOperacion');
 Route::get('/inversionistaOperacion/{cuentaId}/getCuentaBancariaSelected', [App\Http\Controllers\InversionistaOperacionController::class, 'getCuentaBancariaSelected'])->name('inversionistaOperacion.getCuentaBancariaSelected');
+Route::post('/inversionistaOperacion/createOperacion', [App\Http\Controllers\InversionistaOperacionController::class, 'createOperacion'])->name('inversionistaOperacion.createOperacion');
 
 //Inversionista - transaccion - cliente
 Route::get('/inversionistaTransaccion/{nroTransaccion}', [App\Http\Controllers\InversionistaTransaccionController::class, 'index'])->name('inversionistaTransaccion');
