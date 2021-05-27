@@ -28,6 +28,8 @@ class InversionistaOperacionController extends Controller
         $categoria_cuenta = categoriaCuenta::all();
         $monto_inversion = $request->monto;
         $tipo_cuenta = $request->moneda;
+        $empresa_id = $request->id;
+
 
         $moneda = $request->moneda === '1' ? "Soles" : "Dolares";
         
@@ -48,6 +50,7 @@ class InversionistaOperacionController extends Controller
             'monto_inversion'=>$monto_inversion,
             'moneda'=>$moneda,
             'tipo_cuenta'=>$tipo_cuenta,
+            'empresa_id'=>$empresa_id,
             ]);
     }
 
@@ -104,6 +107,7 @@ class InversionistaOperacionController extends Controller
         $newOperacion->monto_inversion = $request->monto_inversion;
         $newOperacion->moneda_id = $request->tipo_cuenta;
         $newOperacion->banco_destino_id = $request->cuenta_destino;
+        $newOperacion->empresa_id = $request->empresa_id;
         $newOperacion->estado_id = "1";
         $newOperacion->save();
         return response(json_encode($newOperacion->nro_orden),200)->header('Content-type','application/json');

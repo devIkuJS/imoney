@@ -17,6 +17,7 @@ class CreateInversionOperacion extends Migration
             $table->id();
             $table->string('nro_orden', 80);
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('empresa_id', 1)->constrained('empresa_inversiones');
             $table->foreignId('banco_origen_id')->constrained('bancos');
             $table->decimal('monto_inversion', $precision = 8, $scale = 2);
             $table->foreignId('moneda_id')->constrained('tipo_cuentas');
