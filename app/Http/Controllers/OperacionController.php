@@ -9,7 +9,6 @@ use App\Models\Operacion;
 use App\Models\Banco;
 use App\Models\CuentaBancaria;
 use App\Models\CategoriaCuenta;
-use App\Models\TipoCambio;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
@@ -21,10 +20,7 @@ class OperacionController extends Controller
     }
     
     public function index(Request $request) { 
-        $tipocambio = TipoCambio::all();
-        $tipoCambio = DB::table('tipo_cambios')
-              ->select('compra', 'venta')
-              ->get();
+        
         $bancos = Banco::all();
 
         $categoria_cuenta = CategoriaCuenta::all();
@@ -105,8 +101,6 @@ class OperacionController extends Controller
         $newOperacion = new Operacion();
         $tipo_cuenta = $request->tipo_cuenta === 'Soles' ? "1" : "2";
         $newOperacion->user_id = Auth::id();
-        $newOperacion->compra = $request->compra;
-        $newOperacion->venta = $request->venta;
         $newOperacion->nro_orden = $this->generateRandomString();
         $newOperacion->banco_origen_id = $request->bancos;
         $newOperacion->descripcionMontoA = $request->descripcionMontoA;
@@ -115,6 +109,7 @@ class OperacionController extends Controller
         $newOperacion->montoB = $request->montoB;
         $newOperacion->banco_destino_id = $request->cuenta_destino;
         $newOperacion->tipo_cuenta = $tipo_cuenta;
+        $newOperacion->tipo_cambio= $request->tipo_cambio;
         $newOperacion->estado_id = "1";
         $newOperacion->save();
         return response(json_encode($newOperacion->nro_orden),200)->header('Content-type','application/json');

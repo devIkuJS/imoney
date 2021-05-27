@@ -33,7 +33,7 @@ class OperacionController extends Controller
             ->join('cuenta_bancarias', 'operacion.banco_destino_id', '=', 'cuenta_bancarias.id')
             ->join('estado_operacion', 'operacion.estado_id', '=', 'estado_operacion.id')
             ->leftjoin('status_nro_operacion', 'operacion.id', '=', 'status_nro_operacion.operacion_id')
-            ->select('operacion.*', 'operacion.compra AS compra','operacion.venta AS venta','users.name AS nombre_usuario' , 'users.apellidos AS apellido_usuario' ,
+            ->select('operacion.*','users.name AS nombre_usuario' , 'users.apellidos AS apellido_usuario' ,
              'bancos.name AS banco_origen', 'cuenta_bancarias.numero_cuenta AS numero_cuenta', 
              'estado_operacion.name AS estado', 'status_nro_operacion.nro_operacion AS nro_operacion', 
              'status_nro_operacion.voucher_operacion AS voucher' , 'status_nro_operacion.id AS id_voucher',
