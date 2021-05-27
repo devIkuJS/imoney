@@ -373,6 +373,7 @@ if($('#bancos').val() === "" ){
  monto_inversion: "{{ $monto_inversion }}",
  cuenta_destino: $('input[name=cbancaria_selected]:checked').val(),
  tipo_cuenta: "{{ $tipo_cuenta }}",
+ empresa_id: "{{ $empresa_id }}",
  _token:"{{ csrf_token() }}",
  },
  success: function (data) {
