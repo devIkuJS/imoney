@@ -203,5 +203,4 @@ $(document).ready(function() {
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.colVis.min.js"></script>
-
 @stop
