@@ -20,7 +20,7 @@ class OperacionController extends Controller
     }
     
     public function index(Request $request) { 
-
+        
         $bancos = Banco::all();
 
         $categoria_cuenta = CategoriaCuenta::all();
@@ -109,6 +109,7 @@ class OperacionController extends Controller
         $newOperacion->montoB = $request->montoB;
         $newOperacion->banco_destino_id = $request->cuenta_destino;
         $newOperacion->tipo_cuenta = $tipo_cuenta;
+        $newOperacion->tipo_cambio= $request->tipo_cambio;
         $newOperacion->estado_id = "1";
         $newOperacion->save();
         return response(json_encode($newOperacion->nro_orden),200)->header('Content-type','application/json');

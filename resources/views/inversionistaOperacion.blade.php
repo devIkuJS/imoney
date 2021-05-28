@@ -117,17 +117,9 @@
 
                     <div class="row mt-4 text-center py-4 div-border">
                         <div class="col-12">
-                            <h4 class="font-weight-bold text-white">Envias: 1000 dólares</h4>
+                            <h4 class="font-weight-bold text-white">Envias: {{$monto_inversion}} {{ $moneda }}</h4>
                             <h5 class="font-weight-bold text-white">                    </h5>
                         </div>
-                        <!--<div class="col-4">
-                            <h4 class="font-weight-bold text-white">Recibes</h4>
-                            <h5 class="font-weight-bold text-white"></h5>
-                        </div>
-                        <div class="col-4">
-                            <h4 class="font-weight-bold text-white">Tipo de cambio</h4>
-                            <h5 class="font-weight-bold text-white"></h5>
-                        </div>-->
                     </div>
                 </div>
             </div>
@@ -196,25 +188,25 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-listar-cuenta">Lista de cuentas en
-                   
-                </h5>
+                <h5 class="modal-title" id="modal-listar-cuenta">Lista de cuentas en {{ $moneda }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p class="text-center font-weight-bold" style="color:#2a3253;font-size: 17px;">Esta lista muestra tus cuentas bancarias en moneda</p>
+                <p class="text-center font-weight-bold" style="color:#2a3253;font-size: 17px;">Esta lista muestra tus cuentas bancarias en moneda {{ $moneda }}</p>
                 
+                @foreach ($lista_cuenta_bancaria as $cbancaria)
                 <label class="content-label">
                     <input type="radio" name="cbancaria_selected" class="card-input-element d-none"
-                        id="">
+                        id="radio_{{$cbancaria->id }}" value="{{$cbancaria->id }}">
                     <div class="card card-body bg-light">
-                        <h5 class="card-title"></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            <h6 class="card-subtitle mb-2 text-muted"></h6>
+                        <h5 class="card-title">Banco: {{$cbancaria->banco}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Numero de Cuenta: {{$cbancaria->numero_cuenta}}
+                            <h6 class="card-subtitle mb-2 text-muted">Tipo de Cuenta: {{$cbancaria->tipo_cuenta}}</h6>
                     </div>
                 </label>
+                @endforeach
                 
                 <div id="err-modal-select-cuenta" class="text-center"></div>
                 <div class="modal-footer">
@@ -233,16 +225,16 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-agregar-cuenta">Agregar nueva cuenta en
+                <h5 class="modal-title" id="modal-agregar-cuenta">Agregar nueva cuenta en {{ $moneda }}
                 
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <p class="text-center font-weight-bold mt-3" style="color:#2a3253;font-size: 17px;">Ingresa tu cuenta bancaria en moneda</p>
+            <p class="text-center font-weight-bold mt-3" style="color:#2a3253;font-size: 17px;">Ingresa tu cuenta bancaria en moneda {{ $moneda }}</p>
             <div class="modal-body">
-                <input type="hidden" name="tipo_cuenta" value="" />
+                <input type="hidden" name="tipo_cuenta" value="{{ $moneda}}" />
                 <div class="form-group">
                     <select class="form-control" id="cuenta_bancaria_user" name="cuenta_bancaria_user">
                         <option value="">Seleccione el banco</option>
@@ -262,9 +254,6 @@
                     <option value="{{$cat->id}}">{{$cat->name}}</option>
                         @endforeach
                 </select>
-
-
-
                 </div>
                 <div id="success-message"></div>
                 <div class="modal-footer">
@@ -277,4 +266,138 @@
 <!-- Modal Agregar Cuenta -->
 
 @endsection
+
+@section('custom-script')
+<script type="text/javascript">
+    $('#agregar-tipo-cuenta').click(function() {
+
+ $.ajax({
+ type: "POST",
+ url: "{{ route('inversionistaOperacion.createCuentaBancaria')}}",
+ data: { 
+ cuenta_bancaria_user: $('#cuenta_bancaria_user').val(),
+ numero_cuenta: $('#numero_cuenta').val(),
+ categoria_cuenta: $('#categoria_cuenta').val(),
+ tipo_cuenta: "{{$tipo_cuenta}}",
+ _token:"{{ csrf_token() }}",
+ },
+ success: function (data) {
+  $("#agregar-tipo-cuenta").attr("disabled", true);
+  $('#success-message').html('<div class="alert alert-success text-center">Cuenta Bancaria registrada , por favor seleccione su cuenta para seguir con la operación</div>');
+
+  setTimeout(() => {
+
+    $("#modal-agregar-cuenta").modal('hide');
+     window.location.reload();
+
+  },  3000);
+  
+
+
+ },
+ error: function (err) {
+    if (err.status == 422) {
+            $.each(err.responseJSON.errors, function (i, error) {
+                var el = $(document).find('[name="'+i+'"]');
+                el.after($('<strong  class="text-error">'+error[0]+'</strong>'));
+            });
+        }
+
+ },
+ });
+
+
+
+});
+
+
+
+$('#seleccionar-tipo-cuenta').click(function() {
+
+var value = $('input[name=cbancaria_selected]:checked').val();
+
+
+if(value === undefined){
+    $('#err-modal-select-cuenta').html('<strong class="text-error">Por favor seleccione la cuenta donde desea recibir su dinero</strong>');
+}else{
+
+    $.ajax({
+type: 'GET',
+url: `inversionistaOperacion/${value}/getCuentaBancariaSelected`,
+success: function (data) {
+    $("#cuenta-selected").html(
+        '<h5 class="text-center font-weight-bold">Cuenta Seleccionada</h5>'+
+        '<div class="div-border px-3 py-3">'+
+            '<h5 class="text-white font-weight-bold">Banco: '+data[0].banco+'</h5>'+
+            '<h6 class="text-white mb-2">#Cuenta: '+data[0].numero_cuenta+'</h6>'+
+            '<h6 class="text-white mb-2">Tipo de cuenta: '+data[0].tipo_cuenta+'</h6>'+
+     '</div>');
+     
+//$("#modal-listar-cuenta").remove();
+document.getElementsByClassName("modal")[0].style.display = "none";
+$('.modal-backdrop').remove();
+
+},
+error: function() { 
+     console.log(data);
+}
+});
+
+}
+
+
+});
+
+
+
+$('#procesar-operacion').click(function() {
+
+    console.log($('input[name=cbancaria_selected]:checked').val());
+
+if($('#bancos').val() === "" ){
+   $('#err-banco-envio').html('<strong class="text-error">Por favor selecciona el banco de donde nos envias tu dinero</strong>');
+
+ }else if(!$('#accept').is(":checked")){
+     $('#err-acepto').html('<strong class="text-error">Por favor acepta la declaración de transferencia</strong>');
+ 
+ }else if($('input[name=cbancaria_selected]:checked').val() === undefined){
+     $('#err-cbancaria-selected').html('<strong class="text-error">Por favor seleccione la cuenta donde desea su capital mas su ganancia</strong>');
+
+ }else{
+
+ $.ajax({
+ type: "POST",
+ url: "{{ route('inversionistaOperacion.createOperacion')}}",
+ data: { 
+ bancos: $('#bancos').val(),
+ monto_inversion: "{{ $monto_inversion }}",
+ cuenta_destino: $('input[name=cbancaria_selected]:checked').val(),
+ tipo_cuenta: "{{ $tipo_cuenta }}",
+ empresa_id: "{{ $empresa_id }}",
+ _token:"{{ csrf_token() }}",
+ },
+ success: function (data) {
+ window.location.href = `inversionistaTransaccion/${data}`;
+ //console.log(data);
+
+ },
+ error: function (err) {
+     console.log(err);
+
+ },
+ });
+ 
+
+
+ }
+
+
+});
+
+
+
+
+</script>
+
+@stop
 

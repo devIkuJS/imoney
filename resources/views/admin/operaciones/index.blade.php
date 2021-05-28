@@ -34,6 +34,7 @@
                                 <th>Monto Enviado</th>
                                 <th>Banco de destino</th>
                                 <th>Monto a Recibir</th>
+                                <th>Tipo de cambio</th>
                                 <th>Estado de transaccion</th>
                                 <th>Fecha de transaccion</th>
                                 <th>Fecha de Actualiz. de transaccion</th>
@@ -52,6 +53,7 @@
                                 <td>{{ $operacion->montoA }} {{ $operacion->descripcionMontoA }}</td>
                                 <td>{{ $operacion->banco_destino}} {{ $operacion->numero_cuenta}} {{ $operacion->tipo_cuenta}}</td>
                                 <td>{{ $operacion->montoB }} {{ $operacion->descripcionMontoB }}</td>
+                                <td>{{ $operacion->tipo_cambio }}</td>
                                 <td>{{ $operacion->estado }}</td>
                                 <td>{{ date('d-m-Y H:i:s', strtotime($operacion->created_at)) }}</td>
                                 <td>{{ date('d-m-Y H:i:s', strtotime($operacion->updated_at)) }}</td>
@@ -85,6 +87,7 @@
                                 <th>Monto Enviado</th>
                                 <th>Banco de destino</th>
                                 <th>Monto a Recibir</th>
+                                <th>Tipo de cambio</th>
                                 <th>Estado de operacion</th>
                                 <th>Fecha de operacion</th>
                                 <th>Fecha de Actualizacion de Operacion</th>
@@ -125,7 +128,7 @@
               "paginate": {
               "next": "Siguiente",
               "previous": "Anterior"
-                }
+            }
         }
     });
 

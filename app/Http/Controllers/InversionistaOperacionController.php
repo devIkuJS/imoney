@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Inversionista;
+use App\Models\InversionOperacion;
 use App\Models\Banco;
 use App\Models\CuentaBancaria;
 use App\Models\CategoriaCuenta;
@@ -20,20 +20,25 @@ class InversionistaOperacionController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+
+        
         $bancos = Banco::all();
         $categoria_cuenta = categoriaCuenta::all();
-        $inversionistaOperacion = Inversionista::all();
+        $monto_inversion = $request->monto;
+        $tipo_cuenta = $request->moneda;
+        $empresa_id = $request->id;
 
-        //$dataInversionista = json_decode(Session::get('dataInversionista'), true);
-        //$tipo_cuenta = $dataInversionista["descripcionMontoB"] === 'Soles' ? "1" : "2";
+
+        $moneda = $request->moneda === '1' ? "Soles" : "Dolares";
+        
 
         $lista_cuenta_bancaria = DB::table('cuenta_bancarias')
             ->join('bancos', 'cuenta_bancarias.banco_id', '=', 'bancos.id')
             ->join('categoria_cuenta', 'cuenta_bancarias.categoria_cuenta_id', '=', 'categoria_cuenta.id')
             ->select('cuenta_bancarias.*', 'bancos.name AS banco', 'categoria_cuenta.name AS tipo_cuenta')
-            //->where('cuenta_bancarias.tipo_cuenta', $tipo_cuenta)
+            ->where('cuenta_bancarias.tipo_cuenta', $tipo_cuenta)
             ->where('cuenta_bancarias.user_id', Auth::id())
             ->where('cuenta_bancarias.estado', 1)
             ->get();
@@ -41,7 +46,12 @@ class InversionistaOperacionController extends Controller
         return view('inversionistaOperacion',[
             'bancos'=>$bancos,
             'lista_cuenta_bancaria' => $lista_cuenta_bancaria,
-            'categoria_cuenta'=>$categoria_cuenta]);
+            'categoria_cuenta'=>$categoria_cuenta,
+            'monto_inversion'=>$monto_inversion,
+            'moneda'=>$moneda,
+            'tipo_cuenta'=>$tipo_cuenta,
+            'empresa_id'=>$empresa_id,
+            ]);
     }
 
     public function createCuentaBancaria(Request $request){
@@ -60,10 +70,9 @@ class InversionistaOperacionController extends Controller
 
        $newCuentaBancaria = new CuentaBancaria();
         
-        $tipo_cuenta = $request->tipo_cuenta === 'Soles' ? "1" : "2";
         $newCuentaBancaria->user_id = Auth::id();
     	$newCuentaBancaria->banco_id = $request->cuenta_bancaria_user;
-        $newCuentaBancaria->tipo_cuenta = $tipo_cuenta;
+        $newCuentaBancaria->tipo_cuenta = $request->tipo_cuenta;
         $newCuentaBancaria->numero_cuenta = $request->numero_cuenta;
         $newCuentaBancaria->categoria_cuenta_id = $request->categoria_cuenta;
         $newCuentaBancaria->estado = 1;
@@ -90,18 +99,15 @@ class InversionistaOperacionController extends Controller
       public function createOperacion (Request $request)
       {
 
-        
-        $newOperacion = new Operacion();
-        $tipo_cuenta = $request->tipo_cuenta === 'Soles' ? "1" : "2";
+        $newOperacion = new InversionOperacion();
+        $tipo_cuenta = $request->tipo_cuenta;
         $newOperacion->user_id = Auth::id();
         $newOperacion->nro_orden = $this->generateRandomString();
         $newOperacion->banco_origen_id = $request->bancos;
-        $newOperacion->descripcionMontoA = $request->descripcionMontoA;
-        $newOperacion->montoA = $request->montoA;
-        $newOperacion->descripcionMontoB = $request->descripcionMontoB;
-        $newOperacion->montoB = $request->montoB;
+        $newOperacion->monto_inversion = $request->monto_inversion;
+        $newOperacion->moneda_id = $request->tipo_cuenta;
         $newOperacion->banco_destino_id = $request->cuenta_destino;
-        $newOperacion->tipo_cuenta = $tipo_cuenta;
+        $newOperacion->empresa_id = $request->empresa_id;
         $newOperacion->estado_id = "1";
         $newOperacion->save();
         return response(json_encode($newOperacion->nro_orden),200)->header('Content-type','application/json');
