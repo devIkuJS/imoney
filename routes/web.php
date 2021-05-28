@@ -22,6 +22,9 @@ Route::get('/empresa/verifyUser', [App\Http\Controllers\EmpresaController::class
 Route::get('/transaccion/email-transaccion-verify/{nroTransaccion}', [App\Http\Controllers\EmailTransaccionController::class, 'index'])->name('email-transaccion-verify');
 Route::get('/email-transaccion', [App\Http\Controllers\EmailTransaccionController::class, 'index'])->name('email-transaccion');
 Route::get('/email-transaccion-finalizada', [App\Http\Controllers\EmailTransaccionController::class, 'index'])->name('email-transaccion-finalizada');
+
+//inversion-verify
+Route::get('/inversionistaTransaccion/email-inversion-verify/{nroTransaccion}', [App\Http\Controllers\EmailInversionController::class, 'index'])->name('email-inversion-verify');
 //rutas publicas
 Route::get('/', function () {
   return view('auth.login');
@@ -110,6 +113,9 @@ Route::get('/admin/operaciones', [App\Http\Controllers\Admin\OperacionController
 Route::post('/admin/operaciones/{operacionId}/actualizar', [App\Http\Controllers\Admin\OperacionController::class, 'actualizar'])->name('admin.operaciones.actualizar');
 
 Route::get('/admin/cuentabancaria', [App\Http\Controllers\Admin\CuentaBancariaController::class, 'index'])->name('admin.cuentabancaria');
+
+
+Route::get('/admin/operaciones-inversion', [App\Http\Controllers\Admin\InversionOperacionController::class, 'index'])->name('admin.operaciones-inversion');
 
 Auth::routes(['verify' => true]);
 

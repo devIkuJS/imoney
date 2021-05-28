@@ -261,9 +261,14 @@ return [
             'icon' => 'fas fa-fw fas fa-money-bill',
         ],
 		[
-            'text' => 'Inversiones',
+            'text' => 'Empresas inversionistas',
             'url'  => '/admin/inversiones',
             'icon' => 'fas fa-fw fas fa-address-card',
+        ],
+        [
+            'text' => 'Operaciones de inversion',
+            'url'  => '/admin/operaciones-inversion',
+            'icon' => 'fas fa-fw fas fa-coins',
         ],
     ],
 

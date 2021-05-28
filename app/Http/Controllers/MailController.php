@@ -6,6 +6,7 @@ use App\Mail\SignupEmail;
 use App\Mail\TransaccionEmail;
 use App\Mail\TransaccionFinalEmail;
 use App\Mail\TransaccionErrorEmail;
+use App\Mail\InversionEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -63,5 +64,18 @@ class MailController extends Controller
             'banco_destino' => $banco_destino,
         ];
         Mail::to($email)->send(new TransaccionErrorEmail($data));
+    }
+
+    public static function enviarNroInversion($name, $email, $nro_orden, $monto_inversion, $moneda, $banco, $banco_destino){
+        $data = [
+            'name' => $name,
+            'email' => $email,
+            'nro_orden' => $nro_orden,
+            'monto_inversion' => $monto_inversion,
+            'moneda' => $moneda,
+            'banco_origen' => $banco,
+            'banco_destino' => $banco_destino,
+        ];
+        Mail::to($email)->send(new InversionEmail($data));
     }
 }
