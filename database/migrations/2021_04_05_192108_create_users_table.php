@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('archivo_dni_atras')->nullable();
             $table->string('verification_code')->nullable();
             $table->integer('is_verified')->default(0);
+            $table->rememberToken();
             $table->timestamps();
         });
     }
