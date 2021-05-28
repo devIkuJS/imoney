@@ -382,6 +382,7 @@ $('#procesar-operacion').click(function() {
     montoB: '{{$dataTipoCambio["montoB"]}}',
     cuenta_destino: $('input[name=cbancaria_selected]:checked').val(),
     tipo_cuenta: '{{$dataTipoCambio["descripcionMontoB"]}}',
+    tipo_cambio: '{{$dataTipoCambio["tipoCambio"]}}',
     _token:"{{ csrf_token() }}",
     },
     success: function (data) {

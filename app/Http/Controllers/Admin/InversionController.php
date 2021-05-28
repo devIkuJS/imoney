@@ -70,6 +70,7 @@ class InversionController extends Controller
         }
         $Inversion->nombre = $request->nombre;
         $Inversion->monto_disponible = $request->monto_disponible;
+        $Inversion->fecha_esperada = $request->fecha_esperada;
         $Inversion->save();
 
         return redirect()->back();

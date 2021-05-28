@@ -30,6 +30,7 @@ class InversionistaOperacionController extends Controller
         $tipo_cuenta = $request->moneda;
         $empresa_id = $request->id;
 
+
         $moneda = $request->moneda === '1' ? "Soles" : "Dolares";
         
 
