@@ -1,10 +1,10 @@
 <div class="modal fade" id="modal-update-inversion-{{$inversion->id}}">
     <div class="modal-dialog">
         <div class="modal-content bg-default">
-            <div class="modal-header">
-                <h4 class="modal-title">Actualizar Empresa inversionista</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
+                <div class="modal-header">
+                    <h4 class="modal-title">Actualizar Empresa inversionista</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
                 </div>
                 <form action="{{ route ('admin.inversiones.actualizar', $inversion->id) }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
@@ -15,7 +15,7 @@
                         </div>
                         <div class="form-group">
                             <div class="form-group row">
-                                    <label for="ficha_ruc_emp" class="col-md-4 col-form-label text-md-left">Informe</label>
+                                <label for="ficha_ruc_emp" class="col-md-4 col-form-label text-md-left">Informe</label>
                                     <div class="col-md-12">
                                         <div class="input-group">
                                             <div class="custom-file">
@@ -32,9 +32,9 @@
                                     </div>
                             </div>
                         </div>
-                            <div class="form-group">
-                                <div class="form-group row">
-                                    <label for="logo" class="col-md-4 col-form-label text-md-left">logo</label>
+                        <div class="form-group">
+                            <div class="form-group row">
+                                <label for="logo" class="col-md-4 col-form-label text-md-left">logo</label>
                                     <div class="col-md-12">
                                         <div class="input-group">
                                             <div class="custom-file">
@@ -48,19 +48,18 @@
                                                 <span class="text-danger">{{ $errors->first('logo') }}</span>
                                             @endif
                                     </div>
-                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="monto_disponible">Monto Disponible</label>
-                                <input type="text" class="form-control" name="monto_disponible" name="monto_disponible" value="{{$inversion->monto_disponible}}"/>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-group row">
+                        </div>
+                        <div class="form-group">
+                            <label for="monto_disponible">Monto Disponible</label>
+                            <input type="text" class="form-control" name="monto_disponible" name="monto_disponible" value="{{$inversion->monto_disponible}}"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group row">
                                     <label for="fecha_esperada" class="col-md-4 col-form-label text-md-left">Fecha
                                         Esperada</label>
-                                    <div class="col-md-12">
-                                        <input class="form-control" type="date" name="fecha_esperada" id="fecha_esperada" value="{{$inversion->fecha_esperada}}">
-                                    </div>
+                                <div class="col-md-12">
+                                    <input class="form-control" type="date" name="fecha_esperada" id="fecha_esperada" value="{{$inversion->fecha_esperada}}">
                                 </div>
                             </div>
                         </div>
@@ -69,8 +68,7 @@
                             <button type="submit" class="btn btn-outline-primary">Guardar cambios</button>
                         </div>
                     </div>
-                </form> 
-            </div>        
+                </form>        
         </div>
       <!-- /.modal-content -->
     </div>

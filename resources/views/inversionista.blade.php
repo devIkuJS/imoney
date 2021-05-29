@@ -183,8 +183,7 @@
                             <div class="row mt-5">
                                 <div class="col-6 text-left">
                                     <h4 class="text-white font-weight-bold">Empresa pagadora</h4>
-                                    <img src={{asset('imagenes_empresa/imoney.jpg')}} width="120" height="70"
-                                        class="mr-3">
+                                   
                                 </div>
                                 <div class="col-6 text-right">
                                     <h4 class="text-white font-weight-bold">{{ $empresa->nombre }}</h4>
@@ -264,7 +263,7 @@
                                             </div>
                                             <div class="row mt-4">
                                                 <div class="col-6">
-                                                    <h5 class="font-weight-bold">Tasa mensual</h5>
+                                                    <h5 class="font-weight-bold">Tasa anual</h5>
                                                     <div class="card font-weight-bold py-2 w-50 text-center float-left">
                                                         8 %</div>
                                                 </div>

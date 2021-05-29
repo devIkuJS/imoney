@@ -120,3 +120,7 @@ Route::get('/admin/operaciones-inversion', [App\Http\Controllers\Admin\Inversion
 Auth::routes(['verify' => true]);
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -91,7 +91,7 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <input class="form-check-input" value="recordarme" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label text-white" for="remember">
                                         {{ __('Recordarme') }}
@@ -103,7 +103,7 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="showpassword" id="showpassword" {{ old('showpassword') ? 'checked' : '' }}>
+                                    <input id="show_password" class="form-check-input" type="checkbox" name="showpassword" id="showpassword" {{ old('showpassword') ? 'checked' : '' }}>
 
                                     <label class="form-check-label text-white" for="showpassword">
                                         {{ __('Mostrar contraseña') }}
@@ -113,7 +113,7 @@
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" onclick="recordarme()">
                                     {{ __('Ingresar') }}
                                 </button>
                             </div>
@@ -147,3 +147,42 @@
 
 
 @endsection
+
+
+@section('js')
+    <script>
+        $('#show_password').on('change',function(event){
+    // Si el checkbox esta "checkeado"
+    if($('#show_password').is(':checked')){
+        // Convertimos el input de contraseña a texto.
+        $('#password').get(0).type='text';
+    // En caso contrario..
+    } else {
+        // Lo convertimos a contraseña.
+        $('#password').get(0).type='password';
+    }
+    });
+    const rmCheck = document.getElementById("remember"),
+    emailInput = document.getElementById("email");
+
+    if (localStorage.checkbox && localStorage.checkbox !== "") {
+    rmCheck.setAttribute("checked", "checked");
+    emailInput.value = localStorage.username;
+    } else {
+    rmCheck.removeAttribute("checked");
+    emailInput.value = "";
+    }
+
+    function recordarme() {
+    if (rmCheck.checked && emailInput.value !== "") {
+        localStorage.username = emailInput.value;
+        localStorage.checkbox = rmCheck.value;
+    } else {
+        localStorage.username = "";
+        localStorage.checkbox = "";
+    }
+    }
+    </script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+@stop
+

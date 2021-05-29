@@ -119,13 +119,11 @@
             </div>
             <form action="{{ route('admin.inversiones.registro') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
-                <p class="text-center font-weight-bold mt-3" style="color:#2a3253;font-size: 17px;"></p>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="nombre">Empresa</label>
                         <input type="text" class="form-control" name="nombre">
                     </div>
-
                         <div class="form-group">
                             <label for="informe">Informe</label>
                             <input type="file" class="form-control-file" name="informe_doc" accept="application/pdf">
@@ -196,12 +194,13 @@ $(document).ready(function() {
 });
 </script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.bootstrap4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
-
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.colVis.min.js"></script>
 @stop
