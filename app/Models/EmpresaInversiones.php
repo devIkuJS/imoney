@@ -17,6 +17,7 @@ class EmpresaInversiones extends Model
         'informe',
         'logo',
         'monto_disponible',
+        'monto_total',
         'fecha_esperada',
         'moneda_inversion'
     ];
