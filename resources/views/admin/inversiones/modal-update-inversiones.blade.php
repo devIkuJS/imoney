@@ -14,45 +14,18 @@
                             <input type="text" name="nombre" class="form-control" id="nombre" value="{{$inversion->nombre}}">
                         </div>
                         <div class="form-group">
-                            <div class="form-group row">
-                                <label for="ficha_ruc_emp" class="col-md-4 col-form-label text-md-left">Informe</label>
-                                    <div class="col-md-12">
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="ruc-file-input" name="ruc_doc" id="ruc-id"
-                                                        aria-describedby="ruc-id"
-                                                        accept="image/jpeg,image/png,application/pdf,image/x-eps">
-                                                <label class="custom-file-label" for="ruc-id">
-                                                </label>
-                                            </div>
-                                        </div>
-                                            @if ($errors->has('ruc_doc'))
-                                                <span class="text-danger">{{ $errors->first('ruc_doc') }}</span>
-                                            @endif
-                                    </div>
-                            </div>
+                            <label for="informe">Informe</label>
+                            <input type="file" class="form-control-file" name="informe" accept="application/pdf">
                         </div>
                         <div class="form-group">
-                            <div class="form-group row">
-                                <label for="logo" class="col-md-4 col-form-label text-md-left">logo</label>
-                                    <div class="col-md-12">
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="logo-file-input" name="logo" id="logo"
-                                                    aria-describedby="logo"
-                                                    accept="image/jpeg,image/png,application/pdf,image/x-eps">
-                                                <label class="custom-file-label" for="logo"></label>
-                                            </div>
-                                        </div>
-                                            @if ($errors->has('logo'))
-                                                <span class="text-danger">{{ $errors->first('logo') }}</span>
-                                            @endif
-                                    </div>
-                            </div>
+                            <label for="logo">Logo</label>
+                            <input type="file" class="form-control-file" name="logo"
+                                accept="image/jpeg,image/png,image/x-eps">
                         </div>
+                       
                         <div class="form-group">
-                            <label for="monto_disponible">Monto Disponible</label>
-                            <input type="text" class="form-control" name="monto_disponible" name="monto_disponible" value="{{$inversion->monto_disponible}}"/>
+                            <label for="monto_total">Monto Total</label>
+                            <input type="text" class="form-control" name="monto_total" value="{{$inversion->monto_total}}">
                         </div>
                         <div class="form-group">
                             <div class="form-group row">
@@ -76,18 +49,5 @@
 </div>
 
 @section('js')
-<script>
 
-document.querySelector('.logo-file-input').addEventListener('change',function(e){ 
-  var fileName = document.getElementById("logo").files[0].name;
-  var nextSibling = e.target.nextElementSibling
-  nextSibling.innerText = fileName
-})
-
-document.querySelector('.ruc-file-input').addEventListener('change',function(e){ 
-  var fileName = document.getElementById("ruc-id").files[0].name;
-  var nextSibling = e.target.nextElementSibling
-  nextSibling.innerText = fileName
-})
-</script>
 @stop

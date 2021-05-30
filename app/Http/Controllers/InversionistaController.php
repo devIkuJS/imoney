@@ -24,7 +24,7 @@ class InversionistaController extends Controller
 
         for ($i = 0; $i < count($empresas); $i++) {
            $empresas[$i]["cantidad_dias"] = $this->dateDiff($empresas[$i]["fecha_esperada"], now());
-           $empresas[$i]["monto_total"] = 50000;
+           /*$empresas[$i]["monto_total"] = 50000;*/
         }
 
         //$monto_total = $empresas[0]["monto_disponible"]*(((1+0.08)*($empresas[0]["cantidad_dias"]/360)));
