@@ -48,7 +48,7 @@ class ResetPassword extends Notification
                 ->action('Restablecer contraseña', url('password/reset', $this->token))
                 ->line('Este enlace para restablecer la contraseña caduca en 60 minutos.')
                 ->line('Si no has solicitado un cambio de contraseña, puedes ignorar o eliminar este e-mail.')
-                ->salutation('Saludos, Imoney Perú SAC');
+                ->salutation('Muchas gracias por operar con iMoney Perú SAC RUC:20602075665, Teléfono: 01-7482710, Celular: 982 273 702, pronto tendremos mas novedades para ti.');
     }
 
     /**

@@ -12,6 +12,11 @@
     .col-form-label{
         font-size:20px !important;
     }
+    .invalid-feedback{
+        color: #8f0000;
+        font-size: 16px !important;
+    }
+
     @media (max-width: 575.98px) {
         .h3 {
             font-size:19px !important;

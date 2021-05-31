@@ -147,13 +147,9 @@
             <div class="col-md-12 text-center">
                 <span class="font-weight-bold h2">Hola, </span><span
                     class="font-weight-bold h2">{{ Auth::user()->name }}</span>
-                    <span class="font-weight-bold text-black h2"> te presentamos nuestras oportunidades de inversión</span>
+                    <span class="font-weight-bold text-black h2"> te presentamos nuestras oportunidades de inversión para hoy {{ date('d-m-Y', strtotime(now())) }} </span>
                     <!--<span class="font-weight-bold text-black h2">este es tu saldo disponible:</span> -->         
                     
-            </div>
-            <div class="col-md-12 text-center mt-3">
-                <h3 class="text-white font-weight-bold">
-                    {{ date('d-m-Y', strtotime(now())) }}</h3>
             </div>
             <!--<div class="col-md-12 mx-auto">
                     <div class="row">
