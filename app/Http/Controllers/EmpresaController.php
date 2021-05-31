@@ -167,6 +167,7 @@ class EmpresaController extends Controller
         $newUserRepresentante->cargo = $request->cargo_repre_legal;
         $newUserRepresentante->empresa = $request->empresa_repre_legal;
         $newUserRepresentante->password = " ";
+        $newUserRepresentante->remember_token = "";
         $newUserRepresentante->tipo_id = "3";
         $newUserRepresentante->archivo_dni_atras = "";
         $newUserRepresentante->save();
@@ -198,6 +199,7 @@ class EmpresaController extends Controller
         $newUserOperaciones->cargo = $request->cargo_per_operaciones;
         $newUserOperaciones->empresa = $request->empresa_per_operaciones;
         $newUserOperaciones->password = Hash::make($request->password);
+        $newUserOperaciones->remember_token = "";
         $newUserOperaciones->tipo_id = "4";
         $newUserOperaciones->archivo_dni_atras = "";
         $newUserOperaciones->verification_code = sha1(time());

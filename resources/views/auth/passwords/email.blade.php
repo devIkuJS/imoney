@@ -13,23 +13,11 @@
         font-size:20px !important;
     }
 
-    /*@media (max-width: 575.98px) {
-        .col-form-label{
-        font-size:30px !important;
-        }
+    .invalid-feedback{
+        color: #8f0000;
+        font-size: 16px !important;
     }
 
-    @media (max-width: 767.98px) {
-        .col-form-label{
-        font-size:20px !important;
-        }
-    }
-
-    @media (max-width: 991.98px) {
-        .col-form-label{
-        font-size:20px !important;
-        }
-    }*/
     @media (max-width: 1199.98px) {
         .col-form-label {
             font-size:14px !important;
@@ -47,13 +35,17 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert alert-success" role="alert" style="font-size:17px !important;">
                             {{ session('status') }}
                         </div>
                     @endif
 
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
+
+                        <div>
+                            <p style="font-size: 17px !important;">Por favor ingrese su correo electrònico registrado en la plataforma, para que pueda recuperar su contraseña</p>
+                        </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right font-weight-bold">{{ __('Correo electronico') }}</label>
