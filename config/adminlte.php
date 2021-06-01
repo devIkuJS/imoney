@@ -265,6 +265,11 @@ return [
             'url'  => '/admin/inversiones',
             'icon' => 'fas fa-fw fas fa-address-card',
         ],
+		[
+            'text' => 'Empresas ALEX',
+            'url'  => '/admin/empresasInversionistas',
+            'icon' => 'fas fa-fw fas fa-search',
+        ],
         [
             'text' => 'Operaciones de inversion',
             'url'  => '/admin/operaciones-inversion',

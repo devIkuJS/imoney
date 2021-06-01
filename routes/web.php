@@ -108,6 +108,12 @@ Route::post('/admin/inversiones/registro', [App\Http\Controllers\Admin\Inversion
 Route::post('/admin/inversiones/{inversionesId}/actualizar', [App\Http\Controllers\Admin\InversionController::class, 'actualizar'])->name('admin.inversiones.actualizar');
 Route::delete('/admin/inversiones/{inversionesId}/eliminar', [App\Http\Controllers\Admin\InversionController::class, 'eliminar'])->name('admin.inversiones.eliminar');
 
+//REPUESTO
+Route::get('/admin/empresasInversionistas', [App\Http\Controllers\Admin\EmpresaInversionistaController::class, 'index'])->name('admin.empresasInversionistas');
+Route::post('/admin/empresasInversionistas/registro', [App\Http\Controllers\Admin\EmpresaInversionistaController::class, 'registro'])->name('admin.empresasInversionistas.registro');
+Route::post('/admin/empresasInversionistas/{empresasInversionistasId}/actualizar', [App\Http\Controllers\Admin\EmpresaInversionistaController::class, 'actualizar'])->name('admin.empresasInversionistas.actualizar');
+Route::delete('/admin/empresasInversionistas/{empresasInversionistasId}/eliminar', [App\Http\Controllers\Admin\EmpresaInversionistaController::class, 'eliminar'])->name('admin.empresasInversionistas.eliminar');
+
 
 Route::get('/admin/operaciones', [App\Http\Controllers\Admin\OperacionController::class, 'index'])->name('admin.operaciones');
 Route::post('/admin/operaciones/{operacionId}/actualizar', [App\Http\Controllers\Admin\OperacionController::class, 'actualizar'])->name('admin.operaciones.actualizar');
