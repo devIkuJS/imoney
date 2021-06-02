@@ -46,8 +46,8 @@ class MailController extends Controller
             'estado_id' => $estado_id,
         ];
 
-        Mail::to('brian125865@gmail.com')->send(new NotificacionAdminEmail($data));
-       //Mail::to('hector.andia@imoney.pe')->cc(['franco.mosso@imoney.pe','roger.bastidas@imoney.pe'])->send(new NotificacionAdminEmail($data));
+        //Mail::to('brian125865@gmail.com')->send(new NotificacionAdminEmail($data));
+       Mail::to('hector.andia@imoney.pe')->cc(['franco.mosso@imoney.pe','roger.bastidas@imoney.pe'])->send(new NotificacionAdminEmail($data));
     }
 
     public static function finalizarOperacion($name, $email, $nro_orden, $montoA, $descripcionMontoA, $montoB, $descripcionMontoB, $banco_origen, $banco_destino){
