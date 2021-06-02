@@ -66,15 +66,12 @@
         background-size: 100%;
         background-repeat: no-repeat;
         width: 80px;
-        /*width: 55px;*/
         height: 60px;
-        /*width: 55px;*/
         border: none;
         outline: none;
         z-index: 20;
         position: absolute;
         top: 20%;
-        /*left: 0;*/
         left: 20px;
         right: 0;
         margin: auto;
@@ -115,7 +112,6 @@
 
 
 @extends('layouts.app')
-
 @section('content')
 <main>
     <div class="container pt-5">
@@ -239,7 +235,7 @@ sendData();
 }
 });
 
-},8000)
+},10000)
 
 
 function sendData(){
@@ -316,6 +312,8 @@ button_save.addEventListener('click', ()=>{
             _token:"{{ csrf_token() }}",
             },
             success: function (data) {
+
+                console.log(tipoCambio);
             window.location.href = "operacion";
             },
             error: function (data, textStatus, errorThrown) {

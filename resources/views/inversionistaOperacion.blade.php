@@ -100,7 +100,6 @@
 
 
 @extends('layouts.app')
-
 @section('content')
 <main>
     <div class="container pt-5">
@@ -290,7 +289,7 @@
     $("#modal-agregar-cuenta").modal('hide');
      window.location.reload();
 
-  },  3000);
+  },  1500);
   
 
 

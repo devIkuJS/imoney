@@ -30,6 +30,7 @@ Route::get('/', function () {
   return view('auth.login');
 });
 
+
 Route::get('/tipoRegistro', [App\Http\Controllers\TipoRegistroController::class, 'index'])->name('tipoRegistro');
 
 //user
@@ -110,6 +111,7 @@ Route::delete('/admin/inversiones/{inversionesId}/eliminar', [App\Http\Controlle
 
 
 Route::get('/admin/operaciones', [App\Http\Controllers\Admin\OperacionController::class, 'index'])->name('admin.operaciones');
+Route::get('/admin/operaciones/getData', [App\Http\Controllers\Admin\OperacionController::class, 'getData'])->name('admin.operaciones.getData');
 Route::post('/admin/operaciones/{operacionId}/actualizar', [App\Http\Controllers\Admin\OperacionController::class, 'actualizar'])->name('admin.operaciones.actualizar');
 
 Route::get('/admin/cuentabancaria', [App\Http\Controllers\Admin\CuentaBancariaController::class, 'index'])->name('admin.cuentabancaria');
@@ -123,4 +125,3 @@ Auth::routes(['verify' => true]);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\SignupEmail;
 use App\Mail\TransaccionEmail;
+use App\Mail\NotificacionAdminEmail;
 use App\Mail\TransaccionFinalEmail;
 use App\Mail\TransaccionErrorEmail;
 use App\Mail\InversionEmail;
@@ -34,6 +35,17 @@ class MailController extends Controller
             'banco_destino' => $banco_destino,
         ];
         Mail::to($email)->send(new TransaccionEmail($data));
+    }
+
+    public static function notificarOperacion($name, $apellidos, $email, $nro_orden, $estado_id){
+        $data = [
+            'name' => $name,
+            'apellidos' => $apellidos,
+            'email' => $email,
+            'nro_orden' => $nro_orden,
+            'estado_id' => $estado_id,
+        ];
+        Mail::to($email)->send(new NotificacionAdminEmail($data));
     }
 
     public static function finalizarOperacion($name, $email, $nro_orden, $montoA, $descripcionMontoA, $montoB, $descripcionMontoB, $banco_origen, $banco_destino){
@@ -78,4 +90,5 @@ class MailController extends Controller
         ];
         Mail::to($email)->send(new InversionEmail($data));
     }
+
 }
