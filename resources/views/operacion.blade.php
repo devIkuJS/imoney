@@ -64,6 +64,29 @@
         color: #8f0000;
     }
 
+    .modal-loading {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background-image:  url('gif/loader.gif');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-color: rgba( 0, 0, 0, 0.5);   
+    
+    }
+    main.loading {
+        overflow: hidden;   
+    }
+
+    main.loading .modal-loading  {
+        display: block;
+    }
+
     @-webkit-keyframes fadeInCheckbox {
         from {
             opacity: 0;
@@ -360,7 +383,7 @@ error: function() {
 
 
 $('#procesar-operacion').click(function() {
-
+ 
    if($('#bancos').val() === "" ){
       $('#err-banco-envio').html('<strong class="text-error">Por favor selecciona el banco de donde nos envias tu dinero</strong>');
 
@@ -371,6 +394,9 @@ $('#procesar-operacion').click(function() {
         $('#err-cbancaria-selected').html('<strong class="text-error">Por favor seleccione la cuenta donde desea recibir su dinero</strong>');
 
     }else{
+
+        $('main').append("<div class='modal-loading'></div>")
+        $('main').addClass("loading")
 
     $.ajax({
     type: "POST",
@@ -387,7 +413,8 @@ $('#procesar-operacion').click(function() {
     _token:"{{ csrf_token() }}",
     },
     success: function (data) {
-    window.location.href = `transaccion/${data}`;
+        $('main').removeClass("loading");
+        window.location.href = `transaccion/${data}`;
 
     },
     error: function (err) {
