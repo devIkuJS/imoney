@@ -89,7 +89,6 @@
     }
 
 
-
     @media (max-width: 575.98px) {
 
         .space-div {
@@ -102,7 +101,6 @@
 
 
 @extends('layouts.app')
-
 @section('content')
 <main>
     <div class="container pt-5">
@@ -290,9 +288,11 @@
  cuenta_bancaria_user: $('#cuenta_bancaria_user').val(),
  numero_cuenta: $('#numero_cuenta').val(),
  categoria_cuenta: $('#categoria_cuenta').val(),
+ tipo_cuenta: "{{ $dataTipoCambio['descripcionMontoB'] }}",
  _token:"{{ csrf_token() }}",
  },
  success: function (data) {
+     console.log(data);
   $("#agregar-tipo-cuenta").attr("disabled", true);
   $('#success-message').html('<div class="alert alert-success text-center">Cuenta Bancaria registrada , por favor seleccione su cuenta para seguir con la operación</div>');
 
@@ -301,7 +301,7 @@
     $("#modal-agregar-cuenta").modal('hide');
      window.location.reload();
 
-  },  3000);
+  },  1500);
 
 
  },
@@ -342,7 +342,8 @@ success: function (data) {
             '<h6 class="text-white mb-2">Tipo de cuenta: '+data[0].tipo_cuenta+'</h6>'+
      '</div>');
 
-    $('#modal-listar-cuenta').modal('hide');
+     document.getElementsByClassName("modal")[0].style.display = "none";
+    $('.modal-backdrop').remove();
 
 },
 error: function() { 

@@ -137,7 +137,6 @@
 
 
 @extends('layouts.app')
-
 @section('content')
 <main>
     <div class="container pt-5">
@@ -146,26 +145,13 @@
 
             <div class="col-md-12 text-center">
                 <span class="font-weight-bold h2">Hola, </span><span
-                    class="font-weight-bold h2">{{ Auth::user()->name }}</span>
-                    <span class="font-weight-bold text-black h2"> te presentamos nuestras oportunidades de inversión para hoy {{ date('d-m-Y', strtotime(now())) }} </span>
-                    <!--<span class="font-weight-bold text-black h2">este es tu saldo disponible:</span> -->         
-                    
+                    class="font-weight-bold h2">{{ Auth::user()->name }} </span>
+                    <span class="font-weight-bold text-black h2"> te presentamos nuestras oportunidades de inversión para hoy {{ date('d-m-Y', strtotime(now())) }} </span>   
             </div>
-            <!--<div class="col-md-12 mx-auto">
-                    <div class="row">
-                        <div class="col-6 text-right">
-                            <h4 class="font-weight-bold">PEN 0.00</h4> 
-                        </div>
-                        <div class="col-6 text-left">
-                            <h4 class="font-weight-bold">USD 0.00</h4>
-                        </div>
-                    </div>
-            <div>-->
 
                     <div class="col-md-12 mx-auto mb-5">
                         <div class="row mt-5">
                             <div class="col-6 text-left">
-                                <!--<h4 class="text-white font-weight-bold">Oportunidades de Inversión</h4>-->
                             </div>
                             <div class="col-6">
                                 <div class="d-flex float-right">
@@ -242,7 +228,7 @@
                                         <h5 class="modal-title font-weight-bold" id="modal-crear-cuenta">Característica
                                             de la Inversión - Deuda
                                         </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="close close-detalle" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -268,12 +254,6 @@
                                                     <div class="card font-weight-bold py-2 w-50 text-center float-left">
                                                         8 %</div>
                                                 </div>
-                                                <!--  <div class="col-6">
-                                            <h5 class="text-right font-weight-bold">Nº factura</h5>
-                                            <div class="card font-weight-bold py-2 w-50 text-center float-right">F0001-00000076
-                                            </div>
-                                        </div>
-                                            -->
                                             </div>
 
                                             <div class="row mt-5">
@@ -286,13 +266,11 @@
                                             <div class="row mt-4">
                                                 <div class="col-12 text-left">
                                                     <h4 class="font-weight-bold ">Quiero Invertir</h4>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Ingrese monto a invertir" name="monto_cambio"
+                                                    <input type="text" class="form-control monto_cambio"
+                                                        placeholder="Ingrese monto a invertir" name="monto_cambio" id="monto_cambio_{{$empresa->id}}"
                                                         onkeypress="return isNumber(event);" />
 
                                                     <input type="hidden" name="inversion_id" value="{{$empresa->id}}" />
-                                                    <!-- <h5 class="text-black text-center font-weight-bold">(cuentas con USD 0.00 disponibles)
-                                            </h5> -->
                                                 </div>
                                             </div>
 
@@ -305,11 +283,10 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <h5 class="font-weight-bold text-right">Retorno esperado</h5>
-                                                    <h5 class="font-weight-bold text-right"></h5>
+                                                    <h5 class="font-weight-bold text-right monto_esperado"></h5>
                                                     <div
-                                                        class="card font-weight-bold py-2 w-50 text-center float-right">
-                                                        {{ $empresa->cantidad_dias }} dias</div>
-                                                    <!--<input type="text" class="col-form-label text-right rounded-pill float-right" placeholder="113 dias" disabled></input>-->
+                                                        class="card font-weight-bold py-2 w-50 text-center float-right d-inline">
+                                                        <strong id="cantidad_dias_{{$empresa->id}}">{{ $empresa->cantidad_dias }}</strong>&nbsp;<strong>dias</strong></div>
                                                 </div>
                                             </div>
 
@@ -343,26 +320,40 @@
 
 @section('custom-script')
 <script>
-    /*  var i = 0;
-function move() {
-  if (i == 0) {
-    i = 1;
-    var elem = document.getElementById("inversionista");
-    var width = 10;
-    var id = setInterval(frame, 10);
-    function frame() {
-      if (width >= 100) {
-        clearInterval(id);
-        i = 0;
-      } else {
-        width++;
-        elem.style.width = width + "%";
-        elem.innerHTML = width  + "%";
-      }
-    }
-  }
-}
+
+/*
+$('.monto_cambio').on("input", function() {
+ var monto_esperado = (this.value*(Math.pow(1.08, (144/360)))).toFixed(2);
+
+ console.log($('.cantidad_dias').text());
+
+  $('.monto_esperado').text(monto_esperado + " "+ "Soles");
+  
+});
 */
+var inputs = $('.monto_cambio');
+
+
+for (var i=0; i<inputs.length; i++) {
+  $(inputs[i]).keyup(function() {
+
+      var id = $(this).attr('id')
+
+      var res = id.charAt(id.length-1);
+      var cantidad_dias = $('#cantidad_dias_'+res).text().trim();
+
+      var monto_esperado = (this.value*(Math.pow(1.08, (cantidad_dias/360)))).toFixed(2);
+
+      $('.monto_esperado').text(monto_esperado + " "+ "Soles");
+      
+  });
+}
+
+
+$(".close-detalle").click(function(){
+  $('.monto_esperado').text("");
+  $('#shares').val('');
+});
 
 
 
