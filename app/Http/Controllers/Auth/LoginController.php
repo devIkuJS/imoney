@@ -45,6 +45,9 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
  
+    public function showLoginForm(){
+        return view('auth.login');
+    }
 
     public function login(Request $request)
     {   
@@ -52,7 +55,7 @@ class LoginController extends Controller
    
         $this->validate($request, [
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required|',
         ]);
    
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'], 'is_verified' => 1 )))
@@ -64,11 +67,18 @@ class LoginController extends Controller
             }
         }else{
             return redirect()->route('login')
-                ->with('error','El correo y contraseña son invalidos');
-        }
-          
+                //->with('error','El correo y contraseña son invalidos');
+                ->withErrors(['email' => trans('auth.failed')])
+                ->withInput(request(['email']));
+        }      
     }
     
+    protected function validateLogin(Request $request){
+        $this->validate($request,[
+            'email' => 'required|string',
+            'password' => 'required|string'
+        ]);
 
+    }
     
 }

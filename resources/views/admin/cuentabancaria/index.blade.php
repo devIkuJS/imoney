@@ -27,6 +27,7 @@
                 <table id="tabla-bancaria" class="table table-bordered table-striped" style="width:100%">
                     <thead class="bg-primary text-white">
                         <tr>
+                            <th>ID</th>
                             <th>Nombre Usuario</th>
                             <th>Apellido Usuario</th>
                             <th>DNI Usuario</th>
@@ -40,6 +41,7 @@
                     <tbody>
                         @foreach ($cBancaria as $item)
                         <tr>
+                                    <td>{{ $item->user_id }}</td>
                                     <td>{{ $item->user_name }}</td>
                                     <td>{{ $item->user_apellido }}</td>
                                     <td>{{ $item->user_dni }}</td>
@@ -57,6 +59,7 @@
                     
                     <tfoot>
                         <tr>
+                            <th>ID</th>
                             <th>Nombre Usuario</th>
                             <th>Apellido Usuario</th>
                             <th>DNI Usuario</th>

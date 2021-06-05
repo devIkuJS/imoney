@@ -436,12 +436,14 @@
                                 <tbody>
                                   <tr>
                                     <th>Cambio</th>
-                                    <th>Envìas</th>
-                                    <th>Recibiràs</th>
+                                    <th>Envías</th>
+                                    <th>Tipo de cambio</th>
+                                    <th>Recibirás</th>
                                   </tr>
                                   <tr>
                                     <td>De {{$email_data['descripcionMontoA']}} a {{$email_data['descripcionMontoB']}}</td>
                                     <td>{{$email_data['montoA']}} {{$email_data['descripcionMontoA']}}</td>
+                                    <td>{{$email_data['tipoCambio']}}</td>
                                     <td>{{$email_data['montoB']}} {{$email_data['descripcionMontoB']}}</td>
                                   </tr>
                                 </tbody>
