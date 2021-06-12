@@ -81,12 +81,15 @@ class MailController extends Controller
         Mail::to($email)->send(new TransaccionErrorEmail($data));
     }
 
-    public static function enviarNroInversion($name, $email, $nro_orden, $monto_inversion, $moneda, $banco, $banco_destino){
+    public static function enviarNroInversion($name, $email, $nro_orden, $monto_inversion,$cantidad_dias,$monto_esperado,$fecha_esperada, $moneda, $banco, $banco_destino){
         $data = [
             'name' => $name,
             'email' => $email,
             'nro_orden' => $nro_orden,
             'monto_inversion' => $monto_inversion,
+            'cantidad_dias' => $cantidad_dias,
+            'monto_esperado' => $monto_esperado,
+            'fecha_esperada' => $fecha_esperada,
             'moneda' => $moneda,
             'banco_origen' => $banco,
             'banco_destino' => $banco_destino,

@@ -29,6 +29,8 @@ class InversionistaOperacionController extends Controller
         $monto_inversion = $request->monto;
         $tipo_cuenta = $request->moneda;
         $empresa_id = $request->id;
+        $cantidad_dias = $request->cantidad_dias;
+        $monto_esperado = $request->monto_esperado;
 
 
         $moneda = $request->moneda === '1' ? "Soles" : "Dolares";
@@ -48,6 +50,8 @@ class InversionistaOperacionController extends Controller
             'lista_cuenta_bancaria' => $lista_cuenta_bancaria,
             'categoria_cuenta'=>$categoria_cuenta,
             'monto_inversion'=>$monto_inversion,
+            'cantidad_dias'=> $cantidad_dias,
+            'monto_esperado'=> $monto_esperado,
             'moneda'=>$moneda,
             'tipo_cuenta'=>$tipo_cuenta,
             'empresa_id'=>$empresa_id,
@@ -105,6 +109,8 @@ class InversionistaOperacionController extends Controller
         $newOperacion->nro_orden = $this->generateRandomString();
         $newOperacion->banco_origen_id = $request->bancos;
         $newOperacion->monto_inversion = $request->monto_inversion;
+        $newOperacion->cantidad_dias = $request->cantidad_dias;
+        $newOperacion->monto_esperado = $request->monto_esperado;
         $newOperacion->moneda_id = $request->tipo_cuenta;
         $newOperacion->banco_destino_id = $request->cuenta_destino;
         $newOperacion->empresa_id = $request->empresa_id;

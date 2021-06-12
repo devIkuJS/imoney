@@ -60,12 +60,26 @@ class InversionistaTransaccionController extends Controller
             'estado_id'=>2,
             'updated_at'=> now()
         ));
-        
 
+        $empresa_inversion = DB::table('empresa_inversiones')
+            ->select('monto_disponible', 'fecha_esperada')
+            ->where('id', $transaccion->empresa_id)
+            ->get();
+
+
+       $monto_disponible_final = $empresa_inversion[0]->monto_disponible - $transaccion->monto_inversion;
+
+        DB::table('empresa_inversiones')->where('id', $transaccion->empresa_id)->update(array(
+            'monto_disponible'=>$monto_disponible_final,
+            'updated_at'=> now()
+        ));
+
+        $fecha_esperada = date('d-m-Y', strtotime($empresa_inversion[0]->fecha_esperada));
+        
+        
         $newOperacion->save();
 
-       MailController::enviarNroInversion(Auth::user()->name, Auth::user()->email , $transaccion->nro_orden, $transaccion->monto_inversion, $transaccion->moneda, $transaccion->banco , $transaccion->banco_destino);
-       //return response(json_encode($transaccion),200)->header('Content-type','application/json');
+       MailController::enviarNroInversion(Auth::user()->name, Auth::user()->email , $transaccion->nro_orden, $transaccion->monto_inversion,$transaccion->cantidad_dias, $transaccion->monto_esperado,$fecha_esperada, $transaccion->moneda, $transaccion->banco , $transaccion->banco_destino);
        return response(json_encode($transaccion->nro_orden),200)->header('Content-type','application/json');
 
         
