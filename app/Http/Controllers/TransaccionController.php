@@ -60,6 +60,7 @@ class TransaccionController extends Controller
         $newOperacion->save();
 
         MailController::enviarOperacion(Auth::user()->name, Auth::user()->email , $transaccion->nro_orden, $transaccion->montoA, $transaccion->descripcionMontoA,  $transaccion->montoB, $transaccion->descripcionMontoB, $transaccion->banco , $transaccion->banco_destino);
+        MailController::notificarOperacion(Auth::user()->name, Auth::user()->apellidos, Auth::user()->email , $transaccion->nro_orden, "2");
 
        return response(json_encode($transaccion->nro_orden),200)->header('Content-type','application/json');
 

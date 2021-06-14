@@ -1,8 +1,3 @@
-<style>
-    .custom-file-label::after {
-        content: "Adjuntar" !important;
-    }
-</style>
 @extends('adminlte::page')
 
 @section('title', 'Modulo Empresas Inversionistas')
@@ -27,16 +22,16 @@
                 <div class="card-header">
                     <h3 class="card-title">Listado de Empresas Inversionistas</h3>
                 </div>
-
+                <!-- card-header -->
                 <div class="mt-3">
                     <button type="button" class="btn btn-primary ml-2" data-toggle="modal"
                         data-target="#modal-crear-cuenta"><i class="fa fa-plus-circle pr-2"></i>Crear nueva empresa
                         inversionista
                     </button>
                 </div>
-                <!-- /.card-header -->
+
                 <div class="card-body">
-                    <table id="empresa_inversiones" class="table table-bordered table-striped" style="width:100%">
+                    <table id="inversiones" class="table table-bordered table-striped" style="width:100%">
                         <thead class="bg-primary text-white">
                             <tr>
                                 <th>ID</th>
@@ -44,6 +39,7 @@
                                 <th>Informe</th>
                                 <th>Logo</th>
                                 <th>Monto Disponible</th>
+                                <th>Monto Total</th>
                                 <th>Fecha Esperada</th>
                                 <th>Moneda Inversion</th>
                                 <th>Acciones</th>
@@ -59,6 +55,7 @@
                                 <td><button type="button" class="btn btn-link" data-toggle="modal"
                                         data-target="#modal-ver-logo-{{$inversion->id}}">Ver logo</button></td>
                                 <td>{{ $inversion->monto_disponible }}</td>
+                                <td>{{ $inversion->monto_total}}</td>
                                 <td>{{ date('d-m-Y', strtotime($inversion->fecha_esperada )) }}</td>
                                 <td>{{ $inversion->moneda_inversion === '1' ? 'Soles' : 'Dolares'  }}</td>
                                 <td>
@@ -90,6 +87,7 @@
                                 <th>Informe</th>
                                 <th>Logo</th>
                                 <th>Monto Disponible</th>
+                                <th>Monto Total</th>
                                 <th>Fecha Esperada</th>
                                 <th>Moneda Inversion</th>
                                 <th>Acciones</th>
@@ -105,6 +103,7 @@
     </div>
     <!-- /.row -->
 </div>
+
 <!-- Modal Agregar empresa inversionista -->
 <div class="modal fade" id="modal-crear-cuenta" tabindex="-1" role="dialog" aria-labelledby="modal-crear-cuenta"
     aria-hidden="true">
@@ -124,20 +123,24 @@
                         <label for="nombre">Empresa</label>
                         <input type="text" class="form-control" name="nombre">
                     </div>
-                        <div class="form-group">
-                            <label for="informe">Informe</label>
-                            <input type="file" class="form-control-file" name="informe_doc" accept="application/pdf">
-                        </div>
+                    <div class="form-group">
+                        <label for="informe">Informe</label>
+                        <input type="file" class="form-control-file" name="informe" accept="application/pdf">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="logo">Logo</label>
-                            <input type="file" class="form-control-file" name="logo"
-                                accept="image/jpeg,image/png,image/x-eps">
-                        </div>
+                    <div class="form-group">
+                        <label for="logo">Logo</label>
+                        <input type="file" class="form-control-file" name="logo"
+                            accept="image/jpeg,image/png,image/x-eps">
+                    </div>
 
                     <div class="form-group">
                         <label for="monto_disponible">Monto Disponible</label>
-                        <input type="text" class="form-control" name="monto_disponible" name="monto_disponible" />
+                        <input type="text" class="form-control" name="monto_disponible">
+                    </div>
+                    <div class="form-group">
+                        <label for="monto_total">Monto Total</label>
+                        <input type="text" class="form-control" name="monto_total">
                     </div>
                     <div class="form-group">
                         <div class="form-group row">
@@ -157,22 +160,24 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
-                <div id="success-message"></div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" id="crear-tipo-cuenta">Agregar</button>
+                
+                    <div id="success-message"></div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" id="crear-tipo-cuenta">Agregar</button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 <!-- Modal Agregar empresa inversionista -->
-@stop
+@endsection
 
 @section('js')
-<script type="text/javascript">
+<script>
 $(document).ready(function() {
-    $('#empresa_inversiones').DataTable({
+    $('#inversiones').DataTable({
         dom: 'Bfrtip',
         buttons: ['excel', 'pdf', 'print'],
         responsive: true,
@@ -190,17 +195,15 @@ $(document).ready(function() {
               "previous": "Anterior"
                 }
         }
-    } );
+    });
 });
 </script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.bootstrap4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.colVis.min.js"></script>
 @stop

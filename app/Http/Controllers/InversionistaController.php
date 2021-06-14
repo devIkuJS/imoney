@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Inversionista;
 use App\Models\EmpresaInversiones;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 use DateTime;
 
 
@@ -24,13 +25,8 @@ class InversionistaController extends Controller
 
         for ($i = 0; $i < count($empresas); $i++) {
            $empresas[$i]["cantidad_dias"] = $this->dateDiff($empresas[$i]["fecha_esperada"], now());
-           $empresas[$i]["monto_total"] = 50000;
         }
 
-        //$monto_total = $empresas[0]["monto_disponible"]*(((1+0.08)*($empresas[0]["cantidad_dias"]/360)));
-        /*$monto_total = 162837.50*(((1+0.125)*(98/360)));
-        dd($monto_total);
-        */
         return view('inversionista', ['empresas' => $empresas]);     
     }
 
@@ -44,11 +40,18 @@ class InversionistaController extends Controller
 
     	$data = $request->all();
 
+        $cantidad_dias = $data["cantidad_dias"];
+
+        $operator_monto_esperado =  $data["monto_cambio"]*(pow(1.08, ($cantidad_dias/360)));
+
+        $monto_esperado = number_format($operator_monto_esperado, 2, '.', '');
+
         return redirect()->route('inversionistaOperacion', [
         'id' => $data["inversion_id"],
         'monto' => $data["monto_cambio"],
         'moneda' => 1,
-
+        'cantidad_dias' => $cantidad_dias,
+        'monto_esperado' => $monto_esperado,
         ]);
         
       

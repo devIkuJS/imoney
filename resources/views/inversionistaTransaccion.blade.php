@@ -24,7 +24,6 @@
 
 
 @extends('layouts.app')
-
 @section('content')
 <main>
     <div class="container pt-5">
@@ -328,9 +327,9 @@ $('#reporte-message').html('<strong class="text-error">Por favor seleccione el m
                 console.log(data);
                 $('#callback-message').fadeIn(1000);
                 $("#btn-transferencia").attr("disabled", false);
-                window.location.href = `email-inversion-verify/${data}`;
+               window.location.href = `email-inversion-verify/${data}`;
 
-                console.log()
+                console.log(data);
             },
             error: function(err){
             console.log(err);
@@ -357,7 +356,7 @@ $('#reporte-message').html('<strong class="text-error">Por favor seleccione el m
             success: (data) => {
                $('#callback-message').fadeIn(1000);
                $("#btn-transferencia").attr("disabled", false);
-                window.location.href = `email-inversion-verify/${data}`;
+               window.location.href = `email-inversion-verify/${data}`;
                 
             },
             error: function(err){

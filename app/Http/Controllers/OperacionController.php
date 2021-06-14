@@ -112,6 +112,7 @@ class OperacionController extends Controller
         $newOperacion->tipo_cambio= $request->tipo_cambio;
         $newOperacion->estado_id = "1";
         $newOperacion->save();
+        MailController::notificarOperacion(Auth::user()->name, Auth::user()->apellidos, Auth::user()->email , $newOperacion->nro_orden, "1");
         return response(json_encode($newOperacion->nro_orden),200)->header('Content-type','application/json');
           
       } 

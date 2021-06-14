@@ -45,7 +45,7 @@
     }
    
 </style>
-@extends('layouts.app')
+@extends('layouts.login')
 
 @section('content')
 <div class="container">
@@ -183,6 +183,5 @@
     }
     }
     </script>
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 @stop
 

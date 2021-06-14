@@ -19,6 +19,7 @@ class CreateEmpresaInversionesTable extends Migration
             $table->string('informe');
             $table->string('logo');
             $table->decimal('monto_disponible', $precision = 8, $scale = 2)->nullable();
+            $table->decimal('monto_total', $precision = 8, $scale = 2)->nullable();
             $table->date('fecha_esperada')->nullable();
             $table->string('moneda_inversion', 50)->nullable();
             $table->timestamps();
