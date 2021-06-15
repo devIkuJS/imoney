@@ -7,7 +7,8 @@
                     <span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <img src="{{asset($empresa->ficha_ruc)}}" alt="{{$empresa->razon_social}}" class="img-fluid" />
+               <!-- <img src="{{asset($empresa->ficha_ruc)}}" alt="{{$empresa->razon_social}}" class="img-fluid" /> -->
+                <embed src="{{asset($empresa->ficha_ruc)}}" width="450" height="500" alt="pdf" />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
