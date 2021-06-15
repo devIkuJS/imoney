@@ -203,13 +203,13 @@
 <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
 <script>
   var firebaseConfig = {
-    apiKey: "AIzaSyAsBMyQFXCk0_ZW71txGarigpYHVXME7qA",
-    authDomain: "imoney-testing.firebaseapp.com",
-    databaseURL: "https://imoney-testing-default-rtdb.firebaseio.com/",
-    projectId: "imoney-testing",
-    storageBucket: "imoney-testing.appspot.com",
-    messagingSenderId: "128485826517",
-    appId: "1:128485826517:web:eac55e9713633cbb74a75c"
+    apiKey: "AIzaSyBgAR1JW7xkn-CtpfI08aitPd4fuYWToxI",
+    authDomain: "imoney-127a8.firebaseapp.com",
+    databaseURL: "https://imoney-127a8-default-rtdb.firebaseio.com",
+    projectId: "imoney-127a8",
+    storageBucket: "imoney-127a8.appspot.com",
+    messagingSenderId: "280989453871",
+    appId: "1:280989453871:web:1c93644dc71bf5a47fc0da"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
