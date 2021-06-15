@@ -228,17 +228,18 @@ var  tCambio = snap.val();
 tCambioCompra = tCambio.compra;
 tCambioVenta = tCambio.venta;
 
-/*
-if((jsonGlobal[0].compra != tCambioCompra) || (jsonGlobal[0].venta != tCambioVenta) ){
+if((jsonGlobal[0].compra != tCambio.compra) || (jsonGlobal[0].venta != tCambio.venta )){
+    
     $("#msj-cambio").html('<strong class="text-warning">El tipo de cambio ha sido actualizado</strong>');
-   
-   setTimeout(function(){
-    window.location.reload();
+
+    setTimeout(()=>{
+
+window.location.reload();
 }, 1500);
 
     
 }
-*/
+
 
 let tipoCambio = tCambioVenta;
 let tipoCambio_Venta = tCambioVenta;
