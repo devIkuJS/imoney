@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-ver-imagen-{{$usuario->id}}">
+<div class="modal fade" id="modal-ver-dni-adelante-{{$usuario->id}}">
     <div class="modal-dialog">
         <div class="modal-content bg-default">
             <div class="modal-header">

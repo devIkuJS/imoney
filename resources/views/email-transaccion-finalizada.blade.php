@@ -435,11 +435,13 @@
                                   <tr>
                                     <th>Cambio</th>
                                     <th>Monto que envío</th>
+                                    <th>Tipo de cambio</th>
                                     <th>Monto depositado</th>
                                   </tr>
                                   <tr>
                                     <td>De {{$email_data['descripcionMontoA']}} a {{$email_data['descripcionMontoB']}}</td>
                                     <td>{{$email_data['montoA']}} {{$email_data['descripcionMontoA']}}</td>
+                                    <td>{{$email_data['tipo_cambio']}}</td>
                                     <td>{{$email_data['montoB']}} {{$email_data['descripcionMontoB']}}</td>
                                   </tr>
                                 </tbody>

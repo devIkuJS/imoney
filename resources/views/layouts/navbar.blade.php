@@ -10,7 +10,7 @@
             <ul class="navbar-nav" style="padding: 7px; margin-left:20px;">
                 <li class="nav-item dropdown show" style="margin-top:25px;">
                     <a class="nav-link dropdown-toggle font-weight-bold" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" style="font-size:17px;margin-left:18px;color:black !important;">Panel de Usuario</a>
-                    <div class="dropdown-menu show" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 39px, 0px);">
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 39px, 0px);">
                       <a class="dropdown-item" href="{{ route('user') }}">Menu principal</a>
                       <a class="dropdown-item" href="{{ route('tipoCambio') }}">Tipo de cambio</a>
                       <a class="dropdown-item" href="{{ route('inversionista') }}">Inversión</a>

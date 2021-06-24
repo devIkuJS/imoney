@@ -40,7 +40,7 @@ class TipoCambioController extends Controller
     public function actualizar(Request $request, $tipocambioId)
     {
         $path =  storage_path();
-        $this->firebase = (new Factory)->withServiceAccount($path. '\imoney-127a8-firebase-adminsdk-sf8fs-8ae070b88c.json');
+        $this->firebase = (new Factory)->withServiceAccount($path. '/imoney-testing-firebase-adminsdk-7uf8g-f37d7743aa.json');
         $this->db = $this->firebase->createDatabase();
       
         $this->db->getReference('/tipoCambio')

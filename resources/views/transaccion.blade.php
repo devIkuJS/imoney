@@ -287,7 +287,7 @@ elem.onchange = function(){
     }else if(this.value == "2"){
         hiddenDiv.style.display = "block";
         $('#showMe').html('<div class="form-group">'+
-                        '<label for="voucher">Adjuntar Voucher</label>'+
+                        '<label for="voucher">Adjuntar Voucher (Obligatorio)</label>'+
                         '<input type="file" class="form-control-file" name="voucher" id="voucher" accept="image/jpeg,image/png,application/pdf,image/x-eps">'+
                     '</div>');
 

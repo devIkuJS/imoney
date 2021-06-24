@@ -30,63 +30,48 @@ class MisDatosController extends Controller
     public function actualizar(Request $request, $usuarioId)
     {
     	$user = User::find($usuarioId);
-        /*$user->domicilio = $request->domicilio;*/ 
-        $user->celular = $request->filled('celular') ? $request->celular : $user->celular; 
         $user->domicilio = $request->filled('domicilio') ? $request->domicilio : $user->domicilio;
-        
+        $user->celular = $request->filled('celular') ? $request->celular : $user->celular; 
+        $user->ocupacion = $request->filled('ocupacion') ? $request->ocupacion : $user->ocupacion;
+        /*$user->domicilio = $request->domicilio;
+        $user->celular = $request->celular;
+        $user->ocupacion = $request->ocupacion;*/
     	$user->save();   
     	return redirect()->back();
     	//dd($request->all());
-        return view('misDatos.actualizar',['user'=>$user]);
+        return response(json_encode($user),200)->header('Content-type','application/json');
+        //return view('misDatos.actualizar',['user'=>$user]);
     }
     
-    public function cambiarContrasena(Request $request)
-    {
-        try {
-            $valid = validator($request->only('old_password', 'new_password', 'confirm_password'), [
-                'old_password' => 'required|string|min:6',
-                'new_password' => 'required|string|min:6|different:old_password',
-                'confirm_password' => 'required_with:new_password|same:new_password|string|min:6',
-                    ], [
-                'confirm_password.required_with' => 'Confirm password is required.'
-            ]);
-
-            if ($valid->fails()) {
-                return response()->json([
-                            'errors' => $valid->errors(),
-                            'message' => 'Faild to update password.',
-                            'status' => false
-                                ], 200);
-            }
-//            Hash::check("param1", "param2")
-//            param1 - user password that has been entered on the form
-//            param2 - old password hash stored in database
-            if (Hash::check($request->get('old_password'), Auth::user()->password)) {
-                $user = User::find(Auth::user()->id);
-                $user->password = (new BcryptHasher)->make($request->get('new_password'));
-                if ($user->save()) {
-                    return response()->json([
-                                'data' => [],
-                                'message' => 'Your password has been updated',
-                                'status' => true
-                                    ], 200);
-                }
-            } else {
-                return response()->json([
-                            'errors' => [],
-                            'message' => 'Wrong password entered.',
-                            'status' => false
-                                ], 200);
-            }
-        } catch (Exception $e) {
-            return response()->json([
-                        'errors' => $e->getMessage(),
-                        'message' => 'Please try again',
-                        'status' => false
-                            ], 200);
+    public function cambiarContrasena(Request $request){
+        $rules = [
+            'mypassword' => 'required',
+            'password' => 'required|confirmed|min:6|max:18',
+        ];
+        
+        $messages = [
+            'mypassword.required' => 'El campo es requerido',
+            'password.required' => 'El campo es requerido',
+            'password.confirmed' => 'Los passwords no coinciden',
+            'password.min' => 'El mínimo permitido son 6 caracteres',
+            'password.max' => 'El máximo permitido son 18 caracteres',
+        ];
+        
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()){
+            return redirect('misDatos.cambiarContrasena')->withErrors($validator);
         }
-    
-        return redirect()->back();
-       
+        else{
+            if (Hash::check($request->mypassword, Auth::user()->password)){
+                $user = new User;
+                $user->where('email', '=', Auth::user()->email)
+                     ->update(['password' => bcrypt($request->password)]);
+                return redirect('misDatos')->with('status', 'Password cambiado con éxito');
+            }
+            else
+            {
+                return redirect('misDatos.cambiarContrasena')->with('message', 'Credenciales incorrectas');
+            }
+        }
     }
 }

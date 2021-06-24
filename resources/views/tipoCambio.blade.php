@@ -108,6 +108,7 @@
             top: 19%;
         }
     }
+    
 </style>
 
 
@@ -202,15 +203,15 @@
 <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
 <script>
-var firebaseConfig = {
-    apiKey: "AIzaSyBgAR1JW7xkn-CtpfI08aitPd4fuYWToxI",
-    authDomain: "imoney-127a8.firebaseapp.com",
-    databaseURL: "https://imoney-127a8-default-rtdb.firebaseio.com",
-    projectId: "imoney-127a8",
-    storageBucket: "imoney-127a8.appspot.com",
-    messagingSenderId: "280989453871",
-    appId: "1:280989453871:web:1c93644dc71bf5a47fc0da"
-  };
+var firebaseConfig = {     
+    apiKey: "AIzaSyAsBMyQFXCk0_ZW71txGarigpYHVXME7qA",     
+    authDomain: "imoney-testing.firebaseapp.com",     
+    databaseURL: "https://imoney-testing-default-rtdb.firebaseio.com/",    
+    projectId: "imoney-testing",     
+    storageBucket: "imoney-testing.appspot.com",     
+    messagingSenderId: "128485826517",     
+    appId: "1:128485826517:web:eac55e9713633cbb74a75c"   
+};
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
@@ -228,15 +229,28 @@ var  tCambio = snap.val();
 tCambioCompra = tCambio.compra;
 tCambioVenta = tCambio.venta;
 
+console.log('actual',jsonGlobal[0].venta);
+console.log('nuevo',tCambio.venta);
 
-if((jsonGlobal[0].compra != tCambioCompra) || (jsonGlobal[0].venta != tCambioVenta) ){
+if((jsonGlobal[0].compra != tCambio.compra) || (jsonGlobal[0].venta != tCambio.venta )){
+    
     $("#msj-cambio").html('<strong class="text-warning">El tipo de cambio ha sido actualizado</strong>');
-   
-   setTimeout(function(){
-    window.location.reload();
+
+    setTimeout(()=>{
+
+window.location.reload();
 }, 1500);
+
+  
+  /* setTimeout(function(){
+    window.location.reload();
+}, 1500);*/
+
+
+
     
 }
+
 
 let tipoCambio = tCambioVenta;
 let tipoCambio_Venta = tCambioVenta;
