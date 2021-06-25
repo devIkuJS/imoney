@@ -436,11 +436,15 @@
                                 <tbody>
                                   <tr>
                                     <th>Monto a invertir</th>
-                                    <th>Moneda</th>
+                                    <th>Cantidad de dias</th>
+                                    <th>Monto esperado</th>
+                                    <th>Fecha de retorno esperado</th>
                                   </tr>
                                   <tr>
-                                    <td>{{$email_data['monto_inversion']}}</td>
-                                    <td>{{$email_data['moneda']}}</td>
+                                    <td>{{$email_data['monto_inversion']}} {{$email_data['moneda']}}</td>
+                                    <td>{{$email_data['cantidad_dias']}} dias</td>
+                                    <td>{{$email_data['monto_esperado']}} {{$email_data['moneda']}}</td>
+                                    <td>{{$email_data['fecha_esperada']}}</td>
                                   </tr>
                                 </tbody>
                               </table>
@@ -451,8 +455,7 @@
                       <p>Datos Enviados</p>
                       <p style="font-weight:bold;">{{$email_data['monto_inversion']}} {{$email_data['moneda']}} de la entidad bancaria {{$email_data['banco_origen']}}</p>
                       <p>Su inversiòn se abonará a la siguiente cuenta y se te enviará un correo con la confirmación del depositó realizado:</p>
-                      <p style="font-weight:bold;"> {{$email_data['moneda']}} en su cuenta {{$email_data['moneda']}} indicada de la entidad bancaria {{$email_data['banco_destino']}}</p>
-                       
+                      <p style="font-weight:bold;">{{$email_data['monto_esperado']}} {{$email_data['moneda']}} en su cuenta {{$email_data['moneda']}} indicada de la entidad bancaria {{$email_data['banco_destino']}}</p>
                        <p style="font-weight:bold;color:gray;">Muchas gracias por operar con iMoney Perú SAC RUC:20602075665, Teléfono: 01-7482710, Celular: 982 273 702, pronto tendremos mas novedades para ti.</p>
                        <small style="font-size: 12px;color:gray;">Si tuviese alguna consulta, duda sobre su transaccion por favor comunicarse a nuestro <a  href="https://api.whatsapp.com/send?phone=+51982273702&text=Tengo%20una%20consulta"
                         target="_blank">whastapp en linea</a></small>

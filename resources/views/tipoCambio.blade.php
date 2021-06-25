@@ -241,11 +241,11 @@ if((jsonGlobal[0].compra != tCambio.compra) || (jsonGlobal[0].venta != tCambio.v
 window.location.reload();
 }, 1500);
 
+
   
   /* setTimeout(function(){
     window.location.reload();
 }, 1500);*/
-
 
 
     

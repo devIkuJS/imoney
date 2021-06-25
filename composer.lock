@@ -1430,16 +1430,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.42.0",
+            "version": "v1.42.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "0e311771797adb1b8674fce77e5dbaf727cea3eb"
+                "reference": "26a471ec72ee98ae146316054b25a88de8693b11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/0e311771797adb1b8674fce77e5dbaf727cea3eb",
-                "reference": "0e311771797adb1b8674fce77e5dbaf727cea3eb",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/26a471ec72ee98ae146316054b25a88de8693b11",
+                "reference": "26a471ec72ee98ae146316054b25a88de8693b11",
                 "shasum": ""
             },
             "require": {
@@ -1488,22 +1488,22 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.42.0"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.42.1"
             },
-            "time": "2021-05-07T17:20:51+00:00"
+            "time": "2021-06-09T22:04:14+00:00"
         },
         {
             "name": "google/cloud-storage",
-            "version": "v1.23.1",
+            "version": "v1.23.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-storage.git",
-                "reference": "ca3817dae90d7d757381f3f63c9d7df58ca1416f"
+                "reference": "4a9f1262c2929af8c33a58466616820dba91dddc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/ca3817dae90d7d757381f3f63c9d7df58ca1416f",
-                "reference": "ca3817dae90d7d757381f3f63c9d7df58ca1416f",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/4a9f1262c2929af8c33a58466616820dba91dddc",
+                "reference": "4a9f1262c2929af8c33a58466616820dba91dddc",
                 "shasum": ""
             },
             "require": {
@@ -1542,9 +1542,9 @@
             ],
             "description": "Cloud Storage Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.23.1"
+                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.23.2"
             },
-            "time": "2021-01-13T22:28:48+00:00"
+            "time": "2021-06-09T22:04:14+00:00"
         },
         {
             "name": "google/crc32",
@@ -9589,16 +9589,16 @@
         },
         {
             "name": "sebastian/global-state",
-            "version": "5.0.2",
+            "version": "5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/global-state.git",
-                "reference": "a90ccbddffa067b51f574dea6eb25d5680839455"
+                "reference": "23bd5951f7ff26f12d4e3242864df3e08dec4e49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/a90ccbddffa067b51f574dea6eb25d5680839455",
-                "reference": "a90ccbddffa067b51f574dea6eb25d5680839455",
+                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/23bd5951f7ff26f12d4e3242864df3e08dec4e49",
+                "reference": "23bd5951f7ff26f12d4e3242864df3e08dec4e49",
                 "shasum": ""
             },
             "require": {
@@ -9641,7 +9641,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/global-state/issues",
-                "source": "https://github.com/sebastianbergmann/global-state/tree/5.0.2"
+                "source": "https://github.com/sebastianbergmann/global-state/tree/5.0.3"
             },
             "funding": [
                 {
@@ -9649,7 +9649,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-26T15:55:19+00:00"
+            "time": "2021-06-11T13:31:12+00:00"
         },
         {
             "name": "sebastian/lines-of-code",
@@ -10107,5 +10107,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

@@ -64,6 +64,7 @@ class TransaccionController extends Controller
   
         $newOperacion->save();
 
+
         MailController::enviarOperacion($tipo_cambio, Auth::user()->name, 
                                         Auth::user()->email , $transaccion->nro_orden, 
                                         $transaccion->montoA, $transaccion->descripcionMontoA, 

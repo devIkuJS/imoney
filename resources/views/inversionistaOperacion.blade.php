@@ -110,7 +110,7 @@
                 <h3 class="text-white font-weight-bold">Confirmacion de Inversión
                     {{ date('d-m-Y', strtotime(now())) }}</h3>
             </div>
-            <div class="col-md-6 mx-auto">
+        <!--    <div class="col-md-6 mx-auto">
 
                 <div class="col-md-12">
 
@@ -122,6 +122,28 @@
                     </div>
                 </div>
             </div>
+        -->
+        <div class="col-md-6 mx-auto">
+
+            <div class="col-md-12">
+
+                <div class="row mt-4 text-center py-4 div-border">
+                    <div class="col-4">
+                        <h4 class="font-weight-bold text-white">Monto a invertir</h4>
+                        <h5 class="font-weight-bold text-white">{{$monto_inversion}} {{ $moneda }}</h5>
+                    </div>
+                    <div class="col-4">
+                        <h4 class="font-weight-bold text-white">Cantidad de dias</h4>
+                        <h5 class="font-weight-bold text-white">{{$cantidad_dias}} dias</h5>
+                    </div>
+                    <div class="col-4">
+                        <h4 class="font-weight-bold text-white">Monto esperado</h4>
+                        <h5 class="font-weight-bold text-white">{{$monto_esperado}} {{ $moneda }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
             <div class="col-md-12 mt-5">
                 <div class="row">
                     <div class="col-md-6">
@@ -370,6 +392,8 @@ if($('#bancos').val() === "" ){
  data: { 
  bancos: $('#bancos').val(),
  monto_inversion: "{{ $monto_inversion }}",
+ cantidad_dias: "{{ $cantidad_dias }}",
+ monto_esperado: "{{ $monto_esperado }}",
  cuenta_destino: $('input[name=cbancaria_selected]:checked').val(),
  tipo_cuenta: "{{ $tipo_cuenta }}",
  empresa_id: "{{ $empresa_id }}",

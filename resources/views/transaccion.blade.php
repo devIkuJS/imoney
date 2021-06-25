@@ -114,23 +114,6 @@
                         </div>
                     </div>
 
-                    <!--<div class="row mt-4">
-                        <div class="col-md-4 col-12">
-                            <div class="card font-weight-bold text-center py-2">
-                                Scotiabank
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-12">
-                            <div class="card font-weight-bold text-center py-2">
-                                Cuenta Corriente: 0006226531
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-12">
-                            <div class="card font-weight-bold text-center py-2">
-                                CCI: 00924300000622653179
-                            </div>
-                        </div>
-                    </div>-->
 
                     @else
 
@@ -188,27 +171,7 @@
                         </div>
                     </div>
 
-                    <!--<div class="row mt-4">
-                        <div class="col-md-4 col-12">
-                            <div class="card font-weight-bold text-center py-2">
-                                Scotiabank
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-12">
-                            <div class="card font-weight-bold text-center py-2">
-                                Cuenta Corriente: 0004892264
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-12">
-                            <div class="card font-weight-bold text-center py-2">
-                                CCI: 00924300000489226475
-                            </div>
-                        </div>
-                    </div>-->
-
                     @endif
-
-                    
 
                     <p class="text-center mt-4 font-weight-bold h5">Tienes un promedio de 25 minutos para realizar la
                         transferencia sin
@@ -247,7 +210,6 @@
                     <div class="form-group">
                         <select class="form-control" id="select_reporte" name="select_reporte">
                             <option value="">Seleccione el modo de reporte de su transaccion</option>
-                            <option value="1">Por Nro Operacion</option>
                             <option value="2">Adjuntar voucher</option>
                         </select>
                     </div>
@@ -278,13 +240,7 @@ elem.onchange = function(){
 
     if(this.value == ""){
         hiddenDiv.style.display = "none";
-    }else if(this.value == "1"){
-        hiddenDiv.style.display = "block";
-        $('#showMe').html('<div class="form-group">'+
-                        '<label for="nro_operacion">Nro Operacion</label>'+
-                        '<input type="text" class="form-control" name="nro_operacion" id="nro_operacion" >'+
-                    '</div>')
-    }else if(this.value == "2"){
+    }else {
         hiddenDiv.style.display = "block";
         $('#showMe').html('<div class="form-group">'+
                         '<label for="voucher">Adjuntar Voucher (Obligatorio)</label>'+
@@ -307,36 +263,6 @@ if($('#select_reporte').val() === "" ){
 $('#reporte-message').html('<strong class="text-error">Por favor seleccione el modo de reporte de su transaccion</strong>');
 
 }else{
-
-    if($('#select_reporte').val() === "1"){
-
-        if($('#nro_operacion').val().length === 0){
-                $('#reporte-message').html('<strong class="text-error">Ingrese por favor el numero de operacion de su transferencia</strong>');
-        }else{
-            
-            $('#callback-message').html('<div class="alert alert-info" role="alert">Efectuando operacion..</div>');
-            $("#btn-transferencia").attr("disabled", true);
-
-            $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            type:'POST',
-            url: "{{ route('transaccion.enviarOperacion')}}",
-            data: formData,
-            cache:false,
-            contentType: false,
-            processData: false,
-            success: (data) => {
-                $('#callback-message').fadeIn(1000);
-                $("#btn-transferencia").attr("disabled", false);
-                window.location.href = `email-transaccion-verify/${data}`;
-            },
-            error: function(err){
-            console.log(err);
-            }
-            });
-        }
-
-    }else if($('#select_reporte').val() === "2"){
 
         if($("#voucher")[0].files.length === 0){
                 $('#reporte-message').html('<strong class="text-error">Adjunte el voucher de su transferencia</strong>');
@@ -362,11 +288,6 @@ $('#reporte-message').html('<strong class="text-error">Por favor seleccione el m
             }
             });
         }
-
-    
-    }
-
-
 
 
 }

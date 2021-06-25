@@ -18,8 +18,6 @@ class MisDatosController extends Controller
 
     public function index()
     {
-       /* $misDatos = MisDatos::all();
-        return view('misDatos'); */
         
         $user = User::find(Auth::user()->id); 
         
@@ -30,17 +28,12 @@ class MisDatosController extends Controller
     public function actualizar(Request $request, $usuarioId)
     {
     	$user = User::find($usuarioId);
-        $user->domicilio = $request->filled('domicilio') ? $request->domicilio : $user->domicilio;
-        $user->celular = $request->filled('celular') ? $request->celular : $user->celular; 
-        $user->ocupacion = $request->filled('ocupacion') ? $request->ocupacion : $user->ocupacion;
-        /*$user->domicilio = $request->domicilio;
-        $user->celular = $request->celular;
-        $user->ocupacion = $request->ocupacion;*/
+      $user->domicilio = $request->filled('domicilio') ? $request->domicilio : $user->domicilio;
+      $user->celular = $request->filled('celular') ? $request->celular : $user->celular; 
+      $user->ocupacion = $request->filled('ocupacion') ? $request->ocupacion : $user->ocupacion;
     	$user->save();   
     	return redirect()->back();
-    	//dd($request->all());
-        return response(json_encode($user),200)->header('Content-type','application/json');
-        //return view('misDatos.actualizar',['user'=>$user]);
+      return response(json_encode($user),200)->header('Content-type','application/json');
     }
     
     public function cambiarContrasena(Request $request){

@@ -269,7 +269,6 @@
                                                     <input type="text" class="form-control monto_cambio"
                                                         placeholder="Ingrese monto a invertir" name="monto_cambio" id="monto_cambio_{{$empresa->id}}"
                                                         onkeypress="return isNumber(event);" />
-
                                                     <input type="hidden" name="inversion_id" value="{{$empresa->id}}" />
                                                 </div>
                                             </div>
@@ -284,9 +283,13 @@
                                                 <div class="col-6">
                                                     <h5 class="font-weight-bold text-right">Retorno esperado</h5>
                                                     <h5 class="font-weight-bold text-right monto_esperado"></h5>
+
+                                                    <input type="hidden" name="monto_esperado" value=""/>
                                                     <div
                                                         class="card font-weight-bold py-2 w-50 text-center float-right d-inline">
                                                         <strong id="cantidad_dias_{{$empresa->id}}">{{ $empresa->cantidad_dias }}</strong>&nbsp;<strong>dias</strong></div>
+
+                                                        <input type="hidden" name="cantidad_dias" value="{{ $empresa->cantidad_dias }}"/>
                                                 </div>
                                             </div>
 
@@ -321,16 +324,6 @@
 @section('custom-script')
 <script>
 
-/*
-$('.monto_cambio').on("input", function() {
- var monto_esperado = (this.value*(Math.pow(1.08, (144/360)))).toFixed(2);
-
- console.log($('.cantidad_dias').text());
-
-  $('.monto_esperado').text(monto_esperado + " "+ "Soles");
-  
-});
-*/
 var inputs = $('.monto_cambio');
 
 
@@ -354,8 +347,6 @@ $(".close-detalle").click(function(){
   $('.monto_esperado').text("");
   $('#shares').val('');
 });
-
-
 
 
 function isNumber(evt) {
