@@ -28,7 +28,8 @@ class InversionController extends Controller
     public function registro(Request $request){
         $newInversion = new EmpresaInversiones();
 
-         if($request->hasfile('informe')){
+        $newInversion->nombre = $request->nombre;
+        if($request->hasfile('informe')){
             $file=$request->file('informe');
             $destinationPath= 'images/informe/';
             $filename= time() . '-' . $file->getClientOriginalName();
@@ -43,8 +44,6 @@ class InversionController extends Controller
             $uploadSuccess= $request->file('logo')->move($destinationPath,$filename);
             $newInversion->logo=$destinationPath . $filename;
         }
-       
-        $newInversion->nombre = $request->nombre;
         $newInversion->monto_disponible = $request->monto_disponible;
         $newInversion->monto_total = $request->monto_total;
         $newInversion->fecha_esperada = $request->fecha_esperada;

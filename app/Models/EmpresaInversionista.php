@@ -13,12 +13,7 @@ class empresaInversionista extends Model
     protected $primarykey='id';
 
     protected $fillable = [
-        'nombre',
-        'informe',
-        'logo',
-        'monto_disponible',
-        'monto_total',
-        'fecha_esperada',
-        'moneda_inversion'
+        'nombre'
+    
     ];
 }
