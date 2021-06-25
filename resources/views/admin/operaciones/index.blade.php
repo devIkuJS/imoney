@@ -38,7 +38,6 @@
                                 <th>Estado de transaccion</th>
                                 <th>Fecha de transaccion</th>
                                 <th>Fecha de Actualiz. de transaccion</th>
-                                <th>Nro Operacion</th>
                                 <th>Voucher de operacion</th>
                                 <th>Acciones</th>
                             </tr>
@@ -57,7 +56,6 @@
                                 <td>{{ $operacion->estado }}</td>
                                 <td>{{ date('d-m-Y H:i:s', strtotime($operacion->created_at)) }}</td>
                                 <td>{{ date('d-m-Y H:i:s', strtotime($operacion->updated_at)) }}</td>
-                                <td>{{ $operacion->nro_operacion }}</td>
                                 @if($operacion->voucher)
                                 <td>
                                     <button type="button" class="btn btn-link" data-toggle="modal"
@@ -91,7 +89,6 @@
                                 <th>Estado de operacion</th>
                                 <th>Fecha de operacion</th>
                                 <th>Fecha de Actualizacion de Operacion</th>
-                                <th>Nro Operacion</th>
                                 <th>Voucher de operacion</th>
                                 <th>Acciones</th>
                             </tr>

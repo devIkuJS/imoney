@@ -22,7 +22,7 @@ class MailController extends Controller
         Mail::to($email)->send(new SignupEmail($data));
     }
 
-    public static function enviarOperacion($tipo_cambio,$name, $email, $nro_orden, $montoA, $descripcionMontoA, $montoB, $descripcionMontoB, $banco_origen, $banco_destino){
+    public static function enviarOperacion($name, $email, $nro_orden, $montoA, $descripcionMontoA, $montoB, $descripcionMontoB, $banco_origen, $banco_destino){
         $data = [
             'name' => $name,
             'email' => $email,
@@ -33,9 +33,8 @@ class MailController extends Controller
             'descripcionMontoB' => $descripcionMontoB,
             'banco_origen' => $banco_origen,
             'banco_destino' => $banco_destino,
-            'tipo_cambio,' => $tipo_cambio,
         ];
-        Mail::to($email)->send(new TransaccionEmail($data,$tipo_cambio));
+        Mail::to($email)->send(new TransaccionEmail($data));
     }
 
     public static function notificarOperacion($name, $apellidos, $email, $nro_orden, $estado_id){
