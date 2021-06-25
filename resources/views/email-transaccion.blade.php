@@ -423,7 +423,7 @@
                       <img src={{asset('imagenes/logo-mail-4.png')}} alt="Fjords" style="width:10%,text-align:center;"
                         class="img-fluid-alex">
 
-                      <h2>Transacción informada</h2>
+                      <h2>Transacción confirmada</h2>
                       <h3 style="color:black !important;">Hola {{ Auth::user()->name }} {{ Auth::user()->apellidos }}</h3>
                       <h3 style="color:black !important;">Tu número de orden es: {{$email_data['nro_orden']}} </h3>
                       <h4>Hemos recibido el número de operación de su transacción</h4>
@@ -443,6 +443,7 @@
                                   <tr>
                                     <td>De {{$email_data['descripcionMontoA']}} a {{$email_data['descripcionMontoB']}}</td>
                                     <td>{{$email_data['montoA']}} {{$email_data['descripcionMontoA']}}</td>
+                                    <td>{{$email_data['tipo_cambio']}}</td>
                                     <td>{{$email_data['montoB']}} {{$email_data['descripcionMontoB']}}</td>
                                   </tr>
                                 </tbody>

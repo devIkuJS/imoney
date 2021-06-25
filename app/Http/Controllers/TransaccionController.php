@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\StatusOperacion;
 
+
+
 class TransaccionController extends Controller
 {
     public function __construct()
@@ -17,7 +19,7 @@ class TransaccionController extends Controller
     }
 
     public function index(Request $request, $nroTransaccion) {  
-
+        
         $transaccion = DB::table('operacion')
             ->join('bancos', 'operacion.banco_origen_id', '=', 'bancos.id')
             ->select('operacion.*', 'bancos.name AS banco' , DB::raw("(SELECT `bancos`.`name`
@@ -34,10 +36,11 @@ class TransaccionController extends Controller
         ]);
     }
 
-    public function enviarOperacion(Request $request){
-
-
+    public function enviarOperacion(Request $request){        
+        
         $transaccion = json_decode($request->transaccion);
+        /*print_r($transaccion);
+        exit;*/
 
         $newOperacion = new StatusOperacion(); 
 
@@ -52,23 +55,21 @@ class TransaccionController extends Controller
         $newOperacion->operacion_id = $transaccion->id;
         $newOperacion->nro_operacion = $request->nro_operacion;
 
+       //exit;
+        $tipo_cambio = $transaccion->tipo_cambio;
         DB::table('operacion')->where('id', $transaccion->id)->update(array(
             'estado_id'=>2,
             'updated_at'=> now()
         ));
-
+  
         $newOperacion->save();
 
-        MailController::enviarOperacion(
-            Auth::user()->name, 
-            Auth::user()->email , 
-            $transaccion->nro_orden, 
-            $transaccion->montoA, 
-            $transaccion->descripcionMontoA,  
-            $transaccion->montoB, 
-            $transaccion->descripcionMontoB, 
-            $transaccion->banco, 
-            $transaccion->banco_destino);
+
+        MailController::enviarOperacion($tipo_cambio, Auth::user()->name, 
+                                        Auth::user()->email , $transaccion->nro_orden, 
+                                        $transaccion->montoA, $transaccion->descripcionMontoA, 
+                                        $transaccion->montoB, $transaccion->descripcionMontoB, 
+                                        $transaccion->banco , $transaccion->banco_destino);
         MailController::notificarOperacion(Auth::user()->name, Auth::user()->apellidos, Auth::user()->email , $transaccion->nro_orden, "2");
 
        return response(json_encode($transaccion->nro_orden),200)->header('Content-type','application/json');

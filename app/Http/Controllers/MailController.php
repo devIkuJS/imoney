@@ -11,6 +11,7 @@ use App\Mail\InversionEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
+
 class MailController extends Controller
 {
     public static function sendSignupEmail($name, $email, $verification_code){
@@ -22,7 +23,7 @@ class MailController extends Controller
         Mail::to($email)->send(new SignupEmail($data));
     }
 
-    public static function enviarOperacion($name, $email, $nro_orden, $montoA, $descripcionMontoA, $montoB, $descripcionMontoB, $banco_origen, $banco_destino){
+    public static function enviarOperacion($tipo_cambio,$name, $email, $nro_orden, $montoA, $descripcionMontoA, $montoB, $descripcionMontoB, $banco_origen, $banco_destino){
         $data = [
             'name' => $name,
             'email' => $email,
@@ -33,6 +34,7 @@ class MailController extends Controller
             'descripcionMontoB' => $descripcionMontoB,
             'banco_origen' => $banco_origen,
             'banco_destino' => $banco_destino,
+            'tipo_cambio' => $tipo_cambio,
         ];
         Mail::to($email)->send(new TransaccionEmail($data));
     }
@@ -50,8 +52,9 @@ class MailController extends Controller
        Mail::to('hector.andia@imoney.pe')->cc(['franco.mosso@imoney.pe','roger.bastidas@imoney.pe'])->send(new NotificacionAdminEmail($data));
     }
 
-    public static function finalizarOperacion($name, $email, $nro_orden, $montoA, $descripcionMontoA, $montoB, $descripcionMontoB, $banco_origen, $banco_destino){
+    public static function finalizarOperacion($tipo_cambio,$name, $email, $nro_orden, $montoA, $descripcionMontoA, $montoB, $descripcionMontoB, $banco_origen, $banco_destino){
         $data = [
+            'tipo_cambio' => $tipo_cambio,
             'name' => $name,
             'email' => $email,
             'nro_orden' => $nro_orden,
@@ -61,6 +64,7 @@ class MailController extends Controller
             'descripcionMontoB' => $descripcionMontoB,
             'banco_origen' => $banco_origen,
             'banco_destino' => $banco_destino,
+           
         ];
         Mail::to($email)->send(new TransaccionFinalEmail($data));
     }

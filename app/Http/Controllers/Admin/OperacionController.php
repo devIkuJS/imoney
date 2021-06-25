@@ -102,11 +102,11 @@ class OperacionController extends Controller
     	$operacion->estado_id = $request->estado_transaccion;
       $operacion->updated_at = now();
     	$operacion->save();
+      $transaccion->tipo_cambio = $request->tipo_cambio;
       
-
       if($request->estado_transaccion === "3"){
 
-        MailController::finalizarOperacion($transaccion[0]->name_usuario, $transaccion[0]->mail_usuario , $transaccion[0]->nro_orden, $transaccion[0]->montoA, $transaccion[0]->descripcionMontoA,  $transaccion[0]->montoB, $transaccion[0]->descripcionMontoB, $transaccion[0]->banco , $transaccion[0]->banco_destino);
+        MailController::finalizarOperacion($transaccion[0]->tipo_cambio,$transaccion[0]->name_usuario, $transaccion[0]->mail_usuario , $transaccion[0]->nro_orden, $transaccion[0]->montoA, $transaccion[0]->descripcionMontoA,  $transaccion[0]->montoB, $transaccion[0]->descripcionMontoB, $transaccion[0]->banco , $transaccion[0]->banco_destino);
 
       }else if($request->estado_transaccion === "4"){
 
