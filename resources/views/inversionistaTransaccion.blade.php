@@ -245,7 +245,6 @@
                     <div class="form-group">
                         <select class="form-control" id="select_reporte" name="select_reporte">
                             <option value="">Seleccione el modo de reporte de su transaccion</option>
-                            <option value="1">Por Nro. Operacion</option>
                             <option value="2">Adjuntar voucher</option>
                         </select>
                     </div>
@@ -269,6 +268,7 @@
 @endsection
 
 @section('custom-script')
+@section('custom-script')
 <script type="text/javascript">
     var elem = document.getElementById("select_reporte");
 elem.onchange = function(){
@@ -276,16 +276,10 @@ elem.onchange = function(){
 
     if(this.value == ""){
         hiddenDiv.style.display = "none";
-    }else if(this.value == "1"){
+    }else {
         hiddenDiv.style.display = "block";
         $('#showMe').html('<div class="form-group">'+
-                        '<label for="nro_operacion">Nro Operacion</label>'+
-                        '<input type="text" class="form-control" name="nro_operacion" id="nro_operacion" >'+
-                    '</div>')
-    }else if(this.value == "2"){
-        hiddenDiv.style.display = "block";
-        $('#showMe').html('<div class="form-group">'+
-                        '<label for="voucher">Adjuntar Voucher</label>'+
+                        '<label for="voucher">Adjuntar Voucher (Obligatorio)</label>'+
                         '<input type="file" class="form-control-file" name="voucher" id="voucher" accept="image/jpeg,image/png,application/pdf,image/x-eps">'+
                     '</div>');
 
@@ -306,39 +300,6 @@ $('#reporte-message').html('<strong class="text-error">Por favor seleccione el m
 
 }else{
 
-    if($('#select_reporte').val() === "1"){
-
-        if($('#nro_operacion').val().length === 0){
-                $('#reporte-message').html('<strong class="text-error">Ingrese por favor el numero de operacion de su transferencia</strong>');
-        }else{
-            
-            $('#callback-message').html('<div class="alert alert-info" role="alert">Efectuando operacion..</div>');
-            $("#btn-transferencia").attr("disabled", true);
-
-            $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            type:'POST',
-            url: "{{ route('inversionistaTransaccion.enviarOperacion')}}",
-            data: formData,
-            cache:false,
-            contentType: false,
-            processData: false,
-            success: (data) => {
-                console.log(data);
-                $('#callback-message').fadeIn(1000);
-                $("#btn-transferencia").attr("disabled", false);
-               window.location.href = `email-inversion-verify/${data}`;
-
-                console.log(data);
-            },
-            error: function(err){
-            console.log(err);
-            }
-            });
-        }
-
-    }else if($('#select_reporte').val() === "2"){
-
         if($("#voucher")[0].files.length === 0){
                 $('#reporte-message').html('<strong class="text-error">Adjunte el voucher de su transferencia</strong>');
         }else{
@@ -354,21 +315,15 @@ $('#reporte-message').html('<strong class="text-error">Por favor seleccione el m
             contentType: false,
             processData: false,
             success: (data) => {
-               $('#callback-message').fadeIn(1000);
-               $("#btn-transferencia").attr("disabled", false);
-               window.location.href = `email-inversion-verify/${data}`;
-                
+                $('#callback-message').fadeIn(1000);
+                $("#btn-transferencia").attr("disabled", false);
+                window.location.href = `email-inversion-verify/${data}`;
             },
             error: function(err){
             console.log(err);
             }
             });
         }
-
-    
-    }
-
-
 
 
 }

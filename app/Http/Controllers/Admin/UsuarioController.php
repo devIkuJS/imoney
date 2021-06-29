@@ -20,16 +20,8 @@ class UsuarioController extends Controller
 		$usuarios = DB::table('users')
             ->join('roles', 'users.tipo_id', '=', 'roles.id')
             ->select('users.*', 'roles.name AS rol')
+            ->where('roles.id','1')
             ->get();
-   /* $usuarios = DB::table('cuenta_bancarias')
-            ->join('users', 'cuenta_bancarias.user_id', '=', 'users.id')
-            ->join('bancos', 'cuenta_bancarias.banco_id', '=', 'bancos.id')
-            ->join('tipo_cuentas', 'cuenta_bancarias.tipo_cuenta', '=', 'tipo_cuentas.id')
-            ->join('categoria_cuenta', 'cuenta_bancarias.categoria_cuenta_id', '=', 'categoria_cuenta.id')
-            ->select('users.*', 'cuenta_bancarias.numero_cuenta AS cuenta_bancaria','bancos.name AS nombre_banco', 'tipo_cuentas.name AS moneda', 'categoria_cuenta.name AS tipo_cuenta')
-            ->get();
-            */
-
 				
     	return view('admin.usuarios.index' , ['usuarios' => $usuarios]);
     }

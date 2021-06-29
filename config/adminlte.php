@@ -241,10 +241,16 @@ return [
             'icon' => 'fas fa-fw fa-dollar-sign',
         ],
         [
-            'text' => 'Usuarios',
+            'text' => 'Persona Natural',
             'url'  => '/admin/usuarios',
             'icon' => 'fas fa-fw fas fa-user',
         ],
+		[
+            'text' => 'Persona Juridica',
+            'url'  => '/admin/personaJuridica',
+            'icon' => 'fas fa-fw fas fa-id-badge',
+        ],
+		
         [
             'text' => 'Empresas',
             'url'  => '/admin/empresas',
