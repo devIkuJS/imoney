@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Modulo Persona natural')
+@section('title', 'Modulo Operador')
 
 @section('content_header')
 <h1>
-Persona natural
+    Operador (Juridico)
 </h1>
 @stop
 
@@ -20,7 +20,7 @@ Persona natural
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Listado de Persona natural</h3>
+                    <h3 class="card-title">Listado de Operadores (Juridico)</h3>
                 </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -28,8 +28,7 @@ Persona natural
                     <thead class="bg-primary text-white">
                         <tr>
                             <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
+                            <th>Nombres y Apellidos</th>
                             <th>Email</th>
                             <th>DNI</th>
                             <th>Celular</th>
@@ -37,11 +36,8 @@ Persona natural
                             <th>Nacionalidad</th>
                             <th>Ocupacion</th>
                             <th>Pos. Politica?</th>
-                            <th>Cargo</th>
                             <th>Empresa</th>
-                            <th>Tipo de Usuario</th>
                             <th>DNI Adelante</th>
-                            <th>DNI Atras</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -49,8 +45,7 @@ Persona natural
                         @foreach ($usuarios as $usuario)
                         <tr>
                             <td>{{ $usuario->id }}</td>
-                            <td>{{ $usuario->name }}</td>
-                            <td>{{ $usuario->apellidos }}</td>
+                            <td>{{ $usuario->name }} {{ $usuario->apellidos }}</td>
                             <td>{{ $usuario->email }}</td>
                             <td>{{ $usuario->dni }}</td>
                             <td>{{ $usuario->celular }}</td>
@@ -58,11 +53,8 @@ Persona natural
                             <td>{{ $usuario->nacionalidad }}</td>
                             <td>{{ $usuario->ocupacion }}</td>
                             <td>{{ $usuario->politico ? 'Si' : 'No'  }}</td>
-                            <td>{{ $usuario->cargo }}</td>
-                            <td>{{ $usuario->empresa }}</td>
-                            <td>{{ $usuario->rol }}</td>
+                            <td>{{ $usuario->razon_social }}</td>
                             <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-ver-dni-adelante-{{$usuario->id}}">Ver DNI</button></td>
-                             <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-ver-dni-atras-{{$usuario->id}}">Ver DNI</button></td>
                             <td>
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-update-usuario-{{$usuario->id}}">Editar</button>
                                 <form action="{{ route ('admin.usuarios.eliminar', $usuario->id) }}" class="d-inline" method="post">
@@ -74,21 +66,17 @@ Persona natural
                             </td>
                         </tr>
                         <!-- modal update -->
-                        @include('admin.usuarios.modal-update-usuario')
+                        @include('admin.representante-legal.modal-update-usuario')
                         <!-- /.modal update-->
                         <!-- modal ver dni adelante -->
-                        @include('admin.usuarios.modal-ver-dni-adelante')
+                        @include('admin.representante-legal.modal-ver-dni-adelante')
                         <!-- /.modal ver dni adelante-->
-                        <!-- modal ver dni atras -->
-                        @include('admin.usuarios.modal-ver-dni-atras')
-                        <!-- /.modal ver dni atras-->
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
                             <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
+                            <th>Nombres y Apellidos</th>
                             <th>Email</th>
                             <th>DNI</th>
                             <th>Celular</th>
@@ -96,11 +84,8 @@ Persona natural
                             <th>Nacionalidad</th>
                             <th>Ocupacion</th>
                             <th>Pos. Politica?</th>
-                            <th>Cargo</th>
                             <th>Empresa</th>
-                            <th>Tipo de Usuario</th>
                             <th>DNI Adelante</th>
-                            <th>DNI Atras</th>
                             <th>Acciones</th>
                         </tr>
                     </tfoot>

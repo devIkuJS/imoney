@@ -94,10 +94,21 @@ Route::post('/transaccion/enviarOperacion', [App\Http\Controllers\TransaccionCon
 
 //Admin
 Route::get('/admin/empresas', [App\Http\Controllers\Admin\EmpresaController::class, 'index'])->name('admin.empresas');
+
 Route::get('/admin/usuarios', [App\Http\Controllers\Admin\UsuarioController::class, 'index'])->name('admin.usuarios');
 Route::post('/admin/usuarios/registro', [App\Http\Controllers\Admin\UsuarioController::class, 'registro'])->name('admin.usuarios.registro');
 Route::post('/admin/usuarios/{usuarioId}/actualizar', [App\Http\Controllers\Admin\UsuarioController::class, 'actualizar'])->name('admin.usuarios.actualizar');
 Route::delete('/admin/usuarios/{usuarioId}/eliminar', [App\Http\Controllers\Admin\UsuarioController::class, 'eliminar'])->name('admin.usuarios.eliminar');
+
+Route::get('/admin/representante-legal', [App\Http\Controllers\Admin\RepresentanteLegalController::class, 'index'])->name('admin.representante-legal');
+Route::post('/admin/representante-legal/registro', [App\Http\Controllers\Admin\RepresentanteLegalController::class, 'registro'])->name('admin.representante-legal.registro');
+Route::post('/admin/representante-legal/{usuarioId}/actualizar', [App\Http\Controllers\Admin\RepresentanteLegalController::class, 'actualizar'])->name('admin.representante-legal.actualizar');
+Route::delete('/admin/representante-legal/{usuarioId}/eliminar', [App\Http\Controllers\Admin\RepresentanteLegalController::class, 'eliminar'])->name('admin.representante-legal.eliminar');
+
+Route::get('/admin/operador', [App\Http\Controllers\Admin\OperadorController::class, 'index'])->name('admin.operador');
+Route::post('/admin/operador/registro', [App\Http\Controllers\Admin\OperadorController::class, 'registro'])->name('admin.operador.registro');
+Route::post('/admin/operador/{usuarioId}/actualizar', [App\Http\Controllers\Admin\OperadorController::class, 'actualizar'])->name('admin.operador.actualizar');
+Route::delete('/admin/operador/{usuarioId}/eliminar', [App\Http\Controllers\Admin\OperadorController::class, 'eliminar'])->name('admin.operador.eliminar');
 
 Route::get('/admin/tipocambio', [App\Http\Controllers\Admin\TipoCambioController::class, 'index'])->name('admin.tipocambio');
 Route::post('/admin/tipocambio/registro', [App\Http\Controllers\Admin\TipoCambioController::class, 'registro'])->name('admin.tipocambio.registro');

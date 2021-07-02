@@ -241,8 +241,18 @@ return [
             'icon' => 'fas fa-fw fa-dollar-sign',
         ],
         [
-            'text' => 'Usuarios',
+            'text' => 'Persona natural',
             'url'  => '/admin/usuarios',
+            'icon' => 'fas fa-fw fas fa-user',
+        ],
+        [
+            'text' => 'Representante Legal',
+            'url'  => '/admin/representante-legal',
+            'icon' => 'fas fa-fw fas fa-user',
+        ],
+        [
+            'text' => 'Operador (Juridico)',
+            'url'  => '/admin/operador',
             'icon' => 'fas fa-fw fas fa-user',
         ],
         [
