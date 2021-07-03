@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
-class UsuarioController extends Controller
+class RepresentanteLegalController extends Controller
 {
     public function _construct()
     {
@@ -17,22 +17,14 @@ class UsuarioController extends Controller
     public function index(Request $request)
     {   
    
-		$usuarios = DB::table('users')
-            ->join('roles', 'users.tipo_id', '=', 'roles.id')
-            ->select('users.*', 'roles.name AS rol')
-            ->where('roles.id', '2')
+    $usuarios = DB::table('representante_legals')
+            ->join('users', 'representante_legals.user_id', '=', 'users.id')
+            ->join('empresa', 'representante_legals.empresa_id', '=', 'empresa.id')
+            ->select('users.*', 'representante_legals.archivo_vigencia AS vigencia','empresa.razon_social AS razon_social')
             ->get();
-   /* $usuarios = DB::table('cuenta_bancarias')
-            ->join('users', 'cuenta_bancarias.user_id', '=', 'users.id')
-            ->join('bancos', 'cuenta_bancarias.banco_id', '=', 'bancos.id')
-            ->join('tipo_cuentas', 'cuenta_bancarias.tipo_cuenta', '=', 'tipo_cuentas.id')
-            ->join('categoria_cuenta', 'cuenta_bancarias.categoria_cuenta_id', '=', 'categoria_cuenta.id')
-            ->select('users.*', 'cuenta_bancarias.numero_cuenta AS cuenta_bancaria','bancos.name AS nombre_banco', 'tipo_cuentas.name AS moneda', 'categoria_cuenta.name AS tipo_cuenta')
-            ->get();
-            */
-
+            
 				
-    	return view('admin.usuarios.index' , ['usuarios' => $usuarios]);
+    	return view('admin.representante-legal.index' , ['usuarios' => $usuarios]);
     }
 
     public function registro(Request $request)

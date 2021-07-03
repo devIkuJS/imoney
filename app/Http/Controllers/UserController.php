@@ -109,4 +109,9 @@ class UserController extends Controller
     {
         //
     }
+
+    public function razonSocial(Request $request)
+    {
+    	return 'hola';
+    }
 }

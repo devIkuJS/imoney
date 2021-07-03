@@ -10,7 +10,8 @@ use App\Models\TipoCuenta;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-
+use Carbon\Carbon;
+use Response;
 class InversionController extends Controller
 {
     public function _construct()

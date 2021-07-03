@@ -147,7 +147,7 @@
                             <label for="fecha_esperada" class="col-md-4 col-form-label text-md-left">Fecha
                                 Esperada</label>
                             <div class="col-md-12">
-                                <input class="form-control" type="date" name="fecha_esperada" id="fecha_esperada">
+                                <input class="form-control" type="date" name="fecha_esperada" id="fecha_esperada" min="{{\Carbon\Carbon::now()->format('Y-m-d')}}">                             
                             </div>
                         </div>
                     </div>
@@ -199,6 +199,8 @@ $(document).ready(function() {
 });
 
 </script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>

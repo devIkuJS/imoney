@@ -254,6 +254,18 @@
                                                     <div class="card font-weight-bold py-2 w-50 text-center float-left">
                                                         8 %</div>
                                                 </div>
+                                                <div class="col-6">
+                                                    <h5 class="text-right font-weight-bold">Tasa mensual</h5>
+                                                    <div class="card font-weight-bold py-2 w-50 text-center float-right">
+                                                       1.0706%</div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-6">
+                                                    <h5 class="font-weight-bold">Número de factura</h5>
+                                                    <div class="card font-weight-bold py-2 w-50 text-center float-left">
+                                                        F001-00000067</div>
+                                                </div>
                                             </div>
 
                                             <div class="row mt-5">

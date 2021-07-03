@@ -30,10 +30,10 @@
 <main>
     <div class="container pt-5">
 
-        <div class="text-center"><span class="font-weight-bold text-white h2">Hola, </span><span
-                class="font-weight-bold h2">{{ Auth::user()->name }}</span>
+    <div class="text-center"><span class="font-weight-bold text-white h2">Hola, </span><span
+                id="hi2" class="font-weight-bold h2"></span>
         </div>
-        <h3 class="text-center font-weight-bold text-white">¡BIENVENIDO! Elige la operación que quieres realizar</h3>
+        <h3 class="text-center font-weight-bold text-white">&#161;BIENVENIDO! Elige la operaci&oacute;n que quieres realizar</h3>
 
         <div class="row mt-5">
             <div class="col-12">
@@ -99,4 +99,7 @@
     </div>
 </main>
 
+
+
 @endsection
+

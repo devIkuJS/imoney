@@ -246,9 +246,14 @@ return [
             'icon' => 'fas fa-fw fas fa-user',
         ],
 		[
-            'text' => 'Persona Juridica',
-            'url'  => '/admin/personaJuridica',
-            'icon' => 'fas fa-fw fas fa-id-badge',
+            'text' => 'Representante Legal',
+            'url'  => '/admin/representante-legal',
+            'icon' => 'fas fa-fw fas fa-user',
+        ],
+        [
+            'text' => 'Operador (Juridico)',
+            'url'  => '/admin/operador',
+            'icon' => 'fas fa-fw fas fa-user',
         ],
 		
         [

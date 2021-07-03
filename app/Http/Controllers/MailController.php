@@ -10,7 +10,7 @@ use App\Mail\TransaccionErrorEmail;
 use App\Mail\InversionEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Facades\DB;
 
 class MailController extends Controller
 {
@@ -36,6 +36,24 @@ class MailController extends Controller
             'banco_destino' => $banco_destino,
             'tipo_cambio' => $tipo_cambio,
         ];
+
+        $idrol = DB::table('roles')
+        ->select('roles.id', 'roles.name')
+        ->where('roles.id', Auth::user()->tipo_id)
+        ->get();
+    
+        if($idrol[0]->id == 3 || $idrol[0]->id == 4){
+            $cuentaSelected = DB::table('persona_operaciones')
+            ->join('empresa', 'empresa.id', '=', 'persona_operaciones.empresa_id')
+            ->select('empresa.razon_social')
+            ->where('persona_operaciones.user_id', Auth::id())
+            ->get();
+            
+            $data['razon_social'] = $cuentaSelected[0]->razon_social;
+            
+        }else if ($idrol[0]->id == 2){
+            $data['razon_social'] = Auth::user()->name." ". Auth::user()->apellidos;  
+        }
         Mail::to($email)->send(new TransaccionEmail($data));
     }
 
