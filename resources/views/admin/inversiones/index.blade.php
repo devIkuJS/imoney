@@ -70,7 +70,7 @@
                                 </td>
                             </tr>
                             <!-- modal update -->
-                            @include('admin.inversiones.modal-update-inversiones')
+                            @include('admin.inversiones.modal-update-inversion')
                             <!-- /.modal update-->
                             <!-- modal ver informe -->
                             @include('admin.inversiones.modal-ver-informe')

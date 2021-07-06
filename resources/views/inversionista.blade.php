@@ -144,8 +144,8 @@
         <div class="row">
 
             <div class="col-md-12 text-center">
-                <span class="font-weight-bold h2">Hola, </span><span
-                    class="font-weight-bold h2">{{ Auth::user()->name }} </span>
+                <span class="font-weight-bold h2">Hola, </span><span id="hi2"
+                    class="font-weight-bold h2"></span>
                     <span class="font-weight-bold text-black h2"> te presentamos nuestras oportunidades de inversión para hoy {{ date('d-m-Y', strtotime(now())) }} </span>   
             </div>
 
@@ -368,5 +368,18 @@ function isNumber(evt) {
              return false;
           return true;
 }
+$(document).ready(function() {
+$.ajax({
+    url: `/inversionista/razonSocial`,
+	success: function(respuesta) {
+		console.log(respuesta);
+		$("#hi2").html(respuesta);
+	},
+	error: function() {
+        console.log("No se ha podido obtener la informacion");
+    }
+});
+
+});
 </script>
 @stop

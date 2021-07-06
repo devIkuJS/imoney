@@ -100,6 +100,21 @@
 </main>
 
 
-
 @endsection
 
+@section('custom-script')
+<script type="text/javascript">
+
+$(document).ready(function() {
+$.ajax({
+    url: `/user/razonSocial`,
+	success: function(respuesta) {
+		console.log(respuesta);
+		$("#hi2").html(respuesta);
+	},
+	error: function() {
+        console.log("No se ha podido obtener la informacion");
+    }
+});
+
+});

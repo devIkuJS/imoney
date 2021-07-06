@@ -65,7 +65,23 @@ class MailController extends Controller
             'nro_orden' => $nro_orden,
             'estado_id' => $estado_id,
         ];
-
+        $idrol = DB::table('roles')
+        ->select('roles.id', 'roles.name')
+        ->where('roles.id', Auth::user()->tipo_id)
+        ->get();
+    
+        if($idrol[0]->id == 3 || $idrol[0]->id == 4){
+            $cuentaSelected = DB::table('persona_operaciones')
+            ->join('empresa', 'empresa.id', '=', 'persona_operaciones.empresa_id')
+            ->select('empresa.razon_social')
+            ->where('persona_operaciones.user_id', Auth::id())
+            ->get();
+            
+            $data['razon_social'] = $cuentaSelected[0]->razon_social;
+            
+        }else if ($idrol[0]->id == 2){
+            $data['razon_social'] = Auth::user()->name." ". Auth::user()->apellidos;  
+        }
         //Mail::to('brian125865@gmail.com')->send(new NotificacionAdminEmail($data));
        Mail::to('hector.andia@imoney.pe')->cc(['franco.mosso@imoney.pe','roger.bastidas@imoney.pe'])->send(new NotificacionAdminEmail($data));
     }

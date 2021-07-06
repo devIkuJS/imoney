@@ -50,6 +50,7 @@ Route::post('/empresa/create', [App\Http\Controllers\EmpresaController::class, '
 //Inversionista - cliente
 Route::get('/inversionista', [App\Http\Controllers\InversionistaController::class, 'index'])->name('inversionista');
 Route::post('/inversionista/gestion', [App\Http\Controllers\InversionistaController::class, 'gestion'])->name('inversionista.gestion');
+Route::get('/inversionista/razonSocial', [App\Http\Controllers\InversionistaController::class, 'razonSocial'])->name('inversionista.razonSocial');
 
 //Inversionista - operacion - cliente 
 Route::get('/inversionistaOperacion', [App\Http\Controllers\InversionistaOperacionController::class, 'index'])->name('inversionistaOperacion');

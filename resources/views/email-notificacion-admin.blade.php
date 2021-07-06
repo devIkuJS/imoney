@@ -423,9 +423,9 @@
                       <img src={{asset('imagenes/logo-mail-4.png')}} alt="Fjords" style="width:10%,text-align:center;"
                         class="img-fluid-alex">
 
-                     <h2>Notificación - {{ $email_data['estado_id'] === "1" ? "Operación de Usuario Registrada" : "Voucher de usuario enviado" }}</h2>
+                     <h2>Notificaci&oacute;n - {{ $email_data['estado_id'] === "1" ? "Operaci&oacute;n de Usuario Registrada" : "Voucher de usuario enviado" }}</h2>
                       <h3 style="color:black !important;">Número de orden: {{$email_data['nro_orden']}} </h3>
-                      <h3 style="color:black !important;">Usuario: {{$email_data['name']}} {{$email_data['apellidos']}}</h3>
+                      <h3 style="color:black !important;">Usuario: {{$email_data['razon_social']}}</h3>
                       <h3 style="color:black !important;">Email: {{$email_data['email']}}</h3>
                     </td>
                   </tr>
