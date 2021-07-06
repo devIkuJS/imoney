@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Banco;
 use App\Models\TipoCuenta;
 use App\Models\CuentaBancaria;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {

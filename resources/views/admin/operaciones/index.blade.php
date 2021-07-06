@@ -108,7 +108,7 @@
 @section('js')
 <script>
     $(document).ready(function() {
-    $('#operaciones').DataTable({
+    var table =  $('#operaciones').DataTable({
         dom: 'Bfrtip',
         buttons: ['excel', 'pdf', 'print'],
         responsive: true,
