@@ -1,92 +1,66 @@
-@extends('adminlte::page')
+<style>
+    .container{
+        margin-top: 55px !important;
+    }
+    .card-header{
+        background:#0274be !important;
+        color:white !important;
+        font-family: Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: 15px;
+    }
 
-@section('title', 'Modulo cuentaBancaria')
-
-@section('content_header')
-<h1>
-    Cuentas Bancarias
-</h1>
-@stop
-
+    .img-fluid2{
+        margin: 10px;
+        margin-top: 0px;
+        margin-left:-10px;
+        margin-right:10px;
+    }
+    .img-fluid:hover{
+        opacity: 0.5;
+        transform: scale(1.25);
+        transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    }
+    .font-weight-bold{
+        color:white !important;
+        font-family: Helvetica, sans-serif;
+        font-weight: bold;
+        margin-top:10px !important;
+    }
+    
+    @media (max-width: 575.98px) {
+        .text-center {
+            font-size:17px;
+        }
+    }
+       
+</style>
+@extends('layouts.app')
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Listado de Cuentas Bancarias</h3>
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">                
+                <div class="card" style="background: transparent !important;border-style: none;">
+                    <div class="card-header" style="background: transparent !important;border-style: none;">
+                        <h2 class="text-center font-weight-bold">{{ __('¿Con que perfil deseas solicitar tu financiamiento?') }}</h2></div>
+                    <div class="card-body mx-auto">
+                        <div class="text-center mb-5 mt-2">
+                            <a class="icon-block" href="{{ route('financiamientoPersonaNatural') }}">
+                                <img src={{asset('imagenes/persona100.png')}} alt="Fjords" style="width:30%" class="img-fluid">
+                            </a>
+                            <p class="font-weight-bold text-white">Persona Natural</p>
+                        </div>
+                        <div class="text-center">
+                            <a class="icon-block" href="{{ route('financiamientoEmpresa') }}">
+                                <img src={{asset('imagenes/empresa_original.png')}} alt="Fjords" style="width:30%" class="img-fluid">
+                            </a>
+                            <p class="font-weight-bold text-white">Empresa</p>
+                        </div>           
+                    </div>
                 </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <table id="cuentaBancaria" class="table table-bordered table-striped" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Usuario</th>
-                            <th>Banco</th>
-                            <th>Tipo de Cuenta</th>
-                            <th>Categoria de Cuenta</th>
-                            <th>Número de Cuenta</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($cuentaBancaria as $cuenta)
-                        <tr>
-                            <td>{{ $cuenta->id }}</td>
-                            <td>{{ $cuenta->usuario }}</td>
-                            <td>{{ $cuenta->banco }}</td>
-                            <td>{{ $cuenta->cuenta_soles }}</td>
-                            <td>{{ $cuenta->cuenta_dolares }}</td>
-                            
-                            <td>
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-update-cuentaBancaria-{{$user->id}}">Editar</button>
-                                <form action="{{ route ('cuentaBancaria.eliminar', $user->id) }}" class="d-inline" method="post">
-                                    {{ csrf_field() }}
-                                    @method('DELETE')
-                                    <button class="btn btn-danger">Eliminar</button>
-                                    
-                                </form>
-                            </td>
-                        </tr>
-                        <!-- modal update -->
-                        @include('cuentaBancaria.modal-update-cuentaBancaria')
-                        <!-- /.modal update-->
-                        @endforeach
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>ID</th>
-                            <th>Usuario</th>
-                            <th>Banco</th>
-                            <th>Tipo de Cuenta</th>
-                            <th>Categoria de Cuenta</th>
-                            <th>Número de Cuenta</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </tfoot>
-                </table>
             </div>
-            <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
         </div>
-        <!-- /.col -->
     </div>
-    <!-- /.row -->
-</div>
-
-@stop
-
-@section('js')
-<script>
-$(document).ready(function() {
-    $('#cuentaBancaria').DataTable({
-        responsive: true,
-        "order": [[ 3, "asc" ]]
-        
-    });
-
-});
-</script>
-@stop
+</main>
+@endsection

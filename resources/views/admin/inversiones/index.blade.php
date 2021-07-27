@@ -36,12 +36,16 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
+                                <th>Número RUC</th>
                                 <th>Informe</th>
                                 <th>Logo</th>
                                 <th>Monto Disponible</th>
-                                <th>Monto Total</th>
-                                <th>Fecha Esperada</th>
                                 <th>Moneda Inversion</th>
+                                <th>Monto Total</th>
+                                <th>Tasa anual (%)</th>
+                                <th>Tasa Mensual (%)</th>
+                                <th>Fecha Esperada</th>
+                                <th>Código de documento</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -50,14 +54,18 @@
                             <tr>
                                 <td>{{ $inversion->id }}</td>
                                 <td>{{ $inversion->nombre }}</td>
+                                <td>{{ $inversion->numero_ruc }}</td>
                                 <td><button type="button" class="btn btn-link" data-toggle="modal"
                                         data-target="#modal-ver-informe-{{$inversion->id}}">Ver informe</button></td>
                                 <td><button type="button" class="btn btn-link" data-toggle="modal"
                                         data-target="#modal-ver-logo-{{$inversion->id}}">Ver logo</button></td>
                                 <td>{{ $inversion->monto_disponible }}</td>
-                                <td>{{ $inversion->monto_total}}</td>
-                                <td>{{ date('d-m-Y', strtotime($inversion->fecha_esperada )) }}</td>
                                 <td>{{ $inversion->moneda_inversion === '1' ? 'Soles' : 'Dolares'  }}</td>
+                                <td>{{ $inversion->monto_total}}</td>
+                                <td>{{ $inversion->tasa_anual}}</td>
+                                <td>{{ $inversion->tasa_mensual}}</td>
+                                <td>{{ date('d-m-Y', strtotime($inversion->fecha_esperada )) }}</td>
+                                <td>{{ $inversion->serie_num_comprobante}}</td>
                                 <td>
                                     <button type="button" class="btn btn-warning" data-toggle="modal"
                                         data-target="#modal-update-inversion-{{$inversion->id}}">Editar</button>
@@ -84,12 +92,15 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
+                                <th>Número RUC</th>
                                 <th>Informe</th>
                                 <th>Logo</th>
                                 <th>Monto Disponible</th>
                                 <th>Monto Total</th>
+                                <th>Tasa anual (%)</th>
+                                <th>Tasa Mensual (%)</th>
                                 <th>Fecha Esperada</th>
-                                <th>Moneda Inversion</th>
+                                <th>Código de documento</th>
                                 <th>Acciones</th>
                             </tr>
                         </tfoot>
@@ -124,10 +135,13 @@
                         <input type="text" class="form-control" name="nombre">
                     </div>
                     <div class="form-group">
+                        <label for="numero_ruc">Número RUC</label>
+                        <input type="text" class="form-control" name="numero_ruc">
+                    </div>
+                    <div class="form-group">
                         <label for="informe">Informe</label>
                         <input type="file" class="form-control-file" name="informe" accept="application/pdf">
                     </div>
-
                     <div class="form-group">
                         <label for="logo">Logo</label>
                         <input type="file" class="form-control-file" name="logo"
@@ -139,8 +153,24 @@
                         <input type="text" class="form-control" name="monto_disponible">
                     </div>
                     <div class="form-group">
+                        <select class="form-control" id="moneda_inversion" name="moneda_inversion">
+                            <option value="">Moneda Inversion</option>
+                            @foreach ($moneda_inversion as $cat)
+                            <option value="{{$cat->id}}">{{$cat->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="monto_total">Monto Total</label>
                         <input type="text" class="form-control" name="monto_total">
+                    </div>
+                    <div class="form-group">
+                        <label for="tasa_anual">Tasa Anual(%)</label>
+                        <input type="text" class="form-control" name="tasa_anual">
+                    </div>
+                    <div class="form-group">
+                        <label for="tasa_mensual">Tasa Mensual(%)</label>
+                        <input type="text" class="form-control" name="tasa_mensual">
                     </div>
                     <div class="form-group">
                         <div class="form-group row">
@@ -151,16 +181,10 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <select class="form-control" id="moneda_inversion" name="moneda_inversion">
-                            <option value="">Moneda Inversion</option>
-                            @foreach ($moneda_inversion as $cat)
-                            <option value="{{$cat->id}}">{{$cat->name}}</option>
-                            @endforeach
-                        </select>
+                        <label for="serie_num_comprobante">Código de documento</label>
+                        <input type="text" class="form-control" name="serie_num_comprobante">
                     </div>
-                
                     <div id="success-message"></div>
                     <div class="modal-footer">
                         <button class="btn btn-primary" id="crear-tipo-cuenta">Agregar</button>

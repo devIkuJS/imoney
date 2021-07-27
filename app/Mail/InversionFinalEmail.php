@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class InversionEmail extends Mailable
+class InversionFinalEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -30,7 +30,7 @@ class InversionEmail extends Mailable
     {
 
        // dd($this->email_data);
-        return $this->from('inversiones@imoney.pe', 'Imoney')->subject("Inversión confirmada")->view('email-inversion', ['email_data' => $this->email_data]);
+        return $this->from('inversiones@imoney.pe', 'Imoney')->subject("Inversión realizada")->view('email-inversion-finalizada', ['email_data' => $this->email_data]);
 
     }
 }

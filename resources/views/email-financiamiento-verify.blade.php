@@ -14,10 +14,10 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header text-center bg-white text-lightblue" style="border:none !important;">{{ __('Transacción confirmada!') }}</div>
+                    <div class="card-header text-center bg-white text-lightblue" style="border:none !important;">{{ __('Financiamiento confirmado!') }}</div>
                         <div class="card-body text-center pt-0">
                             <img src="{{asset('imagenes/send_mail.png')}}" alt="send-mail" class="img-fluid" style="width: 200px;"/>
-                            <p class="font-weight-bold h5">Tu transacci&oacute;n con <strong style="color:#3233c1 !important;">Nro orden: {{$nroTransaccion}}</strong> fue confirmada por favor verifica tu correo electronico</p>
+                            <p class="font-weight-bold h5">Gracias por compartirnos tu informaci&oacute;n<strong style="color:#3233c1 !important;"></strong>.Por favor verifica tu correo electronico</p>
                             <p class="font-weight-bold h5" style="color:gray;">Si deseas regresar al panel principal, por favor, selecciona <a href="{{ route('user') }}">aqui</a></p>
                         </div>
                 </div>

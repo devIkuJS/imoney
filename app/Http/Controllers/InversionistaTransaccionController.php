@@ -22,7 +22,8 @@ class InversionistaTransaccionController extends Controller
         $transaccion = DB::table('inversion_operacion')
             ->join('bancos', 'inversion_operacion.banco_origen_id', '=', 'bancos.id')
             ->join('tipo_cuentas', 'inversion_operacion.moneda_id', '=', 'tipo_cuentas.id')
-            ->select('inversion_operacion.*', 'bancos.name AS banco' , 'tipo_cuentas.name as moneda', DB::raw("(SELECT `bancos`.`name`
+            ->join('empresa_inversiones', 'inversion_operacion.empresa_id', '=', 'empresa_inversiones.id')
+            ->select('inversion_operacion.*', 'bancos.name AS banco' , 'tipo_cuentas.name as moneda', 'empresa_inversiones.nombre AS empresa_nombre', 'empresa_inversiones.serie_num_comprobante AS codigo_factura', DB::raw("(SELECT `bancos`.`name`
             FROM `cuenta_bancarias`
             inner join `bancos` on `cuenta_bancarias`.`banco_id` = `bancos`.`id`
             where `cuenta_bancarias`.`id` = `inversion_operacion`.`banco_destino_id`) AS `banco_destino`")  )
@@ -79,10 +80,10 @@ class InversionistaTransaccionController extends Controller
         
         $newOperacion->save();
 
-       MailController::enviarNroInversion(Auth::user()->name, Auth::user()->email , $transaccion->nro_orden, $transaccion->monto_inversion,$transaccion->cantidad_dias, $transaccion->monto_esperado,$fecha_esperada, $transaccion->moneda, $transaccion->banco , $transaccion->banco_destino);
-       return response(json_encode($transaccion->nro_orden),200)->header('Content-type','application/json');
-
-        
+       MailController::enviarNroInversion(Auth::user()->name, Auth::user()->email , $transaccion->nro_orden, $transaccion->monto_inversion,$transaccion->cantidad_dias, $transaccion->monto_esperado,$fecha_esperada, $transaccion->moneda, $transaccion->banco , $transaccion->banco_destino,  $transaccion->empresa_nombre, $transaccion->codigo_factura);
+       MailController::notificarOperacionInversion(Auth::user()->name, Auth::user()->apellidos, Auth::user()->email , $transaccion->nro_orden, "2");
+       
+       return response(json_encode($transaccion->nro_orden),200)->header('Content-type','application/json');     
 
     }
     

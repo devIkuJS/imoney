@@ -46,10 +46,14 @@ class InversionController extends Controller
         }
        
         $newInversion->nombre = $request->nombre;
+        $newInversion->numero_ruc = $request->numero_ruc;
         $newInversion->monto_disponible = $request->monto_disponible;
         $newInversion->monto_total = $request->monto_total;
+        $newInversion->tasa_anual = $request->tasa_anual;
+        $newInversion->tasa_mensual = $request->tasa_mensual;
         $newInversion->fecha_esperada = $request->fecha_esperada;
         $newInversion->moneda_inversion = $request->moneda_inversion;
+        $newInversion->serie_num_comprobante = $request->serie_num_comprobante;
         $newInversion->save();
         return redirect()->back();
     }
@@ -73,8 +77,13 @@ class InversionController extends Controller
         }
         
         $Inversion->nombre = $request->nombre;
+        $Inversion->numero_ruc = $request->numero_ruc;
+        $Inversion->monto_disponible = $request->monto_disponible;
         $Inversion->monto_total = $request->monto_total;
+        $Inversion->tasa_anual = $request->tasa_anual;
+        $Inversion->tasa_mensual = $request->tasa_mensual;
         $Inversion->fecha_esperada = $request->fecha_esperada;
+        $Inversion->serie_num_comprobante = $request->serie_num_comprobante;
         $Inversion->save();
 
         return redirect()->back();

@@ -423,9 +423,9 @@
                       <img src={{asset('imagenes/logo-mail-4.png')}} alt="Fjords" style="width:10%,text-align:center;"
                         class="img-fluid-alex">
 
-                      <h2>Transacción No procesada</h2>
+                      <h2>Inversión No procesada</h2>
                       <h3 style="color:black !important;">Tu número de orden es: {{$email_data['nro_orden']}} </h3>
-                      <h4 class="text-danger">Su transacción no pudo ser realizada , por favor comuníquese a nuestro número de whastapp en linea con el número de orden </h4>
+                      <h4 class="text-danger">Su inversión no pudo ser realizada , por favor comuníquese a nuestro número de whastapp en linea con el número de orden </h4>
                       <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                         <tbody>
                           <tr>
@@ -434,14 +434,14 @@
                                 cellspacing="0" style="width: 100%;border-collapse: collapse;">
                                 <tbody>
                                   <tr>
-                                    <th>Cambio</th>
-                                    <th>Envìas</th>
-                                    <th>Recibiras </th>
+                                    <th>Monto a invertir</th>
+                                    <th>Monto esperado</th>
+                                    <th>Código de factura</th>
                                   </tr>
                                   <tr>
-                                    <td>De {{$email_data['descripcionMontoA']}} a {{$email_data['descripcionMontoB']}}</td>
-                                    <td>{{$email_data['montoA']}} {{$email_data['descripcionMontoA']}}</td>
-                                    <td>{{$email_data['montoB']}} {{$email_data['descripcionMontoB']}}</td>
+                                    <td>{{$email_data['monto_esperado']}} {{$email_data['moneda']}}</td>
+                                    <td>{{$email_data['monto_inversion']}} {{$email_data['moneda']}}</td>
+                                    <td>{{$email_data['codigo_factura']}}</td>
                                   </tr>
                                 </tbody>
                               </table>

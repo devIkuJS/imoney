@@ -23,7 +23,6 @@ class InversionistaOperacionController extends Controller
     public function index(Request $request)
     {
 
-        
         $bancos = Banco::all();
         $categoria_cuenta = categoriaCuenta::all();
         $monto_inversion = $request->monto;
@@ -72,7 +71,7 @@ class InversionistaOperacionController extends Controller
             'numero_cuenta.unique' => 'La cuenta ingresada ya esta registrada en el sistema',
         ]);
 
-       $newCuentaBancaria = new CuentaBancaria();
+        $newCuentaBancaria = new CuentaBancaria();
         
         $newCuentaBancaria->user_id = Auth::id();
     	$newCuentaBancaria->banco_id = $request->cuenta_bancaria_user;
@@ -82,11 +81,9 @@ class InversionistaOperacionController extends Controller
         $newCuentaBancaria->estado = 1;
         $newCuentaBancaria->save();
         
-        return response(json_encode($newCuentaBancaria),200)->header('Content-type','application/json');
-
-        
+        return response(json_encode($newCuentaBancaria),200)->header('Content-type','application/json');   
           
-      }
+    }
 
       public function getCuentaBancariaSelected(Request $request, $cuentaId){
         $cuentaSelected = DB::table('cuenta_bancarias')
@@ -116,12 +113,13 @@ class InversionistaOperacionController extends Controller
         $newOperacion->empresa_id = $request->empresa_id;
         $newOperacion->estado_id = "1";
         $newOperacion->save();
+        MailController::notificarOperacionInversion(Auth::user()->name, Auth::user()->apellidos, Auth::user()->email , $newOperacion->nro_orden, "1");
         return response(json_encode($newOperacion->nro_orden),200)->header('Content-type','application/json');
           
       } 
 
 
-      function generateRandomString($length = 6) {
+    function generateRandomString($length = 6) {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXY123456789Z';
         $charactersLength = strlen($characters);
         $randomString = '';

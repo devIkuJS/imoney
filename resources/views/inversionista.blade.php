@@ -133,6 +133,10 @@
     .col-form-label {
         background: white !important;
     }
+    div.border{
+        border: 5px solid #ffffff !important;
+    }
+    
 </style>
 
 
@@ -140,15 +144,12 @@
 @section('content')
 <main>
     <div class="container pt-5">
-
         <div class="row">
-
             <div class="col-md-12 text-center">
                 <span class="font-weight-bold h2">Hola, </span><span id="hi2"
-                    class="font-weight-bold h2"></span>
-                    <span class="font-weight-bold text-black h2"> te presentamos nuestras oportunidades de inversión para hoy {{ date('d-m-Y', strtotime(now())) }} </span>   
+                    class="font-weight-bold text-white h1"></span>
+                    <h3 class="font-weight-bold h2"> te presentamos nuestras oportunidades de inversión para hoy {{ date('d-m-Y', strtotime(now())) }} </h3>   
             </div>
-
                     <div class="col-md-12 mx-auto mb-5">
                         <div class="row mt-5">
                             <div class="col-6 text-left">
@@ -166,26 +167,32 @@
                         </div>
 
                         @foreach ($empresas as $empresa)
-                        <div>
+                        <!--<div class="border mx-auto mb-3">-->
+                        <div class="form-group row mt-5">
                             <div class="row mt-5">
                                 <div class="col-6 text-left">
                                     <h4 class="text-white font-weight-bold">Empresa pagadora</h4>
-                                   
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-5">
+                                <div class="col-6 text-left">
+                                <h4 class="text-white font-weight-bold">{{ $empresa->nombre }}</h4>
+                                    <h4 class="text-white font-weight-bold">RUC {{ $empresa->numero_ruc }}</h4>                                   
                                 </div>
                                 <div class="col-6 text-right">
-                                    <h4 class="text-white font-weight-bold">{{ $empresa->nombre }}</h4>
                                     <img src={{asset($empresa->logo)}} width="120" height="70">
                                 </div>
                             </div>
 
-                            <div class="row mt-5">
+                            <div class="form-group row mt-5">
                                 <div class="col-6 text-left">
                                     <h5 class="text-white font-weight-bold">Monto disponible</h5>
-                                    <h5 class="text-white font-weight-bold">{{ $empresa->monto_disponible }}</h5>
+                                    <h5 class="text-white font-weight-bold">{{ $empresa->monto_disponible }} {{ $empresa->moneda_inversion === '1' ? 'Soles' : 'Dolares' }}</h5>
                                 </div>
                                 <div class="col-6 text-right">
                                     <h5 class="text-white font-weight-bold">Monto total</h5>
-                                    <h5 class="text-white font-weight-bold">{{ $empresa->monto_total }}</h5>
+                                    <h5 class="text-white font-weight-bold">{{ $empresa->monto_total }} {{ $empresa->moneda_inversion === '1' ? 'Soles' : 'Dolares' }}</h5>
                                 </div>
                             </div>
 
@@ -199,14 +206,13 @@
                                 </div>
                             </div>
 
-                            <div class="row mt-4">
+                            <div class="form-group row mt-4">
                                 <div class="col-3">
                                     <h5 class="text-white text-left font-weight-bold">Tasa anualizada</h5>
-                                    <div class="card font-weight-bold py-2 w-50 text-center float-left">8%</div>
+                                    <div class="card font-weight-bold py-2 w-50 text-center float-left">{{ $empresa->tasa_anual }}%</div>
                                 </div>
                                 <div class="col-6">
                                     <div class="text-center mt-4 ">
-
                                         <button type="button" class="btn btn-primary btn-cambiar-ahora"
                                             data-toggle="modal" data-target="#modal-ver-detalle-{{$empresa->id}}">Ver
                                             detalle</button>
@@ -237,43 +243,53 @@
                                         <div class="modal-body">
                                             <div class="row mt-4">
                                                 <div class="col-6">
-                                                    <h5 class="font-weight-bold">Fecha proyectada de cobro</h5>
-                                                    <div class="card font-weight-bold py-2 w-50 text-center float-left">
-                                                        {{ date('d-m-Y', strtotime($empresa->fecha_esperada )) }}</div>
+                                                    <h5 class="font-weight-bold">Empresa pagadora</h5>
+                                                    <h5 class="font-weight-bold">{{ $empresa->nombre }}</h5>
+                                                    <!--<h5 class="font-weight-bold">RUC {{ $empresa->numero_ruc }}</h5>-->                                   
                                                 </div>
                                                 <div class="col-6">
                                                     <h5 class="text-right font-weight-bold">Teaser informativo</h5>
                                                     <a href="{{asset($empresa->informe)}}" target="_blank"><button
                                                             type="button" class="btn btn-danger float-right"><i
-                                                                class="far fa-file-pdf pr-2"></i>Ver PDF</button></a>
+                                                            class="far fa-file-pdf pr-2"></i>Ver PDF</button></a>                               
                                                 </div>
                                             </div>
                                             <div class="row mt-4">
                                                 <div class="col-6">
                                                     <h5 class="font-weight-bold">Tasa anual</h5>
                                                     <div class="card font-weight-bold py-2 w-50 text-center float-left">
-                                                        8 %</div>
+                                                        {{ $empresa->tasa_anual }}%</div>
                                                 </div>
                                                 <div class="col-6">
-                                                    <h5 class="text-right font-weight-bold">Tasa mensual</h5>
+                                                    <h5 class="font-weight-bold">Fecha proyectada de cobro</h5>
                                                     <div class="card font-weight-bold py-2 w-50 text-center float-right">
-                                                       1.0706%</div>
+                                                        {{ date('d-m-Y', strtotime($empresa->fecha_esperada )) }}</div>
                                                 </div>
+                                                <!--<div class="col-6">
+                                                   <h5 class="text-right font-weight-bold">Teaser informativo</h5>
+                                                    <a href="{{asset($empresa->informe)}}" target="_blank"><button
+                                                            type="button" class="btn btn-danger float-right"><i
+                                                                class="far fa-file-pdf pr-2"></i>Ver PDF</button></a>
+                                                </div>-->
                                             </div>
                                             <div class="row mt-4">
                                                 <div class="col-6">
-                                                    <h5 class="font-weight-bold">Número de factura</h5>
+                                                <h5 class="font-weight-bold">Tasa mensual</h5>
                                                     <div class="card font-weight-bold py-2 w-50 text-center float-left">
-                                                        F001-00000067</div>
+                                                       {{ $empresa->tasa_mensual }}%</div>
+                                                </div>
+                                                <div class="col-6">
+                                                <h5 class="font-weight-bold text-right">Código de Doc.</h5>
+                                                    <div class="card font-weight-bold py-2 w-50 text-center float-right">
+                                                        {{ $empresa->serie_num_comprobante }}</div>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="row mt-5">
                                                 <div class="col-md-12 mt-4 text-left">
                                                     <span class="font-weight-bold h3">Operación de Factoring</span>
                                                 </div>
                                             </div>
-
 
                                             <div class="row mt-4">
                                                 <div class="col-12 text-left">
@@ -290,7 +306,7 @@
                                                     <h5 class="font-weight-bold text-left">Monto disponible de la
                                                         factura</h5>
                                                     <h5 class="font-weight-bold text-left">
-                                                        {{ $empresa->monto_disponible }}</h5>
+                                                        {{ $empresa->monto_disponible }} {{ $empresa->moneda_inversion === '1' ? 'Soles' : 'Dolares' }}</h5>
                                                 </div>
                                                 <div class="col-6">
                                                     <h5 class="font-weight-bold text-right">Retorno esperado</h5>
@@ -312,10 +328,8 @@
                                                     </button>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>

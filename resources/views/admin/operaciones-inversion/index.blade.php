@@ -31,11 +31,13 @@
                                 <th>Nro Orden</th>
                                 <th>Usuario</th>
                                 <th>Banco de Origen</th>
+                                <th>Moneda</th>
                                 <th>Monto Enviado</th>
                                 <th>Banco de destino</th>
                                 <th>Estado de transaccion</th>
                                 <th>Fecha de transaccion</th>
                                 <th>Fecha de Actualiz. de transaccion</th>
+                                <th>Código de factura</th>
                                 <th>Voucher de operacion</th>
                                 <th>Acciones</th>
                             </tr>
@@ -47,11 +49,13 @@
                                 <td>{{ $operacion->nro_orden }}</td>
                                 <td>{{ $operacion->nombre_usuario }} {{ $operacion->apellido_usuario }}</td>
                                 <td>{{ $operacion->banco_origen }}</td>
+                                <td>{{ $operacion->moneda }}</td>
                                 <td>{{ $operacion->monto_inversion }}</td>
                                 <td>{{ $operacion->banco_destino}} {{ $operacion->numero_cuenta}} {{ $operacion->tipo_cuenta}}</td>
                                 <td>{{ $operacion->estado }}</td>
                                 <td>{{ date('d-m-Y H:i:s', strtotime($operacion->created_at)) }}</td>
                                 <td>{{ date('d-m-Y H:i:s', strtotime($operacion->updated_at)) }}</td>
+                                <td>{{ $operacion->codigo_factura }}</td>
                                 @if($operacion->voucher)
                                 <td>
                                     <button type="button" class="btn btn-link" data-toggle="modal"
@@ -60,7 +64,7 @@
                                 @else
                                 <td>&nbsp;</td>
                                 @endif
-                                @include('admin.operaciones.modal-ver-voucher')
+                                @include('admin.operaciones-inversion.modal-ver-voucher')
                                 @if($operacion->estado_id === 2)
                                 <td>
                                     <button type="button" class="btn btn-warning font-weight-bold" data-toggle="modal" data-target="#modal-update-estado-transaccion-{{$operacion->id}}">Actualizar Estado</button>
@@ -68,7 +72,7 @@
                                 @else
                                 <td>&nbsp;</td>
                                 @endif
-                                @include('admin.operaciones.modal-update-estado-transaccion')
+                                @include('admin.operaciones-inversion.modal-update-estado-transaccion')
                             </tr>
                             @endforeach
                             
@@ -79,11 +83,13 @@
                                 <th>Nro Orden</th>
                                 <th>Usuario</th>
                                 <th>Banco de Origen</th>
+                                <th>Moneda</th>
                                 <th>Monto Enviado</th>
                                 <th>Banco de destino</th>
                                 <th>Estado de transaccion</th>
                                 <th>Fecha de transaccion</th>
                                 <th>Fecha de Actualiz. de transaccion</th>
+                                <th>Código de factura</th>
                                 <th>Voucher de operacion</th>
                                 <th>Acciones</th>
                             </tr>

@@ -426,7 +426,7 @@
                       <h2>Inversión confirmada</h2>
                       <h3 style="color:black !important;">Hola {{$email_data['razon_social']}}</h3>
                       <h3 style="color:black !important;">Tu número de orden es: {{$email_data['nro_orden']}} </h3>
-                      <h4>Hemos recibido el número de operación de su inversión</h4>
+                      <h4>Hemos recibido el número de operación en su inversión en la Empresa {{$email_data['empresa_nombre']}}</h4>
                       <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                         <tbody>
                           <tr>
@@ -439,12 +439,14 @@
                                     <th>Cantidad de dias</th>
                                     <th>Monto esperado</th>
                                     <th>Fecha de retorno esperado</th>
+                                    <th>Código de factura</th>
                                   </tr>
                                   <tr>
                                     <td>{{$email_data['monto_inversion']}} {{$email_data['moneda']}}</td>
                                     <td>{{$email_data['cantidad_dias']}} dias</td>
                                     <td>{{$email_data['monto_esperado']}} {{$email_data['moneda']}}</td>
                                     <td>{{$email_data['fecha_esperada']}}</td>
+                                    <td>{{$email_data['codigo_factura']}}</td>
                                   </tr>
                                 </tbody>
                               </table>
@@ -452,7 +454,7 @@
                           </tr>
                         </tbody>
                       </table>
-                      <p>Datos Enviados</p>
+                      <p>Monto Enviado</p>
                       <p style="font-weight:bold;">{{$email_data['monto_inversion']}} {{$email_data['moneda']}} de la entidad bancaria {{$email_data['banco_origen']}}</p>
                       <p>Su inversiòn se abonará a la siguiente cuenta y se te enviará un correo con la confirmación del depositó realizado:</p>
                       <p style="font-weight:bold;">{{$email_data['monto_esperado']}} {{$email_data['moneda']}} en su cuenta {{$email_data['moneda']}} indicada de la entidad bancaria {{$email_data['banco_destino']}}</p>

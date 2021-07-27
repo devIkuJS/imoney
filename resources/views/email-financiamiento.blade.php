@@ -284,6 +284,7 @@
     .mb0 {
       margin-bottom: 0;
     }
+
     .preheader {
       color: transparent;
       display: none;
@@ -422,9 +423,11 @@
                       <img src={{asset('imagenes/logo-mail-4.png')}} alt="Fjords" style="width:10%,text-align:center;"
                         class="img-fluid-alex">
 
-                      <h2>Transacción realizada</h2>
-                      <h3 style="color:black !important;">Tu número de orden es: {{$email_data['nro_orden']}} </h3>
-                      <h4>Hemos depositado {{$email_data['montoB']}} {{$email_data['descripcionMontoB']}} en su cuenta {{$email_data['descripcionMontoB']}} indicada de la entidad bancaria {{$email_data['banco_destino']}} </h4>
+                      <h2>¡FELICIDADES!</h2>
+                      <h3 style="color:black !important;">Hemos recibido la informaci&oacute;n respecto a tu solicitud
+                                de financiamiento en el corto plazo nuestro equipo estara en comunicaci&oacute;n directa
+                                para conocer mas detalles de tu solicitud, atentamente.
+                                </h3>    
                       <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                         <tbody>
                           <tr>
@@ -433,14 +436,7 @@
                                 cellspacing="0" style="width: 100%;border-collapse: collapse;">
                                 <tbody>
                                   <tr>
-                                    <th>Cambio</th>
-                                    <th>Monto que envío</th>
-                                    <th>Monto depositado</th>
-                                  </tr>
-                                  <tr>
-                                    <td>De {{$email_data['descripcionMontoA']}} a {{$email_data['descripcionMontoB']}}</td>
-                                    <td>{{$email_data['montoA']}} {{$email_data['descripcionMontoA']}}</td>
-                                    <td>{{$email_data['montoB']}} {{$email_data['descripcionMontoB']}}</td>
+                                   
                                   </tr>
                                 </tbody>
                               </table>
@@ -448,8 +444,8 @@
                           </tr>
                         </tbody>
                       </table>
-                      <p style="font-weight:bold;">Muchas gracias por operar con iMoney Perú SAC RUC:20602075665, Teléfono: 01-7482710, Celular: 982 273 702, pronto tendremos mas novedades para ti.</p>
-                       
+                      <p>Datos Enviados</p>
+                       <p style="font-weight:bold;color:gray;">Muchas gracias por operar con iMoney Perú SAC RUC:20602075665, Teléfono: 01-7482710, Celular: 982 273 702, pronto tendremos mas novedades para ti.</p>
                        <small style="font-size: 12px;color:gray;">Si tuviese alguna consulta, duda sobre su transaccion por favor comunicarse a nuestro <a  href="https://api.whatsapp.com/send?phone=+51982273702&text=Tengo%20una%20consulta"
                         target="_blank">whastapp en linea</a></small>
 

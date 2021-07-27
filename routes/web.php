@@ -25,6 +25,11 @@ Route::get('/email-transaccion-finalizada', [App\Http\Controllers\EmailTransacci
 
 //inversion-verify
 Route::get('/inversionistaTransaccion/email-inversion-verify/{nroTransaccion}', [App\Http\Controllers\EmailInversionController::class, 'index'])->name('email-inversion-verify');
+
+//financiamiento-verify
+Route::get('/email-financiamiento-verify', [App\Http\Controllers\EmailFinanciamientoController::class, 'index'])->name('email-financiamiento-verify');
+//Route::get('/email-financiamiento', [App\Http\Controllers\EmailFinanciamientoController::class, 'index'])->name('email-financiamiento');
+
 //rutas publicas
 Route::get('/', function () {
   return view('auth.login');
@@ -68,19 +73,22 @@ Route::post('/cuentaBancaria/registro', [App\Http\Controllers\CuentaBancariaCont
 Route::post('/cuentaBancaria/{cuentaBancariaId}/actualizar', [App\Http\Controllers\CuentaBancariaController::class, 'actualizar'])->name('cuentaBancaria.actualizar');
 Route::post('/cuentaBancaria/{cuentaBancariaId}/cambiarEstado', [App\Http\Controllers\CuentaBancariaController::class, 'cambiarEstado'])->name('cuentaBancaria.cambiarEstado');
 
-//EstadoCuenta - GUTI
-Route::get('/estadoCuenta', [App\Http\Controllers\EstadoCuentaController::class, 'index'])->name('estadoCuenta');
-
-//Financiamiento - GUTI
+//Financiamiento - cliente
 Route::get('/financiamiento', [App\Http\Controllers\FinanciamientoController::class, 'index'])->name('financiamiento');
 
-//MisDatos - GUTI
+Route::get('/financiamientoPersonaNatural', [App\Http\Controllers\FinanciamientoPersonaNaturalController::class, 'index'])->name('financiamientoPersonaNatural');
+Route::post('/financiamientoPersonaNatural/create', [App\Http\Controllers\FinanciamientoPersonaNaturalController::class, 'create'])->name('financiamientoPersonaNatural.create');
+
+Route::get('/financiamientoEmpresa', [App\Http\Controllers\FinanciamientoEmpresaController::class, 'index'])->name('financiamientoEmpresa');
+Route::post('/financiamientoEmpresa/create', [App\Http\Controllers\FinanciamientoEmpresaController::class, 'create'])->name('financiamientoEmpresa.create');
+
+//MisDatos - cliente
 Route::get('/misDatos', [App\Http\Controllers\MisDatosController::class, 'index'])->name('misDatos');
 Route::post('/misDatos/{usuarioId}/actualizar', [App\Http\Controllers\MisDatosController::class, 'actualizar'])->name('misDatos.actualizar');
 Route::post('/misDatos/{usuarioId}/cambiarContrasena', [App\Http\Controllers\MisDatosController::class, 'cambiarContrasena'])->name('misDatos.cambiarContrasena');
 
-//CambioTipo - GUTI
-Route::get('/cambioTipo', [App\Http\Controllers\CambioTipoController::class, 'index'])->name('cambioTipo');
+//EstadoCuenta - cliente
+Route::get('/estadoCuenta', [App\Http\Controllers\EstadoCuentaController::class, 'index'])->name('estadoCuenta');
 
 //Operaciones
 Route::get('/operacion', [App\Http\Controllers\OperacionController::class, 'index'])->name('operacion');
@@ -131,6 +139,9 @@ Route::get('/admin/cuentabancaria', [App\Http\Controllers\Admin\CuentaBancariaCo
 
 
 Route::get('/admin/operaciones-inversion', [App\Http\Controllers\Admin\InversionOperacionController::class, 'index'])->name('admin.operaciones-inversion');
+Route::get('/admin/operaciones-inversion/getData', [App\Http\Controllers\Admin\InversionOperacionController::class, 'getData'])->name('admin.operaciones-inversion.getData');
+Route::post('/admin/operaciones-inversion/{operacionId}/actualizar', [App\Http\Controllers\Admin\InversionOperacionController::class, 'actualizar'])->name('admin.operaciones-inversion.actualizar');
+
 
 Auth::routes(['verify' => true]);
 

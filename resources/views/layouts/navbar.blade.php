@@ -14,10 +14,10 @@
                       <a class="dropdown-item" href="{{ route('user') }}">Menu principal</a>
                       <a class="dropdown-item" href="{{ route('tipoCambio') }}">Tipo de cambio</a>
                       <a class="dropdown-item" href="{{ route('inversionista') }}">Inversión</a>
-                      <a class="dropdown-item" href="#">Financiamiento</a>
+                      <a class="dropdown-item" href="{{ route('financiamiento') }}">Financiamiento</a>
                       <a class="dropdown-item" href="{{ route('misDatos') }}">Mis datos</a>
                       <a class="dropdown-item" href="{{ route('cuentaBancaria') }}">Cuentas bancarias</a>
-                      <a class="dropdown-item" href="#">Estado de cuenta</a>
+                      <a class="dropdown-item" href="{{ route('estadoCuenta') }}">Estado de cuenta</a>
                     </div>
                   </li>
                   <li class="nav-item dropdown">

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Mail\SignupEmail;
 use App\Mail\TransaccionEmail;
-use App\Mail\NotificacionAdminEmail;
 use App\Mail\TransaccionFinalEmail;
 use App\Mail\TransaccionErrorEmail;
+use App\Mail\NotificacionAdminEmail;
 use App\Mail\InversionEmail;
+use App\Mail\InversionFinalEmail;
+use App\Mail\InversionErrorEmail;
+use App\Mail\FinanciamientoEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
@@ -57,7 +61,46 @@ class MailController extends Controller
         Mail::to($email)->send(new TransaccionEmail($data));
     }
 
+    public static function enviarFinanciamiento($name, $email){
+        $data = [
+            'name' => $name,
+            'email' => $email,
+          
+        ];
+
+        Mail::to($email)->send(new FinanciamientoEmail($data));
+    }
+
     public static function notificarOperacion($name, $apellidos, $email, $nro_orden, $estado_id){
+        $data = [
+            'name' => $name,
+            'apellidos' => $apellidos,
+            'email' => $email,
+            'nro_orden' => $nro_orden,
+            'estado_id' => $estado_id,
+        ];
+        $idrol = DB::table('roles')
+        ->select('roles.id', 'roles.name')
+        ->where('roles.id', Auth::user()->tipo_id)
+        ->get();
+    
+        if($idrol[0]->id == 3 || $idrol[0]->id == 4){
+            $cuentaSelected = DB::table('persona_operaciones')
+            ->join('empresa', 'empresa.id', '=', 'persona_operaciones.empresa_id')
+            ->select('empresa.razon_social')
+            ->where('persona_operaciones.user_id', Auth::id())
+            ->get();
+            
+            $data['razon_social'] = $cuentaSelected[0]->razon_social;
+            
+        }else if ($idrol[0]->id == 2){
+            $data['razon_social'] = Auth::user()->name." ". Auth::user()->apellidos;  
+        }
+        //Mail::to('brian125865@gmail.com')->send(new NotificacionAdminEmail($data));
+       Mail::to('hector.andia@imoney.pe')->cc(['franco.mosso@imoney.pe','roger.bastidas@imoney.pe'])->send(new NotificacionAdminEmail($data));
+    }
+
+    public static function notificarOperacionInversion($name, $apellidos, $email, $nro_orden, $estado_id){
         $data = [
             'name' => $name,
             'apellidos' => $apellidos,
@@ -97,10 +140,24 @@ class MailController extends Controller
             'montoB' => $montoB,
             'descripcionMontoB' => $descripcionMontoB,
             'banco_origen' => $banco_origen,
-            'banco_destino' => $banco_destino,
-           
+            'banco_destino' => $banco_destino,     
         ];
         Mail::to($email)->send(new TransaccionFinalEmail($data));
+    }
+
+    public static function finalizarOperacionInversion($name, $email, $moneda, $nro_orden, $monto_esperado,$monto_inversion, $banco_origen, $banco_destino, $codigo_factura){
+        $data = [
+            'name' => $name,
+            'email' => $email,
+            'moneda' => $moneda,
+            'nro_orden' => $nro_orden,
+            'monto_esperado' => $monto_esperado,
+            'monto_inversion' => $monto_inversion,
+            'banco_origen' => $banco_origen,
+            'banco_destino' => $banco_destino, 
+            'codigo_factura' => $codigo_factura,      
+        ];
+        Mail::to($email)->send(new InversionFinalEmail($data));
     }
 
     public static function errorOperacion($name, $email, $nro_orden, $montoA, $descripcionMontoA, $montoB, $descripcionMontoB, $banco_origen, $banco_destino){
@@ -118,7 +175,22 @@ class MailController extends Controller
         Mail::to($email)->send(new TransaccionErrorEmail($data));
     }
 
-    public static function enviarNroInversion($name, $email, $nro_orden, $monto_inversion,$cantidad_dias,$monto_esperado,$fecha_esperada, $moneda, $banco, $banco_destino){
+    public static function errorOperacionInversion($name, $email, $moneda, $nro_orden, $monto_esperado,$monto_inversion, $banco_origen, $banco_destino, $codigo_factura){
+        $data = [
+            'name' => $name,
+            'email' => $email,
+            'moneda' => $moneda,
+            'nro_orden' => $nro_orden,
+            'monto_esperado' => $monto_esperado,
+            'monto_inversion' => $monto_inversion,
+            'banco_origen' => $banco_origen,
+            'banco_destino' => $banco_destino,
+            'codigo_factura' => $codigo_factura, 
+        ];
+        Mail::to($email)->send(new InversionErrorEmail($data));
+    }
+
+    public static function enviarNroInversion($name, $email, $nro_orden, $monto_inversion,$cantidad_dias,$monto_esperado,$fecha_esperada, $moneda, $banco, $banco_destino, $empresa_nombre, $codigo_factura){
         $data = [
             'name' => $name,
             'email' => $email,
@@ -130,7 +202,26 @@ class MailController extends Controller
             'moneda' => $moneda,
             'banco_origen' => $banco,
             'banco_destino' => $banco_destino,
+            'empresa_nombre' => $empresa_nombre,
+            'codigo_factura' => $codigo_factura,
         ];
+        $idrol = DB::table('roles')
+        ->select('roles.id', 'roles.name')
+        ->where('roles.id', Auth::user()->tipo_id)
+        ->get();
+    
+        if($idrol[0]->id == 3 || $idrol[0]->id == 4){
+            $cuentaSelected = DB::table('persona_operaciones')
+            ->join('empresa', 'empresa.id', '=', 'persona_operaciones.empresa_id')
+            ->select('empresa.razon_social')
+            ->where('persona_operaciones.user_id', Auth::id())
+            ->get();
+            
+            $data['razon_social'] = $cuentaSelected[0]->razon_social;
+            
+        }else if ($idrol[0]->id == 2){
+            $data['razon_social'] = Auth::user()->name." ". Auth::user()->apellidos;  
+        }
         Mail::to($email)->send(new InversionEmail($data));
     }
 
