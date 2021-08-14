@@ -284,6 +284,7 @@
     .mb0 {
       margin-bottom: 0;
     }
+
     .preheader {
       color: transparent;
       display: none;
@@ -422,37 +423,9 @@
                       <img src={{asset('imagenes/logo-mail-4.png')}} alt="Fjords" style="width:10%,text-align:center;"
                         class="img-fluid-alex">
 
-                      <h2>Inversión realizada</h2>
-                      <h3 style="color:black !important;">Tu número de orden es: {{$email_data['nro_orden']}} </h3>
-                      <h4>Hemos depositado en su cuenta  indicada de la entidad bancaria {{$email_data['banco_destino']}} </h4>
-                      <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                        <tbody>
-                          <tr>
-                            <td align="center">
-                              <table id="tablaTransaccion" role="presentation" border="3" cellpadding="0"
-                                cellspacing="0" style="width: 100%;border-collapse: collapse;">
-                                <tbody>
-                                  <tr>
-                                    <th>Monto a invertir</th>
-                                    <th>Monto esperado</th>
-                                    <th>Código de factura</th>
-                                  </tr>
-                                  <tr>
-                                    <td>{{$email_data['monto_esperado']}} {{$email_data['moneda']}}</td>
-                                    <td>{{$email_data['monto_inversion']}} {{$email_data['moneda']}}</td>
-                                    <td>{{$email_data['codigo_factura']}}</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <p style="font-weight:bold;">Muchas gracias por operar con iMoney Perú SAC RUC:20602075665, Teléfono: 01-7482710, Celular: 982 273 702, pronto tendremos mas novedades para ti.</p>
-                       
-                       <small style="font-size: 12px;color:gray;">Si tuviese alguna consulta, duda sobre su transaccion por favor comunicarse a nuestro <a  href="https://api.whatsapp.com/send?phone=+51982273702&text=Tengo%20una%20consulta"
-                        target="_blank">whastapp en linea</a></small>
-
+                     <h2>Notificaci&oacute;n - Financiamiento de Usuario Registrado</h2>
+                      <h3 style="color:black !important;">Usuario: {{$email_data['razon_social']}}</h3>
+                      <h3 style="color:black !important;">Email: {{$email_data['email']}}</h3>
                     </td>
                   </tr>
                 </table>

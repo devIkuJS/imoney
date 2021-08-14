@@ -281,6 +281,22 @@ return [
             'url'  => '/admin/operaciones-inversion',
             'icon' => 'fas fa-fw fas fa-coins',
         ],
+        [
+            'text' => 'Financiamiento Per. Natural',
+            'url'  => '/admin/financiamientoPersonaNatural',
+            'icon' => 'fas fa-fw fas fa-user-circle',
+        ],
+        [
+            'text' => 'Financiamiento Empresa',
+            'url'  => '/admin/financiamientoEmpresa',
+            'icon' => 'fas fa-fw fas fa-user-tie',
+        ],
+        [
+            'text' => 'Estado de Cuenta',
+            'url'  => '/admin/estadoCuenta',
+            'icon' => 'fas fa-fw fas fa-money-check',
+        ],
+        
     ],
 
     /*

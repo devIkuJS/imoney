@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NotificacionAdminEmail extends Mailable
+class NotificacionAdminInversionEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,11 +32,11 @@ class NotificacionAdminEmail extends Mailable
 
        if($this->email_data['estado_id'] === "1"){
 
-        return $this->from($this->email_data['email'], 'Imoney')->subject("Notificación - Operación de Usuario Registrada")->view('email-notificacion-admin', ['email_data' => $this->email_data]);
+        return $this->from($this->email_data['email'], 'Imoney')->subject("Notificación - Operación Inversión - Operación de Usuario Registrada")->view('email-notificacion-admin-inversion', ['email_data' => $this->email_data]);
 
        }else{
 
-        return $this->from($this->email_data['email'], 'Imoney')->subject("Notificación - Nro Operacion y/o Voucher de usuario enviado")->view('email-notificacion-admin', ['email_data' => $this->email_data]);
+        return $this->from($this->email_data['email'], 'Imoney')->subject("Notificación - Operación Inversión - Nro Operacion y/o Voucher de usuario enviado")->view('email-notificacion-admin-inversion', ['email_data' => $this->email_data]);
 
        }
        

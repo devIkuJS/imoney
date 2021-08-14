@@ -136,6 +136,14 @@
     div.border{
         border: 5px solid #ffffff !important;
     }
+
+    .text-error {
+        color: #8f0000;
+    }
+
+    .text-warning {
+        color: #d8ee0a;
+    }
     
 </style>
 
@@ -146,85 +154,35 @@
     <div class="container pt-5">
         <div class="row">
             <div class="col-md-12 text-center">
-                <span class="font-weight-bold h2">Hola, </span><span id="hi2"
+                <span class="font-weight-bold text-white h2">Hola, </span><span id="hi2"
                     class="font-weight-bold text-white h1"></span>
-                    <h3 class="font-weight-bold h2"> te presentamos nuestras oportunidades de inversión para hoy {{ date('d-m-Y', strtotime(now())) }} </h3>   
+                    <h2 class="font-weight-bold">Nuestras oportunidades de inversión para hoy {{ date('d-m-Y', strtotime(now())) }}:</h2>   
             </div>
                     <div class="col-md-12 mx-auto mb-5">
                         <div class="row mt-5">
                             <div class="col-6 text-left">
+                                <h4 class="font-weight-bold text-white">Escoge tu divisa a invertir</h4>
                             </div>
                             <div class="col-6">
-                                <div class="d-flex float-right">
-                                    <span class="mr-2 font-weight-bold text-white">PEN</span>
+                                <div class="d-flex float-right mr-4">
+                                    <span class="mr-2 font-weight-bold text-white h4">PEN</span>
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                        <label class="custom-control-label text-white font-weight-bold"
+                                        <label class="custom-control-label text-white font-weight-bold h4"
                                             for="customSwitch1">USD</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        @foreach ($empresas as $empresa)
+                        
                         <!--<div class="border mx-auto mb-3">-->
-                        <div class="form-group row mt-5">
-                            <div class="row mt-5">
-                                <div class="col-6 text-left">
-                                    <h4 class="text-white font-weight-bold">Empresa pagadora</h4>
-                                </div>
-                            </div>
-
-                            <div class="form-group row mt-5">
-                                <div class="col-6 text-left">
-                                <h4 class="text-white font-weight-bold">{{ $empresa->nombre }}</h4>
-                                    <h4 class="text-white font-weight-bold">RUC {{ $empresa->numero_ruc }}</h4>                                   
-                                </div>
-                                <div class="col-6 text-right">
-                                    <img src={{asset($empresa->logo)}} width="120" height="70">
-                                </div>
-                            </div>
-
-                            <div class="form-group row mt-5">
-                                <div class="col-6 text-left">
-                                    <h5 class="text-white font-weight-bold">Monto disponible</h5>
-                                    <h5 class="text-white font-weight-bold">{{ $empresa->monto_disponible }} {{ $empresa->moneda_inversion === '1' ? 'Soles' : 'Dolares' }}</h5>
-                                </div>
-                                <div class="col-6 text-right">
-                                    <h5 class="text-white font-weight-bold">Monto total</h5>
-                                    <h5 class="text-white font-weight-bold">{{ $empresa->monto_total }} {{ $empresa->moneda_inversion === '1' ? 'Soles' : 'Dolares' }}</h5>
-                                </div>
-                            </div>
-
-                            <div class="row text-center">
-                                <div class="col-12">
-                                    <div class="progress">
-                                        <div id="inversionista" class="progress-bar bg-dark" role="progressbar"
-                                            style="width: 30%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row mt-4">
-                                <div class="col-3">
-                                    <h5 class="text-white text-left font-weight-bold">Tasa anualizada</h5>
-                                    <div class="card font-weight-bold py-2 w-50 text-center float-left">{{ $empresa->tasa_anual }}%</div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-center mt-4 ">
-                                        <button type="button" class="btn btn-primary btn-cambiar-ahora"
-                                            data-toggle="modal" data-target="#modal-ver-detalle-{{$empresa->id}}">Ver
-                                            detalle</button>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <h5 class="text-white text-right font-weight-bold ">Plazo</h5>
-                                    <div class="card font-weight-bold py-2 w-50 text-center float-right">
-                                        {{ $empresa->cantidad_dias }} días</div>
-                                </div>
-                            </div>
+                        <div class="form-group row mt-5" id="returnSolesDolares">
+                            
                         </div>
+                        
+                        @foreach ($empresas as $empresa)
+                        
                         <!-- Modal Ver detalle -->
                         <div class="modal fade" id="modal-ver-detalle-{{$empresa->id}}" tabindex="-1" role="dialog"
                             aria-labelledby="modal-ver-detalle" aria-hidden="true">
@@ -238,7 +196,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form action="{{ route ('inversionista.gestion') }}" method="post">
+                                    <form id="formulario" data-id="{{$empresa->id}}" action="{{ route ('inversionista.gestion') }}" method="post">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
                                             <div class="row mt-4">
@@ -293,11 +251,12 @@
 
                                             <div class="row mt-4">
                                                 <div class="col-12 text-left">
-                                                    <h4 class="font-weight-bold ">Quiero Invertir</h4>
+                                                    <h4 class="font-weight-bold">Quiero Invertir</h4>
                                                     <input type="text" class="form-control monto_cambio"
                                                         placeholder="Ingrese monto a invertir" name="monto_cambio" id="monto_cambio_{{$empresa->id}}"
                                                         onkeypress="return isNumber(event);" />
-                                                    <input type="hidden" name="inversion_id" value="{{$empresa->id}}" />
+                                                        <div id="tcambio-message_{{$empresa->id}}" class="text-center mt-4 h5"></div>
+                                                    <input type="hidden" id="inversion_id" name="inversion_id" value="{{$empresa->id}}" />
                                                 </div>
                                             </div>
 
@@ -305,18 +264,20 @@
                                                 <div class="col-6">
                                                     <h5 class="font-weight-bold text-left">Monto disponible de la
                                                         factura</h5>
+                                                        <input type="hidden" value="{{ $empresa->moneda_inversion }}" name="moneda">
+                                                        <input type="hidden" id="monto_disponible_{{$empresa->id}}" value="{{ $empresa->monto_disponible }}">
                                                     <h5 class="font-weight-bold text-left">
-                                                        {{ $empresa->monto_disponible }} {{ $empresa->moneda_inversion === '1' ? 'Soles' : 'Dolares' }}</h5>
+                                                        {{ $empresa->monto_disponible }} {{ $empresa->moneda_inversion == '1' ? 'Soles' : 'Dolares' }}</h5>
                                                 </div>
                                                 <div class="col-6">
                                                     <h5 class="font-weight-bold text-right">Retorno esperado</h5>
-                                                    <h5 class="font-weight-bold text-right monto_esperado"></h5>
+                                                    <h5 class="font-weight-bold text-right"> <span class="monto_esperado"></span> <span class="monto_esperado_sd"> {{ $empresa->moneda_inversion == '1' ? 'Soles' : 'Dolares' }}</span></h5>
 
                                                     <input type="hidden" name="monto_esperado" value=""/>
                                                     <div
                                                         class="card font-weight-bold py-2 w-50 text-center float-right d-inline">
-                                                        <strong id="cantidad_dias_{{$empresa->id}}">{{ $empresa->cantidad_dias }}</strong>&nbsp;<strong>dias</strong></div>
-
+                                                        <strong id="cantidad_dias_{{$empresa->id}}">{{ $empresa->cantidad_dias }}</strong>&nbsp;<strong>dias</strong>
+                                                    </div>
                                                         <input type="hidden" name="cantidad_dias" value="{{ $empresa->cantidad_dias }}"/>
                                                 </div>
                                             </div>
@@ -342,9 +303,6 @@
     </div>
 </main>
 
-
-
-
 @endsection
 
 @section('custom-script')
@@ -363,7 +321,7 @@ for (var i=0; i<inputs.length; i++) {
 
       var monto_esperado = (this.value*(Math.pow(1.08, (cantidad_dias/360)))).toFixed(2);
 
-      $('.monto_esperado').text(monto_esperado + " "+ "Soles");
+      $('.monto_esperado').text(monto_esperado);
       
   });
 }
@@ -382,7 +340,32 @@ function isNumber(evt) {
              return false;
           return true;
 }
+
 $(document).ready(function() {
+
+/*VALIDAR MONTO DISPONIBLE */
+
+$(document).on("submit", "form", function(e){
+    
+    inversion_id = $(this).data("id")
+    $("#tcambio-message_"+inversion_id).html("");
+    monto_cambio1 = $("#monto_cambio_"+inversion_id).val();
+
+    monto_disponible1 = $("#monto_disponible_"+inversion_id).val();
+
+    if(monto_cambio1 == "" || monto_cambio1 <= 0){
+       $("#tcambio-message_"+inversion_id).html('<strong class="text-error">Por favor ingrese una cantidad válida</strong>')
+       
+       e.preventDefault();
+       return false;
+    }else if(parseFloat(monto_cambio1) > monto_disponible1){
+        $("#tcambio-message_"+inversion_id).html('<strong class="text-error">Monto disponible debe ser menor o igual al monto ingresado.</strong>')
+        
+        e.preventDefault();
+        return false;
+    }
+});
+
 $.ajax({
     url: `/inversionista/razonSocial`,
 	success: function(respuesta) {
@@ -394,6 +377,195 @@ $.ajax({
     }
 });
 
+/*SWITCH*/
+//$('#customSwitch1').trigger('change');
+changeSelect({target: $("#customSwitch1")[0]});
+$('#customSwitch1').on('change', changeSelect);
+
+    function changeSelect(e){
+        let test = e.target.checked;
+        if(!test){//si es false
+            tipoOpcion = 1;
+        }else{
+            tipoOpcion = 2;
+        }
+
+        $.ajax({
+            url: `/inversionista/`+tipoOpcion+`/obtenerSolesDolaeres`,
+            success: function(respuesta) {
+                console.log("AJAX: "+respuesta);
+                console.log(respuesta.empresas[0]);
+                arreglo = respuesta.empresas;
+                htmlA = ""
+                countEmpresa = 0;
+                arreglo.forEach(function(empresa, index) {
+                    console.log("Empresa " + index + " | Nombre: " + empresa.nombre);
+                    countEmpresa = index+1;
+                    if(empresa.moneda_inversion == '1'){
+                        tipoMoneda = 'Soles';
+                    }else{
+                        tipoMoneda = 'Dolares';
+                    }
+                    htmlA +='<div class="row mt-5">'+
+                                    '<div class="col-6 text-left">'+
+                                        '<h4 class="text-black font-weight-bold"><u>Empresa pagadora '+countEmpresa+'</u></h4>'+
+                                    '</div>'+
+                                '</div>'+
+
+                                '<div class="form-group row mt-5">'+
+                                    '<div class="col-6 text-left">'+
+                                    '<h4 class="text-white font-weight-bold">'+empresa.nombre+'</h4>'+
+                                    '<h4 class="text-white font-weight-bold">RUC '+empresa.numero_ruc+'</h4>'+                                     
+                                    '</div>'+
+                                    '<div class="col-6 text-right">'+
+                                    
+                                    '<img src="{{ asset('/') }}'+empresa.logo+'" width="120" height="70">'+
+
+                                    '</div>'+
+                                '</div>'+
+
+                                '<div class="form-group row mt-5">'+
+                                    '<div class="col-6 text-left">'+
+                                        '<h5 class="text-white font-weight-bold">Monto disponible</h5>'+
+                                        '<h5 class="text-white font-weight-bold">'+empresa.monto_disponible+' '+tipoMoneda+'</h5>'+
+                                    '</div>'+
+                                    '<div class="col-6 text-right">'+
+                                        '<h5 class="text-white font-weight-bold">Monto total</h5>'+
+                                        '<h5 class="text-white font-weight-bold">'+empresa.monto_total+' '+tipoMoneda+'</h5>'+
+                                    '</div>'+
+                                '</div>'+
+
+                                '<div class="row text-center">'+
+                                    '<div class="col-12">'+
+                                        '<div class="progress">'+
+                                            '<div id="inversionista" class="progress-bar bg-dark" role="progressbar"'+
+                                                'style="width: 30%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'+
+
+                                '<div class="form-group row mt-4">'+
+                                    '<div class="col-6">'+
+                                        '<h5 class="text-white text-left font-weight-bold">Tasa anualizada</h5>'+
+                                        '<div class="card font-weight-bold py-2 w-25 text-center float-left">'+empresa.tasa_anual +'%</div>'+
+                                    '</div>'+
+                                    
+                                    '<div class="col-6">'+
+                                        '<h5 class="text-white text-right font-weight-bold">Plazo</h5>'+
+                                        '<div class="card font-weight-bold py-2 w-25 text-center float-right">'+
+                                            empresa.cantidad_dias+' días</div>'+
+                                    '</div>'+
+                                '</div>'+
+
+                                '<div class="form-group row">'+
+                                    '<div class="col-12">'+
+                                        '<div class="text-center mt-1">'+
+                                            '<button type="button" class="btn btn-primary btn-cambiar-ahora"'+
+                                                'data-toggle="modal" data-target="#modal-ver-detalle-'+empresa.id+'">Ver '+
+                                                'detalle</button>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'
+                });
+                $("#returnSolesDolares").html(htmlA);            
+            },
+            error: function() {
+                console.log("No se ha podido obtener la informacion");
+            }
+        });
+    }
+
+/*
+$(document).on('change', '#customSwitch1', function (e) {
+    let test = e.target.checked;
+    if(!test){//si es false
+        tipoOpcion = 1;
+    }else{
+        tipoOpcion = 2;
+    }
+
+    $.ajax({
+        url: `/inversionista/`+tipoOpcion+`/obtenerSolesDolaeres`,
+        success: function(respuesta) {
+            console.log("AJAX: "+respuesta);
+            console.log(respuesta.empresas[0]);
+            arreglo = respuesta.empresas;
+            htmlA = ""
+            arreglo.forEach(function(empresa, index) {
+                console.log("Persona " + index + " | Nombre: " + empresa.nombre);
+                
+                if(empresa.moneda_inversion === '1'){
+                    tipoMoneda = 'Soles';
+                }else{
+                    tipoMoneda = 'Dolares';
+                }
+                htmlA +='<div class="row mt-5">'+
+                                '<div class="col-6 text-left">'+
+                                    '<h4 class="text-white font-weight-bold">Empresa pagadora</h4>'+
+                                '</div>'+
+                            '</div>'+
+
+                            '<div class="form-group row mt-5">'+
+                                '<div class="col-6 text-left">'+
+                                '<h4 class="text-white font-weight-bold">'+empresa.nombre+'</h4>'+
+                                    '<h4 class="text-white font-weight-bold">RUC '+empresa.numero_ruc+'</h4>'+                                 
+                                '</div>'+
+                                '<div class="col-6 text-right">'+
+                                
+                                '<img src="{{ asset('/') }}'+empresa.logo+'" width="120" height="70">'+
+
+                                '</div>'+
+                            '</div>'+
+
+                            '<div class="form-group row mt-5">'+
+                                '<div class="col-6 text-left">'+
+                                    '<h5 class="text-white font-weight-bold">Monto disponible</h5>'+
+                                    '<h5 class="text-white font-weight-bold">'+empresa.monto_disponible+' '+tipoMoneda+'</h5>'+
+                                '</div>'+
+                                '<div class="col-6 text-right">'+
+                                    '<h5 class="text-white font-weight-bold">Monto total</h5>'+
+                                    '<h5 class="text-white font-weight-bold">'+empresa.monto_total+' '+tipoMoneda+'</h5>'+
+                                '</div>'+
+                            '</div>'+
+
+                            '<div class="row text-center">'+
+                                '<div class="col-12">'+
+                                    '<div class="progress">'+
+                                        '<div id="inversionista" class="progress-bar bg-dark" role="progressbar"'+
+                                            'style="width: 30%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
+
+                            '<div class="form-group row mt-4">'+
+                                '<div class="col-3">'+
+                                    '<h5 class="text-white text-left font-weight-bold">Tasa anualizada</h5>'+
+                                    '<div class="card font-weight-bold py-2 w-50 text-center float-left">'+empresa.tasa_anual +'%</div>'+
+                                '</div>'+
+                                '<div class="col-6">'+
+                                    '<div class="text-center mt-4 ">'+
+                                        '<button type="button" class="btn btn-primary btn-cambiar-ahora"'+
+                                            'data-toggle="modal" data-target="#modal-ver-detalle-'+empresa.id+'">Ver'+
+                                            'detalle</button>'+
+                                    '</div>'+
+                                '</div>'+
+                                '<div class="col-3">'+
+                                    '<h5 class="text-white text-right font-weight-bold ">Plazo</h5>'+
+                                    '<div class="card font-weight-bold py-2 w-50 text-center float-right">'+
+                                        empresa.cantidad_dias+' días</div>'+
+                                '</div>'+
+                            '</div>'
+            });
+            $("#returnSolesDolares").html(htmlA);            
+        },
+        error: function() {
+            console.log("No se ha podido obtener la informacion");
+        }
+    });
+});
+*/
 });
 </script>
 @stop

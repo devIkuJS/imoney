@@ -25,10 +25,8 @@ class FinanciamientoEmpresaController extends Controller
         
     }
 
-    public function enviarFinanciamiento(Request $request){
-
-        $transaccion = json_decode($request->transaccion);
-        
+    public function create(Request $request){
+    
         $newFinanciamientoEmpresa = new FinanciamientoEmpresa();
         $newFinanciamientoEmpresa->user_id = Auth::id();
 
@@ -72,22 +70,42 @@ class FinanciamientoEmpresaController extends Controller
             $newFinanciamientoEmpresa->ficha_inmobiliario=$destinationPath . $filename;
         }
         $newFinanciamientoEmpresa->save();
-        return redirect()->back();
-
-        MailController::enviarFinanciamiento(Auth::user()->name, 
-                                Auth::user()->email , $transaccion->nro_orden); 
+        if($newFinanciamientoEmpresa!=null){
+            MailController::enviarFinanciamientoEmpresa(Auth::user()->name, 
+                                                 Auth::user()->email );
                                     
-        MailController::notificarOperacion(Auth::user()->name, Auth::user()->apellidos, Auth::user()->email , $transaccion->nro_orden, "2");
-        return response(json_encode($transaccion->nro_orden),200)->header('Content-type','application/json');
-    }
-    function generateRandomString($length = 6) {
-        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXY123456789Z';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
+            MailController::notificarFinanciamiento(Auth::user()->name,
+                                                 Auth::user()->apellidos,
+                                                 Auth::user()->email);
+            return redirect('/email-financiamiento-verify');
         }
-        return $randomString;
+            
     }
+    
+    public function razonSocial()
+    {
+        //SELECT e.razon_social FROM persona_operaciones po INNER JOIN empresa e ON e.id = po.empresa_id WHERE po.user_id = 69
+        $idrol = DB::table('roles')
+            ->select('roles.id', 'roles.name')
+            ->where('roles.id', Auth::user()->tipo_id)
+            ->get();
+        
+        if($idrol[0]->id == 3 || $idrol[0]->id == 4){
+             $cuentaSelected = DB::table('persona_operaciones')
+            ->join('empresa', 'empresa.id', '=', 'persona_operaciones.empresa_id')
+            ->select('empresa.razon_social')
+            ->where('persona_operaciones.user_id', Auth::id())
+            ->get();
+            
+    	    return $cuentaSelected[0]->razon_social;
+    	    
+        }else if ($idrol[0]->id == 2){
+            return Auth::user()->name;   
+        }
+        
+       
+    	
+    	//return response("HOLA");
+    } 
 }
 

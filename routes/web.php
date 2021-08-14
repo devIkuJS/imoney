@@ -56,6 +56,7 @@ Route::post('/empresa/create', [App\Http\Controllers\EmpresaController::class, '
 Route::get('/inversionista', [App\Http\Controllers\InversionistaController::class, 'index'])->name('inversionista');
 Route::post('/inversionista/gestion', [App\Http\Controllers\InversionistaController::class, 'gestion'])->name('inversionista.gestion');
 Route::get('/inversionista/razonSocial', [App\Http\Controllers\InversionistaController::class, 'razonSocial'])->name('inversionista.razonSocial');
+Route::get('/inversionista/{tipoOpcion}/obtenerSolesDolaeres', [App\Http\Controllers\InversionistaController::class, 'obtenerSolesDolaeres'])->name('inversionista.obtenerSolesDolaeres');
 
 //Inversionista - operacion - cliente 
 Route::get('/inversionistaOperacion', [App\Http\Controllers\InversionistaOperacionController::class, 'index'])->name('inversionistaOperacion');
@@ -77,9 +78,11 @@ Route::post('/cuentaBancaria/{cuentaBancariaId}/cambiarEstado', [App\Http\Contro
 Route::get('/financiamiento', [App\Http\Controllers\FinanciamientoController::class, 'index'])->name('financiamiento');
 
 Route::get('/financiamientoPersonaNatural', [App\Http\Controllers\FinanciamientoPersonaNaturalController::class, 'index'])->name('financiamientoPersonaNatural');
+Route::get('/inversionista/razonSocial', [App\Http\Controllers\FinanciamientoPersonaNaturalController::class, 'razonSocial'])->name('financiamientoPersonaNatural.razonSocial');
 Route::post('/financiamientoPersonaNatural/create', [App\Http\Controllers\FinanciamientoPersonaNaturalController::class, 'create'])->name('financiamientoPersonaNatural.create');
 
 Route::get('/financiamientoEmpresa', [App\Http\Controllers\FinanciamientoEmpresaController::class, 'index'])->name('financiamientoEmpresa');
+Route::get('/inversionista/razonSocial', [App\Http\Controllers\FinanciamientoEmpresaController::class, 'razonSocial'])->name('financiamientoEmpresa.razonSocial');
 Route::post('/financiamientoEmpresa/create', [App\Http\Controllers\FinanciamientoEmpresaController::class, 'create'])->name('financiamientoEmpresa.create');
 
 //MisDatos - cliente
@@ -142,6 +145,17 @@ Route::get('/admin/operaciones-inversion', [App\Http\Controllers\Admin\Inversion
 Route::get('/admin/operaciones-inversion/getData', [App\Http\Controllers\Admin\InversionOperacionController::class, 'getData'])->name('admin.operaciones-inversion.getData');
 Route::post('/admin/operaciones-inversion/{operacionId}/actualizar', [App\Http\Controllers\Admin\InversionOperacionController::class, 'actualizar'])->name('admin.operaciones-inversion.actualizar');
 
+Route::get('/admin/financiamientoPersonaNatural', [App\Http\Controllers\Admin\FinanciamientoPersonaNaturalController::class, 'index'])->name('admin.financiamientoPersonaNatural');
+
+Route::get('/admin/financiamientoEmpresa', [App\Http\Controllers\Admin\FinanciamientoEmpresaController::class, 'index'])->name('admin.financiamientoEmpresa');
+
+Route::get('/admin/estadoCuenta', [App\Http\Controllers\Admin\EstadoCuentaController::class, 'index'])->name('admin.estadoCuenta');
+Route::post('/admin/estadoCuenta/create', [App\Http\Controllers\Admin\EstadoCuentaController::class, 'create'])->name('admin.estadoCuenta.create');
+
+/*Route::get('/admin/inversionEmpresas', [App\Http\Controllers\Admin\EmpresaInversionController::class, 'index'])->name('admin.inversionEmpresas');
+Route::post('/admin/inversionEmpresas/create', [App\Http\Controllers\Admin\EmpresaInversionController::class, 'create'])->name('admin.inversionEmpresas.create');
+Route::post('/admin/inversionEmpresas/{inversionesId}/actualizar', [App\Http\Controllers\Admin\EmpresaInversionController::class, 'actualizar'])->name('admin.inversionEmpresas.actualizar');
+Route::delete('/admin/inversionEmpresas/{inversionesId}/eliminar', [App\Http\Controllers\Admin\EmpresaInversionController::class, 'eliminar'])->name('admin.inversionEmpresas.eliminar');*/
 
 Auth::routes(['verify' => true]);
 

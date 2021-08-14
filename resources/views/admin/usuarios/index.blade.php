@@ -42,6 +42,7 @@
                             <th>Tipo de Usuario</th>
                             <th>DNI Adelante</th>
                             <th>DNI Atras</th>
+                            <th>Fecha de Inscripción</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -62,14 +63,14 @@
                             <td>{{ $usuario->empresa }}</td>
                             <td>{{ $usuario->rol }}</td>
                             <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-ver-dni-adelante-{{$usuario->id}}">Ver DNI</button></td>
-                             <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-ver-dni-atras-{{$usuario->id}}">Ver DNI</button></td>
+                            <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-ver-dni-atras-{{$usuario->id}}">Ver DNI</button></td>
+                            <td>{{ date('d-m-Y H:i:s', strtotime($usuario->created_at)) }}</td> 
                             <td>
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-update-usuario-{{$usuario->id}}">Editar</button>
                                 <form action="{{ route ('admin.usuarios.eliminar', $usuario->id) }}" class="d-inline" method="post">
                                     {{ csrf_field() }}
                                     @method('DELETE')
-                                    <button class="btn btn-danger">Eliminar</button>
-                                    
+                                    <button class="btn btn-danger">Eliminar</button>   
                                 </form>
                             </td>
                         </tr>
@@ -101,6 +102,7 @@
                             <th>Tipo de Usuario</th>
                             <th>DNI Adelante</th>
                             <th>DNI Atras</th>
+                            <th>Fecha de Inscripción</th>
                             <th>Acciones</th>
                         </tr>
                     </tfoot>

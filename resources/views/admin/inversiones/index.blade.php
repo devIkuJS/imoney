@@ -55,20 +55,17 @@
                                 <td>{{ $inversion->id }}</td>
                                 <td>{{ $inversion->nombre }}</td>
                                 <td>{{ $inversion->numero_ruc }}</td>
-                                <td><button type="button" class="btn btn-link" data-toggle="modal"
-                                        data-target="#modal-ver-informe-{{$inversion->id}}">Ver informe</button></td>
-                                <td><button type="button" class="btn btn-link" data-toggle="modal"
-                                        data-target="#modal-ver-logo-{{$inversion->id}}">Ver logo</button></td>
+                                <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-ver-informe-{{$inversion->id}}">Ver informe</button></td>          
+                                <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-ver-logo-{{$inversion->id}}">Ver logo</button></td>         
                                 <td>{{ $inversion->monto_disponible }}</td>
                                 <td>{{ $inversion->moneda_inversion === '1' ? 'Soles' : 'Dolares'  }}</td>
-                                <td>{{ $inversion->monto_total}}</td>
-                                <td>{{ $inversion->tasa_anual}}</td>
-                                <td>{{ $inversion->tasa_mensual}}</td>
+                                <td>{{ $inversion->monto_total }}</td>
+                                <td>{{ $inversion->tasa_anual }}</td>
+                                <td>{{ $inversion->tasa_mensual }}</td>
                                 <td>{{ date('d-m-Y', strtotime($inversion->fecha_esperada )) }}</td>
-                                <td>{{ $inversion->serie_num_comprobante}}</td>
+                                <td>{{ $inversion->serie_num_comprobante }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-warning" data-toggle="modal"
-                                        data-target="#modal-update-inversion-{{$inversion->id}}">Editar</button>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-update-inversion-{{$inversion->id}}">Editar</button>            
                                     <form action="{{ route ('admin.inversiones.eliminar', $inversion->id) }}"
                                         class="d-inline" method="post">
                                         {{ csrf_field() }}
@@ -96,6 +93,7 @@
                                 <th>Informe</th>
                                 <th>Logo</th>
                                 <th>Monto Disponible</th>
+                                <th>Moneda Inversion</th>
                                 <th>Monto Total</th>
                                 <th>Tasa anual (%)</th>
                                 <th>Tasa Mensual (%)</th>
@@ -147,7 +145,6 @@
                         <input type="file" class="form-control-file" name="logo"
                             accept="image/jpeg,image/png,image/x-eps">
                     </div>
-
                     <div class="form-group">
                         <label for="monto_disponible">Monto Disponible</label>
                         <input type="text" class="form-control" name="monto_disponible">

@@ -43,7 +43,7 @@
             <div class="col-md-6">                
                 <div class="card" style="background: transparent !important;border-style: none;">
                     <div class="card-header" style="background: transparent !important;border-style: none;">
-                        <h2 class="text-center font-weight-bold">{{ __('¿Con que perfil deseas solicitar tu financiamiento?') }}</h2></div>
+                        <h2 class="text-center font-weight-bold">{{ __('SELECCIONA TU PERFIL') }}</h2></div>
                     <div class="card-body mx-auto">
                         <div class="text-center mb-5 mt-2">
                             <a class="icon-block" href="{{ route('financiamientoPersonaNatural') }}">

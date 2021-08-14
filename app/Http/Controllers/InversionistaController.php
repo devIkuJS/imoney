@@ -30,6 +30,32 @@ class InversionistaController extends Controller
         return view('inversionista', ['empresas' => $empresas]);     
     }
 
+    public function obtenerSolesDolaeres(Request $request, $tipoOpcion)
+    {
+        
+        $empresas = DB::select('select * from empresa_inversiones where moneda_inversion = ?', [$tipoOpcion]);
+        /*$empresas = DB::select('empresa_inversiones')
+                          ->where('moneda_inversion', '=', $tipoOpcion)
+                          ->get();  */
+        //return $empresas;
+        /*$empresas = array_map(function ($value) {
+            return (array)$value;
+        }, $empresas);*/
+        
+        
+        for ($i = 0; $i < count($empresas); $i++) {
+           /* echo '<pre>';
+print_r($empresas[$i]->fecha_esperada);
+echo '</pre>';
+exit;*/
+           //$empresas[$i]["cantidad_dias"] = $this->dateDiff($empresas[$i]->fecha_esperada, now());
+           $empresas[$i]->cantidad_dias = $this->dateDiff($empresas[$i]->fecha_esperada, now());
+        }
+
+        return ['empresas' => $empresas];     
+        //exit;
+    }
+
     function dateDiff ($d1, $d2) {
         // Return the number of days between the two dates:    
         return round(abs(strtotime($d1) - strtotime($d2))/86400);
@@ -37,9 +63,11 @@ class InversionistaController extends Controller
 
     public function gestion (Request $request)
       {
-
+       
     	$data = $request->all();
 
+        
+        //$moneda = $request->moneda === '1' ? "Soles" : "Dolares";
         $cantidad_dias = $data["cantidad_dias"];
 
         $operator_monto_esperado =  $data["monto_cambio"]*(pow(1.08, ($cantidad_dias/360)));
@@ -49,7 +77,7 @@ class InversionistaController extends Controller
         return redirect()->route('inversionistaOperacion', [
         'id' => $data["inversion_id"],
         'monto' => $data["monto_cambio"],
-        'moneda' => 1,
+        'moneda' => $data["moneda"],
         'cantidad_dias' => $cantidad_dias,
         'monto_esperado' => $monto_esperado,
         ]);

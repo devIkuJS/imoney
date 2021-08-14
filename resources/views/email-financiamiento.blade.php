@@ -424,7 +424,7 @@
                         class="img-fluid-alex">
 
                       <h2>¡FELICIDADES!</h2>
-                      <h3 style="color:black !important;">Hemos recibido la informaci&oacute;n respecto a tu solicitud
+                      <h3 style="color:black !important;">{{$email_data['razon_social']}},hemos recibido la informaci&oacute;n respecto a tu solicitud
                                 de financiamiento en el corto plazo nuestro equipo estara en comunicaci&oacute;n directa
                                 para conocer mas detalles de tu solicitud, atentamente.
                                 </h3>    

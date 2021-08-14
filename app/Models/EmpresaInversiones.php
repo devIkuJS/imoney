@@ -14,11 +14,15 @@ class EmpresaInversiones extends Model
 
     protected $fillable = [
         'nombre',
+        'numero_ruc',
         'informe',
         'logo',
         'monto_disponible',
         'monto_total',
+        'tasa_anual',
+        'tasa_mensual',
         'fecha_esperada',
-        'moneda_inversion'
+        'moneda_inversion',
+        'serie_num_comprobante'
     ];
 }

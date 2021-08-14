@@ -66,7 +66,3 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-
-@section('js')
-
-@stop
