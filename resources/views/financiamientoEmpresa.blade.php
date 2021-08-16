@@ -72,10 +72,15 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">                
-                <div class="card" style="background: transparent !important;border-style: none;">
+                <!--<div class="card" style="background: transparent !important;border-style: none;">
                     <div class="card-header mt-0" style="background: transparent !important;border-style: none;">
                         <span class="font-weight-bold text-white h2 text-center">Hola, Guti </span>            
                         <h5 class="text-center font-weight-bold text-black">IMONEY Soluciones financieras para empresa</h5>
+                    </div>-->
+                    <div class="col-md-12 text-center">
+                            <span class="font-weight-bold text-white h2">Hola, </span><span id="hi2"
+                            class="font-weight-bold text-white h1"></span>
+                             <h4 class="font-weight-bold">IMONEY Soluciones financieras para empresa</h4>   
                     </div>
                         <form action="{{ route('financiamientoEmpresa.create') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}          
@@ -96,7 +101,7 @@
                                             <label for="factura" class="font-weight-bold">Factoring & Confirming Financiamiento a la Importación</label>                                  
                                         </div>
                                         <div class="col-6">
-                                            <label for="factura" class="text-white font-weight-bold">Factura/Letra/Orden compra</label>
+                                            <label for="factura" class="text-white font-weight-bold">PDF de tu Factura / Letra / Orden compra</label>
                                             <input type="file" class="form-control" name="factura" accept="application/pdf">
                                         </div>
                                     </div>
@@ -107,7 +112,7 @@
                                             <label for="copia_literal" class="font-weight-bold">Préstamo con garantía inmobiliaria</label>                                  
                                         </div>
                                         <div class="col-6">
-                                            <label for="copia_literal" class="text-white font-weight-bold">Copia literal inmueble a poner en garantia</label>
+                                            <label for="copia_literal" class="text-white font-weight-bold">PDF de copia literal inmueble a poner en garantia</label>
                                             <input type="file" class="form-control" name="copia_literal" accept="application/pdf">
                                         </div>
                                     </div>
@@ -118,7 +123,7 @@
                                             <label for="cotizacion" class="font-weight-bold">Leasing o Arrendamiento</label>                                  
                                         </div>
                                         <div class="col-6">
-                                            <label for="cotizacion" class="text-white font-weight-bold">Ficha RUC/Cotización de bien a adquirir</label>
+                                            <label for="cotizacion" class="text-white font-weight-bold">PDF Ficha RUC / Cotización de bien a adquirir</label>
                                             <input type="file" class="form-control" name="cotizacion" accept="application/pdf">
                                         </div>
                                     </div>
@@ -129,7 +134,7 @@
                                             <label for="ficha_cliente" class="font-weight-bold">Financiamiento a mis clientes</label>                                  
                                         </div>
                                         <div class="col-6">
-                                            <label for="ficha_cliente" class="text-white font-weight-bold">Ficha RUC</label>
+                                            <label for="ficha_cliente" class="text-white font-weight-bold">PDF Ficha RUC</label>
                                             <input type="file" class="form-control" name="ficha_cliente" accept="application/pdf">
                                         </div>
                                     </div>
@@ -140,7 +145,7 @@
                                             <label for="ficha_inmobiliario" class="font-weight-bold">Financiamiento Inmobiliario</label>                                  
                                         </div>
                                         <div class="col-6">
-                                            <label for="ficha_inmobiliario" class="text-white font-weight-bold">Ficha RUC</label> 
+                                            <label for="ficha_inmobiliario" class="text-white font-weight-bold">PDF Ficha RUC</label> 
                                             <input type="file" class="form-control" name="ficha_inmobiliario" accept="application/pdf">
                                         </div>
                                     </div>
@@ -184,7 +189,6 @@
                                 </div>        
                             </div> 
                         </form>                   
-                </div>
             </div>
         </div>
     </div>

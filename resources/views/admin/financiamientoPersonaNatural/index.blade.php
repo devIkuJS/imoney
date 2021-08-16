@@ -32,6 +32,7 @@
                                 <th>Producto o servicio</th>
                                 <th>Establecimiento</th>
                                 <th>Bien o servicio</th>
+                                <th>Monto total</th>
                                 <th>Número de cuotas</th>
                                 <th>Foto de perfil</th>
                             </tr>
@@ -43,6 +44,7 @@
                                 <td>{{ $natural->user_name }}</td>
                                 <td>{{ $natural->descripcion }}</td>
                                 <td>{{ $natural->establecimiento }}</td>
+                                <td>{{ $natural->monto_total }}</td>
                                 <td>{{ $natural->servicio }}</td>
                                 <td>{{ $natural->numero_cuota }}</td>
                                 <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-ver-imagen-{{$natural->id}}">Ver foto perfil</button></td>
@@ -59,6 +61,7 @@
                                 <th>Producto o servicio</th>
                                 <th>Establecimiento</th>
                                 <th>Bien o servicio</th>
+                                <th>Monto total</th>
                                 <th>Número de cuotas</th>
                                 <th>Foto de perfil</th>
                             </tr>

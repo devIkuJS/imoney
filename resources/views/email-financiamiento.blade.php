@@ -423,10 +423,9 @@
                       <img src={{asset('imagenes/logo-mail-4.png')}} alt="Fjords" style="width:10%,text-align:center;"
                         class="img-fluid-alex">
 
-                      <h2>¡FELICIDADES!</h2>
-                      <h3 style="color:black !important;">{{$email_data['razon_social']}},hemos recibido la informaci&oacute;n respecto a tu solicitud
-                                de financiamiento en el corto plazo nuestro equipo estara en comunicaci&oacute;n directa
-                                para conocer mas detalles de tu solicitud, atentamente.
+                      <h2>Financiamiento confirmado</h2>
+                      <h3 style="color:black !important;">{{$email_data['razon_social']}},hemos tomado nota de su solicitud
+                                de financiamiento y pronto tendre tendremos contacto con Usted.
                                 </h3>    
                       <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                         <tbody>

@@ -63,10 +63,16 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-9">                
-                <div class="card" style="background: transparent !important;border-style: none;">
+                <!--<div class="card" style="background: transparent !important;border-style: none;">
                     <div class="card-header" style="background: transparent !important;border-style: none;">
-                        <span class="font-weight-bold text-white h2 text-center">Hola, Guti </span>
+                        <span class="font-weight-bold text-white h2">Hola, </span><span id="hi2"
+                            class="font-weight-bold text-white h1"></span>
                         <h5 class="font-weight-bold text-center text-black h5">Con IMONEY compra hoy y paga en cómodas cuotas en nuestros comerciales aliados.</h5>
+                    </div>-->
+                    <div class="col-md-12 text-center">
+                            <span class="font-weight-bold text-white h2">Hola, </span><span id="hi2"
+                            class="font-weight-bold text-white h1"></span>
+                             <h4 class="font-weight-bold">Con IMONEY compra hoy y paga en cómodas cuotas en nuestros comerciales aliados.</h4>   
                     </div>
                         <form action="{{ route('financiamientoPersonaNatural.create') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}  
@@ -213,7 +219,6 @@
                             </div>
                         </form>  
                     </div>                  
-                </div>
             </div>
         </div>
     </div>
